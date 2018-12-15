@@ -41,7 +41,10 @@ class Toshiba extends Decoder{
 	public static function decode(string $partNumber) : FlashInfo{
 		//Info with asterisk(*) means "Unique character for product variety control."
 		$flashInfo = (new FlashInfo($partNumber))->setManufacturer(self::getName());
-		$partNumber = substr($partNumber, 4, strlen($partNumber));//remove TH/TC58
+		$extra = [
+			"multi_chip" => self::shiftChars($partNumber, 2) === "TH"
+		];
+		$partNumber = substr($partNumber, 2, strlen($partNumber));//remove 58
 		$level = self::getOrDefault($if = self::shiftChars($partNumber, 1), [
 			"N" => "NAND",
 			"D" => "NAND *",
@@ -88,17 +91,15 @@ class Toshiba extends Decoder{
 			]));
 		$width = self::shiftChars($partNumber, 1);
 		$flashInfo->setDeviceWidth($width <= 4 ? "x8" : "x16");
-		$extra = self::getOrDefault(((int) $width) % 5, [
+		$size = self::getOrDefault(((int) $width) % 5, [
 			0 => ["4KB", "256KB"],
 			1 => ["4KB", "512KB"],
 			2 => [">4KB", ">512KB"],
 			3 => ["2KB", "128KB"],
 			4 => ["2KB", "256KB"]
 		], ["Unknown", "Unknown"]);
-		$extra = [
-			"page_size" => $extra[0],
-			"block_size" => $extra[1]
-		];
+		$extra["page_size"] = $size[0];
+		$extra["block_size"] = $size[1];
 		$flashInfo->setLithography(self::getOrDefault(self::shiftChars($partNumber, 1), [
 			"A" => "130nm",
 			"B" => "90nm",

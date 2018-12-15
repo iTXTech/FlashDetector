@@ -12,6 +12,7 @@ PS X:\>php fd.php TH58TEG7DDJTA20
 
 PS X:\>php fd.php H27UDG8M2MTR
 
+PS X:\>php fd.php K9HDGD8U5M
 ```
 
 ## License
