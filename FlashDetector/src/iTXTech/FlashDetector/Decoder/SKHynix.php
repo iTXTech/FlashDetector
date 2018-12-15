@@ -43,7 +43,7 @@ class SKHynix extends Decoder{
 	public static function decode(string $partNumber) : FlashInfo{
 		$flashInfo = (new FlashInfo($partNumber))
 			->setManufacturer(self::getName())
-			->setLevel("Not supported");
+			->setLevel("NAND");
 		$partNumber = substr($partNumber, 3, strlen($partNumber));//remove H27
 		$flashInfo
 			->setVoltage(self::getOrDefault(self::shiftChars($partNumber, 1), [

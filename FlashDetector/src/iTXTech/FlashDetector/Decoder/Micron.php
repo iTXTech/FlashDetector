@@ -73,7 +73,8 @@ class Micron extends Decoder{
 			->setType(self::getOrDefault(self::shiftChars($partNumber, 1), [
 				"A" => "SLC",
 				"C" => "MLC-2",
-				"E" => "MLC-3"
+				"E" => "MLC-3 (TLC)"
+				//TODO: QLC
 			]));
 
 		$classification = self::getOrDefault(self::shiftChars($partNumber, 1), [
@@ -119,7 +120,7 @@ class Micron extends Decoder{
 				"B" => (new FlashInterface(false))->setAsync(true)->setSync(true),
 				"C" => (new FlashInterface(false))->setSync(true),
 				"D" => (new FlashInterface(false))->setSpi(true)
-			]));
+			], new FlashInterface(false)));
 		//ignoring package
 
 		return $flashInfo;

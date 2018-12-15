@@ -43,6 +43,10 @@ class FlashInfo{
 		$this->partNumber = strtoupper($partNumber);
 	}
 
+	public function getPartNumber() : string{
+		return $this->partNumber;
+	}
+
 	public function setManufacturer(string $m) : FlashInfo{
 		$this->manufacturer = $m;
 		return $this;
