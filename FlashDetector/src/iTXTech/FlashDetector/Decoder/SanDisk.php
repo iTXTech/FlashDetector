@@ -23,13 +23,14 @@ namespace iTXTech\FlashDetector\Decoder;
 use iTXTech\FlashDetector\FlashInfo;
 use iTXTech\SimpleFramework\Util\StringUtil;
 
-class Samsung extends Decoder{
+//There is no datasheet or guide available!
+class SanDisk extends Decoder{
 	public static function getName() : string{
-		return "Samsung";
+		return "SanDisk";
 	}
 
 	public static function check(string $partNumber) : bool{
-		if(StringUtil::startsWith($partNumber, "K")){
+		if(StringUtil::startsWith($partNumber, "SD")){
 			return true;
 		}
 		return false;
@@ -37,7 +38,7 @@ class Samsung extends Decoder{
 
 	public static function decode(string $partNumber) : FlashInfo{
 		$flashInfo = (new FlashInfo($partNumber))->setManufacturer(self::getName());
-		$partNumber = substr($partNumber, 2, strlen($partNumber));//remove K9
+		$partNumber = substr($partNumber, 2, strlen($partNumber));//remove SD
 
 		return $flashInfo;
 	}

@@ -34,7 +34,7 @@ class SKHynix extends Decoder{
 	}
 
 	public static function check(string $partNumber) : bool{
-		if(StringUtil::startsWith($partNumber, "H27")){//TODO: E2NAND
+		if(StringUtil::startsWith($partNumber, "H")){//TODO: E2NAND
 			return true;
 		}
 		return false;

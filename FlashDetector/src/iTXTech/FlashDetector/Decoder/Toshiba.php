@@ -31,8 +31,7 @@ class Toshiba extends Decoder{
 	}
 
 	public static function check(string $partNumber) : bool{
-		if(StringUtil::startsWith($partNumber, "TC58") or
-			StringUtil::startsWith($partNumber, "TH58")){
+		if(StringUtil::startsWith($partNumber, "T")){
 			return true;
 		}
 		return false;
