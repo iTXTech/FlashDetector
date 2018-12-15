@@ -31,6 +31,9 @@ abstract class Decoder{
 	public abstract static function decode(string $partNumber) : FlashInfo;
 
 	public static function shiftChars(string &$str, int $num) : string{
+		if($num > strlen($str)){
+			return "";
+		}
 		$res = substr($str, 0, $num);
 		$str = substr($str, $num, strlen($str));
 		return $res;

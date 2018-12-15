@@ -22,6 +22,7 @@ namespace iTXTech\FlashDetector\Decoder;
 
 use iTXTech\FlashDetector\Classification;
 use iTXTech\FlashDetector\FlashInfo;
+use iTXTech\FlashDetector\FlashInterface;
 use iTXTech\SimpleFramework\Util\StringUtil;
 
 class Micron extends Decoder{
@@ -30,37 +31,38 @@ class Micron extends Decoder{
 	}
 
 	public static function check(string $partNumber) : bool{
-		if(StringUtil::startsWith($partNumber, "mt")){
+		if(StringUtil::startsWith($partNumber, "MT")){
 			return true;
 		}
 		return false;
 	}
 
 	public static function decode(string $partNumber) : FlashInfo{
+		$flashInfo = new FlashInfo($partNumber);
 		$partNumber = substr($partNumber, 2, strlen($partNumber));//remove MT
 		$level = self::getOrUnknown(self::shiftChars($partNumber, 3), [
-			"29f" => "NAND Flash",
-			"29e" => "Enterprise NAND Flash"
+			"29F" => "NAND Flash",
+			"29E" => "Enterprise NAND Flash"
 		]);
 		$density = self::matchFromStart($partNumber, [
-			"1g" => "1Gb",
-			"2g" => "2Gb",
-			"4g" => "4Gb",
-			"8g" => "8Gb",
-			"16g" => "16Gb",
-			"32g" => "32Gb",
-			"64g" => "64Gb",
-			"128g" => "128Gb",
-			"256g" => "256Gb",
-			"384g" => "384Gb",
-			"512g" => "512Gb",
-			"1t" => "1024Gb",
-			"1t2" => "1152Gb",
-			"1ht" => "1536Gb",
-			"2t" => "2048Gb",
-			"3t" => "3072Gb",
-			"4t" => "4096Gb",
-			"6t" => "6144Gb",
+			"1G" => "1Gb",
+			"2G" => "2Gb",
+			"4G" => "4Gb",
+			"8G" => "8Gb",
+			"16G" => "16Gb",
+			"32G" => "32Gb",
+			"64G" => "64Gb",
+			"128G" => "128Gb",
+			"256G" => "256Gb",
+			"384G" => "384Gb",
+			"512G" => "512Gb",
+			"1T" => "1024Gb",
+			"1T2" => "1152Gb",
+			"1HT" => "1536Gb",
+			"2T" => "2048Gb",
+			"3T" => "3072Gb",
+			"4T" => "4096Gb",
+			"6T" => "6144Gb",
 		]);
 		$deviceWidth = self::getOrUnknown(self::shiftChars($partNumber, 2), [
 			"01" => "1 bit",
@@ -68,37 +70,62 @@ class Micron extends Decoder{
 			"16" => "16 bits"
 		]);
 		$type = self::getOrUnknown(self::shiftChars($partNumber, 1), [
-			"a" => "SLC",
-			"c" => "MLC-2",
-			"e" => "MLC-3"
+			"A" => "SLC",
+			"C" => "MLC-2",
+			"E" => "MLC-3"
 		]);
-		$cls = self::getOrUnknown(self::shiftChars($partNumber, 1), [
-			"a" => [1, 0, 0, 1],
-			"b" => [1, 1, 1, 1],
-			"d" => [2, 1, 1, 1],
-			"e" => [2, 2, 2, 2],
-			"f" => [2, 2, 2, 1],
-			"g" => [3, 3, 3, 3],
-			"j" => [4, 2, 2, 1],
-			"k" => [4, 2, 2, 2],
-			"l" => [4, 4, 4, 4],
-			"m" => [4, 4, 4, 2],
-			"q" => [8, 4, 4, 4],
-			"r" => [8, 2, 2, 2],
-			"t" => [16, 8, 4, 2],
-			"u" => [8, 4, 4, 2],
-			"v" => [16, 8, 4, 4]
+		$classification = self::getOrUnknown(self::shiftChars($partNumber, 1), [
+			"A" => [1, 0, 0, 1],
+			"B" => [1, 1, 1, 1],
+			"D" => [2, 1, 1, 1],
+			"E" => [2, 2, 2, 2],
+			"F" => [2, 2, 2, 1],
+			"G" => [3, 3, 3, 3],
+			"J" => [4, 2, 2, 1],
+			"K" => [4, 2, 2, 2],
+			"L" => [4, 4, 4, 4],
+			"M" => [4, 4, 4, 2],
+			"Q" => [8, 4, 4, 4],
+			"R" => [8, 2, 2, 2],
+			"T" => [16, 8, 4, 2],
+			"U" => [8, 4, 4, 2],
+			"V" => [16, 8, 4, 4]
 		], [0, 0, 0 ,0]);
+		$voltage = self::getOrUnknown(self::shiftChars($partNumber, 1), [
+			"A" => "VCC: 3.3V (2.70–3.60V), VCCQ: 3.3V (2.70–3.60V)",
+			"B" => "1.8V (1.70–1.95V)",
+			"C" => "VCC: 3.3V (2.70–3.60V), VCCQ: 1.8V (1.70–1.95V)",
+			"E" => "VCC: 3.3V (2.70–3.60V), VCCQ: 3.3V (2.70–3.60V)",
+			"F" => "VCC: 3.3V (2.50–3.60V), VCCQ: 1.2V (1.14–1.26V)",
+			"G" => "VCC: 3.3V (2.60–3.60V) , VCCQ: 1.8V (1.70–1.95V)",
+			"H" => "VCC: 3.3V (2.50–3.60V), VCCQ: 1.2V (1.14–1.26) or 1.8V (1.70–1.95V)",
+			"J" => "VCC: 3.3V (2.50–3.60V), VCCQ: 1.8V (1.70–1.95V)",
+			"K" => "VCC: 3.3V (2.60–3.60V), VCCQ: 3.3V (2.60–3.60V)",
+			"L" => "VCC: 3.3V (2.60–3.60V), VCCQ: 3.3V (2.60–3.60V)",
+		]);
+		$generation = self::getOrUnknown(self::shiftChars($partNumber, 1), [
+			"A" => 1,
+			"B" => 2,
+			"C" => 3,
+			"D" => 4
+		]);
+		$interface = self::getOrUnknown(self::shiftChars($partNumber, 1), [
+			"A" => (new FlashInterface(false))->setAsync(true),
+			"B" => (new FlashInterface(false))->setAsync(true)->setSync(true),
+			"C" => (new FlashInterface(false))->setSync(true),
+			"D" => (new FlashInterface(false))->setSpi(true)
+		]);
+		//ignoring package
 
-
-		$flashInfo = new FlashInfo();
 		$flashInfo->setManufacturer(self::getName())
 			->setLevel($level)
 			->setDensity($density)
 			->setDeviceWidth($deviceWidth)
-			->setClassification(new Classification($cls[1], $cls[3], $cls[2], $cls[0]))
+			->setClassification(new Classification($classification[1], $classification[3], $classification[2], $classification[0]))
+			->setVoltage($voltage)
+			->setGeneration($generation)
+			->setInterface($interface)
 			->setType($type);
-
 
 		return $flashInfo;
 	}

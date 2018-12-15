@@ -41,7 +41,7 @@ abstract class FlashDetector{
 	}
 
 	public static function detect(string $partNumber) : FlashInfo{
-		$partNumber = strtolower($partNumber);
+		$partNumber = strtoupper($partNumber);
 		foreach(self::$decoders as $decoder){
 			if($decoder::check($partNumber)){
 				return $decoder::decode($partNumber);

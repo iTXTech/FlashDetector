@@ -21,10 +21,12 @@
 namespace iTXTech\FlashDetector;
 
 class FlashInfo{
+	private $partNumber;
 	private $manufacturer;
 	private $level;//Enterprise/consumer
 	private $density;//256Gb
 	private $deviceWidth;//only Micron
+	private $lithography;//22nm 19nm 1ynm 1znm
 	private $type;//SLC MLC TLC QLC
 	private $classification;//1CE 1DIE
 	private $voltage;//3.3V 1.8V
@@ -34,7 +36,8 @@ class FlashInfo{
 
 	private $extraInfo;
 
-	public function __construct(){
+	public function __construct(string $partNumber = ""){
+		$this->partNumber = strtoupper($partNumber);
 	}
 
 	public function setManufacturer(string $m) : FlashInfo{
@@ -72,7 +75,7 @@ class FlashInfo{
 		return $this;
 	}
 
-	public function setInterface($interface) : FlashInfo{
+	public function setInterface(FlashInterface $interface) : FlashInfo{
 		$this->interface = $interface;
 		return $this;
 	}
@@ -92,6 +95,11 @@ class FlashInfo{
 		return $this;
 	}
 
+	public function setLithography($lithography) : FlashInfo{
+		$this->lithography = $lithography;
+		return $this;
+	}
+
 	public function __toString(){
 		$reflectionClass = new \ReflectionClass($this);
 		$properties = $reflectionClass->getProperties();
@@ -103,6 +111,6 @@ class FlashInfo{
 				$info[$property->getName()] = $this->{$property->getName()};
 			}
 		}
-		return json_encode($info);
+		return json_encode($info, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
 	}
 }
