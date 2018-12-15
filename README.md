@@ -4,6 +4,16 @@
 
 Universal NAND Flash Part Number Decoder
 
+## Usage
+
+```powershell
+PS X:\>git clone https://github.com/iTXTech/SimpleFramework.git --depth=1 sf
+PS X:\>php fd.php TH58TEG7DDJTA20
+
+PS X:\>php fd.php H27UDG8M2MTR
+
+```
+
 ## License
 
     Copyright (C) 2018 iTX Technologies
