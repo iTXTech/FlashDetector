@@ -22,6 +22,7 @@ namespace iTXTech\FlashDetector;
 
 use iTXTech\FlashDetector\Decoder\Decoder;
 use iTXTech\FlashDetector\Decoder\Micron;
+use iTXTech\FlashDetector\Decoder\SKHynix;
 
 abstract class FlashDetector{
 	/** @var Decoder[] */
@@ -29,6 +30,7 @@ abstract class FlashDetector{
 
 	public static function init(){
 		self::registerDecoder(Micron::class);
+		self::registerDecoder(SKHynix::class);
 	}
 
 	public static function registerDecoder(string $decoder) : bool {
@@ -48,6 +50,6 @@ abstract class FlashDetector{
 				break;
 			}
 		}
-		return new FlashInfo();
+		return (new FlashInfo($partNumber))->setManufacturer("Unknown");
 	}
 }

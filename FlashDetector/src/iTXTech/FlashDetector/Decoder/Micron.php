@@ -38,42 +38,44 @@ class Micron extends Decoder{
 	}
 
 	public static function decode(string $partNumber) : FlashInfo{
-		$flashInfo = new FlashInfo($partNumber);
+		$flashInfo = (new FlashInfo($partNumber))->setManufacturer(self::getName());
 		$partNumber = substr($partNumber, 2, strlen($partNumber));//remove MT
-		$level = self::getOrUnknown(self::shiftChars($partNumber, 3), [
-			"29F" => "NAND Flash",
-			"29E" => "Enterprise NAND Flash"
-		]);
-		$density = self::matchFromStart($partNumber, [
-			"1G" => "1Gb",
-			"2G" => "2Gb",
-			"4G" => "4Gb",
-			"8G" => "8Gb",
-			"16G" => "16Gb",
-			"32G" => "32Gb",
-			"64G" => "64Gb",
-			"128G" => "128Gb",
-			"256G" => "256Gb",
-			"384G" => "384Gb",
-			"512G" => "512Gb",
-			"1T" => "1024Gb",
-			"1T2" => "1152Gb",
-			"1HT" => "1536Gb",
-			"2T" => "2048Gb",
-			"3T" => "3072Gb",
-			"4T" => "4096Gb",
-			"6T" => "6144Gb",
-		]);
-		$deviceWidth = self::getOrUnknown(self::shiftChars($partNumber, 2), [
-			"01" => "1 bit",
-			"08" => "8 bits",
-			"16" => "16 bits"
-		]);
-		$type = self::getOrUnknown(self::shiftChars($partNumber, 1), [
-			"A" => "SLC",
-			"C" => "MLC-2",
-			"E" => "MLC-3"
-		]);
+		$flashInfo
+			->setLevel(self::getOrUnknown(self::shiftChars($partNumber, 3), [
+				"29F" => "NAND Flash",
+				"29E" => "Enterprise NAND Flash"
+			]))
+			->setDensity(self::matchFromStart($partNumber, [
+				"1G" => "1Gb",
+				"2G" => "2Gb",
+				"4G" => "4Gb",
+				"8G" => "8Gb",
+				"16G" => "16Gb",
+				"32G" => "32Gb",
+				"64G" => "64Gb",
+				"128G" => "128Gb",
+				"256G" => "256Gb",
+				"384G" => "384Gb",
+				"512G" => "512Gb",
+				"1T" => "1024Gb",
+				"1T2" => "1152Gb",
+				"1HT" => "1536Gb",
+				"2T" => "2048Gb",
+				"3T" => "3072Gb",
+				"4T" => "4096Gb",
+				"6T" => "6144Gb",
+			]))
+			->setDeviceWidth(self::getOrUnknown(self::shiftChars($partNumber, 2), [
+				"01" => "1 bit",
+				"08" => "8 bits",
+				"16" => "16 bits"
+			]))
+			->setType(self::getOrUnknown(self::shiftChars($partNumber, 1), [
+				"A" => "SLC",
+				"C" => "MLC-2",
+				"E" => "MLC-3"
+			]));
+
 		$classification = self::getOrUnknown(self::shiftChars($partNumber, 1), [
 			"A" => [1, 0, 0, 1],
 			"B" => [1, 1, 1, 1],
@@ -91,41 +93,34 @@ class Micron extends Decoder{
 			"U" => [8, 4, 4, 2],
 			"V" => [16, 8, 4, 4]
 		], [0, 0, 0 ,0]);
-		$voltage = self::getOrUnknown(self::shiftChars($partNumber, 1), [
-			"A" => "VCC: 3.3V (2.70–3.60V), VCCQ: 3.3V (2.70–3.60V)",
-			"B" => "1.8V (1.70–1.95V)",
-			"C" => "VCC: 3.3V (2.70–3.60V), VCCQ: 1.8V (1.70–1.95V)",
-			"E" => "VCC: 3.3V (2.70–3.60V), VCCQ: 3.3V (2.70–3.60V)",
-			"F" => "VCC: 3.3V (2.50–3.60V), VCCQ: 1.2V (1.14–1.26V)",
-			"G" => "VCC: 3.3V (2.60–3.60V) , VCCQ: 1.8V (1.70–1.95V)",
-			"H" => "VCC: 3.3V (2.50–3.60V), VCCQ: 1.2V (1.14–1.26) or 1.8V (1.70–1.95V)",
-			"J" => "VCC: 3.3V (2.50–3.60V), VCCQ: 1.8V (1.70–1.95V)",
-			"K" => "VCC: 3.3V (2.60–3.60V), VCCQ: 3.3V (2.60–3.60V)",
-			"L" => "VCC: 3.3V (2.60–3.60V), VCCQ: 3.3V (2.60–3.60V)",
-		]);
-		$generation = self::getOrUnknown(self::shiftChars($partNumber, 1), [
-			"A" => 1,
-			"B" => 2,
-			"C" => 3,
-			"D" => 4
-		]);
-		$interface = self::getOrUnknown(self::shiftChars($partNumber, 1), [
-			"A" => (new FlashInterface(false))->setAsync(true),
-			"B" => (new FlashInterface(false))->setAsync(true)->setSync(true),
-			"C" => (new FlashInterface(false))->setSync(true),
-			"D" => (new FlashInterface(false))->setSpi(true)
-		]);
-		//ignoring package
 
-		$flashInfo->setManufacturer(self::getName())
-			->setLevel($level)
-			->setDensity($density)
-			->setDeviceWidth($deviceWidth)
-			->setClassification(new Classification($classification[1], $classification[3], $classification[2], $classification[0]))
-			->setVoltage($voltage)
-			->setGeneration($generation)
-			->setInterface($interface)
-			->setType($type);
+		$flashInfo->setClassification(new Classification(
+			$classification[1], $classification[3], $classification[2], $classification[0]))
+			->setVoltage(self::getOrUnknown(self::shiftChars($partNumber, 1), [
+				"A" => "VCC: 3.3V (2.70–3.60V), VCCQ: 3.3V (2.70–3.60V)",
+				"B" => "1.8V (1.70–1.95V)",
+				"C" => "VCC: 3.3V (2.70–3.60V), VCCQ: 1.8V (1.70–1.95V)",
+				"E" => "VCC: 3.3V (2.70–3.60V), VCCQ: 3.3V (2.70–3.60V)",
+				"F" => "VCC: 3.3V (2.50–3.60V), VCCQ: 1.2V (1.14–1.26V)",
+				"G" => "VCC: 3.3V (2.60–3.60V) , VCCQ: 1.8V (1.70–1.95V)",
+				"H" => "VCC: 3.3V (2.50–3.60V), VCCQ: 1.2V (1.14–1.26) or 1.8V (1.70–1.95V)",
+				"J" => "VCC: 3.3V (2.50–3.60V), VCCQ: 1.8V (1.70–1.95V)",
+				"K" => "VCC: 3.3V (2.60–3.60V), VCCQ: 3.3V (2.60–3.60V)",
+				"L" => "VCC: 3.3V (2.60–3.60V), VCCQ: 3.3V (2.60–3.60V)",
+			]))
+			->setGeneration(self::getOrUnknown(self::shiftChars($partNumber, 1), [
+				"A" => 1,
+				"B" => 2,
+				"C" => 3,
+				"D" => 4
+			]))
+			->setInterface(self::getOrUnknown(self::shiftChars($partNumber, 1), [
+				"A" => (new FlashInterface(false))->setAsync(true),
+				"B" => (new FlashInterface(false))->setAsync(true)->setSync(true),
+				"C" => (new FlashInterface(false))->setSync(true),
+				"D" => (new FlashInterface(false))->setSpi(true)
+			]));
+		//ignoring package
 
 		return $flashInfo;
 	}

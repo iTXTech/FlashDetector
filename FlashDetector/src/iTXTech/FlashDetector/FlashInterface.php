@@ -21,10 +21,14 @@
 namespace iTXTech\FlashDetector;
 
 class FlashInterface{
+	//is ToggleDDR or ONFi?
 	private $isToggle;
+	//For ONFi
 	private $async = false;
 	private $sync = false;
+	///For Toggle DDR
 	private $toggle = false;
+	//SPI (Seems only Micron has this)
 	private $spi = false;
 
 	public function __construct(bool $isToggle){
@@ -54,10 +58,11 @@ class FlashInterface{
 	public function getArray(){
 		return $this->isToggle ? [
 			"tog" => $this->toggle
+		] : ($this->spi ? [
+			"spi" => $this->spi
 		] : [
 			"async" => $this->async,
-			"sync" => $this->sync,
-			"spi" => $this->spi
-		];
+			"sync" => $this->sync
+		]);
 	}
 }

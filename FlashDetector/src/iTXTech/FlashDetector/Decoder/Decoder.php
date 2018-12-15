@@ -39,7 +39,7 @@ abstract class Decoder{
 		return $res;
 	}
 
-	public static function getOrUnknown(string $str, array $info, $default = "Unknonw"){
+	public static function getOrUnknown(string $str, array $info, $default = "Unknown"){
 		return $info[$str] ?? $default;
 	}
 

@@ -21,16 +21,41 @@
 namespace iTXTech\FlashDetector;
 
 class Classification{
+	public const UNKNOWN_PROP = -1;
+
 	private $ce;
 	private $ch;
 	private $rnb;
 	private $die;
 
-	public function __construct(int $ce, int $ch, int $rnb, int $die = -1){
+	public function __construct(int $ce = self::UNKNOWN_PROP,
+	                            int $ch = self::UNKNOWN_PROP,
+	                            int $rnb = self::UNKNOWN_PROP,
+	                            int $die = self::UNKNOWN_PROP){
 		$this->ce = $ce;
 		$this->ch = $ch;
 		$this->rnb = $rnb;
 		$this->die = $die;
+	}
+
+	public function setCh(int $ch) : Classification{
+		$this->ch = $ch;
+		return $this;
+	}
+
+	public function setCe(int $ce) : Classification{
+		$this->ce = $ce;
+		return $this;
+	}
+
+	public function setDie(int $die) : Classification{
+		$this->die = $die;
+		return $this;
+	}
+
+	public function setRnb(int $rnb) : Classification{
+		$this->rnb = $rnb;
+		return $this;
 	}
 
 	public function getArray() : array {
