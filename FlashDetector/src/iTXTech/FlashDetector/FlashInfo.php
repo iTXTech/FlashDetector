@@ -20,6 +20,9 @@
 
 namespace iTXTech\FlashDetector;
 
+use iTXTech\FlashDetector\Property\Classification;
+use iTXTech\FlashDetector\Property\FlashInterface;
+
 class FlashInfo{
 	private $partNumber;
 	private $manufacturer;
@@ -45,17 +48,17 @@ class FlashInfo{
 		return $this;
 	}
 
-	public function setLevel($level) : FlashInfo{
+	public function setLevel(string $level) : FlashInfo{
 		$this->level = $level;
 		return $this;
 	}
 
-	public function setDensity($density) : FlashInfo{
+	public function setDensity(string $density) : FlashInfo{
 		$this->density = $density;
 		return $this;
 	}
 
-	public function setDeviceWidth($deviceWidth) : FlashInfo{
+	public function setDeviceWidth(string $deviceWidth) : FlashInfo{
 		$this->deviceWidth = $deviceWidth;
 		return $this;
 	}
@@ -65,12 +68,12 @@ class FlashInfo{
 		return $this;
 	}
 
-	public function setType($type) : FlashInfo{
+	public function setType(string $type) : FlashInfo{
 		$this->type = $type;
 		return $this;
 	}
 
-	public function setGeneration($generation) : FlashInfo{
+	public function setGeneration(string $generation) : FlashInfo{
 		$this->generation = $generation;
 		return $this;
 	}
@@ -80,12 +83,12 @@ class FlashInfo{
 		return $this;
 	}
 
-	public function setPackage($package) : FlashInfo{
+	public function setPackage(string $package) : FlashInfo{
 		$this->package = $package;
 		return $this;
 	}
 
-	public function setVoltage($voltage) : FlashInfo{
+	public function setVoltage(string $voltage) : FlashInfo{
 		$this->voltage = $voltage;
 		return $this;
 	}
@@ -95,7 +98,7 @@ class FlashInfo{
 		return $this;
 	}
 
-	public function setLithography($lithography) : FlashInfo{
+	public function setLithography(string $lithography) : FlashInfo{
 		$this->lithography = $lithography;
 		return $this;
 	}
@@ -106,7 +109,9 @@ class FlashInfo{
 		$info = [];
 		foreach($properties as $property){
 			if(is_object($this->{$property->getName()})){
-				$info[$property->getName()] = $this->{$property->getName()}->getArray();
+				/** @var Arrayable $prop */
+				$prop = $this->{$property->getName()};
+				$info[$property->getName()] = $prop->toArray();
 			} else{
 				$info[$property->getName()] = $this->{$property->getName()};
 			}

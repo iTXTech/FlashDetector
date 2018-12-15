@@ -20,9 +20,9 @@
 
 namespace iTXTech\FlashDetector\Decoder;
 
-use iTXTech\FlashDetector\Classification;
 use iTXTech\FlashDetector\FlashInfo;
-use iTXTech\FlashDetector\FlashInterface;
+use iTXTech\FlashDetector\Property\Classification;
+use iTXTech\FlashDetector\Property\FlashInterface;
 use iTXTech\SimpleFramework\Util\StringUtil;
 
 class Micron extends Decoder{
@@ -41,7 +41,7 @@ class Micron extends Decoder{
 		$flashInfo = (new FlashInfo($partNumber))->setManufacturer(self::getName());
 		$partNumber = substr($partNumber, 2, strlen($partNumber));//remove MT
 		$flashInfo
-			->setLevel(self::getOrUnknown(self::shiftChars($partNumber, 3), [
+			->setLevel(self::getOrDefault(self::shiftChars($partNumber, 3), [
 				"29F" => "NAND Flash",
 				"29E" => "Enterprise NAND Flash"
 			]))
@@ -65,18 +65,18 @@ class Micron extends Decoder{
 				"4T" => "4096Gb",
 				"6T" => "6144Gb",
 			]))
-			->setDeviceWidth(self::getOrUnknown(self::shiftChars($partNumber, 2), [
+			->setDeviceWidth(self::getOrDefault(self::shiftChars($partNumber, 2), [
 				"01" => "1 bit",
 				"08" => "8 bits",
 				"16" => "16 bits"
 			]))
-			->setType(self::getOrUnknown(self::shiftChars($partNumber, 1), [
+			->setType(self::getOrDefault(self::shiftChars($partNumber, 1), [
 				"A" => "SLC",
 				"C" => "MLC-2",
 				"E" => "MLC-3"
 			]));
 
-		$classification = self::getOrUnknown(self::shiftChars($partNumber, 1), [
+		$classification = self::getOrDefault(self::shiftChars($partNumber, 1), [
 			"A" => [1, 0, 0, 1],
 			"B" => [1, 1, 1, 1],
 			"D" => [2, 1, 1, 1],
@@ -96,25 +96,25 @@ class Micron extends Decoder{
 
 		$flashInfo->setClassification(new Classification(
 			$classification[1], $classification[3], $classification[2], $classification[0]))
-			->setVoltage(self::getOrUnknown(self::shiftChars($partNumber, 1), [
-				"A" => "VCC: 3.3V (2.70–3.60V), VCCQ: 3.3V (2.70–3.60V)",
+			->setVoltage(self::getOrDefault(self::shiftChars($partNumber, 1), [
+				"A" => "Vcc: 3.3V (2.70–3.60V), VccQ: 3.3V (2.70–3.60V)",
 				"B" => "1.8V (1.70–1.95V)",
-				"C" => "VCC: 3.3V (2.70–3.60V), VCCQ: 1.8V (1.70–1.95V)",
-				"E" => "VCC: 3.3V (2.70–3.60V), VCCQ: 3.3V (2.70–3.60V)",
-				"F" => "VCC: 3.3V (2.50–3.60V), VCCQ: 1.2V (1.14–1.26V)",
-				"G" => "VCC: 3.3V (2.60–3.60V) , VCCQ: 1.8V (1.70–1.95V)",
-				"H" => "VCC: 3.3V (2.50–3.60V), VCCQ: 1.2V (1.14–1.26) or 1.8V (1.70–1.95V)",
-				"J" => "VCC: 3.3V (2.50–3.60V), VCCQ: 1.8V (1.70–1.95V)",
-				"K" => "VCC: 3.3V (2.60–3.60V), VCCQ: 3.3V (2.60–3.60V)",
-				"L" => "VCC: 3.3V (2.60–3.60V), VCCQ: 3.3V (2.60–3.60V)",
+				"C" => "Vcc: 3.3V (2.70–3.60V), VccQ: 1.8V (1.70–1.95V)",
+				"E" => "Vcc: 3.3V (2.70–3.60V), VccQ: 3.3V (2.70–3.60V)",
+				"F" => "Vcc: 3.3V (2.50–3.60V), VccQ: 1.2V (1.14–1.26V)",
+				"G" => "Vcc: 3.3V (2.60–3.60V) , VccQ: 1.8V (1.70–1.95V)",
+				"H" => "Vcc: 3.3V (2.50–3.60V), VccQ: 1.2V (1.14–1.26) or 1.8V (1.70–1.95V)",
+				"J" => "Vcc: 3.3V (2.50–3.60V), VcQ: 1.8V (1.70–1.95V)",
+				"K" => "Vcc: 3.3V (2.60–3.60V), VccQ: 3.3V (2.60–3.60V)",
+				"L" => "Vcc: 3.3V (2.60–3.60V), VccQ: 3.3V (2.60–3.60V)",
 			]))
-			->setGeneration(self::getOrUnknown(self::shiftChars($partNumber, 1), [
+			->setGeneration(self::getOrDefault(self::shiftChars($partNumber, 1), [
 				"A" => 1,
 				"B" => 2,
 				"C" => 3,
 				"D" => 4
 			]))
-			->setInterface(self::getOrUnknown(self::shiftChars($partNumber, 1), [
+			->setInterface(self::getOrDefault(self::shiftChars($partNumber, 1), [
 				"A" => (new FlashInterface(false))->setAsync(true),
 				"B" => (new FlashInterface(false))->setAsync(true)->setSync(true),
 				"C" => (new FlashInterface(false))->setSync(true),

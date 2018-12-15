@@ -20,9 +20,9 @@
 
 namespace iTXTech\FlashDetector\Decoder;
 
-use iTXTech\FlashDetector\Classification;
 use iTXTech\FlashDetector\FlashInfo;
-use iTXTech\FlashDetector\FlashInterface;
+use iTXTech\FlashDetector\Property\Classification;
+use iTXTech\FlashDetector\Property\FlashInterface;
 use iTXTech\SimpleFramework\Util\StringUtil;
 
 class SKHynix extends Decoder{
@@ -34,7 +34,7 @@ class SKHynix extends Decoder{
 	}
 
 	public static function check(string $partNumber) : bool{
-		if(StringUtil::startsWith($partNumber, "H27")){//E2NAND
+		if(StringUtil::startsWith($partNumber, "H27")){//TODO: E2NAND
 			return true;
 		}
 		return false;
@@ -46,7 +46,7 @@ class SKHynix extends Decoder{
 			->setLevel("Not supported");
 		$partNumber = substr($partNumber, 3, strlen($partNumber));//remove H27
 		$flashInfo
-			->setVoltage(self::getOrUnknown(self::shiftChars($partNumber, 1), [
+			->setVoltage(self::getOrDefault(self::shiftChars($partNumber, 1), [
 				"U" => "2.7V~3.6V (3.3V)",
 				"L" => "2.7V",
 				"S" => "1.8V",
@@ -54,7 +54,7 @@ class SKHynix extends Decoder{
 				//what is Q, hynix's new NAND are most with Q?
 				//According to SiliconMotion's Document, most of H27Q NAND are 3.3V required
 			]))
-			->setDensity(self::getOrUnknown(self::shiftChars($partNumber, 2), [
+			->setDensity(self::getOrDefault(self::shiftChars($partNumber, 2), [
 				"64" => "64Mb",
 				"25" => "256Mb",
 				"1G" => "1Gb",
@@ -69,11 +69,11 @@ class SKHynix extends Decoder{
 				"DG" => "128Gb",
 				//TODO: more
 			]))
-			->setDeviceWidth(self::getOrUnknown(self::shiftChars($partNumber, 1), [
+			->setDeviceWidth(self::getOrDefault(self::shiftChars($partNumber, 1), [
 				"8" => "x8 (8b)",
 				"6" => "x16 (16b)"
 			]));
-		$classification = self::getOrUnknown(self::shiftChars($partNumber, 1), [
+		$classification = self::getOrDefault(self::shiftChars($partNumber, 1), [
 			//Type, Die, Block
 			"S" => ["SLC", 1, self::SMALL_BLOCK],
 			"A" => ["SLC", 2, self::SMALL_BLOCK],
@@ -93,7 +93,7 @@ class SKHynix extends Decoder{
 			//TODO: more
 		], ["Unknown", -1, self::SMALL_BLOCK]);
 		$flashInfo->setType($classification[0]);
-		$mode = self::getOrUnknown(self::shiftChars($partNumber, 1), [
+		$mode = self::getOrDefault(self::shiftChars($partNumber, 1), [
 			"1" => [1, 1, true],//CE, RnB, Sync
 			"2" => [1, 1, false],
 			"4" => [2, 2, true],
@@ -104,13 +104,13 @@ class SKHynix extends Decoder{
 		$flashInfo->setClassification(new Classification(
 			$mode[0], Classification::UNKNOWN_PROP, $mode[1], $classification[2]));
 		$flashInfo->setInterface((new FlashInterface(false))->setAsync(true)->setSync(true))//Async default = true
-			->setGeneration(self::getOrUnknown(self::shiftChars($partNumber, 1), [
+			->setGeneration(self::getOrDefault(self::shiftChars($partNumber, 1), [
 				"M" => 1,
 				"A" => 2,
 				"B" => 3,
 				"C" => 4
 			]))
-			->setPackage(self::getOrUnknown(self::shiftChars($partNumber, 1), [
+			->setPackage(self::getOrDefault(self::shiftChars($partNumber, 1), [
 				"T" => "TSOP1",
 				"V" => "WSOP",
 				"S" => "USOP",
@@ -125,14 +125,14 @@ class SKHynix extends Decoder{
 				"K" => "KGD",
 				"D" => "PGD2"
 			]));
-		$packageMaterial = self::getOrUnknown(self::shiftChars($partNumber, 1), [
+		$packageMaterial = self::getOrDefault(self::shiftChars($partNumber, 1), [
 			"A" => "Wafer",
 			"P" => "Lead Free",
 			"L" => "Leaded",
 			"R" => "Lead & Halogen Free"
 		]);
 		$flashInfo->setExtraInfo([
-			"page" => $classification[2] === self::SMALL_BLOCK ? 512 : 2048,
+			"page" => $classification[2] === self::SMALL_BLOCK ? "512+16 B" : "2048+64 B",
 			"package_material" => $packageMaterial,
 			"double_stack_package" => $classification[1] === -1 ? true : false,
 			"dual_interface" => $mode[0] === -1 ? true : false,//maybe this property is Channel

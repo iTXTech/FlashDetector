@@ -23,9 +23,18 @@ require_once "sf/autoload.php";
 use iTXTech\SimpleFramework\Initializer;
 use iTXTech\SimpleFramework\Console\Logger;
 use iTXTech\SimpleFramework\Module\ModuleManager;
+use iTXTech\SimpleFramework\Util\Util;
+
 use iTXTech\FlashDetector\FlashDetector;
 
 Initializer::initTerminal();
+
+if(!isset($argv[1])){
+	Util::println("Usage: \"" . PHP_BINARY . "\" \"" . $argv[0] . "\" <part number>");
+	exit(1);
+}
+
+Logger::$logLevel = 2;//disable logger
 
 Logger::info("Loading iTXTech FlashDetector");
 
@@ -44,4 +53,4 @@ if($moduleManager->getModule("iTXTech_FlashDetector") === null){
 
 FlashDetector::init();
 $info = FlashDetector::detect($argv[1]);
-echo $info . PHP_EOL;
+Util::println($info);

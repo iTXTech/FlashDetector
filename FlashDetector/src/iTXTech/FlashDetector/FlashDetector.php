@@ -23,6 +23,7 @@ namespace iTXTech\FlashDetector;
 use iTXTech\FlashDetector\Decoder\Decoder;
 use iTXTech\FlashDetector\Decoder\Micron;
 use iTXTech\FlashDetector\Decoder\SKHynix;
+use iTXTech\FlashDetector\Decoder\Toshiba;
 
 abstract class FlashDetector{
 	/** @var Decoder[] */
@@ -31,6 +32,7 @@ abstract class FlashDetector{
 	public static function init(){
 		self::registerDecoder(Micron::class);
 		self::registerDecoder(SKHynix::class);
+		self::registerDecoder(Toshiba::class);
 	}
 
 	public static function registerDecoder(string $decoder) : bool {

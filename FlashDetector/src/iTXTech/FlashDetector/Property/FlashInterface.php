@@ -18,9 +18,11 @@
  * limitations under the License.
  */
 
-namespace iTXTech\FlashDetector;
+namespace iTXTech\FlashDetector\Property;
 
-class FlashInterface{
+use iTXTech\FlashDetector\Arrayable;
+
+class FlashInterface implements Arrayable{
 	//is ToggleDDR or ONFi?
 	private $isToggle;
 	//For ONFi
@@ -55,9 +57,9 @@ class FlashInterface{
 		return $this;
 	}
 
-	public function getArray(){
+	public function toArray() : array {
 		return $this->isToggle ? [
-			"tog" => $this->toggle
+			"toggle" => $this->toggle
 		] : ($this->spi ? [
 			"spi" => $this->spi
 		] : [

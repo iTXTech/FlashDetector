@@ -18,10 +18,13 @@
  * limitations under the License.
  */
 
-namespace iTXTech\FlashDetector;
+namespace iTXTech\FlashDetector\Property;
 
-class Classification{
+use iTXTech\FlashDetector\Arrayable;
+
+class Classification implements Arrayable{
 	public const UNKNOWN_PROP = -1;
+	public const CHANNEL_SINGLE_OR_DUAL = -2;
 
 	private $ce;
 	private $ch;
@@ -58,7 +61,7 @@ class Classification{
 		return $this;
 	}
 
-	public function getArray() : array {
+	public function toArray() : array {
 		return [
 			"nCE" => $this->ce,
 			"Ch" => $this->ch,
