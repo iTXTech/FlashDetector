@@ -34,13 +34,23 @@ Initializer::initTerminal();
 $options = new Options();
 $options->addOption((new OptionBuilder("d"))->longOpt("smi-dbf-dir")->required(true)
 	->hasArg(true)->argName("dir")->build());
+$options->addOption((new OptionBuilder("v"))->longOpt("set-version")->required(true)
+	->hasArg(true)->argName("ver")->build());
 $options->addOption((new OptionBuilder("p"))->longOpt("json-pretty")->build());
 
 try{
-	//Flash Database
-	$fdb = [];
-
 	$cmd = (new Parser())->parse($options, $argv);
+	//Flash Database
+	$fdb = [
+		"info" => [
+			"name" => "iTXTech FlashDetector Flash Database",
+			"website" => "https://github.com/iTXTech/FlashDetector",
+			"version" => $cmd->getOptionValue("v"),
+			"time" => date("r"),
+			"controllers" => []
+		]
+	];
+
 	$smiDir = $cmd->getOptionValue("d");
 	$dbfs = scandir($smiDir);//Generate from SiliconMotion DBF
 	natsort($dbfs);
@@ -65,11 +75,14 @@ try{
 }
 
 function mergeDbf(array &$fdb, string $filename, string $db){
-	$db = explode("\r\n", mb_convert_encoding($db, "UTF-8", "UTF-8"));//SMI DBF is in CRLF (Windows) format
+	$db = explode("\r\n", mb_convert_encoding($db, "UTF-8", "UTF-8"));
+	//SMI DBF is in CRLF (Windows) format
+	$controller = str_replace(["flash_", ".dbf"], "", $filename);
+	$fdb["info"]["controllers"][] = $controller;
 	foreach($db as $record){
 		if(StringUtil::startsWith($record, "@")){
 			$record = substr($record, 2);
-			list($id, $info) = explode(" // ", $record);
+			list($id, $info) = explode("// ", $record);
 			$fid = explode(" ", $id);
 			$id = "";
 			for($i = 0; $i < 6; $i++){
@@ -99,7 +112,6 @@ function mergeDbf(array &$fdb, string $filename, string $db){
 			if(strlen($info[2]) !== 5){
 				array_splice($info, 2, 0, "");
 			}
-			$controller = str_replace(["flash_", ".dbf"], "", $filename);
 			$info[0] = str_replace(["samaung", "hynix"], ["samsung", "skhynix"], strtolower($info[0]));
 			if(isset($info[3]) and StringUtil::endsWith($info[3], "LC")){
 				$cellLevel = $info[3];
