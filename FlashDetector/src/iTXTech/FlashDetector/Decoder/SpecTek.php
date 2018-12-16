@@ -37,7 +37,7 @@ class SpecTek extends Decoder{
 
 	public static function decode(string $partNumber) : FlashInfo{
 		$flashInfo = (new FlashInfo($partNumber))->setManufacturer(self::getName());
-		$partNumber = substr($partNumber, 2, strlen($partNumber));
+		$partNumber = substr($partNumber, 2);
 
 		return $flashInfo;
 	}

@@ -46,14 +46,14 @@ class Toshiba extends Decoder{
 		$level = self::shiftChars($partNumber, 2);
 		if(in_array($level, ["GV", "GB"])){
 			//TODO: Toshiba E2NAND
-			return $flashInfo->setLevel("E2NAND");
+			return $flashInfo->setType("E2NAND");
 		}
 		$level = self::getOrDefault($if = self::shiftChars($partNumber, 1), [
 			"N" => "NAND",
 			"D" => "NAND *",
 			"T" => "Toggle mode NAND"
 		]);
-		$flashInfo->setLevel($level)
+		$flashInfo->setType($level)
 			->setInterface((new FlashInterface(true))->setToggle($if === "T"))
 			->setVoltage(self::getOrDefault(self::shiftChars($partNumber, 1), [
 				"V" => "3.3V",
@@ -84,7 +84,7 @@ class Toshiba extends Decoder{
 				"T0" => "128GB",
 				"T1" => "256GB"
 			]))
-			->setType(self::getOrDefault(self::shiftChars($partNumber, 1), [
+			->setCellLevel(self::getOrDefault(self::shiftChars($partNumber, 1), [
 				"S" => "SLC",
 				"H" => "SLC *",
 				"D" => "MLC",

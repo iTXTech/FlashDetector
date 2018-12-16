@@ -26,11 +26,11 @@ use iTXTech\FlashDetector\Property\FlashInterface;
 class FlashInfo{
 	private $partNumber;
 	private $manufacturer;
-	private $level;//Enterprise/consumer
+	private $type;//Enterprise/consumer
 	private $density;//256Gb
 	private $deviceWidth;//only Micron
 	private $lithography;//22nm 19nm 1ynm 1znm
-	private $type;//SLC MLC TLC QLC
+	private $cellLevel;//SLC MLC TLC QLC
 	private $classification;//1CE 1DIE
 	private $voltage;//3.3V 1.8V
 	private $generation;//1 2 3 4
@@ -38,6 +38,7 @@ class FlashInfo{
 	private $package;//TSOP48 BGA152 LGA52
 
 	private $extraInfo;
+	private $flashId;
 
 	public function __construct(string $partNumber = ""){
 		$this->partNumber = strtoupper($partNumber);
@@ -47,13 +48,17 @@ class FlashInfo{
 		return $this->partNumber;
 	}
 
+	public function getManufacturer() : string{
+		return $this->manufacturer;
+	}
+
 	public function setManufacturer(string $m) : FlashInfo{
 		$this->manufacturer = $m;
 		return $this;
 	}
 
-	public function setLevel(string $level) : FlashInfo{
-		$this->level = $level;
+	public function setType(string $type) : FlashInfo{
+		$this->type = $type;
 		return $this;
 	}
 
@@ -72,8 +77,8 @@ class FlashInfo{
 		return $this;
 	}
 
-	public function setType(string $type) : FlashInfo{
-		$this->type = $type;
+	public function setCellLevel(string $cellLevel) : FlashInfo{
+		$this->cellLevel = $cellLevel;
 		return $this;
 	}
 
@@ -107,6 +112,11 @@ class FlashInfo{
 		return $this;
 	}
 
+	public function setFlashId($flashId) : FlashInfo{
+		$this->flashId = $flashId;
+		return $this;
+	}
+
 	public function __toString(){
 		$reflectionClass = new \ReflectionClass($this);
 		$properties = $reflectionClass->getProperties();
@@ -116,7 +126,7 @@ class FlashInfo{
 				/** @var Arrayable $prop */
 				$prop = $this->{$property->getName()};
 				$info[$property->getName()] = $prop->toArray();
-			} else{
+			}else{
 				$info[$property->getName()] = $this->{$property->getName()};
 			}
 		}

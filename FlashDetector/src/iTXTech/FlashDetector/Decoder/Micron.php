@@ -39,9 +39,9 @@ class Micron extends Decoder{
 
 	public static function decode(string $partNumber) : FlashInfo{
 		$flashInfo = (new FlashInfo($partNumber))->setManufacturer(self::getName());
-		$partNumber = substr($partNumber, 2, strlen($partNumber));//remove MT
+		$partNumber = substr($partNumber, 2);//remove MT
 		$flashInfo
-			->setLevel(self::getOrDefault(self::shiftChars($partNumber, 3), [
+			->setType(self::getOrDefault(self::shiftChars($partNumber, 3), [
 				"29F" => "NAND Flash",
 				"29E" => "Enterprise NAND Flash"
 			]))
@@ -70,7 +70,7 @@ class Micron extends Decoder{
 				"08" => "8 bits",
 				"16" => "16 bits"
 			]))
-			->setType(self::getOrDefault(self::shiftChars($partNumber, 1), [
+			->setCellLevel(self::getOrDefault(self::shiftChars($partNumber, 1), [
 				"A" => "SLC",
 				"C" => "MLC-2",
 				"E" => "MLC-3 (TLC)"

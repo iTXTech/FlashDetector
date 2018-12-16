@@ -32,6 +32,7 @@ use iTXTech\FlashDetector\Decoder\Toshiba;
 abstract class FlashDetector{
 	/** @var Decoder[] */
 	private static $decoders = [];
+	private static $fdb = [];
 
 	public static function init(){
 		self::registerDecoder(Micron::class);
@@ -41,6 +42,10 @@ abstract class FlashDetector{
 		self::registerDecoder(Intel::class);
 		self::registerDecoder(SpecTek::class);
 		self::registerDecoder(SanDisk::class);
+		if(Loader::getInstance() !== null){
+			$fdb = Loader::getInstance()->getResourceAsText("fdb.json");
+			self::$fdb = json_decode($fdb, true);
+		}
 	}
 
 	public static function registerDecoder(string $decoder) : bool {
@@ -52,14 +57,28 @@ abstract class FlashDetector{
 		return false;
 	}
 
-	public static function detect(string $partNumber) : FlashInfo{
+	public static function detect(string $partNumber, bool $combineFdb = false) : FlashInfo{
 		$partNumber = strtoupper($partNumber);
 		foreach(self::$decoders as $decoder){
 			if($decoder::check($partNumber)){
-				return $decoder::decode($partNumber);
-				break;
+				$info = $decoder::decode($partNumber);
+				if($combineFdb and ($data = self::getFlashInfoFromFdb($info)) !== null){
+					$info->setFlashId($data["id"]);
+					if($data["l"] !== ""){
+						$info->setLithography($data["l"]);
+					}
+				}
+				return $info;
 			}
 		}
 		return (new FlashInfo($partNumber))->setManufacturer("Unknown");
+	}
+
+	public static function getFlashInfoFromFdb(FlashInfo $info) : ?array {
+		$m = strtolower($info->getManufacturer());
+		if($m === "skhynix"){
+			$m = "hynix";
+		}
+		return self::$fdb[$m][$info->getPartNumber()] ?? null;
 	}
 }

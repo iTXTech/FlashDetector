@@ -52,5 +52,5 @@ if($moduleManager->getModule("iTXTech_FlashDetector") === null){
 }
 
 FlashDetector::init();
-$info = FlashDetector::detect($argv[1]);
+$info = FlashDetector::detect($argv[1], true);
 Util::println($info);

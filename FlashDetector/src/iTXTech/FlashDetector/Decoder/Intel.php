@@ -45,13 +45,13 @@ class Intel extends Decoder{
 		];
 		if(StringUtil::startsWith($partNumber, "X")){
 			$extra["wafer"] = true;
-			$partNumber = substr($partNumber, 1, strlen($partNumber));
+			$partNumber = substr($partNumber, 1);
 		}elseif(StringUtil::startsWith($partNumber, "JS") or
 			StringUtil::startsWith($partNumber, "PF")){
-			$partNumber = substr($partNumber, 2, strlen($partNumber));
+			$partNumber = substr($partNumber, 2);
 		}
-		$partNumber = substr($partNumber, 3, strlen($partNumber));
-		$flashInfo->setLevel("NAND Flash")
+		$partNumber = substr($partNumber, 3);
+		$flashInfo->setType("NAND Flash")
 			->setDensity(self::getOrDefault($density = self::shiftChars($partNumber, 3), [
 				"08G" => "1 GB",
 				"16G" => "2 GB",
@@ -87,7 +87,7 @@ class Intel extends Decoder{
 				"B" => "1.8V (1.70V-1.95V)"
 				//TODO: C
 			]))
-			->setType(self::getOrDefault(self::shiftChars($partNumber, 1), [
+			->setCellLevel(self::getOrDefault(self::shiftChars($partNumber, 1), [
 				"N" => "SLC",
 				"M" => "MLC",
 				"T" => "TLC", //TODO: Confirm

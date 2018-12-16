@@ -23,9 +23,16 @@ namespace iTXTech\FlashDetector;
 use iTXTech\SimpleFramework\Module\Module;
 
 class Loader extends Module{
+	private static $instance;
+
 	public function load(){
+		self::$instance = $this;
 	}
 
 	public function unload(){
+	}
+
+	public static function getInstance() : Loader{
+		return self::$instance;
 	}
 }

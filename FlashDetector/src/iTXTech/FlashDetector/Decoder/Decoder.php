@@ -35,7 +35,7 @@ abstract class Decoder{
 			return "";
 		}
 		$res = substr($str, 0, $num);
-		$str = substr($str, $num, strlen($str));
+		$str = substr($str, $num);
 		return $res;
 	}
 
@@ -56,7 +56,7 @@ abstract class Decoder{
 		foreach($level as $l){
 			foreach($l as $k => $v){
 				if(StringUtil::startsWith($str, $k)){
-					$str = substr($str, strlen($k), strlen($str));
+					$str = substr($str, strlen($k));
 					return $v;
 				}
 			}

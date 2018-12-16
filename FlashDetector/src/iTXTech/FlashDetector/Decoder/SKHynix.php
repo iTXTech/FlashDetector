@@ -45,9 +45,9 @@ class SKHynix extends Decoder{
 			->setManufacturer(self::getName());
 		if(in_array($level = self::shiftChars($partNumber, 3), ["H2J", "H2D"])){
 			//TODO: SKHynix E2NAND
-			return $flashInfo->setLevel("E2NAND");
+			return $flashInfo->setType("E2NAND");
 		} else {
-			$flashInfo->setLevel("NAND");
+			$flashInfo->setType("NAND");
 		}
 		$flashInfo
 			->setVoltage(self::getOrDefault(self::shiftChars($partNumber, 1), [
@@ -96,7 +96,7 @@ class SKHynix extends Decoder{
 			"M" => ["TLC", 1, self::LARGE_BLOCK]
 			//TODO: more
 		], ["Unknown", -1, self::SMALL_BLOCK]);
-		$flashInfo->setType($classification[0]);
+		$flashInfo->setCellLevel($classification[0]);
 		$mode = self::getOrDefault(self::shiftChars($partNumber, 1), [
 			"1" => [1, 1, true],//CE, RnB, Sync
 			"2" => [1, 1, false],
