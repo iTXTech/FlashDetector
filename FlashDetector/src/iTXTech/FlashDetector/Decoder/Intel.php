@@ -46,8 +46,10 @@ class Intel extends Decoder{
 		if(StringUtil::startsWith($partNumber, "X")){
 			$extra["wafer"] = true;
 			$partNumber = substr($partNumber, 1);
-		}elseif(StringUtil::startsWith($partNumber, "JS") or
-			StringUtil::startsWith($partNumber, "PF")){
+		}elseif(StringUtil::startsWith($partNumber, "JS")){
+			$partNumber = substr($partNumber, 2);
+			$flashInfo->setPackage("TSOP");
+		}elseif(StringUtil::startsWith($partNumber, "PF")){
 			$partNumber = substr($partNumber, 2);
 		}
 		$partNumber = substr($partNumber, 3);
@@ -100,7 +102,7 @@ class Intel extends Decoder{
 				"E" => "25 nm",
 				//TODO: confirm
 				"F" => "20 nm",
-				"G" => "3D L06"
+				"G" => "3D"
 			]))
 			->setGeneration(self::shiftChars($partNumber, 1));
 

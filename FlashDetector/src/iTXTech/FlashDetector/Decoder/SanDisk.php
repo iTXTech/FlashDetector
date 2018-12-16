@@ -39,6 +39,9 @@ class SanDisk extends Decoder{
 	public static function decode(string $partNumber) : FlashInfo{
 		$flashInfo = (new FlashInfo($partNumber))->setManufacturer(self::getName());
 		$partNumber = substr($partNumber, 2);//remove SD
+		if(substr($partNumber, 0, 2) === "IN"){
+			return $flashInfo->setType("iNAND (Not supported)");
+		}
 
 		return $flashInfo;
 	}

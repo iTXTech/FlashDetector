@@ -26,6 +26,32 @@ use iTXTech\FlashDetector\Property\FlashInterface;
 use iTXTech\SimpleFramework\Util\StringUtil;
 
 class Micron extends Decoder{
+	private const PACKAGE_LIST = [
+		"WP" => "48-pin TSOP I (CPL version)",
+		"WC" => "48-pin TSOP I (OCPL version)",
+		"C5" => "52-pad VLGA, 14 x 18 x 1.0 (SDP/DDP/QDP)",
+		"G1" => "272-ball VBGA, 14 x 18 x 1.0 (SDP, DDP, 3DP, QDP)",
+		"G2" => "272-ball TBGA, 14 x 18 x 1.3 (QDP, 8DP)",
+		"G6" => "272-ball LBGA, 14 x 18 x 1.5 (16DP)",
+		"H1" => "100-ball VBGA, 12 x 18 x 1.0",
+		"H2" => "100-ball TBGA, 12 x 18 x 1.2",
+		"H3" => "100-ball LBGA, 12 x 18 x 1.4 (8DP)",
+		"H4" => "63-ball VFBGA, 9 x 11 x 1.0",
+		"HC" => "63-ball VFBGA, 10.5 x 13 x 1.0",
+		"H6" => "152-ball VBGA, 14 x 18 x 1.0 (SDP, DDP)",
+		"H7" => "152-ball TBGA, 14 x 18 x 1.2 (QDP)",
+		"H8" => "152-ball LBGA, 14 x 18 x 1.4 (8DP)",
+		"H9" => "100-ball LBGA, 12 x 18 x 1.6 (16DP)",
+		"J1" => "132-ball VBGA, 12 x 18 x 1.0 (SDP, DDP)",
+		"J2" => "132-ball TBGA, 12 x 18 x 1.2 (QDP)",
+		"J3" => "132-ball LBGA, 12 x 18 x 1.4 (8DP)",
+		"J4" => "132-ball VBGA, 12 x 18 x 1.0 (SDP, DDP)",
+		"J5" => "132-ball TBGA, 12 x 18 x 1.2 (QDP)",
+		"J6" => "132-ball LBGA, 12 x 18 x 1.4 (8DP)",
+		"J7" => "152-ball LBGA, 14 x 18 x 1.5 (16DP)",
+		"J9" => "132-ball LBGA, 12mm x 18mm x 1.5mm (16DP)"
+	];
+
 	public static function getName() : string{
 		return "Micron";
 	}
@@ -120,9 +146,18 @@ class Micron extends Decoder{
 				"B" => (new FlashInterface(false))->setAsync(true)->setSync(true),
 				"C" => (new FlashInterface(false))->setSync(true),
 				"D" => (new FlashInterface(false))->setSpi(true)
-			], new FlashInterface(false)));
+			], new FlashInterface(false)))
+			->setPackage(self::getOrDefault(self::shiftChars($partNumber, 2), self::PACKAGE_LIST));
 		//ignoring package
 
 		return $flashInfo;
+	}
+
+	public static function processBeforeQueryFdb(string $partNumber){
+		$package = substr($partNumber, strlen($partNumber) - 2);
+		if(isset(self::PACKAGE_LIST[$package])){
+			return substr($partNumber, 0, strlen($partNumber) - 2);
+		}
+		return $partNumber;
 	}
 }

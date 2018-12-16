@@ -62,7 +62,7 @@ abstract class FlashDetector{
 		foreach(self::$decoders as $decoder){
 			if($decoder::check($partNumber)){
 				$info = $decoder::decode($partNumber);
-				if($combineFdb and ($data = self::getFlashInfoFromFdb($info)) !== null){
+				if($combineFdb and ($data = self::getFlashInfoFromFdb($info, $decoder)) !== null){
 					$info->setFlashId($data["id"]);
 					$info->setController($data["t"]);
 					if($data["l"] !== ""){
@@ -78,7 +78,9 @@ abstract class FlashDetector{
 		return (new FlashInfo($partNumber))->setManufacturer("Unknown");
 	}
 
-	public static function getFlashInfoFromFdb(FlashInfo $info) : ?array{
-		return self::$fdb[strtolower($info->getManufacturer())][$info->getPartNumber()] ?? null;
+	public static function getFlashInfoFromFdb(FlashInfo $info, string $decoder) : ?array{
+		/** @var Decoder $decoder */
+		return self::$fdb[strtolower($info->getManufacturer())]
+			[$decoder::processBeforeQueryFdb($info->getPartNumber())] ?? null;
 	}
 }

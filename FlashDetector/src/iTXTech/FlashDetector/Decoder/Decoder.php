@@ -63,4 +63,8 @@ abstract class Decoder{
 		}
 		return $default;
 	}
+
+	public static function processBeforeQueryFdb(string $partNumber){
+		return $partNumber;
+	}
 }

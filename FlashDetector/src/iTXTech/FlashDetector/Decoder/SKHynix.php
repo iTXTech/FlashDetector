@@ -45,7 +45,9 @@ class SKHynix extends Decoder{
 			->setManufacturer(self::getName());
 		if(in_array($level = self::shiftChars($partNumber, 3), ["H2J", "H2D"])){
 			//TODO: SKHynix E2NAND
-			return $flashInfo->setType("E2NAND");
+			return $flashInfo->setType("E2NAND (Not supported)");
+		}elseif($level === "HY2"){
+			return $flashInfo->setType("LEGACY NAND (Not supported)");
 		}else{
 			$flashInfo->setType("NAND");
 		}
