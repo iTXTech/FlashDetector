@@ -33,6 +33,7 @@ abstract class FlashDetector{
 	/** @var Decoder[] */
 	private static $decoders = [];
 	private static $fdb = [];
+	private static $iddb = [];
 
 	public static function init(){
 		self::registerDecoder(Micron::class);
@@ -43,8 +44,8 @@ abstract class FlashDetector{
 		self::registerDecoder(SpecTek::class);
 		self::registerDecoder(SanDisk::class);
 		if(Loader::getInstance() !== null){
-			$fdb = Loader::getInstance()->getResourceAsText("fdb.json");
-			self::$fdb = json_decode($fdb, true);
+			self::$fdb = json_decode(Loader::getInstance()->getResourceAsText("fdb.json"), true);
+			self::$iddb = json_decode(Loader::getInstance()->getResourceAsText("iddb.json"), true);
 		}
 	}
 
@@ -82,5 +83,9 @@ abstract class FlashDetector{
 		/** @var Decoder $decoder */
 		return self::$fdb[strtolower($info->getManufacturer())]
 			[$decoder::processBeforeQueryFdb($info->getPartNumber())] ?? null;
+	}
+
+	public static function getFlashPartNumberFromIddb(string $id) : ?array{
+		return self::$iddb[strtoupper($id)] ?? null;
 	}
 }

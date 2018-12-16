@@ -106,7 +106,7 @@ function mergeDbf(array &$fdb, string $filename, string $db){
 				}
 			}
 			$info = array_values($info);
-			if(!isset($info[2])){
+			if(!isset($info[2]) or StringUtil::endsWith($info[1], "nm")){//Sandisk iNAND wrong partNumber
 				continue;
 			}
 			if(strlen($info[2]) !== 5){
