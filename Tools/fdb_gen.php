@@ -34,6 +34,7 @@ Initializer::initTerminal();
 $options = new Options();
 $options->addOption((new OptionBuilder("d"))->longOpt("smi-dbf-dir")->required(true)
 	->hasArg(true)->argName("dir")->build());
+$options->addOption((new OptionBuilder("p"))->longOpt("json-pretty")->build());
 
 try{
 	//Flash Database
@@ -51,9 +52,14 @@ try{
 	}
 
 	$file = __DIR__ . DIRECTORY_SEPARATOR . "fdb.json";
-	file_put_contents($file, json_encode($fdb, JSON_PRETTY_PRINT));
+	if($cmd->hasOption("p")){
+		$json = json_encode($fdb, JSON_PRETTY_PRINT);
+	}else{
+		$json = json_encode($fdb);
+	}
+	file_put_contents($file, $json);
 	Logger::info("FlashDetector Flash Database has been written to $file");
-} catch(ParseException $e){
+}catch(ParseException $e){
 	Util::println($e->getMessage());
 	echo((new HelpFormatter())->generateHelp("fdb_gen", $options));
 }
@@ -73,25 +79,46 @@ function mergeDbf(array &$fdb, string $filename, string $db){
 			if(StringUtil::contains($info, "//")){
 				$comment = trim(substr(strstr($info, "//"), 2));
 			}
-			$info = explode(" ", str_replace($comment, "", $info));//Manufacturer, PartNumber, SMICode, Lithography, CellLevel
+			$info = explode(" ", str_replace(
+				[$comment, "NEW DATE CODE", "OLD DATE CODE", " - ", "L84A HP", "SanDisk SanDisk"],
+				["", "", "", "-", "L84A_HP", "SanDisk"],
+				$info));
+			//Manufacturer, PartNumber, SMICode, Lithography, CellLevel
 			foreach($info as $k => $v){
-				$info[$k] = trim(str_replace("/", "", $v));
+				$v = trim(str_replace(["/", ","], "", $v));
+				if($v === ""){
+					unset($info[$k]);
+				}else{
+					$info[$k] = $v;
+				}
+			}
+			$info = array_values($info);
+			if(!isset($info[2])){
+				continue;
+			}
+			if(strlen($info[2]) !== 5){
+				array_splice($info, 2, 0, "");
 			}
 			$controller = str_replace(["flash_", ".dbf"], "", $filename);
 			$info[0] = str_replace(["samaung", "hynix"], ["samsung", "skhynix"], strtolower($info[0]));
+			if(isset($info[3]) and StringUtil::endsWith($info[3], "LC")){
+				$cellLevel = $info[3];
+				$info[3] = $info[4] ?? "";
+				$info[4] = $cellLevel;
+			}elseif(isset($info[5]) and strlen($info[5]) < 5){
+				$info[3] .= " " . $info[5];
+			}
 			$data = [
 				"id" => [$id],//Flash ID
 				"l" => $info[3] ?? "",//Lithography
 				"c" => $info[4] ?? "",//cell level
 				//"s" => $info[2] ?? "",//SMICode
 				"t" => [$controller],//controller
+				"m" => $comment
 			];
-			if($comment !== ""){
-				$data["m"] = $comment;
-			}
 			if(!isset($fdb[$info[0]])){
 				$fdb[$info[0]] = [$info[1] => $data];
-			} else {
+			}else{
 				if(isset($fdb[$info[0]][$info[1]])){
 					if(!in_array($id, $fdb[$info[0]][$info[1]]["id"])){
 						$fdb[$info[0]][$info[1]]["id"][] = $id;
@@ -99,13 +126,10 @@ function mergeDbf(array &$fdb, string $filename, string $db){
 					if(!in_array($controller, $fdb[$info[0]][$info[1]]["t"])){
 						$fdb[$info[0]][$info[1]]["t"][] = $controller;
 					}
-					if($fdb[$info[0]][$info[1]]["l"] === ""){
-						$fdb[$info[0]][$info[1]]["l"] = $data["l"];
-					}
-					if($fdb[$info[0]][$info[1]]["c"] === ""){
-						$fdb[$info[0]][$info[1]]["c"] = $data["c"];
-					}
-				} else{
+					$fdb[$info[0]][$info[1]]["l"] = $data["l"];
+					$fdb[$info[0]][$info[1]]["c"] = $data["c"];
+					$fdb[$info[0]][$info[1]]["m"] = $comment;
+				}else{
 					$fdb[$info[0]][$info[1]] = $data;
 				}
 			}
