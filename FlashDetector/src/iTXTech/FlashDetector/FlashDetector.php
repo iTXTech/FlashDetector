@@ -64,6 +64,7 @@ abstract class FlashDetector{
 				$info = $decoder::decode($partNumber);
 				if($combineFdb and ($data = self::getFlashInfoFromFdb($info)) !== null){
 					$info->setFlashId($data["id"]);
+					$info->setController($data["t"]);
 					if($data["l"] !== ""){
 						$info->setLithography($data["l"]);
 					}

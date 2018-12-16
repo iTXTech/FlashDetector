@@ -47,10 +47,11 @@ try{
 	$cmd = (new Parser())->parse($options, $argv);
 	$smiDir = $cmd->getOptionValue("d");
 	$dbfs = scandir($smiDir);//Generate from SiliconMotion DBF
+	natsort($dbfs);
 	foreach($dbfs as $dbf){
 		if(StringUtil::endsWith($dbf, ".dbf")){
 			$db = file_get_contents($smiDir . DIRECTORY_SEPARATOR . $dbf);
-			mergeDbf($fdb, $db);
+			mergeDbf($fdb, $dbf, $db);
 		}
 	}
 
@@ -62,7 +63,7 @@ try{
 	echo((new HelpFormatter())->generateHelp("fdb_gen", $options));
 }
 
-function mergeDbf(array &$fdb, string $db){
+function mergeDbf(array &$fdb, string $filename, string $db){
 	$db = explode("\r\n", mb_convert_encoding($db, "UTF-8", "UTF-8"));//SMI DBF is in CRLF (Windows) format
 	foreach($db as $record){
 		if(StringUtil::startsWith($record, "@")){
@@ -81,12 +82,17 @@ function mergeDbf(array &$fdb, string $db){
 			foreach($info as $k => $v){
 				$info[$k] = trim(str_replace("/", "", $v));
 			}
+			$controller = str_replace(["flash_", ".dbf"], "", $filename);
 			$info[0] = strtolower($info[0]);
+			if($info[0] === "samaung"){
+				$info[0] = "samsung";
+			}
 			$data = [
-				"id" => $id,//Flash ID
+				"id" => [$id],//Flash ID
 				"l" => $info[3] ?? "",//Lithography
 				"c" => $info[4] ?? "",//cell level
 				//"s" => $info[2] ?? "",//SMICode
+				"t" => [$controller],//controller
 			];
 			if($comment !== ""){
 				$data["m"] = $comment;
@@ -95,12 +101,15 @@ function mergeDbf(array &$fdb, string $db){
 				$fdb[$info[0]] = [$info[1] => $data];
 			} else {
 				if(isset($fdb[$info[0]][$info[1]])){
-					if(!is_array($fdb[$info[0]][$info[1]]["id"]) && $fdb[$info[0]][$info[1]]["id"] !== $data["id"]){
-						$fdb[$info[0]][$info[1]]["id"] = [$fdb[$info[0]][$info[1]]["id"]];
+					if(!in_array($id, $fdb[$info[0]][$info[1]]["id"])){
+						$fdb[$info[0]][$info[1]]["id"][] = $id;
 					}
-					if(is_array($fdb[$info[0]][$info[1]]["id"]) and
-						!in_array($data["id"], $fdb[$info[0]][$info[1]]["id"])){
-						$fdb[$info[0]][$info[1]]["id"][] = $data["id"];
+					$fdb[$info[0]][$info[1]]["t"][] = $controller;
+					if($fdb[$info[0]][$info[1]]["l"] === ""){
+						$fdb[$info[0]][$info[1]]["l"] = $data["l"];
+					}
+					if($fdb[$info[0]][$info[1]]["c"] === ""){
+						$fdb[$info[0]][$info[1]]["c"] = $data["c"];
 					}
 				} else{
 					$fdb[$info[0]][$info[1]] = $data;
