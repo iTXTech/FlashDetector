@@ -43,7 +43,11 @@ class Toshiba extends Decoder{
 		$extra = [
 			"multi_chip" => self::shiftChars($partNumber, 2) === "TH"
 		];
-		$partNumber = substr($partNumber, 2, strlen($partNumber));//remove 58
+		$level = self::shiftChars($partNumber, 2);
+		if(in_array($level, ["GV", "GB"])){
+			//TODO: Toshiba E2NAND
+			return $flashInfo->setLevel("E2NAND");
+		}
 		$level = self::getOrDefault($if = self::shiftChars($partNumber, 1), [
 			"N" => "NAND",
 			"D" => "NAND *",
@@ -100,15 +104,18 @@ class Toshiba extends Decoder{
 		$extra["page_size"] = $size[0];
 		$extra["block_size"] = $size[1];
 		$flashInfo->setLithography(self::getOrDefault(self::shiftChars($partNumber, 1), [
-			"A" => "130nm",
-			"B" => "90nm",
-			"C" => "70nm",
-			"D" => "56nm",
-			"E" => "43nm",
-			"F" => "32nm",
-			"G" => "24nm A-type",
-			"H" => "24nm B-type",
-			//TODO: more
+			"A" => "130 nm",
+			"B" => "90 nm",
+			"C" => "70 nm",
+			"D" => "56 nm",
+			"E" => "43 nm",
+			"F" => "32 nm",
+			"G" => "24 nm A-type",
+			"H" => "24 nm B-type",
+			//TODO: confirm
+			"J" => "19 nm",
+			"K" => "A19 nm",
+			"L" => "15 nm",
 		]));
 		$package = self::shiftChars($partNumber, 2);
 		if(in_array($package, ["FT", "TG", "TA"])){

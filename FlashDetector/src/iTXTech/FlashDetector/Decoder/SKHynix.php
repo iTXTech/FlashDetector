@@ -42,9 +42,13 @@ class SKHynix extends Decoder{
 
 	public static function decode(string $partNumber) : FlashInfo{
 		$flashInfo = (new FlashInfo($partNumber))
-			->setManufacturer(self::getName())
-			->setLevel("NAND");
-		$partNumber = substr($partNumber, 3, strlen($partNumber));//remove H27
+			->setManufacturer(self::getName());
+		if(in_array($level = self::shiftChars($partNumber, 3), ["H2J", "H2D"])){
+			//TODO: SKHynix E2NAND
+			return $flashInfo->setLevel("E2NAND");
+		} else {
+			$flashInfo->setLevel("NAND");
+		}
 		$flashInfo
 			->setVoltage(self::getOrDefault(self::shiftChars($partNumber, 1), [
 				"U" => "2.7V~3.6V (3.3V)",
@@ -88,7 +92,7 @@ class SKHynix extends Decoder{
 			"V" => ["MLC", 4, self::LARGE_BLOCK],
 			"W" => ["MLC", -1, self::LARGE_BLOCK],//Double Stack Package
 			"Y" => ["MLC", 8, self::LARGE_BLOCK],
-			//Not sure
+			//TODO: confirm
 			"M" => ["TLC", 1, self::LARGE_BLOCK]
 			//TODO: more
 		], ["Unknown", -1, self::SMALL_BLOCK]);
