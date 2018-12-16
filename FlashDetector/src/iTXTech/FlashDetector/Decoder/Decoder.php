@@ -26,7 +26,7 @@ use iTXTech\SimpleFramework\Util\StringUtil;
 abstract class Decoder{
 	public abstract static function getName() : string;
 
-	public abstract static function check(string $partNumber) : bool ;
+	public abstract static function check(string $partNumber) : bool;
 
 	public abstract static function decode(string $partNumber) : FlashInfo;
 
@@ -48,7 +48,7 @@ abstract class Decoder{
 		foreach($info as $k => $v){
 			if(isset($level[strlen($k)])){
 				$level[strlen($k)][$k] = $v;
-			} else {
+			}else{
 				$level[strlen($k)] = [$k => $v];
 			}
 		}

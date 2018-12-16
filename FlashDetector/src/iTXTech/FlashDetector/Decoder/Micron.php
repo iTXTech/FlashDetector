@@ -93,7 +93,7 @@ class Micron extends Decoder{
 			"T" => [16, 8, 4, 2],
 			"U" => [8, 4, 4, 2],
 			"V" => [16, 8, 4, 4]
-		], [0, 0, 0 ,0]);
+		], [0, 0, 0, 0]);
 
 		$flashInfo->setClassification(new Classification(
 			$classification[1], $classification[3], $classification[2], $classification[0]))

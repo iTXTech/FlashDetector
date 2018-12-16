@@ -120,9 +120,9 @@ class Toshiba extends Decoder{
 		$package = self::shiftChars($partNumber, 2);
 		if(in_array($package, ["FT", "TG", "TA"])){
 			$flashInfo->setPackage("TSOP");
-		} elseif (in_array($package, ["XB", "XG", "BA"])){
+		}elseif(in_array($package, ["XB", "XG", "BA"])){
 			$flashInfo->setPackage("BGA");
-		} elseif (in_array($package, ["XL", "LA"])){
+		}elseif(in_array($package, ["XL", "LA"])){
 			$flashInfo->setPackage("LGA");
 		}
 

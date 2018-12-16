@@ -57,7 +57,7 @@ class FlashInterface implements Arrayable{
 		return $this;
 	}
 
-	public function toArray() : array {
+	public function toArray() : array{
 		return $this->isToggle ? [
 			"toggle" => $this->toggle
 		] : ($this->spi ? [

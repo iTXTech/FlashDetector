@@ -22,15 +22,10 @@ require_once "../sf/autoload.php";
 
 ini_set("memory_limit", -1);
 
-use iTXTech\SimpleFramework\Initializer;
 use iTXTech\SimpleFramework\Console\Logger;
-use iTXTech\SimpleFramework\Console\Option\{
-	HelpFormatter,
-	Options,
-	OptionBuilder,
-	Parser
-};
+use iTXTech\SimpleFramework\Console\Option\{HelpFormatter, OptionBuilder, Options, Parser};
 use iTXTech\SimpleFramework\Console\Option\Exception\ParseException;
+use iTXTech\SimpleFramework\Initializer;
 use iTXTech\SimpleFramework\Util\StringUtil;
 use iTXTech\SimpleFramework\Util\Util;
 
@@ -83,10 +78,7 @@ function mergeDbf(array &$fdb, string $filename, string $db){
 				$info[$k] = trim(str_replace("/", "", $v));
 			}
 			$controller = str_replace(["flash_", ".dbf"], "", $filename);
-			$info[0] = strtolower($info[0]);
-			if($info[0] === "samaung"){
-				$info[0] = "samsung";
-			}
+			$info[0] = str_replace(["samaung", "hynix"], ["samsung", "skhynix"], strtolower($info[0]));
 			$data = [
 				"id" => [$id],//Flash ID
 				"l" => $info[3] ?? "",//Lithography
@@ -104,7 +96,9 @@ function mergeDbf(array &$fdb, string $filename, string $db){
 					if(!in_array($id, $fdb[$info[0]][$info[1]]["id"])){
 						$fdb[$info[0]][$info[1]]["id"][] = $id;
 					}
-					$fdb[$info[0]][$info[1]]["t"][] = $controller;
+					if(!in_array($controller, $fdb[$info[0]][$info[1]]["t"])){
+						$fdb[$info[0]][$info[1]]["t"][] = $controller;
+					}
 					if($fdb[$info[0]][$info[1]]["l"] === ""){
 						$fdb[$info[0]][$info[1]]["l"] = $data["l"];
 					}

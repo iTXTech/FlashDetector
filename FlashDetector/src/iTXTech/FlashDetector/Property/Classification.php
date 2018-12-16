@@ -32,9 +32,9 @@ class Classification implements Arrayable{
 	private $die;
 
 	public function __construct(int $ce = self::UNKNOWN_PROP,
-	                            int $ch = self::UNKNOWN_PROP,
-	                            int $rnb = self::UNKNOWN_PROP,
-	                            int $die = self::UNKNOWN_PROP){
+								int $ch = self::UNKNOWN_PROP,
+								int $rnb = self::UNKNOWN_PROP,
+								int $die = self::UNKNOWN_PROP){
 		$this->ce = $ce;
 		$this->ch = $ch;
 		$this->rnb = $rnb;
@@ -61,7 +61,7 @@ class Classification implements Arrayable{
 		return $this;
 	}
 
-	public function toArray() : array {
+	public function toArray() : array{
 		return [
 			"nCE" => $this->ce,
 			"Ch" => $this->ch,

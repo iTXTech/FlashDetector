@@ -48,7 +48,7 @@ abstract class FlashDetector{
 		}
 	}
 
-	public static function registerDecoder(string $decoder) : bool {
+	public static function registerDecoder(string $decoder) : bool{
 		if(is_a($decoder, Decoder::class, true)){
 			/** @var $decoder Decoder */
 			self::$decoders[$decoder::getName()] = $decoder;
@@ -78,11 +78,7 @@ abstract class FlashDetector{
 		return (new FlashInfo($partNumber))->setManufacturer("Unknown");
 	}
 
-	public static function getFlashInfoFromFdb(FlashInfo $info) : ?array {
-		$m = strtolower($info->getManufacturer());
-		if($m === "skhynix"){
-			$m = "hynix";
-		}
-		return self::$fdb[$m][$info->getPartNumber()] ?? null;
+	public static function getFlashInfoFromFdb(FlashInfo $info) : ?array{
+		return self::$fdb[strtolower($info->getManufacturer())][$info->getPartNumber()] ?? null;
 	}
 }

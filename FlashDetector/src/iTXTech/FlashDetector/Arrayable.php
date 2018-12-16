@@ -21,5 +21,5 @@
 namespace iTXTech\FlashDetector;
 
 interface Arrayable{
-	public function toArray() : array ;
+	public function toArray() : array;
 }
