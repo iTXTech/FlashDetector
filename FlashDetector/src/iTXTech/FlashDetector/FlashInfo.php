@@ -40,6 +40,7 @@ class FlashInfo{
 	private $extraInfo;
 	private $flashId;
 	private $controller;
+	private $comment;
 
 	public function __construct(string $partNumber = ""){
 		$this->partNumber = strtoupper($partNumber);
@@ -120,6 +121,11 @@ class FlashInfo{
 
 	public function setController(array $controller) : FlashInfo{
 		$this->controller = $controller;
+		return $this;
+	}
+
+	public function setComment($comment) : FlashInfo{
+		$this->comment = $comment;
 		return $this;
 	}
 

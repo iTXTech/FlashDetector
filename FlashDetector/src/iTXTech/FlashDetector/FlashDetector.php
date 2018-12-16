@@ -68,6 +68,9 @@ abstract class FlashDetector{
 					if($data["l"] !== ""){
 						$info->setLithography($data["l"]);
 					}
+					if(isset($data["m"])){
+						$info->setComment($data["m"]);
+					}
 				}
 				return $info;
 			}

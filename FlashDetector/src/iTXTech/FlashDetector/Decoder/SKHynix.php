@@ -46,7 +46,7 @@ class SKHynix extends Decoder{
 		if(in_array($level = self::shiftChars($partNumber, 3), ["H2J", "H2D"])){
 			//TODO: SKHynix E2NAND
 			return $flashInfo->setType("E2NAND");
-		} else {
+		}else{
 			$flashInfo->setType("NAND");
 		}
 		$flashInfo
@@ -54,7 +54,8 @@ class SKHynix extends Decoder{
 				"U" => "2.7V~3.6V (3.3V)",
 				"L" => "2.7V",
 				"S" => "1.8V",
-				"Q" => "3.3V (?)"
+				"J" => "2.7V~3.6V/1.2V",
+				"Q" => "2.7V~3.6V/1.8V"
 				//what is Q, hynix's new NAND are most with Q?
 				//According to SiliconMotion's Document, most of H27Q NAND are 3.3V required
 			]))
@@ -71,11 +72,18 @@ class SKHynix extends Decoder{
 				"8G" => "8Gb",
 				"BG" => "32Gb",
 				"DG" => "128Gb",
+				"EG" => "256Gb",
+				"FG" => "512Gb",
+				"PG" => "192Gb",
+				"RG" => "384Gb",
+				"VG" => "768Gb",
+				"1T" => "1Tb",
+				"2T" => "2Tb",
 				//TODO: more
 			]))
 			->setDeviceWidth(self::getOrDefault(self::shiftChars($partNumber, 1), [
-				"8" => "x8 (8b)",
-				"6" => "x16 (16b)"
+				"8" => "x8",
+				"6" => "x16"
 			]));
 		$classification = self::getOrDefault(self::shiftChars($partNumber, 1), [
 			//Type, Die, Block
@@ -92,28 +100,42 @@ class SKHynix extends Decoder{
 			"V" => ["MLC", 4, self::LARGE_BLOCK],
 			"W" => ["MLC", -1, self::LARGE_BLOCK],//Double Stack Package
 			"Y" => ["MLC", 8, self::LARGE_BLOCK],
-			//TODO: confirm
-			"M" => ["TLC", 1, self::LARGE_BLOCK]
+			"R" => ["MLC", 6, self::LARGE_BLOCK],
+			"Z" => ["MLC", 12, self::LARGE_BLOCK],
+			"C" => ["MLC", 16, self::LARGE_BLOCK],
+			"M" => ["TLC", 1, self::LARGE_BLOCK],
+			"N" => ["TLC", 2, self::LARGE_BLOCK],
+			"P" => ["TLC", 4, self::LARGE_BLOCK],
+			"Q" => ["TLC", 8, self::LARGE_BLOCK]
 			//TODO: more
 		], ["Unknown", -1, self::SMALL_BLOCK]);
 		$flashInfo->setCellLevel($classification[0]);
 		$mode = self::getOrDefault(self::shiftChars($partNumber, 1), [
-			"1" => [1, 1, true],//CE, RnB, Sync
-			"2" => [1, 1, false],
-			"4" => [2, 2, true],
-			"5" => [2, 2, false],
-			"D" => [-1, -1, false],//Dual Interface
-			"F" => [4, 4, false]
-		], [-1, -1, false]);
+			"1" => [1, 1, true, 1],//CE, RnB, Sync
+			"2" => [1, 1, false, 1],
+			"4" => [2, 2, true, 1],
+			"5" => [2, 2, false, 1],
+			"D" => [-1, -1, false, 2],//Dual Interface
+			"F" => [4, 4, false, 2],//Dual Interface
+			"T" => [5, 5, false, 1],
+			"U" => [6, 6, false, 1],
+			"V" => [8, 8, false, 1],
+			"M" => [4, 1, true, 2],//Dual Interface
+			"G" => [4, 2, true, 2],//Dual Interface
+			"W" => [6, 6, true, 2],//Dual Interface
+			"H" => [8, 8, true, 2],//Dual Interface
+		], [-1, -1, false, -1]);
 		$flashInfo->setClassification(new Classification(
-			$mode[0], Classification::UNKNOWN_PROP, $mode[1], $classification[2]));
+			$mode[0], $mode[3], $mode[1], $classification[1]));
 		$flashInfo->setInterface((new FlashInterface(false))->setAsync(true)->setSync(true))//Async default = true
-			->setGeneration(self::getOrDefault(self::shiftChars($partNumber, 1), [
-				"M" => 1,
-				"A" => 2,
-				"B" => 3,
-				"C" => 4
-			]))
+		->setGeneration(self::getOrDefault(self::shiftChars($partNumber, 1), [
+			"M" => 1,
+			"A" => 2,
+			"B" => 3,
+			"C" => 4,
+			"D" => 5,
+			"E" => 6
+		]))
 			->setPackage(self::getOrDefault(self::shiftChars($partNumber, 1), [
 				"T" => "TSOP1",
 				"V" => "WSOP",
@@ -127,7 +149,11 @@ class SKHynix extends Decoder{
 				"W" => "Wafer",
 				"C" => "PGD1 (chip)",
 				"K" => "KGD",
-				"D" => "PGD2"
+				"D" => "PGD2",
+				"I" => "VFBGA-100",
+				"J" => "LFBGA-100",
+				"A" => "VLGA",
+				"H" => "XLGA"
 			]));
 		$packageMaterial = self::getOrDefault(self::shiftChars($partNumber, 1), [
 			"A" => "Wafer",
@@ -138,8 +164,8 @@ class SKHynix extends Decoder{
 		$flashInfo->setExtraInfo([
 			"page" => $classification[2] === self::SMALL_BLOCK ? "512+16 B" : "2048+64 B",
 			"package_material" => $packageMaterial,
-			"double_stack_package" => $classification[1] === -1 ? true : false,
-			"dual_interface" => $mode[0] === -1 ? true : false,//maybe this property is Channel
+			"double_stack_package" => $classification[1] === -1,
+			"dual_interface" => $mode[3] > 1,//maybe this property is Channel
 		]);
 
 
