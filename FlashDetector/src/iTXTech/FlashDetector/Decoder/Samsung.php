@@ -27,6 +27,56 @@ use iTXTech\FlashDetector\Property\FlashInterface;
 use iTXTech\SimpleFramework\Util\StringUtil;
 
 class Samsung extends Decoder{
+	private const CLASSIFICAITION = [
+		//CellLevel, Die
+		"9" => [4, 8],//never seen
+		"A" => [3, 1],
+		"B" => [3, 2],
+		"C" => [2, 4],
+		"D" => [3, -1],//TODO: confirm: 3D TLC V4
+		"F" => [1, 1],
+		"G" => [2, 1],
+		"H" => [2, 4],
+		"K" => [1, -1],//Die stack
+		"L" => [2, 2],
+		"M" => [2, -1],//Dual stack package = DSP
+		"N" => [1, -1],//DSP
+		"O" => [3, 8],
+		"P" => [2, 8],
+		"Q" => [1, 8],
+		"R" => [2, 12],
+		"S" => [2, 6],
+		"T" => [1, -1],//SLC SINGLE (S/B)
+		"U" => [2, 16],
+		"W" => [1, 4]
+	];
+	private const DENSITY = [
+		"12" => 512,
+		"16" => 16,
+		"28" => 128,
+		"32" => 32,
+		"40" => 4,
+		"56" => 256,
+		"64" => 64,
+		"80" => 8,
+		"1G" => 1 * 1024,
+		"2G" => 2 * 1024,
+		"4G" => 4 * 1024,
+		"8G" => 8 * 1024,
+		"AG" => 16 * 1024,
+		"BG" => 32 * 1024,
+		"CG" => 64 * 1024,
+		"DG" => 128 * 1024,
+		"EG" => 256 * 1024,
+		"FG" => 256 * 1024,
+		"GG" => 384 * 1024,
+		"HG" => 512 * 1024,
+		"LG" => 24 * 1024,
+		"NG" => 96 * 1024,
+		"ZG" => 48 * 1024,
+		"00" => 0
+	];
+
 	public static function getName() : string{
 		return "Samsung";
 	}
@@ -43,56 +93,9 @@ class Samsung extends Decoder{
 			->setManufacturer(self::getName())
 			->setType("NAND");
 		$partNumber = substr($partNumber, 2);//remove K9
-		$c = self::getOrDefault(self::shiftChars($partNumber, 1), [
-			//CellLevel, Die
-			"9" => [4, 8],//never seen
-			"A" => [3, 1],
-			"B" => [3, 2],
-			"C" => [2, 4],
-			"D" => [3, -1],//TODO: confirm: 3D TLC V4
-			"F" => [1, 1],
-			"G" => [2, 1],
-			"H" => [2, 4],
-			"K" => [1, -1],//Die stack
-			"L" => [2, 2],
-			"M" => [2, -1],//Dual stack package = DSP
-			"N" => [1, -1],//DSP
-			"O" => [3, 8],
-			"P" => [2, 8],
-			"Q" => [1, 8],
-			"R" => [2, 12],
-			"S" => [2, 6],
-			"T" => [1, -1],//SLC SINGLE (S/B)
-			"U" => [2, 16],
-			"W" => [1, 4]
-		], [-1, -1]);
+		$c = self::getOrDefault(self::shiftChars($partNumber, 1), self::CLASSIFICAITION, [-1, -1]);
 		$flashInfo->setCellLevel($c[0])
-			->setDensity(self::getOrDefault(self::shiftChars($partNumber, 2), [
-				"12" => "512Mb",
-				"16" => "16Mb",
-				"28" => "128Mb",
-				"32" => "32Mb",
-				"40" => "4Mb",
-				"56" => "256Mb",
-				"64" => "64Mb",
-				"80" => "8Mb",
-				"1G" => "1Gb",
-				"2G" => "2Gb",
-				"4G" => "4Gb",
-				"8G" => "8Gb",
-				"AG" => "16Gb",
-				"BG" => "32Gb",
-				"CG" => "64Gb",
-				"DG" => "128Gb",
-				"EG" => "256Gb",
-				"FD" => "256Gb",
-				"GG" => "384Gb",
-				"HD" => "512Gb",
-				"LG" => "24Gb",
-				"NG" => "96Gb",
-				"ZG" => "48Gb",
-				"00" => "0"
-			]));
+			->setDensity(self::getOrDefault(self::shiftChars($partNumber, 2), self::DENSITY, 0));
 		$technology = self::shiftChars($partNumber, 1);
 		//only check if is D => DDR
 		$flashInfo->setInterface((new FlashInterface(true))->setToggle($technology === "D"))
@@ -145,8 +148,30 @@ class Samsung extends Decoder{
 	}
 
 	public static function getFlashInfoFromFdb(string $partNumber) : ?array{
-		if(!isset(FlashDetector::getFdb()[strtolower(self::getName())][$partNumber]) and strlen($partNumber) === 10){
+		if(!isset(FlashDetector::getFdb()[strtolower(self::getName())][$partNumber]) and strlen($partNumber) === 10){//standard
+			$c = self::CLASSIFICAITION[substr($partNumber, 2, 1)] ?? -1;
+			//convert part number to single die
+			if($c[1] > 1){//die
+				foreach(self::CLASSIFICAITION as $code => $cf){
+					if($cf[0] === $c[0] and $cf[1] === 1){
+						$partNumber{2} = $code;
+						$density = self::DENSITY[substr($partNumber, 3, 2)] ?? -1;
+						foreach(self::DENSITY as $cd => $d){
+							if($d * $c[1] === $density){
+								$partNumber{3} = $cd{0};
+								$partNumber{4} = $cd{1};
+							}
+						}
+						break;
+					}
+				}
+			}
 			$partNumber{8} = "0";
+			$info = FlashDetector::getFdb()[strtolower(self::getName())][$partNumber] ?? null;
+			if($info !== null){
+				$info["m"] .= " (" . $c[1] . " x " . $partNumber . ")";
+			}
+			return $info;
 		}
 		return FlashDetector::getFdb()[strtolower(self::getName())][$partNumber] ?? null;
 	}

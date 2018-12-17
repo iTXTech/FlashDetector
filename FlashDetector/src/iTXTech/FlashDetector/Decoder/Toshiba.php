@@ -20,6 +20,7 @@
 
 namespace iTXTech\FlashDetector\Decoder;
 
+use iTXTech\FlashDetector\FlashDetector;
 use iTXTech\FlashDetector\FlashInfo;
 use iTXTech\FlashDetector\Property\Classification;
 use iTXTech\FlashDetector\Property\FlashInterface;
@@ -63,34 +64,34 @@ class Toshiba extends Decoder{
 				"D" => "Vcc: 3.3V/1.8V, VccQ: 3.3V/1.8V"
 			]))
 			->setDensity(self::getOrDefault(self::shiftChars($partNumber, 2), [
-				"M8" => "32MB",
-				"M9" => "64MB",
-				"G0" => "128MB",
-				"G1" => "256MB",
-				"G2" => "512MB",
-				"G3" => "1GB",
-				"G4" => "2GB",
-				"GA" => "3GB",
-				"G5" => "4GB",
-				"GB" => "6GB",
-				"G6" => "8GB",
-				"GC" => "12GB",
-				"G7" => "16GB",
-				"GD" => "24GB",
-				"G8" => "32GB",
-				"GE" => "48GB",
-				"G9" => "64GB",
-				"GF" => "96GB",
-				"T0" => "128GB",
-				"T1" => "256GB"
-			]))
+				"M8" => 256,
+				"M9" => 512,
+				"G0" => 1 * 1024,
+				"G1" => 2 * 1024,
+				"G2" => 4 * 1024,
+				"G3" => 8 * 1024,
+				"G4" => 16 * 1024,
+				"GA" => 24 * 1024,
+				"G5" => 32 * 1024,
+				"GB" => 48 * 1024,
+				"G6" => 64 * 1024,
+				"GC" => 96 * 1024,
+				"G7" => 128 * 1024,
+				"GD" => 192 * 1024,
+				"G8" => 256 * 1024,
+				"GE" => 384 * 1024,
+				"G9" => 512 * 1024,
+				"GF" => 768 * 1024,
+				"T0" => 1 * 1024 * 1024,
+				"T1" => 2 * 1024 * 1024
+			], 0))
 			->setCellLevel(self::getOrDefault(self::shiftChars($partNumber, 1), [
 				"S" => 1,
-				"H" => "SLC *",
+				"H" => 1,
 				"D" => 2,
-				"E" => "MLC *",
+				"E" => 2,
 				"T" => 3,
-				"U" => "TLC *"
+				"U" => 3
 			]));
 		$width = self::shiftChars($partNumber, 1);
 		$flashInfo->setDeviceWidth($width <= 4 ? "x8" : "x16");

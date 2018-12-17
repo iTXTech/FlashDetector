@@ -55,7 +55,7 @@ class FlashInfo{
 		return $this->manufacturer;
 	}
 
-	public function getCellLevel() : ?string {
+	public function getCellLevel() : ?string{
 		return $this->cellLevel;
 	}
 
@@ -69,8 +69,14 @@ class FlashInfo{
 		return $this;
 	}
 
-	public function setDensity(string $density) : FlashInfo{
-		$this->density = $density;
+	public function setDensity(int $density) : FlashInfo{
+		$unit = ["Mb", "Gb", "Tb"];
+		$i = 0;
+		while($density > 1024 and isset($unit[$i + 1])){
+			$density /= 1024;
+			$i++;
+		}
+		$this->density = $density . " " . $unit[$i];
 		return $this;
 	}
 

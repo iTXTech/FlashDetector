@@ -56,14 +56,14 @@ class Intel extends Decoder{
 		$partNumber = substr($partNumber, 3);
 		$flashInfo->setType("NAND Flash")
 			->setDensity(self::getOrDefault($density = self::shiftChars($partNumber, 3), [
-				"08G" => "1 GB",
-				"16G" => "2 GB",
-				"32G" => "4 GB",
-				"64G" => "8 GB",
-				"16B" => "16 GB",
-				"32B" => "32 GB",
+				"08G" => 8 * 1024,//Mbits
+				"16G" => 16 * 1024,
+				"32G" => 32 * 1024,
+				"64G" => 64 * 1024,
+				"16B" => 128 * 1024,
+				"32B" => 256 * 1024,
 				//TODO: 02T
-			]))
+			], 0))
 			->setDeviceWidth(self::getOrDefault(self::shiftChars($partNumber, 2), [
 				"08" => "x8",
 				"16" => "x16"
