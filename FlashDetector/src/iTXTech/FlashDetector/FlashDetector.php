@@ -28,6 +28,7 @@ use iTXTech\FlashDetector\Decoder\SanDisk;
 use iTXTech\FlashDetector\Decoder\SKHynix;
 use iTXTech\FlashDetector\Decoder\SpecTek;
 use iTXTech\FlashDetector\Decoder\Toshiba;
+use iTXTech\SimpleFramework\Util\StringUtil;
 
 abstract class FlashDetector{
 	/** @var Decoder[] */
@@ -85,7 +86,17 @@ abstract class FlashDetector{
 			[$decoder::processBeforeQueryFdb($info->getPartNumber())] ?? null;
 	}
 
-	public static function getFlashPartNumberFromIddb(string $id) : ?array{
+	public static function getFlashPartNumberFromIddb(string $id, bool $partCompare = false) : ?array{
+		if($partCompare){
+			$result = [];
+			foreach(self::$iddb as $fid => $partNumber){
+				if(StringUtil::startsWith($fid, $id)){
+					var_dump($partNumber);
+					$result[] = $partNumber;
+				}
+			}
+			return $result;
+		}
 		return self::$iddb[strtoupper($id)] ?? null;
 	}
 }

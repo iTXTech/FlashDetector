@@ -51,5 +51,5 @@ if($moduleManager->getModule("iTXTech_FlashDetector") === null){
 }
 
 FlashDetector::init();
-$info = FlashDetector::getFlashPartNumberFromIddb($argv[1]);
+$info = FlashDetector::getFlashPartNumberFromIddb($argv[1], true);
 Util::println(json_encode($info, JSON_PRETTY_PRINT));

@@ -65,7 +65,9 @@ class Micron extends Decoder{
 
 	public static function decode(string $partNumber) : FlashInfo{
 		$flashInfo = (new FlashInfo($partNumber))->setManufacturer(self::getName());
-		$partNumber = substr($partNumber, 2);//remove MT
+		if(!StringUtil::startsWith($partNumber, "29")){
+			$partNumber = substr($partNumber, 2);//remove MT
+		}
 		$flashInfo
 			->setType(self::getOrDefault(self::shiftChars($partNumber, 3), [
 				"29F" => "NAND Flash",

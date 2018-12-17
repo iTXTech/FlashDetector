@@ -93,8 +93,8 @@ function mergeDbf(array &$fdb, string $filename, string $db){
 				$comment = trim(substr(strstr($info, "//"), 2));
 			}
 			$info = explode(" ", str_replace(
-				[$comment, "NEW DATE CODE", "OLD DATE CODE", " - ", "L84A HP", "SanDisk SanDisk"],
-				["", "", "", "-", "L84A_HP", "SanDisk"],
+				[$comment, "NEW DATE CODE", "OLD DATE CODE", " - ", "L84A HP", "SanDisk SanDisk", "-ES"],
+				["", "", "", "-", "L84A_HP", "SanDisk", "ES"],
 				$info));
 			//Manufacturer, PartNumber, SMICode, Lithography, CellLevel
 			foreach($info as $k => $v){
