@@ -90,9 +90,9 @@ class Intel extends Decoder{
 				//TODO: C
 			]))
 			->setCellLevel(self::getOrDefault(self::shiftChars($partNumber, 1), [
-				"N" => "SLC",
-				"M" => "MLC",
-				"T" => "TLC", //TODO: Confirm
+				"N" => 1,
+				"M" => 2,
+				"T" => 3, //TODO: Confirm
 			]))
 			->setLithography(self::getOrDefault(self::shiftChars($partNumber, 1), [
 				"A" => "90 nm",

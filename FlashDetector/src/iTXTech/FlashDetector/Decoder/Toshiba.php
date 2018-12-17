@@ -85,11 +85,11 @@ class Toshiba extends Decoder{
 				"T1" => "256GB"
 			]))
 			->setCellLevel(self::getOrDefault(self::shiftChars($partNumber, 1), [
-				"S" => "SLC",
+				"S" => 1,
 				"H" => "SLC *",
-				"D" => "MLC",
+				"D" => 2,
 				"E" => "MLC *",
-				"T" => "TLC",
+				"T" => 3,
 				"U" => "TLC *"
 			]));
 		$width = self::shiftChars($partNumber, 1);

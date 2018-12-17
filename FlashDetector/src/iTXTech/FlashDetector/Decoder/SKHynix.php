@@ -89,26 +89,26 @@ class SKHynix extends Decoder{
 			]));
 		$classification = self::getOrDefault(self::shiftChars($partNumber, 1), [
 			//Type, Die, Block
-			"S" => ["SLC", 1, self::SMALL_BLOCK],
-			"A" => ["SLC", 2, self::SMALL_BLOCK],
-			"B" => ["SLC", 4, self::SMALL_BLOCK],
-			"F" => ["SLC", 1, self::LARGE_BLOCK],
-			"G" => ["SLC", 2, self::LARGE_BLOCK],
-			"H" => ["SLC", 4, self::LARGE_BLOCK],
-			"J" => ["SLC", 8, self::LARGE_BLOCK],
-			"K" => ["SLC", -1, self::LARGE_BLOCK],//Double Stack Package
-			"T" => ["MLC", 1, self::LARGE_BLOCK],
-			"U" => ["MLC", 2, self::LARGE_BLOCK],
-			"V" => ["MLC", 4, self::LARGE_BLOCK],
-			"W" => ["MLC", -1, self::LARGE_BLOCK],//Double Stack Package
-			"Y" => ["MLC", 8, self::LARGE_BLOCK],
-			"R" => ["MLC", 6, self::LARGE_BLOCK],
-			"Z" => ["MLC", 12, self::LARGE_BLOCK],
-			"C" => ["MLC", 16, self::LARGE_BLOCK],
-			"M" => ["TLC", 1, self::LARGE_BLOCK],
-			"N" => ["TLC", 2, self::LARGE_BLOCK],
-			"P" => ["TLC", 4, self::LARGE_BLOCK],
-			"Q" => ["TLC", 8, self::LARGE_BLOCK]
+			"S" => [1, 1, self::SMALL_BLOCK],
+			"A" => [1, 2, self::SMALL_BLOCK],
+			"B" => [1, 4, self::SMALL_BLOCK],
+			"F" => [1, 1, self::LARGE_BLOCK],
+			"G" => [1, 2, self::LARGE_BLOCK],
+			"H" => [1, 4, self::LARGE_BLOCK],
+			"J" => [1, 8, self::LARGE_BLOCK],
+			"K" => [1, -1, self::LARGE_BLOCK],//Double Stack Package
+			"T" => [2, 1, self::LARGE_BLOCK],
+			"U" => [2, 2, self::LARGE_BLOCK],
+			"V" => [2, 4, self::LARGE_BLOCK],
+			"W" => [2, -1, self::LARGE_BLOCK],//Double Stack Package
+			"Y" => [2, 8, self::LARGE_BLOCK],
+			"R" => [2, 6, self::LARGE_BLOCK],
+			"Z" => [2, 12, self::LARGE_BLOCK],
+			"C" => [2, 16, self::LARGE_BLOCK],
+			"M" => [3, 1, self::LARGE_BLOCK],
+			"N" => [3, 2, self::LARGE_BLOCK],
+			"P" => [3, 4, self::LARGE_BLOCK],
+			"Q" => [3, 8, self::LARGE_BLOCK]
 			//TODO: more
 		], ["Unknown", -1, self::SMALL_BLOCK]);
 		$flashInfo->setCellLevel($classification[0]);

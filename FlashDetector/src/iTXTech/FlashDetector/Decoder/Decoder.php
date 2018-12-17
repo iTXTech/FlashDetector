@@ -24,6 +24,14 @@ use iTXTech\FlashDetector\FlashInfo;
 use iTXTech\SimpleFramework\Util\StringUtil;
 
 abstract class Decoder{
+	public const CELL_LEVEL = [
+		-1 => null,
+		1 => "SLC",
+		2 => "MLC",
+		3 => "TLC",
+		4 => "QLC"
+	];
+
 	public abstract static function getName() : string;
 
 	public abstract static function check(string $partNumber) : bool;

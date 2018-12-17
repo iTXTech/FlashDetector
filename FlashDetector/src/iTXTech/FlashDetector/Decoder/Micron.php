@@ -99,7 +99,7 @@ class Micron extends Decoder{
 				"16" => "16 bits"
 			]))
 			->setCellLevel(self::getOrDefault(self::shiftChars($partNumber, 1), [
-				"A" => "SLC",
+				"A" => 1,
 				"C" => "MLC-2",
 				"E" => "MLC-3 (TLC)"
 				//TODO: QLC

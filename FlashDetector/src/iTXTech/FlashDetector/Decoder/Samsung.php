@@ -21,6 +21,8 @@
 namespace iTXTech\FlashDetector\Decoder;
 
 use iTXTech\FlashDetector\FlashInfo;
+use iTXTech\FlashDetector\Property\Classification;
+use iTXTech\FlashDetector\Property\FlashInterface;
 use iTXTech\SimpleFramework\Util\StringUtil;
 
 class Samsung extends Decoder{
@@ -36,8 +38,107 @@ class Samsung extends Decoder{
 	}
 
 	public static function decode(string $partNumber) : FlashInfo{
-		$flashInfo = (new FlashInfo($partNumber))->setManufacturer(self::getName());
+		$flashInfo = (new FlashInfo($partNumber))
+			->setManufacturer(self::getName())
+			->setType("NAND");
 		$partNumber = substr($partNumber, 2);//remove K9
+		$c = self::getOrDefault(self::shiftChars($partNumber, 1), [
+			//CellLevel, Die
+			"9" => [4, 8],//never seen
+			"A" => [3, 1],
+			"B" => [3, 2],
+			"C" => [2, 4],
+			"D" => [3, -1],//TODO: confirm: 3D TLC V4
+			"F" => [1, 1],
+			"G" => [2, 1],
+			"H" => [2, 4],
+			"K" => [1, -1],//Die stack
+			"L" => [2, 2],
+			"M" => [2, -1],//Dual stack package = DSP
+			"N" => [1, -1],//DSP
+			"O" => [3, 8],
+			"P" => [2, 8],
+			"Q" => [1, 8],
+			"R" => [2, 12],
+			"S" => [2, 6],
+			"T" => [1, -1],//SLC SINGLE (S/B)
+			"U" => [2, 16],
+			"W" => [1, 4]
+		], [-1, -1]);
+		$flashInfo->setCellLevel($c[0])
+			->setDensity(self::getOrDefault(self::shiftChars($partNumber, 2), [
+				"12" => "512Mb",
+				"16" => "16Mb",
+				"28" => "128Mb",
+				"32" => "32Mb",
+				"40" => "4Mb",
+				"56" => "256Mb",
+				"64" => "64Mb",
+				"80" => "8Mb",
+				"1G" => "1Gb",
+				"2G" => "2Gb",
+				"4G" => "4Gb",
+				"8G" => "8Gb",
+				"AG" => "16Gb",
+				"BG" => "32Gb",
+				"CG" => "64Gb",
+				"DG" => "128Gb",
+				"EG" => "256Gb",
+				"FD" => "256Gb",
+				"GG" => "384Gb",
+				"HD" => "512Gb",
+				"LG" => "24Gb",
+				"NG" => "96Gb",
+				"ZG" => "48Gb",
+				"00" => "0"
+			]));
+		$technology = self::shiftChars($partNumber, 1);
+		//only check if is D => DDR
+		$flashInfo->setInterface((new FlashInterface(true))->setToggle($technology === "D"))
+			->setDeviceWidth(self::getOrDefault(self::shiftChars($partNumber, 1), [
+				"0" => "NONE",
+				"8" => "x8",
+				"6" => "x16"
+			]))
+			->setVoltage(self::getOrDefault(self::shiftChars($partNumber, 1), [
+				"A" => "1.65V~3.6V",
+				"B" => "2.7V (2.5V~2.9V)",
+				"C" => "5.0V (4.5V~5.5V)",
+				"D" => "2.65V (2.4V ~ 2.9V)",
+				"E" => "2.3V~3.6V",
+				"R" => "1.8V (1.65V~1.95V)",
+				"Q" => "1.8V (1.7V ~ 1.95V)",
+				"T" => "2.4V~3.0V",
+				"S" => "3.3V (3V~3.6V/ VccQ1.8V (1.65V~1.95V)",
+				"U" => "2.7V~3.6V",
+				"V" => "3.3V (3.0V~3.6V)",
+				"W" => "2.7V~5.5V, 3.0V~5.5V",
+				"0" => "NONE",
+			]));
+		$mode = self::getOrDefault(self::shiftChars($partNumber, 1), [
+			"0" => [-1, -1],//CE, R/nB
+			"1" => [2, 2],
+			"3" => [3, 3],
+			"4" => [4, 1],
+			"5" => [4, 4],
+			"6" => [6, 2],
+			"7" => [8, 4],
+			"8" => [8, 2],
+			"9" => [-1, -1],//1st block OTP
+			"A" => [-1, -1],//Mask Option 1
+			"L" => [-1, -1],//Low grade
+		], [-1, -1]);
+		$flashInfo->setClassification(new Classification($mode[0], Classification::UNKNOWN_PROP, $mode[1], $c[1]))
+			->setGeneration(self::getOrDefault(self::shiftChars($partNumber, 1), [
+				"M" => 1,
+				"A" => 2,
+				"B" => 3,
+				"C" => 4,
+				"D" => 5,
+				"E" => 6,
+				"Y" => 25,
+				"Z" => 26
+			]));
 
 		return $flashInfo;
 	}

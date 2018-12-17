@@ -64,20 +64,29 @@ abstract class FlashDetector{
 		foreach(self::$decoders as $decoder){
 			if($decoder::check($partNumber)){
 				$info = $decoder::decode($partNumber);
-				if($combineFdb and ($data = self::getFlashInfoFromFdb($info, $decoder)) !== null){
-					$info->setFlashId($data["id"]);
-					$info->setController($data["t"]);
-					if($data["l"] !== ""){
-						$info->setLithography($data["l"]);
-					}
-					if(isset($data["m"])){
-						$info->setComment($data["m"]);
-					}
+				if($combineFdb){
+					self::combineDataFromFdb($info, $decoder);
 				}
 				return $info;
 			}
 		}
 		return (new FlashInfo($partNumber))->setManufacturer("Unknown");
+	}
+
+	public static function combineDataFromFdb(FlashInfo $info, string $decoder){
+		if(($data = self::getFlashInfoFromFdb($info, $decoder)) !== null){
+			$info->setFlashId($data["id"]);
+			$info->setController($data["t"]);
+			if($data["l"] !== ""){
+				$info->setLithography($data["l"]);
+			}
+			if(isset($data["m"])){
+				$info->setComment($data["m"]);
+			}
+			if($info->getCellLevel() === null and $data["c"] !== ""){
+				$info->setCellLevel($data["c"]);
+			}
+		}
 	}
 
 	public static function getFlashInfoFromFdb(FlashInfo $info, string $decoder) : ?array{
@@ -91,8 +100,7 @@ abstract class FlashDetector{
 			$result = [];
 			foreach(self::$iddb as $fid => $partNumber){
 				if(StringUtil::startsWith($fid, $id)){
-					var_dump($partNumber);
-					$result[] = $partNumber;
+					$result[$fid] = $partNumber;
 				}
 			}
 			return $result;

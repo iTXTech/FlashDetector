@@ -20,6 +20,7 @@
 
 namespace iTXTech\FlashDetector;
 
+use iTXTech\FlashDetector\Decoder\Decoder;
 use iTXTech\FlashDetector\Property\Classification;
 use iTXTech\FlashDetector\Property\FlashInterface;
 
@@ -54,6 +55,10 @@ class FlashInfo{
 		return $this->manufacturer;
 	}
 
+	public function getCellLevel() : ?string {
+		return $this->cellLevel;
+	}
+
 	public function setManufacturer(string $m) : FlashInfo{
 		$this->manufacturer = $m;
 		return $this;
@@ -79,8 +84,8 @@ class FlashInfo{
 		return $this;
 	}
 
-	public function setCellLevel(string $cellLevel) : FlashInfo{
-		$this->cellLevel = $cellLevel;
+	public function setCellLevel(int $cellLevel) : FlashInfo{
+		$this->cellLevel = Decoder::CELL_LEVEL[$cellLevel];
 		return $this;
 	}
 
