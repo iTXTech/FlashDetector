@@ -20,6 +20,7 @@
 
 namespace iTXTech\FlashDetector\Decoder;
 
+use iTXTech\FlashDetector\FlashDetector;
 use iTXTech\FlashDetector\FlashInfo;
 
 class SpecTek extends Decoder{
@@ -40,5 +41,9 @@ class SpecTek extends Decoder{
 		$partNumber = substr($partNumber, 2);
 
 		return $flashInfo;
+	}
+
+	public static function getFlashInfoFromFdb(string $partNumber) : ?array{
+		return FlashDetector::getFdb()[strtolower(self::getName())][$partNumber] ?? null;
 	}
 }

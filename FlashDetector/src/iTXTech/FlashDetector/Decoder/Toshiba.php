@@ -150,4 +150,8 @@ class Toshiba extends Decoder{
 
 		return $flashInfo;
 	}
+
+	public static function getFlashInfoFromFdb(string $partNumber) : ?array{
+		return FlashDetector::getFdb()[strtolower(self::getName())][$partNumber] ?? null;
+	}
 }

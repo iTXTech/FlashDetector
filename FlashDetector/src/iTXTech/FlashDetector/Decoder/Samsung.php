@@ -20,6 +20,7 @@
 
 namespace iTXTech\FlashDetector\Decoder;
 
+use iTXTech\FlashDetector\FlashDetector;
 use iTXTech\FlashDetector\FlashInfo;
 use iTXTech\FlashDetector\Property\Classification;
 use iTXTech\FlashDetector\Property\FlashInterface;
@@ -141,5 +142,12 @@ class Samsung extends Decoder{
 			]));
 
 		return $flashInfo;
+	}
+
+	public static function getFlashInfoFromFdb(string $partNumber) : ?array{
+		if(!isset(FlashDetector::getFdb()[strtolower(self::getName())][$partNumber]) and strlen($partNumber) === 10){
+			$partNumber{8} = "0";
+		}
+		return FlashDetector::getFdb()[strtolower(self::getName())][$partNumber] ?? null;
 	}
 }

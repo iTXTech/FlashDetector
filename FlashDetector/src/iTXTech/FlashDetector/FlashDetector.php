@@ -36,6 +36,14 @@ abstract class FlashDetector{
 	private static $fdb = [];
 	private static $iddb = [];
 
+	public static function getFdb() : array{
+		return self::$fdb;
+	}
+
+	public static function getIddb() : array{
+		return self::$iddb;
+	}
+
 	public static function init(){
 		self::registerDecoder(Micron::class);
 		self::registerDecoder(SKHynix::class);
@@ -74,7 +82,8 @@ abstract class FlashDetector{
 	}
 
 	public static function combineDataFromFdb(FlashInfo $info, string $decoder){
-		if(($data = self::getFlashInfoFromFdb($info, $decoder)) !== null){
+		/** @var Decoder $decoder */
+		if(($data = $decoder::getFlashInfoFromFdb($info->getPartNumber())) !== null){
 			$info->setFlashId($data["id"]);
 			$info->setController($data["t"]);
 			if($data["l"] !== ""){
@@ -87,12 +96,6 @@ abstract class FlashDetector{
 				$info->setCellLevel($data["c"]);
 			}
 		}
-	}
-
-	public static function getFlashInfoFromFdb(FlashInfo $info, string $decoder) : ?array{
-		/** @var Decoder $decoder */
-		return self::$fdb[strtolower($info->getManufacturer())]
-			[$decoder::processBeforeQueryFdb($info->getPartNumber())] ?? null;
 	}
 
 	public static function getFlashPartNumberFromIddb(string $id, bool $partCompare = false) : ?array{

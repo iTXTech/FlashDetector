@@ -20,6 +20,7 @@
 
 namespace iTXTech\FlashDetector\Decoder;
 
+use iTXTech\FlashDetector\FlashDetector;
 use iTXTech\FlashDetector\FlashInfo;
 use iTXTech\FlashDetector\Property\Classification;
 use iTXTech\FlashDetector\Property\FlashInterface;
@@ -165,12 +166,15 @@ class SKHynix extends Decoder{
 		]);
 		$flashInfo->setExtraInfo([
 			"page" => $classification[2] === self::SMALL_BLOCK ? "512+16 B" : "2048+64 B",
-			"package_material" => $packageMaterial,
-			"double_stack_package" => $classification[1] === -1,
-			"dual_interface" => $mode[3] > 1,//maybe this property is Channel
+			"packageMaterial" => $packageMaterial,
+			"doubleStackPackage" => $classification[1] === -1,
+			"dualInterface" => $mode[3] > 1,//maybe this property is Channel
 		]);
 
-
 		return $flashInfo;
+	}
+
+	public static function getFlashInfoFromFdb(string $partNumber) : ?array{
+		return FlashDetector::getFdb()[strtolower(self::getName())][$partNumber] ?? null;
 	}
 }

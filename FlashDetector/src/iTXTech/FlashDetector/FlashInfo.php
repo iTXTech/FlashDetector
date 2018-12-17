@@ -84,8 +84,8 @@ class FlashInfo{
 		return $this;
 	}
 
-	public function setCellLevel(int $cellLevel) : FlashInfo{
-		$this->cellLevel = Decoder::CELL_LEVEL[$cellLevel];
+	public function setCellLevel($cellLevel) : FlashInfo{
+		$this->cellLevel = is_string($cellLevel) ? $cellLevel : Decoder::CELL_LEVEL[$cellLevel];
 		return $this;
 	}
 

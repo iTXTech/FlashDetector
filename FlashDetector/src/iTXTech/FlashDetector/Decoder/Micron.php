@@ -20,6 +20,7 @@
 
 namespace iTXTech\FlashDetector\Decoder;
 
+use iTXTech\FlashDetector\FlashDetector;
 use iTXTech\FlashDetector\FlashInfo;
 use iTXTech\FlashDetector\Property\Classification;
 use iTXTech\FlashDetector\Property\FlashInterface;
@@ -100,8 +101,8 @@ class Micron extends Decoder{
 			]))
 			->setCellLevel(self::getOrDefault(self::shiftChars($partNumber, 1), [
 				"A" => 1,
-				"C" => "MLC-2",
-				"E" => "MLC-3 (TLC)"
+				"C" => 2,
+				"E" => 3
 				//TODO: QLC
 			]));
 
@@ -153,6 +154,14 @@ class Micron extends Decoder{
 		//ignoring package
 
 		return $flashInfo;
+	}
+
+	public static function getFlashInfoFromFdb(string $partNumber) : array{
+		$package = substr($partNumber, strlen($partNumber) - 2);
+		if(isset(self::PACKAGE_LIST[$package])){
+			$partNumber = substr($partNumber, 0, strlen($partNumber) - 2);
+		}
+		return FlashDetector::getFdb()[strtolower(self::getName())][$partNumber] ?? null;
 	}
 
 	public static function processBeforeQueryFdb(string $partNumber){
