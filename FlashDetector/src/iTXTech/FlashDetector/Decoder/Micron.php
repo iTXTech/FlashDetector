@@ -156,7 +156,7 @@ class Micron extends Decoder{
 		return $flashInfo;
 	}
 
-	public static function getFlashInfoFromFdb(string $partNumber) : array{
+	public static function getFlashInfoFromFdb(string $partNumber) : ?array{
 		$package = substr($partNumber, strlen($partNumber) - 2);
 		if(isset(self::PACKAGE_LIST[$package])){
 			$partNumber = substr($partNumber, 0, strlen($partNumber) - 2);
