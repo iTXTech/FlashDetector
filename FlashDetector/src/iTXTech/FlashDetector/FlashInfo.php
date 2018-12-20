@@ -30,7 +30,7 @@ class FlashInfo{
 	private $type;//Enterprise/consumer
 	private $density;//256Gb
 	private $deviceWidth;//only Micron
-	private $lithography;//22nm 19nm 1ynm 1znm
+	private $processNode;//22nm 19nm 1ynm 1znm
 	private $cellLevel;//SLC MLC TLC QLC
 	private $classification;//1CE 1DIE
 	private $voltage;//3.3V 1.8V
@@ -72,7 +72,7 @@ class FlashInfo{
 	public function setDensity(int $density) : FlashInfo{
 		$unit = ["Mb", "Gb", "Tb"];
 		$i = 0;
-		while($density > 1024 and isset($unit[$i + 1])){
+		while($density >= 1024 and isset($unit[$i + 1])){
 			$density /= 1024;
 			$i++;
 		}
@@ -120,8 +120,8 @@ class FlashInfo{
 		return $this;
 	}
 
-	public function setLithography(string $lithography) : FlashInfo{
-		$this->lithography = $lithography;
+	public function setProcessNode(string $processNode) : FlashInfo{
+		$this->processNode = $processNode;
 		return $this;
 	}
 

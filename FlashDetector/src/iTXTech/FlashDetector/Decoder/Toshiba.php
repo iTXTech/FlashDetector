@@ -104,7 +104,7 @@ class Toshiba extends Decoder{
 		], ["Unknown", "Unknown"]);
 		$extra["page_size"] = $size[0];
 		$extra["block_size"] = $size[1];
-		$flashInfo->setLithography(self::getOrDefault(self::shiftChars($partNumber, 1), [
+		$flashInfo->setProcessNode(self::getOrDefault(self::shiftChars($partNumber, 1), [
 			"A" => "130 nm",
 			"B" => "90 nm",
 			"C" => "70 nm",

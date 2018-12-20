@@ -87,7 +87,7 @@ abstract class FlashDetector{
 			$info->setFlashId($data["id"]);
 			$info->setController($data["t"]);
 			if($data["l"] !== ""){
-				$info->setLithography($data["l"]);
+				$info->setProcessNode($data["l"]);
 			}
 			if(isset($data["m"])){
 				$info->setComment($data["m"]);

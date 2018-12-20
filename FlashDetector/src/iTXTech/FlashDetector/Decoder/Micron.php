@@ -27,9 +27,9 @@ use iTXTech\FlashDetector\Property\FlashInterface;
 use iTXTech\SimpleFramework\Util\StringUtil;
 
 class Micron extends Decoder{
-	private const PACKAGE_LIST = [
-		"WP" => "48-pin TSOP I (CPL version)",
-		"WC" => "48-pin TSOP I (OCPL version)",
+	protected const PACKAGE = [
+		"WP" => "48-pin TSOP I Center Package Leads (CPL) PB free",
+		"WC" => "48-pin TSOP I Off-center Package Leads (OCPL) PB free",
 		"C5" => "52-pad VLGA, 14 x 18 x 1.0 (SDP/DDP/QDP)",
 		"G1" => "272-ball VBGA, 14 x 18 x 1.0 (SDP, DDP, 3DP, QDP)",
 		"G2" => "272-ball TBGA, 14 x 18 x 1.3 (QDP, 8DP)",
@@ -50,7 +50,86 @@ class Micron extends Decoder{
 		"J5" => "132-ball TBGA, 12 x 18 x 1.2 (QDP)",
 		"J6" => "132-ball LBGA, 12 x 18 x 1.4 (8DP)",
 		"J7" => "152-ball LBGA, 14 x 18 x 1.5 (16DP)",
-		"J9" => "132-ball LBGA, 12mm x 18mm x 1.5mm (16DP)"
+		"J9" => "132-ball LBGA, 12 x 18 x 1.5 (16DP)",
+		//SpecTek
+		"C3" => "52-pad ULGA, 12 x 17 x 0.65",
+		"C4" => "52-pad VLGA, 12 x 17 x 1.0",
+		"C6" => "52-pad LLGA, 14 x 18 x 1.47",
+		"C7" => "48-pad LLGA, 12 x 20 x 1.47",
+		"C8" => "52-pad WLGA, 14 x 18 x 0.75",
+		"D1" => "52-pad VLGA, 11 x 14 x 0.9",
+		"G5" => "272-ball LFBGA, 14 x 18 x 1.4",
+		"G9" => "252-ball LFBGA, 12 x 18 x 1.4",
+		"H5" => "56-ball VFBGA, 12.8 x 9.5 x 1.0",
+		"K3" => "100-ball VLGA 12 x 18 x 0.9",
+		"K4" => "100-ball TLGA, 12 x 18 x 1.1",
+		"K7" => "152-ball VLGA 14 x 18 x 0.9",
+		"K8" => "152-ball TLGA 14 x 18 x 1.1",
+		"K9" => "132-ball VLGA, 12 x 18 x 1.0",
+		"MD" => "130-ball VFBGA, 8 x 9 x 1.0",
+		"M4" => "132-ball TBGA, 12 x 18 x 1.3",
+		"M5" => "132-ball LBGA, 12 x 18 x 1.5",
+		"M8" => "55-ball VFBGA, 8 x 10 x 1.2",//should be M8Z
+	];
+	protected const DENSITY = [
+		"1G" => 1 * 1024,
+		"2G" => 2 * 1024,
+		"4G" => 4 * 1024,
+		"8G" => 8 * 1024,
+		"16G" => 16 * 1024,
+		"32G" => 32 * 1024,
+		"64G" => 64 * 1024,
+		"128G" => 128 * 1024,
+		"256G" => 256 * 1024,
+		"384G" => 384 * 1024,
+		"512G" => 512 * 1024,
+		"1T" => 1024 * 1024,
+		"1T2" => 1.125 * 1024 * 1024,
+		"1HT" => 1.5 * 1024 * 1024,
+		"2T" => 2 * 1024 * 1024,
+		"3T" => 3 * 1024 * 1024,
+		"4T" => 4 * 1024 * 1024,
+		"6T" => 6 * 1024 * 1024,
+		"8T" => 8 * 1024 * 1024,
+		"16T" => 16 * 1024 * 1024,
+	];
+	protected const CLASSIFICATION = [
+		"A" => [1, 0, 0, 1],//die, ce, rnb, ch
+		"B" => [1, 1, 1, 1],
+		"D" => [2, 1, 1, 1],
+		"E" => [2, 2, 2, 2],
+		"F" => [2, 2, 2, 1],
+		"G" => [3, 3, 3, 3],
+		"J" => [4, 2, 2, 1],
+		"K" => [4, 2, 2, 2],
+		"L" => [4, 4, 4, 4],
+		"M" => [4, 4, 4, 2],
+		"Q" => [8, 4, 4, 4],
+		"R" => [8, 2, 2, 2],
+		"T" => [16, 8, 4, 2],
+		"U" => [8, 4, 4, 2],
+		"V" => [16, 8, 4, 4],
+		//SpecTek, no R/nB documented
+		"C" => [3, 3, -1, 1],
+		"H" => [4, 1, -1, 1],
+		"N" => [6, 6, -1, 3],
+		"P" => [8, 8, -1, 2],
+		"W" => [16, 4, -1, 2],
+		"X" => [4, 4, -1, 2],
+		"Y" => [11, 7, -1, 3],
+		"4" => [4, 4, -1, 1]
+	];
+	protected const INTERFACE = [
+		"A" => [false, true, false],//sync, async, spi
+		"B" => [true, true, false],
+		"C" => [true, false, false],
+		"D" => [false, false, true],
+		//SpecTek
+		"E" => [true, true, false],//TODO: confirm
+		"F" => [false, true, false],
+		"G" => [true, true, false],//TODO: confirm
+		"M" => [false, false, false],//TODO: confirm
+		"N" => [false, true, false]
 	];
 
 	public static function getName() : string{
@@ -74,26 +153,7 @@ class Micron extends Decoder{
 				"29F" => "NAND Flash",
 				"29E" => "Enterprise NAND Flash"
 			]))
-			->setDensity(self::matchFromStart($partNumber, [
-				"1G" => 1 * 1024,
-				"2G" => 2 * 1024,
-				"4G" => 4 * 1024,
-				"8G" => 8 * 1024,
-				"16G" => 16 * 1024,
-				"32G" => 32 * 1024,
-				"64G" => 64 * 1024,
-				"128G" => 128 * 1024,
-				"256G" => 256 * 1024,
-				"384G" => 384 * 1024,
-				"512G" => 512 * 1024,
-				"1T" => 1024 * 1024,
-				"1T2" => 1152 * 1024,
-				"1HT" => 1536 * 1024,
-				"2T" => 2048 * 1024,
-				"3T" => 3072 * 1024,
-				"4T" => 4096 * 1024,
-				"6T" => 6144 * 1024,
-			], 0))
+			->setDensity(self::matchFromStart($partNumber, self::DENSITY, 0))
 			->setDeviceWidth(self::getOrDefault(self::shiftChars($partNumber, 2), [
 				"01" => "1 bit",
 				"08" => "8 bits",
@@ -106,23 +166,8 @@ class Micron extends Decoder{
 				//TODO: QLC
 			]));
 
-		$classification = self::getOrDefault(self::shiftChars($partNumber, 1), [
-			"A" => [1, 0, 0, 1],
-			"B" => [1, 1, 1, 1],
-			"D" => [2, 1, 1, 1],
-			"E" => [2, 2, 2, 2],
-			"F" => [2, 2, 2, 1],
-			"G" => [3, 3, 3, 3],
-			"J" => [4, 2, 2, 1],
-			"K" => [4, 2, 2, 2],
-			"L" => [4, 4, 4, 4],
-			"M" => [4, 4, 4, 2],
-			"Q" => [8, 4, 4, 4],
-			"R" => [8, 2, 2, 2],
-			"T" => [16, 8, 4, 2],
-			"U" => [8, 4, 4, 2],
-			"V" => [16, 8, 4, 4]
-		], [0, 0, 0, 0]);
+		$classification = self::getOrDefault(self::shiftChars($partNumber, 1),
+			self::CLASSIFICATION, [0, 0, 0, 0]);
 
 		$flashInfo->setClassification(new Classification(
 			$classification[1], $classification[3], $classification[2], $classification[0]))
@@ -134,7 +179,7 @@ class Micron extends Decoder{
 				"F" => "Vcc: 3.3V (2.50–3.60V), VccQ: 1.2V (1.14–1.26V)",
 				"G" => "Vcc: 3.3V (2.60–3.60V) , VccQ: 1.8V (1.70–1.95V)",
 				"H" => "Vcc: 3.3V (2.50–3.60V), VccQ: 1.2V (1.14–1.26) or 1.8V (1.70–1.95V)",
-				"J" => "Vcc: 3.3V (2.50–3.60V), VcQ: 1.8V (1.70–1.95V)",
+				"J" => "Vcc: 3.3V (2.50–3.60V), VccQ: 1.8V (1.70–1.95V)",
 				"K" => "Vcc: 3.3V (2.60–3.60V), VccQ: 3.3V (2.60–3.60V)",
 				"L" => "Vcc: 3.3V (2.60–3.60V), VccQ: 3.3V (2.60–3.60V)",
 			]))
@@ -143,22 +188,23 @@ class Micron extends Decoder{
 				"B" => 2,
 				"C" => 3,
 				"D" => 4
-			]))
-			->setInterface(self::getOrDefault(self::shiftChars($partNumber, 1), [
-				"A" => (new FlashInterface(false))->setAsync(true),
-				"B" => (new FlashInterface(false))->setAsync(true)->setSync(true),
-				"C" => (new FlashInterface(false))->setSync(true),
-				"D" => (new FlashInterface(false))->setSpi(true)
-			], new FlashInterface(false)))
-			->setPackage(self::getOrDefault(self::shiftChars($partNumber, 2), self::PACKAGE_LIST));
+			]));
+		self::setInterface(self::shiftChars($partNumber, 1), $flashInfo)
+			->setPackage(self::getOrDefault(self::shiftChars($partNumber, 2), self::PACKAGE));
 		//ignoring package
 
 		return $flashInfo;
 	}
 
+	protected static function setInterface(string $interface, FlashInfo $info) : FlashInfo{
+		$i = self::getOrDefault($interface, self::INTERFACE, [false, false, false]);
+		return $info->setInterface((new FlashInterface(false))
+			->setSync($i[0])->setAsync($i[1])->setSpi($i[2]));
+	}
+
 	public static function getFlashInfoFromFdb(string $partNumber) : ?array{
 		$package = substr($partNumber, strlen($partNumber) - 2);
-		if(isset(self::PACKAGE_LIST[$package])){
+		if(isset(self::PACKAGE[$package])){
 			$partNumber = substr($partNumber, 0, strlen($partNumber) - 2);
 		}
 		return FlashDetector::getFdb()[strtolower(self::getName())][$partNumber] ?? null;
@@ -166,7 +212,7 @@ class Micron extends Decoder{
 
 	public static function processBeforeQueryFdb(string $partNumber){
 		$package = substr($partNumber, strlen($partNumber) - 2);
-		if(isset(self::PACKAGE_LIST[$package])){
+		if(isset(self::PACKAGE[$package])){
 			return substr($partNumber, 0, strlen($partNumber) - 2);
 		}
 		return $partNumber;
