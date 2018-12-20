@@ -39,6 +39,9 @@ class SpecTek extends Micron{
 
 	public static function decode(string $partNumber) : FlashInfo{
 		$flashInfo = (new FlashInfo($partNumber))->setManufacturer(self::getName())->setType("NAND Flash");
+		if(strlen($partNumber) == 13){
+			return $flashInfo->setType("NAND Flash (Old SpecTek Numbering, not supported)");
+		}
 		$partNumber = substr($partNumber, 3);//remove Fxx
 		$extra = [];
 		$flashInfo
