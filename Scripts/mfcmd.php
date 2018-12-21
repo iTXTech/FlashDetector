@@ -72,8 +72,3 @@ try{
 	Util::println($e->getMessage());
 	echo((new HelpFormatter())->generateHelp("mfcmd", $options));
 }
-
-//$result = Micron::partNumberToFbga($argv[1]);
-//$result = SpecTek::markCodeToPartNumber($argv[1]);
-//$result = SpecTek::partNumberToMarkCode($argv[1]);
-//var_dump($result);

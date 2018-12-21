@@ -20,6 +20,7 @@
 
 namespace iTXTech\FlashDetector\Decoder;
 
+use iTXTech\FlashDetector\Constants;
 use iTXTech\FlashDetector\FlashDetector;
 use iTXTech\FlashDetector\FlashInfo;
 use iTXTech\FlashDetector\Property\Classification;
@@ -28,7 +29,7 @@ use iTXTech\SimpleFramework\Util\StringUtil;
 
 class Toshiba extends Decoder{
 	public static function getName() : string{
-		return "Toshiba";
+		return Constants::MANUFACTURER_TOSHIBA;
 	}
 
 	public static function check(string $partNumber) : bool{
@@ -42,17 +43,18 @@ class Toshiba extends Decoder{
 		//Info with asterisk(*) means "Unique character for product variety control."
 		$flashInfo = (new FlashInfo($partNumber))->setManufacturer(self::getName());
 		$extra = [
-			"multi_chip" => self::shiftChars($partNumber, 2) === "TH"
+			"multiChip" => self::shiftChars($partNumber, 2) === "TH"
 		];
 		$level = self::shiftChars($partNumber, 2);
 		if(in_array($level, ["GV", "GB"])){
 			//TODO: Toshiba E2NAND
-			return $flashInfo->setType("E2NAND (Not supported)");
+			return $flashInfo->setType(Constants::NAND_TYPE_E2NAND)
+				->setExtraInfo([Constants::NOT_SUPPORTED_REASON => Constants::TOSHIBA_E2NAND_NOT_SUPPORTED]);
 		}
 		$level = self::getOrDefault($if = self::shiftChars($partNumber, 1), [
-			"N" => "NAND",
-			"D" => "NAND *",
-			"T" => "Toggle mode NAND"
+			"N" => Constants::NAND_TYPE_NAND,
+			"D" => Constants::NAND_TYPE_NAND,
+			"T" => Constants::NAND_TYPE_NAND,
 		]);
 		$flashInfo->setType($level)
 			->setInterface((new FlashInterface(true))->setToggle($if === "T"))
@@ -94,7 +96,7 @@ class Toshiba extends Decoder{
 				"U" => 3
 			]));
 		$width = self::shiftChars($partNumber, 1);
-		$flashInfo->setDeviceWidth($width <= 4 ? "x8" : "x16");
+		$flashInfo->setDeviceWidth($width <= 4 ? 8 : 16);
 		$size = self::getOrDefault(((int) $width) % 5, [
 			0 => ["4KB", "256KB"],
 			1 => ["4KB", "512KB"],
@@ -102,8 +104,8 @@ class Toshiba extends Decoder{
 			3 => ["2KB", "128KB"],
 			4 => ["2KB", "256KB"]
 		], ["Unknown", "Unknown"]);
-		$extra["page_size"] = $size[0];
-		$extra["block_size"] = $size[1];
+		$extra["pageSize"] = $size[0];
+		$extra["blockSize"] = $size[1];
 		$flashInfo->setProcessNode(self::getOrDefault(self::shiftChars($partNumber, 1), [
 			"A" => "130 nm",
 			"B" => "90 nm",
@@ -127,8 +129,8 @@ class Toshiba extends Decoder{
 			$flashInfo->setPackage("LGA");
 		}
 
-		$extra["lead_free"] = !in_array($package, ["FT", "XB"]);
-		$extra["halogen_free"] = in_array($package, ["TA", "BA", "LA"]);
+		$extra["leadFree"] = !in_array($package, ["FT", "XB"]);
+		$extra["halogenFree"] = in_array($package, ["TA", "BA", "LA"]);
 		$flashInfo->setExtraInfo($extra);
 		$classification = self::getOrDefault(self::shiftChars($partNumber, 1), [
 			"0" => [1, 1],//Ch, nCE

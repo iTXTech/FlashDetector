@@ -20,6 +20,7 @@
 
 namespace iTXTech\FlashDetector\Decoder;
 
+use iTXTech\FlashDetector\Constants;
 use iTXTech\FlashDetector\FlashDetector;
 use iTXTech\FlashDetector\FlashInfo;
 use iTXTech\FlashDetector\Property\Classification;
@@ -31,7 +32,7 @@ class SKHynix extends Decoder{
 	public const LARGE_BLOCK = 1;//2048+64 B/page
 
 	public static function getName() : string{
-		return "SKHynix";
+		return Constants::MANUFACTURER_SKHYNIX;
 	}
 
 	public static function check(string $partNumber) : bool{
@@ -46,11 +47,13 @@ class SKHynix extends Decoder{
 			->setManufacturer(self::getName());
 		if(in_array($level = self::shiftChars($partNumber, 3), ["H2J", "H2D"])){
 			//TODO: SKHynix E2NAND
-			return $flashInfo->setType("E2NAND (Not supported)");
+			return $flashInfo->setType(Constants::NAND_TYPE_E2NAND)
+				->setExtraInfo([Constants::NOT_SUPPORTED_REASON => Constants::SKHYNIX_E2NAND_NOT_SUPPORTED]);
 		}elseif($level === "HY2"){
-			return $flashInfo->setType("LEGACY NAND (Not supported)");
+			return $flashInfo->setType(Constants::NAND_TYPE_NAND)
+				->setExtraInfo([Constants::NOT_SUPPORTED_REASON => Constants::SKHYNIX_OLD_NUMBERING]);
 		}else{
-			$flashInfo->setType("NAND");
+			$flashInfo->setType(Constants::NAND_TYPE_NAND);
 		}
 		$flashInfo
 			->setVoltage(self::getOrDefault(self::shiftChars($partNumber, 1), [
@@ -85,9 +88,9 @@ class SKHynix extends Decoder{
 				//TODO: more
 			]))
 			->setDeviceWidth(self::getOrDefault(self::shiftChars($partNumber, 1), [
-				"8" => "x8",
-				"6" => "x16"
-			]));
+				"8" => 8,
+				"6" => 16
+			], -1));
 		$classification = self::getOrDefault(self::shiftChars($partNumber, 1), [
 			//Type, Die, Block
 			"S" => [1, 1, self::SMALL_BLOCK],
@@ -159,10 +162,10 @@ class SKHynix extends Decoder{
 				"H" => "XLGA"
 			]));
 		$packageMaterial = self::getOrDefault(self::shiftChars($partNumber, 1), [
-			"A" => "Wafer",
-			"P" => "Lead Free",
-			"L" => "Leaded",
-			"R" => "Lead & Halogen Free"
+			"A" => Constants::SKHYNIX_PM_WAFER,
+			"P" => Constants::SKHYNIX_PM_LEAD_FREE,
+			"L" => Constants::SKHYNIX_PM_LEADED,
+			"R" => Constants::SKHYNIX_PM_LEAD_AND_HALOGEN_FREE
 		]);
 		$flashInfo->setExtraInfo([
 			"page" => $classification[2] === self::SMALL_BLOCK ? "512+16 B" : "2048+64 B",

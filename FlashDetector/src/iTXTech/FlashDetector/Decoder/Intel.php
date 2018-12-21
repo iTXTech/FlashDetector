@@ -20,6 +20,7 @@
 
 namespace iTXTech\FlashDetector\Decoder;
 
+use iTXTech\FlashDetector\Constants;
 use iTXTech\FlashDetector\FlashDetector;
 use iTXTech\FlashDetector\FlashInfo;
 use iTXTech\FlashDetector\Property\Classification;
@@ -28,7 +29,7 @@ use iTXTech\SimpleFramework\Util\StringUtil;
 
 class Intel extends Decoder{
 	public static function getName() : string{
-		return "Intel";
+		return Constants::MANUFACTURER_INTEL;
 	}
 
 	public static function check(string $partNumber) : bool{
@@ -54,7 +55,7 @@ class Intel extends Decoder{
 			$partNumber = substr($partNumber, 2);
 		}
 		$partNumber = substr($partNumber, 3);
-		$flashInfo->setType("NAND Flash")
+		$flashInfo->setType(Constants::NAND_TYPE_NAND)
 			->setDensity(self::getOrDefault($density = self::shiftChars($partNumber, 3), [
 				"08G" => 8 * 1024,//Mbits
 				"16G" => 16 * 1024,
@@ -65,9 +66,9 @@ class Intel extends Decoder{
 				//TODO: 02T
 			], 0))
 			->setDeviceWidth(self::getOrDefault(self::shiftChars($partNumber, 2), [
-				"08" => "x8",
-				"16" => "x16"
-			]));
+				"08" => 8,
+				"16" => 16
+			], -1));
 		if(((int) $density{2}) > 0){//same as Micron
 			return Micron::decode($flashInfo->getPartNumber());
 		}

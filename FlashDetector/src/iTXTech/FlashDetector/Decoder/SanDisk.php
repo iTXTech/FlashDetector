@@ -20,6 +20,7 @@
 
 namespace iTXTech\FlashDetector\Decoder;
 
+use iTXTech\FlashDetector\Constants;
 use iTXTech\FlashDetector\FlashDetector;
 use iTXTech\FlashDetector\FlashInfo;
 use iTXTech\SimpleFramework\Util\StringUtil;
@@ -27,7 +28,7 @@ use iTXTech\SimpleFramework\Util\StringUtil;
 //There is no datasheet or guide available!
 class SanDisk extends Decoder{
 	public static function getName() : string{
-		return "SanDisk";
+		return Constants::MANUFACTURER_SANDISK;
 	}
 
 	public static function check(string $partNumber) : bool{
@@ -41,10 +42,12 @@ class SanDisk extends Decoder{
 		$flashInfo = (new FlashInfo($partNumber))->setManufacturer(self::getName());
 		$partNumber = substr($partNumber, 2);//remove SD
 		if(substr($partNumber, 0, 2) === "IN"){
-			return $flashInfo->setType("iNAND (Not supported)");
+			return $flashInfo->setType(Constants::NAND_TYPE_INAND)
+				->setExtraInfo([Constants::NOT_SUPPORTED_REASON => Constants::SANDISK_INAND_NOT_SUPPORTED]);
 		}
 
-		return $flashInfo;
+		return $flashInfo->setType(Constants::NAND_TYPE_NAND)
+			->setExtraInfo([Constants::NOT_SUPPORTED_REASON => Constants::SANDISK_NAND_NOT_SUPPORTED]);
 	}
 
 	public static function getFlashInfoFromFdb(string $partNumber) : ?array{

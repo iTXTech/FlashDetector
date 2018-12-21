@@ -20,6 +20,7 @@
 
 namespace iTXTech\FlashDetector\Decoder;
 
+use iTXTech\FlashDetector\Constants;
 use iTXTech\FlashDetector\FlashDetector;
 use iTXTech\FlashDetector\FlashInfo;
 use iTXTech\FlashDetector\Property\Classification;
@@ -133,7 +134,7 @@ class Micron extends Decoder{
 	];
 
 	public static function getName() : string{
-		return "Micron";
+		return Constants::MANUFACTURER_MICRON;
 	}
 
 	public static function check(string $partNumber) : bool{
@@ -148,17 +149,18 @@ class Micron extends Decoder{
 		if(!StringUtil::startsWith($partNumber, "29")){
 			$partNumber = substr($partNumber, 2);//remove MT
 		}
+		$partNumber = substr($partNumber, 2);//remove 29
+		$extra = [
+			"enterprise" => self::shiftChars($partNumber, 1) === "E"
+		];
 		$flashInfo
-			->setType(self::getOrDefault(self::shiftChars($partNumber, 3), [
-				"29F" => "NAND Flash",
-				"29E" => "Enterprise NAND Flash"
-			]))
+			->setType(Constants::NAND_TYPE_NAND)
 			->setDensity(self::matchFromStart($partNumber, self::DENSITY, 0))
 			->setDeviceWidth(self::getOrDefault(self::shiftChars($partNumber, 2), [
-				"01" => "1 bit",
-				"08" => "8 bits",
-				"16" => "16 bits"
-			]))
+				"01" => 1,
+				"08" => 8,
+				"16" => 16
+			], -1))
 			->setCellLevel(self::getOrDefault(self::shiftChars($partNumber, 1), [
 				"A" => 1,
 				"C" => 2,
@@ -190,7 +192,8 @@ class Micron extends Decoder{
 				"D" => 4
 			]));
 		self::setInterface(self::shiftChars($partNumber, 1), $flashInfo)
-			->setPackage(self::getOrDefault(self::shiftChars($partNumber, 2), self::PACKAGE));
+			->setPackage(self::getOrDefault(self::shiftChars($partNumber, 2), self::PACKAGE))
+			->setExtraInfo($extra);
 		//ignoring package
 
 		return $flashInfo;

@@ -70,17 +70,11 @@ class FlashInfo{
 	}
 
 	public function setDensity(int $density) : FlashInfo{
-		$unit = ["Mb", "Gb", "Tb"];
-		$i = 0;
-		while($density >= 1024 and isset($unit[$i + 1])){
-			$density /= 1024;
-			$i++;
-		}
-		$this->density = $density . " " . $unit[$i];
+		$this->density = $density;
 		return $this;
 	}
 
-	public function setDeviceWidth(string $deviceWidth) : FlashInfo{
+	public function setDeviceWidth(int $deviceWidth) : FlashInfo{
 		$this->deviceWidth = $deviceWidth;
 		return $this;
 	}
@@ -140,7 +134,7 @@ class FlashInfo{
 		return $this;
 	}
 
-	public function __toString(){
+	public function toArray(bool $raw = true){
 		$reflectionClass = new \ReflectionClass($this);
 		$properties = $reflectionClass->getProperties();
 		$info = [];
@@ -153,6 +147,29 @@ class FlashInfo{
 				$info[$property->getName()] = $this->{$property->getName()};
 			}
 		}
-		return json_encode($info, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
+
+		if(!$raw){
+			$density = $info["density"];
+			if($density !== null){
+				$unit = ["Mb", "Gb", "Tb"];
+				$i = 0;
+				while($density >= 1024 and isset($unit[$i + 1])){
+					$density /= 1024;
+					$i++;
+				}
+				$info["density"] = $density . " " . $unit[$i];
+			}
+			$deviceWidth = $info["deviceWidth"];
+			if($deviceWidth !== null){
+				$info["deviceWidth"] = "x" . $deviceWidth;
+			}
+
+			$info = FlashDetector::translate($info);
+		}
+		return $info;
+	}
+
+	public function __toString(){
+		return json_encode($this->toArray(false), JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
 	}
 }

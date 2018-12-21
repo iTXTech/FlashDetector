@@ -35,6 +35,8 @@ abstract class FlashDetector{
 	private static $decoders = [];
 	private static $fdb = [];
 	private static $iddb = [];
+	private static $lang = [];
+	private static $fallbackLang = [];
 
 	public static function getFdb() : array{
 		return self::$fdb;
@@ -44,7 +46,11 @@ abstract class FlashDetector{
 		return self::$iddb;
 	}
 
-	public static function init(){
+	public static function getLang() : array{
+		return self::$lang;
+	}
+
+	public static function init(string $lang = "eng", string $fallbackLang = "eng"){
 		self::registerDecoder(Micron::class);
 		self::registerDecoder(SKHynix::class);
 		self::registerDecoder(Toshiba::class);
@@ -55,6 +61,9 @@ abstract class FlashDetector{
 		if(Loader::getInstance() !== null){
 			self::$fdb = json_decode(Loader::getInstance()->getResourceAsText("fdb.json"), true);
 			self::$iddb = json_decode(Loader::getInstance()->getResourceAsText("iddb.json"), true);
+			self::$lang = json_decode(Loader::getInstance()->getResourceAsText("lang/$lang.json"), true);
+			self::$fallbackLang = json_decode(Loader::getInstance()
+				->getResourceAsText("lang/$fallbackLang.json"), true);
 		}
 	}
 
@@ -109,5 +118,36 @@ abstract class FlashDetector{
 			return $result;
 		}
 		return self::$iddb[strtoupper($id)] ?? null;
+	}
+
+	/**
+	 * @param $var
+	 *
+	 * @return array|string|bool|null
+	 */
+	public static function translate($var){
+		if(is_array($var)){
+			return self::translateArray($var);
+		}elseif(is_string($var)){
+			return self::translateString($var);
+		}
+		return $var;
+	}
+
+	public static function translateArray(array $arr) : array{
+		foreach($arr as $k => $v){
+			$arr[$k] = self::translate($v);
+		}
+		return $arr;
+	}
+
+	public static function translateString(string $key) : string{
+		if(isset(self::$lang[$key])){
+			return self::$lang[$key];
+		}
+		if(isset(self::$fallbackLang[$key])){
+			return self::$fallbackLang[$key];
+		}
+		return $key;
 	}
 }

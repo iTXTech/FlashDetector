@@ -20,13 +20,14 @@
 
 namespace iTXTech\FlashDetector\Decoder;
 
+use iTXTech\FlashDetector\Constants;
 use iTXTech\FlashDetector\FlashDetector;
 use iTXTech\FlashDetector\FlashInfo;
 use iTXTech\FlashDetector\Property\Classification;
 
 class SpecTek extends Micron{
 	public static function getName() : string{
-		return "SpecTek (Micron)";
+		return Constants::MANUFACTURER_SPECTEK;
 	}
 
 	public static function check(string $partNumber) : bool{
@@ -38,12 +39,16 @@ class SpecTek extends Micron{
 	}
 
 	public static function decode(string $partNumber) : FlashInfo{
-		$flashInfo = (new FlashInfo($partNumber))->setManufacturer(self::getName())->setType("NAND Flash");
+		$flashInfo = (new FlashInfo($partNumber))
+			->setManufacturer(self::getName())->setType(Constants::NAND_TYPE_NAND);
 		if(strlen($partNumber) == 13){
-			return $flashInfo->setType("NAND Flash (Old SpecTek Numbering, not supported)");
+			return $flashInfo->setExtraInfo([Constants::NOT_SUPPORTED_REASON => Constants::SPECTEK_OLD_NUMBERING]);
 		}
 		$partNumber = substr($partNumber, 3);//remove Fxx
-		$extra = [];
+		$extra = [
+			"eccEnabled" => false,
+			"halfPageAndSize" => false
+		];
 		$flashInfo
 			->setCellLevel(self::getOrDefault($cellLevel = self::shiftChars($partNumber, 1), [
 				"3" => 1,
@@ -60,19 +65,25 @@ class SpecTek extends Micron{
 			"9" => "90-100%",
 			"6" => "50-90%",
 			"5" => "40-60%",
-			"0" => "BL or S* grade definitions"
+			"0" => Constants::SPECTEK_DENSITY_GRADE_ZERO
 		]);
 		$configuration = self::shiftChars($partNumber, 1);
+		if(in_array($configuration, ["G", "P"])){
+			$extra["eccEnabled"] = true;
+		}
+		if($configuration == "M"){
+			$extra["halfPageAndSize"] = true;
+		}
 		$flashInfo
 			->setDeviceWidth(self::getOrDefault($configuration, [
-				"G" => "x8 ECC enabled",
-				"L" => "x16",
-				"H" => "x1",
-				"M" => "x8 (half page, size)",
-				"J" => "x4",
-				"P" => "x16 ECC enabled",
-				"K" => "x8 (normal page, size)",
-				"N" => "Not available"
+				"G" => 8,
+				"L" => 16,
+				"H" => 1,
+				"M" => 8,
+				"J" => 4,
+				"P" => 16,
+				"K" => 8,
+				"N" => 0
 			]))
 			->setVoltage(self::getOrDefault(self::shiftChars($partNumber, 1), [
 				"1" => "Vcc: 1.8V",
@@ -94,21 +105,21 @@ class SpecTek extends Micron{
 			$classification[1], $classification[3], $classification[2], $classification[0]));
 
 		$extra["packageFunctionalityPartialType"] = self::getOrDefault(self::shiftChars($partNumber, 1), [
-			"A" => "All CE(s) are valid and usable",
-			"B" => "CE1 Valid, CE2 not guaranteed",
-			"C" => "CE2 Valid, CE1 not guaranteed",
-			"D" => "SLC on the fly. Consult factory for more information"
+			"A" => Constants::SPECTEK_PFPT_A,
+			"B" => Constants::SPECTEK_PFPT_B,
+			"C" => Constants::SPECTEK_PFPT_C,
+			"D" => Constants::SPECTEK_PFPT_D
 		]);
 
 		self::setInterface($interface = self::shiftChars($partNumber, 1), $flashInfo)
 			->setPackage(self::getOrDefault(self::shiftChars($partNumber, 2), self::PACKAGE));
 
 		$ifInfo = self::getOrDefault($interface, [
-			"E" => "PPN (Perfect Page NAND)",
-			"F" => "Async/NV-DDR2 or NV-DDR3 only",
-			"G" => "Enterprise Sync",
-			"M" => "SIM Flash",
-			"N" => "Async/NV-DDR2"
+			"E" => Constants::SPECTEK_IF_E,
+			"F" => Constants::SPECTEK_IF_F,
+			"G" => Constants::SPECTEK_IF_G,
+			"M" => Constants::SPECTEK_IF_M,
+			"N" => Constants::SPECTEK_IF_N
 		], "");
 		if($ifInfo !== ""){
 			$extra["interfaceInfo"] = $ifInfo;

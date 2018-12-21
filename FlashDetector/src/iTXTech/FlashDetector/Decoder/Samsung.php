@@ -20,6 +20,7 @@
 
 namespace iTXTech\FlashDetector\Decoder;
 
+use iTXTech\FlashDetector\Constants;
 use iTXTech\FlashDetector\FlashDetector;
 use iTXTech\FlashDetector\FlashInfo;
 use iTXTech\FlashDetector\Property\Classification;
@@ -78,7 +79,7 @@ class Samsung extends Decoder{
 	];
 
 	public static function getName() : string{
-		return "Samsung";
+		return Constants::MANUFACTURER_SAMSUNG;
 	}
 
 	public static function check(string $partNumber) : bool{
@@ -91,7 +92,7 @@ class Samsung extends Decoder{
 	public static function decode(string $partNumber) : FlashInfo{
 		$flashInfo = (new FlashInfo($partNumber))
 			->setManufacturer(self::getName())
-			->setType("NAND");
+			->setType(Constants::NAND_TYPE_NAND);
 		$partNumber = substr($partNumber, 2);//remove K9
 		$c = self::getOrDefault(self::shiftChars($partNumber, 1), self::CLASSIFICAITION, [-1, -1]);
 		$flashInfo->setCellLevel($c[0])
@@ -100,10 +101,10 @@ class Samsung extends Decoder{
 		//only check if is D => DDR
 		$flashInfo->setInterface((new FlashInterface(true))->setToggle($technology === "D"))
 			->setDeviceWidth(self::getOrDefault(self::shiftChars($partNumber, 1), [
-				"0" => "NONE",
-				"8" => "x8",
-				"6" => "x16"
-			]))
+				"0" => 0,
+				"8" => 8,
+				"6" => 16
+			], -1))
 			->setVoltage(self::getOrDefault(self::shiftChars($partNumber, 1), [
 				"A" => "1.65V~3.6V",
 				"B" => "2.7V (2.5V~2.9V)",
