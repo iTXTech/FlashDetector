@@ -5,6 +5,12 @@
   "description": "Universal NAND Flash Part Number Decoder",
   "author": "iTX Technologies",
   "main": "iTXTech\\FlashDetector\\Loader",
-  "order": 0,
-  "website": "https://github.com/iTXTech/FlashDetector"
+  "order": 1,
+  "website": "https://github.com/iTXTech/FlashDetector",
+  "dependencies": [
+    {
+      "name": "PeratX/SimpleHtmlDom",
+      "version": "1.1.0"
+    }
+  ]
 }

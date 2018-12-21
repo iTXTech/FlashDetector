@@ -2,3 +2,4 @@
 sf/
 module/
 Tools/*.json
+*.phar

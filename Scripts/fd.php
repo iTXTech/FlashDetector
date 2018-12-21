@@ -18,39 +18,17 @@
  * limitations under the License.
  */
 
-require_once "sf/autoload.php";
+//Flash Detector
 
-use iTXTech\SimpleFramework\Initializer;
-use iTXTech\SimpleFramework\Console\Logger;
-use iTXTech\SimpleFramework\Module\ModuleManager;
-use iTXTech\SimpleFramework\Util\Util;
+require_once "env.php";
 
 use iTXTech\FlashDetector\FlashDetector;
-
-Initializer::initTerminal();
+use iTXTech\SimpleFramework\Util\Util;
 
 if(!isset($argv[1])){
 	Util::println("Usage: \"" . PHP_BINARY . "\" \"" . $argv[0] . "\" <part number>");
 	exit(1);
 }
 
-Logger::$logLevel = 2;//disable logger
-
-Logger::info("Loading iTXTech FlashDetector");
-
-global $classLoader;
-try{
-	$moduleManager = new ModuleManager($classLoader, __DIR__ . DIRECTORY_SEPARATOR, "");
-	$moduleManager->loadModules();
-}catch(Throwable $e){
-	Logger::logException($e);
-}
-
-if($moduleManager->getModule("iTXTech_FlashDetector") === null){
-	Logger::error("Module not loaded.");
-	exit(1);
-}
-
-FlashDetector::init();
 $info = FlashDetector::detect($argv[1], true);
 Util::println($info);
