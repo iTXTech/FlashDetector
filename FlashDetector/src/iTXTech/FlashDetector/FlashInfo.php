@@ -134,7 +134,7 @@ class FlashInfo{
 		return $this;
 	}
 
-	public function toArray(bool $raw = true){
+	public function toArray(bool $raw = true) : array{
 		$reflectionClass = new \ReflectionClass($this);
 		$properties = $reflectionClass->getProperties();
 		$info = [];

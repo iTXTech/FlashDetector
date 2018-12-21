@@ -9,13 +9,18 @@ Universal NAND Flash Part Number Decoder
 ```powershell
 PS X:\>git clone https://github.com/iTXTech/SimpleFramework.git --depth=1 sf
 
-PS X:\>php fd.php TH58TEG7DDJTA20
-PS X:\>php fd.php H27UDG8M2MTR
-PS X:\>php fd.php K9HDGD8U5M
-PS X:\>php fd.php SDTNPMCHEM-032G
+PS X:\Scripts>php fd.php TH58TEG7DDJTA20
+PS X:\Scripts>php fd.php H27UDG8M2MTR
+PS X:\Scripts>php fd.php K9HDGD8U5M
 
-PS X:\>php rs.php 98D584327656
-PS X:\>php rs.php 89A46432AA05
+PS X:\Scripts>php rs.php 98D584327656
+PS X:\Scripts>php rs.php 89A46432AA05
+
+PS X:\Scripts>php mfcmd.php -m -c -v NW634
+PS X:\Scripts>php mfcmd.php -s -p -v FBNL63B71KDK
+
+PS X:\Scripts>php test_output.php -l chs
+PS X:\Scripts>php test_output.php -l eng -r
 ```
 
 ## License
