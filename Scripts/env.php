@@ -40,12 +40,17 @@ try{
 		__DIR__ . DIRECTORY_SEPARATOR . ".." . DIRECTORY_SEPARATOR, "");
 	$moduleManager->registerModuleDependencyResolver(new WraithSpireMDR($moduleManager,
 		"https://raw.githubusercontent.com/iTXTech/WraithSpireDatabase/master/", []));
-	$moduleManager->loadModules();
+	loadModule($moduleManager, "SimpleHtmlDom_v1.1.0.phar");
+	loadModule($moduleManager, "FlashDetector");
 }catch(Throwable $e){
 	Logger::logException($e);
 }
 
-if($moduleManager->getModule("iTXTech_FlashDetector") === null){
+function loadModule(ModuleManager $manager, string $name){
+	$manager->tryLoadModule($manager->getModulePath() . $name);
+}
+
+if($moduleManager->getModule("FlashDetector") === null){
 	Logger::error("Module not loaded.");
 	exit(1);
 }

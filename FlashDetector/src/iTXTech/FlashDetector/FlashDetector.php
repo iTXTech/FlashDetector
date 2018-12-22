@@ -76,7 +76,7 @@ abstract class FlashDetector{
 		return false;
 	}
 
-	public static function detect(string $partNumber, bool $combineFdb = false) : FlashInfo{
+	public static function detect(string $partNumber, bool $combineFdb = true) : FlashInfo{
 		$partNumber = strtoupper($partNumber);
 		foreach(self::$decoders as $decoder){
 			if($decoder::check($partNumber)){

@@ -26,19 +26,20 @@ use iTXTech\FlashDetector\Property\FlashInterface;
 
 class FlashInfo{
 	private $partNumber;
-	private $manufacturer;
-	private $type;//Enterprise/consumer
+	private $manufacturer;//Intel/Samsung
+	private $type;//NAND/iNAND/E2NAND
 	private $density;//256Gb
-	private $deviceWidth;//only Micron
+	private $deviceWidth;//x8 x16 x4
 	private $processNode;//22nm 19nm 1ynm 1znm
 	private $cellLevel;//SLC MLC TLC QLC
-	private $classification;//1CE 1DIE
-	private $voltage;//3.3V 1.8V
+	private $classification;//CE, Ch, Die, R/nB
+	private $voltage;//3.3V/1.8V
 	private $generation;//1 2 3 4
 	private $interface;//Async/Sync ToggleDDR
 	private $package;//TSOP48 BGA152 LGA52
 
 	private $extraInfo;
+	//data from Flash Database
 	private $flashId;
 	private $controller;
 	private $comment;

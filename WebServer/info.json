@@ -1,0 +1,22 @@
+{
+  "name": "FDWebServer",
+  "version": "1.0.0",
+  "api": 6,
+  "description": "The Server Software for pixiv.FUN PanDesktop and PanMobile",
+  "author": "iTX Technologies",
+  "main": "iTXTech\\FlashDetector\\WebServer\\Loader",
+  "order": 2,
+  "website": "https://github.com/iTXTech/FlashDetector",
+  "dependencies": [
+    {
+      "name": "iTXTech/FlashDetector",
+      "version": "1.0.0"
+    }
+  ],
+  "extensions": [
+    {
+      "name": "swoole",
+      "version": "4.1.0"
+    }
+  ]
+}
