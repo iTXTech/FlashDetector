@@ -62,11 +62,18 @@ class Classification implements Arrayable{
 	}
 
 	public function toArray() : array{
-		return [
-			"nCE" => $this->ce,
-			"Ch" => $this->ch,
-			"RnB" => $this->rnb,
-			"Die" => $this->die
-		];
+		$reflectionClass = new \ReflectionClass($this);
+		$properties = $reflectionClass->getProperties();
+		$info = [];
+		foreach($properties as $property){
+			if(is_object($this->{$property->getName()})){
+				/** @var Arrayable $prop */
+				$prop = $this->{$property->getName()};
+				$info[$property->getName()] = $prop->toArray();
+			}else{
+				$info[$property->getName()] = $this->{$property->getName()};
+			}
+		}
+		return $info;
 	}
 }
