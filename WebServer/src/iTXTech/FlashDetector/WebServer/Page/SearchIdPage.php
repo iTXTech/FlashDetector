@@ -26,18 +26,17 @@ use Swoole\Http\Request;
 use Swoole\Http\Response;
 use Swoole\Http\Server;
 
-class DecodePage extends AbstractPage{
+class SearchIdPage extends AbstractPage{
 	public static function process(Request $request, Response $response, Server $server){
-		if(!isset($request->get["pn"])){
+		if(!isset($request->get["id"])){
 			self::sendJsonData($response, [
 				"result" => false,
-				"message" => "Missing part number"
+				"message" => "Missing Flash Id"
 			]);
 		}else{
 			self::sendJsonData($response, [
 				"result" => true,
-				"data" => FlashDetector::detect($request->get["pn"])
-					->toArray((($request->get["trans"] ?? 0) == 1) ? false : true)
+				"data" => FlashDetector::getFlashPartNumberFromIddb($request->get["id"], true)
 			]);
 		}
 	}
