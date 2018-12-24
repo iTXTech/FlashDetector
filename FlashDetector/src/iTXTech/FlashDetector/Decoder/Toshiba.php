@@ -63,7 +63,8 @@ class Toshiba extends Decoder{
 				"Y" => "1.8V",
 				"A" => "Vcc: 3.3V, VccQ: 1.8V",
 				"B" => "Vcc: 3.3V, VccQ: 1.65V-3.6V",
-				"D" => "Vcc: 3.3V/1.8V, VccQ: 3.3V/1.8V"
+				"D" => "Vcc: 3.3V/1.8V, VccQ: 3.3V/1.8V",
+				"E" => "Vcc: 3.3V, VccQ: 3.3V/1.8V"
 			]))
 			->setDensity(self::getOrDefault(self::shiftChars($partNumber, 2), [
 				"M8" => 256,
@@ -87,22 +88,36 @@ class Toshiba extends Decoder{
 				"T0" => 1 * 1024 * 1024,
 				"T1" => 2 * 1024 * 1024
 			], 0))
-			->setCellLevel(self::getOrDefault(self::shiftChars($partNumber, 1), [
+			->setCellLevel(self::getOrDefault($ep = self::shiftChars($partNumber, 1), [
 				"S" => 1,
-				"H" => 1,
+				"H" => 1,//eSLC
 				"D" => 2,
-				"E" => 2,
+				"E" => 2,//eMLC
 				"T" => 3,
 				"U" => 3
 			]));
+		$extra["enterprise"] = in_array($ep, ["H", "E"]);
 		$width = self::shiftChars($partNumber, 1);
-		$flashInfo->setDeviceWidth($width <= 4 ? 8 : 16);
-		$size = self::getOrDefault(((int) $width) % 5, [
-			0 => ["4KB", "256KB"],
-			1 => ["4KB", "512KB"],
-			2 => [">4KB", ">512KB"],
-			3 => ["2KB", "128KB"],
-			4 => ["2KB", "256KB"]
+		if(in_array($width, ["0", "1", "2", "3", "4", "A", "B", "C", "D"])){
+			$flashInfo->setDeviceWidth(8);
+		}elseif(in_array($width, ["5", "6", "7", "8", "9"])){
+			$flashInfo->setDeviceWidth(16);
+		}
+		$size = self::getOrDefault($width, [
+			"0" => ["4KB", "256KB"],
+			"1" => ["4KB", "512KB"],
+			"2" => [">4KB", ">512KB"],
+			"3" => ["2KB", "128KB"],
+			"4" => ["2KB", "256KB"],
+			"5" => ["4KB", "256KB"],
+			"6" => ["4KB", "512KB"],
+			"7" => [">4KB", ">512KB"],
+			"8" => ["2KB", "128KB"],
+			"9" => ["2KB", "256KB"],
+			"A" => ["8KB", "2MB"],
+			"B" => ["16KB", "8MB"],
+			"C" => ["16KB 1pl", "4MB"],
+			"D" => ["16KB 2pl", "4MB"]
 		], ["Unknown", "Unknown"]);
 		$extra["pageSize"] = $size[0];
 		$extra["blockSize"] = $size[1];
