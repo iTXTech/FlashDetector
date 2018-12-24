@@ -164,8 +164,9 @@ class Micron extends Decoder{
 			->setCellLevel(self::getOrDefault(self::shiftChars($partNumber, 1), [
 				"A" => 1,
 				"C" => 2,
-				"E" => 3
-				//TODO: QLC
+				"E" => 3,
+				//TODO: confirm
+				"G" => 4
 			]));
 
 		$classification = self::getOrDefault(self::shiftChars($partNumber, 1),
