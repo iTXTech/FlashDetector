@@ -22,9 +22,9 @@ namespace iTXTech\FlashDetector\FDBGen\Generator;
 
 use iTXTech\SimpleFramework\Util\StringUtil;
 
-class SiliconMotion extends Generator{
+class SiliconMotionUFD extends Generator{
 	public static function getDirName() : string{
-		return "smi";
+		return "smufd";
 	}
 
 	//Don't look at it, may do harm to you

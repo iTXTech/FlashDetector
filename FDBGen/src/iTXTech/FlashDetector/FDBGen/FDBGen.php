@@ -21,7 +21,8 @@
 namespace iTXTech\FlashDetector\FDBGen;
 
 use iTXTech\FlashDetector\FDBGen\Generator\Generator;
-use iTXTech\FlashDetector\FDBGen\Generator\SiliconMotion;
+use iTXTech\FlashDetector\FDBGen\Generator\Innostor;
+use iTXTech\FlashDetector\FDBGen\Generator\SiliconMotionUFD;
 use iTXTech\SimpleFramework\Util\StringUtil;
 
 abstract class FDBGen{
@@ -36,7 +37,8 @@ abstract class FDBGen{
 	}
 
 	public static function init(){
-		self::registerGenerator(SiliconMotion::class);
+		self::registerGenerator(SiliconMotionUFD::class);
+		self::registerGenerator(Innostor::class);
 	}
 
 	public static function generate(string $version, string $db) : array{
