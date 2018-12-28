@@ -82,22 +82,18 @@ class SiliconMotionUFD extends Generator{
 					"t" => [$controller],//controller
 					"m" => $comment
 				];
-				if(!isset($db[$info[0]])){
-					$db[$info[0]] = [$info[1] => $data];
-				}else{
-					if(isset($db[$info[0]][$info[1]])){
-						if(!in_array($id, $db[$info[0]][$info[1]]["id"])){
-							$db[$info[0]][$info[1]]["id"][] = $id;
-						}
-						if(!in_array($controller, $db[$info[0]][$info[1]]["t"])){
-							$db[$info[0]][$info[1]]["t"][] = $controller;
-						}
-						$db[$info[0]][$info[1]]["l"] = $data["l"];
-						$db[$info[0]][$info[1]]["c"] = $data["c"];
-						$db[$info[0]][$info[1]]["m"] = $comment;
-					}else{
-						$db[$info[0]][$info[1]] = $data;
+				if(isset($db[$info[0]][$info[1]])){
+					if(!in_array($id, $db[$info[0]][$info[1]]["id"])){
+						$db[$info[0]][$info[1]]["id"][] = $id;
 					}
+					if(!in_array($controller, $db[$info[0]][$info[1]]["t"])){
+						$db[$info[0]][$info[1]]["t"][] = $controller;
+					}
+					$db[$info[0]][$info[1]]["l"] = $data["l"];
+					$db[$info[0]][$info[1]]["c"] = $data["c"];
+					$db[$info[0]][$info[1]]["m"] = $comment;
+				}else{
+					$db[$info[0]][$info[1]] = $data;
 				}
 			}
 		}
