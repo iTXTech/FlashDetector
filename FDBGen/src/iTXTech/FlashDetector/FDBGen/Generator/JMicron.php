@@ -20,6 +20,8 @@
 
 namespace iTXTech\FlashDetector\FDBGen\Generator;
 
+use iTXTech\FlashDetector\Decoder\Micron;
+use iTXTech\FlashDetector\Decoder\SKHynix;
 use iTXTech\SimpleFramework\Util\StringUtil;
 
 class JMicron extends Generator{
@@ -70,11 +72,10 @@ class JMicron extends Generator{
 						}
 						break;
 					case "micron":
-						$bit = strstr($pn, "08");
-						if($bit !== false and strlen($bit) >= 8){
-							$pn = substr($pn, 0, strlen($pn) + 7 - strlen($bit));
-						}
-
+						$pn = Micron::removePackage($pn);
+						break;
+					case "skhynix":
+						$pn = SKHynix::removePackage($pn);
 						break;
 				}
 

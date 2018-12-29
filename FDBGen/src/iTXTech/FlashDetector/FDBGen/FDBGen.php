@@ -24,6 +24,7 @@ use iTXTech\FlashDetector\FDBGen\Generator\Generator;
 use iTXTech\FlashDetector\FDBGen\Generator\Innostor;
 use iTXTech\FlashDetector\FDBGen\Generator\JMicron;
 use iTXTech\FlashDetector\FDBGen\Generator\Maxiotek;
+use iTXTech\FlashDetector\FDBGen\Generator\SandForce;
 use iTXTech\FlashDetector\FDBGen\Generator\SiliconMotionUFD;
 use iTXTech\SimpleFramework\Util\StringUtil;
 
@@ -43,6 +44,7 @@ abstract class FDBGen{
 		self::registerGenerator(Innostor::class);
 		self::registerGenerator(JMicron::class);
 		self::registerGenerator(Maxiotek::class);
+		self::registerGenerator(SandForce::class);
 	}
 
 	public static function generate(string $version, string $db) : array{
@@ -60,12 +62,14 @@ abstract class FDBGen{
 		];
 		$dirs = array_keys(self::$generators);
 		foreach($dirs as $dir){
-			$generator = self::$generators[strtolower($dir)];
-			$files = scandir($db . $dir);
-			foreach($files as $file){
-				if(!in_array($file, [".", ".."])){
-					$f = $db . $dir . DIRECTORY_SEPARATOR . $file;
-					$generator::merge($fdb, file_get_contents($f), $file);
+			if(file_exists($db . $dir)){
+				$generator = self::$generators[strtolower($dir)];
+				$files = scandir($db . $dir);
+				foreach($files as $file){
+					if(!in_array($file, [".", ".."])){
+						$f = $db . $dir . DIRECTORY_SEPARATOR . $file;
+						$generator::merge($fdb, file_get_contents($f), $file);
+					}
 				}
 			}
 		}

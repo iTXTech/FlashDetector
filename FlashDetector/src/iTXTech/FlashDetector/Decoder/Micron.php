@@ -207,18 +207,14 @@ class Micron extends Decoder{
 	}
 
 	public static function getFlashInfoFromFdb(string $partNumber) : ?array{
-		$package = substr($partNumber, strlen($partNumber) - 2);
-		if(isset(self::PACKAGE[$package])){
-			$partNumber = substr($partNumber, 0, strlen($partNumber) - 2);
-		}
-		return FlashDetector::getFdb()[strtolower(self::getName())][$partNumber] ?? null;
+		return FlashDetector::getFdb()[strtolower(self::getName())][self::removePackage($partNumber)] ?? null;
 	}
 
-	public static function processBeforeQueryFdb(string $partNumber){
-		$package = substr($partNumber, strlen($partNumber) - 2);
-		if(isset(self::PACKAGE[$package])){
-			return substr($partNumber, 0, strlen($partNumber) - 2);
+	public static function removePackage(string $pn) : string{
+		$bit = strstr($pn, "08");
+		if($bit !== false and strlen($bit) >= 8){
+			$pn = substr($pn, 0, strlen($pn) + 7 - strlen($bit));
 		}
-		return $partNumber;
+		return $pn;
 	}
 }

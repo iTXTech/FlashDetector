@@ -20,6 +20,8 @@
 
 namespace iTXTech\FlashDetector\FDBGen\Generator;
 
+use iTXTech\FlashDetector\Decoder\SKHynix;
+
 class Innostor extends Generator{
 	public static function getDirName() : string{
 		return "is";
@@ -37,8 +39,13 @@ class Innostor extends Generator{
 			foreach($flashes as $flash){
 				list($pn, $id, $ce) = explode("-", $flash);
 				$id = substr($id, 0, 12);
-				if($manufacturer === "sandisk"){
-					$pn = str_replace("_", "-", $pn);//_032G -> -032G
+				switch($manufacturer){
+					case "sandisk":
+						$pn = str_replace("_", "-", $pn);//_032G -> -032G
+						break;
+					case "skhynix":
+						$pn = SKHynix::removePackage($pn);
+						break;
 				}
 				if(isset($db[$manufacturer][$pn])){
 					if(!in_array($id, $db[$manufacturer][$pn]["id"])){

@@ -20,6 +20,7 @@
 
 namespace iTXTech\FlashDetector\FDBGen\Generator;
 
+use iTXTech\FlashDetector\Decoder\SKHynix;
 use iTXTech\SimpleFramework\Util\StringUtil;
 
 class SiliconMotionUFD extends Generator{
@@ -73,6 +74,9 @@ class SiliconMotionUFD extends Generator{
 					$info[4] = $cellLevel;
 				}elseif(isset($info[5]) and strlen($info[5]) < 5){
 					$info[3] .= " " . $info[5];
+				}
+				if($info[0] == "skhynix"){
+					$info[1] = SKHynix::removePackage($info[1]);
 				}
 				$data = [
 					"id" => [$id],//Flash ID

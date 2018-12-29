@@ -178,6 +178,13 @@ class SKHynix extends Decoder{
 	}
 
 	public static function getFlashInfoFromFdb(string $partNumber) : ?array{
-		return FlashDetector::getFdb()[strtolower(self::getName())][$partNumber] ?? null;
+		return FlashDetector::getFdb()[strtolower(self::getName())][self::removePackage($partNumber)] ?? null;
+	}
+
+	public static function removePackage(string $pn) : string{
+		if(StringUtil::startsWith($pn, "H27") and strlen($pn) == 12){
+			$pn = substr($pn, 0, 10);
+		}
+		return $pn;
 	}
 }
