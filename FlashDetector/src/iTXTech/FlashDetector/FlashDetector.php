@@ -108,6 +108,7 @@ abstract class FlashDetector{
 	}
 
 	public static function getFlashPartNumberFromIddb(string $id, bool $partCompare = false) : ?array{
+		$id = strtoupper($id);
 		if($partCompare){
 			$result = [];
 			foreach(self::$iddb as $fid => $partNumber){
