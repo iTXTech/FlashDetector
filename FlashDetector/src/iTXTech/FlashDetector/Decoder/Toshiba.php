@@ -118,7 +118,7 @@ class Toshiba extends Decoder{
 			"B" => ["16KB", "8MB"],
 			"C" => ["16KB 1pl", "4MB"],
 			"D" => ["16KB 2pl", "4MB"]
-		], ["Unknown", "Unknown"]);
+		], [Constants::UNKNOWN, Constants::UNKNOWN]);
 		$extra["pageSize"] = $size[0];
 		$extra["blockSize"] = $size[1];
 		$flashInfo->setProcessNode(self::getOrDefault(self::shiftChars($partNumber, 1), [

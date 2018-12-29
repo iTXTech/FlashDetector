@@ -86,7 +86,7 @@ class SKHynix extends Decoder{
 				"1T" => 1 * 1024 * 1024,
 				"2T" => 2 * 1024 * 1024,
 				//TODO: more
-			]))
+			], 0))
 			->setDeviceWidth(self::getOrDefault(self::shiftChars($partNumber, 1), [
 				"8" => 8,
 				"6" => 16
@@ -114,7 +114,7 @@ class SKHynix extends Decoder{
 			"P" => [3, 4, self::LARGE_BLOCK],
 			"Q" => [3, 8, self::LARGE_BLOCK]
 			//TODO: more
-		], ["Unknown", -1, self::SMALL_BLOCK]);
+		], [-1, -1, self::SMALL_BLOCK]);
 		$flashInfo->setCellLevel($classification[0]);
 		$mode = self::getOrDefault(self::shiftChars($partNumber, 1), [
 			"1" => [1, 1, true, 1],//CE, RnB, Sync

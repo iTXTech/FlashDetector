@@ -161,8 +161,16 @@ class FlashInfo{
 				$info["density"] = $density . " " . $unit[$i];
 			}
 			$deviceWidth = $info["deviceWidth"];
-			if($deviceWidth !== null){
+			if($deviceWidth === -1){
+				$info["deviceWidth"] = Constants::UNKNOWN;
+			}elseif($deviceWidth !== null){
 				$info["deviceWidth"] = "x" . $deviceWidth;
+			}
+
+			foreach($info as $k => $v){
+				if($v === null){
+					$info[$k] = Constants::UNKNOWN;
+				}
 			}
 
 			$info = FlashDetector::translate($info);

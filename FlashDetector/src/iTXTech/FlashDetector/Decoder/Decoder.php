@@ -20,6 +20,7 @@
 
 namespace iTXTech\FlashDetector\Decoder;
 
+use iTXTech\FlashDetector\Constants;
 use iTXTech\FlashDetector\FlashInfo;
 use iTXTech\SimpleFramework\Util\StringUtil;
 
@@ -47,11 +48,11 @@ abstract class Decoder{
 		return $res;
 	}
 
-	public static function getOrDefault($str, array $info, $default = "Unknown"){
+	public static function getOrDefault($str, array $info, $default = Constants::UNKNOWN){
 		return $info[$str] ?? $default;
 	}
 
-	public static function matchFromStart(string &$str, array $info, $default = "Unknown"){
+	public static function matchFromStart(string &$str, array $info, $default = Constants::UNKNOWN){
 		$level = [];
 		foreach($info as $k => $v){
 			if(isset($level[strlen($k)])){

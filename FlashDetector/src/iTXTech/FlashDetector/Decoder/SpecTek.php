@@ -84,7 +84,7 @@ class SpecTek extends Micron{
 				"P" => 16,
 				"K" => 8,
 				"N" => 0
-			]))
+			], -1))
 			->setVoltage(self::getOrDefault(self::shiftChars($partNumber, 1), [
 				"1" => "Vcc: 1.8V",
 				"2" => "Vcc: 2.7V",

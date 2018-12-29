@@ -35,7 +35,7 @@ interface Constants{
 	public const NAND_TYPE_E2NAND = "e2nand";
 	public const NAND_TYPE_INAND = "inand";
 
-	public const UNKNOWN = "unknown";
+	public const UNKNOWN = "Unknown";
 
 	public const NOT_SUPPORTED_REASON = "notSupportedReason";
 
