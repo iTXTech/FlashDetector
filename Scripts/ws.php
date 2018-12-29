@@ -29,7 +29,7 @@ use iTXTech\SimpleFramework\Console\Logger;
 Logger::$logLevel = 0;
 
 global $moduleManager;
-loadModule($moduleManager, "WebServer");
+loadModule($moduleManager, "FDWebServer");
 
 FlashDetector::init("chs");
 $server = new WebServer([
