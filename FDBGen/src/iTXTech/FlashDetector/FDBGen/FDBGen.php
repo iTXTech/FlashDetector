@@ -20,6 +20,7 @@
 
 namespace iTXTech\FlashDetector\FDBGen;
 
+use iTXTech\FlashDetector\FDBGen\Generator\AlcorMicro;
 use iTXTech\FlashDetector\FDBGen\Generator\Generator;
 use iTXTech\FlashDetector\FDBGen\Generator\Innostor;
 use iTXTech\FlashDetector\FDBGen\Generator\JMicron;
@@ -45,6 +46,7 @@ abstract class FDBGen{
 		self::registerGenerator(JMicron::class);
 		self::registerGenerator(Maxiotek::class);
 		self::registerGenerator(SandForce::class);
+		self::registerGenerator(AlcorMicro::class);
 	}
 
 	public static function generate(string $version, string $db) : array{
