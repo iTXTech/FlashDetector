@@ -20,43 +20,48 @@
 
 namespace iTXTech\FlashDetector\FDBGen\Generator;
 
+use iTXTech\FlashDetector\Decoder\Micron;
 use iTXTech\FlashDetector\Decoder\SKHynix;
 use iTXTech\SimpleFramework\Util\StringUtil;
 
-class Innostor extends Generator{
+class SiliconMotionSSD extends Generator{
 	public static function getDirName() : string{
-		return "is";
+		return "smssd";
 	}
 
 	public static function merge(array &$db, string $data, string $filename) : void{
-		$controller = "IS" . explode("_", $filename)[0];
-		$data = parse_ini_string($data, true);
+		$controller = "SM" . explode("_", $filename)[0];
 		$db["info"]["controllers"][] = $controller;
-		foreach($data as $manufacturer => $flashes){
-			$manufacturer = str_replace(["psc", "hynix"], ["powerchip", "skhynix"], strtolower($manufacturer));
-			if($manufacturer == "flashdb version"){
-				continue;
-			}
-			foreach($flashes as $flash){
-				list($pn, $id, $ce) = explode("-", $flash);
-				$id = substr($id, 0, 12);
+		$data = explode("\r\n", $data);
+		foreach($data as $k => $config){
+			if(StringUtil::startsWith($config, "A") and
+				!StringUtil::startsWith($data[$k + 1], "A") and
+				!StringUtil::endsWith($config, "[END]")){
+				list($flash, $info) = explode("=", $data[$k + 1], 2);
+				list($manufacturer, $density, $pn) = explode(",", $flash, 3);
+				$manufacturer = str_replace("hynix", "skhynix", strtolower($manufacturer));
+				$pn = trim(preg_replace('/\(.*?\)/', '', $pn));
+				if(StringUtil::contains($pn, "-")){
+					$pn = trim(explode("-", $pn)[0]);
+				}
+				if(StringUtil::contains($pn, "_")){
+					$pn = trim(explode("_", $pn)[0]);
+				}
 				switch($manufacturer){
-					case "sandisk":
-						$pn = str_replace("_", "-", $pn);//_032G -> -032G
+					case "micron":
+						$pn = Micron::removePackage($pn);
 						break;
 					case "skhynix":
 						$pn = SKHynix::removePackage($pn);
 						break;
 				}
+				$rawId = explode(",", $info);
+				$id = "";
+				for($i = 0; $i < 6; $i++){
+					$id .= $rawId[$i];
+				}
 				if(isset($db[$manufacturer][$pn])){
-					$exist = false;
-					foreach($db[$manufacturer][$pn]["id"] as $existedId){
-						if(StringUtil::startsWith($existedId, $id)){
-							$exist = true;
-							break;
-						}
-					}
-					if(!$exist){
+					if(!in_array($id, $db[$manufacturer][$pn]["id"])){
 						$db[$manufacturer][$pn]["id"][] = $id;
 					}
 					if(!in_array($controller, $db[$manufacturer][$pn]["t"])){
