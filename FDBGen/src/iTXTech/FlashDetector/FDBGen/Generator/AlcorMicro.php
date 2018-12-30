@@ -21,6 +21,7 @@
 namespace iTXTech\FlashDetector\FDBGen\Generator;
 
 use iTXTech\FlashDetector\Decoder\Micron;
+use iTXTech\FlashDetector\Decoder\SKHynix;
 use iTXTech\SimpleFramework\Util\StringUtil;
 
 class AlcorMicro extends Generator{
@@ -49,6 +50,13 @@ class AlcorMicro extends Generator{
 			switch($manufacturer){
 				case "micron":
 					$pn = Micron::removePackage($pn);
+					break;
+				case "hynix":
+					$manufacturer = "skynix";
+					if(StringUtil::contains($pn, "-")){
+						$pn = explode("-", $pn)[0];
+					}
+					$pn = SKHynix::removePackage($pn);
 					break;
 			}
 			if(isset($db[$manufacturer][$pn])){
