@@ -126,7 +126,7 @@ abstract class FlashDetector{
 		$result = [];
 		foreach(self::$fdb as $manufacturer => $flashes){
 			foreach($flashes as $partNumber => $flash){
-				if(($partMatch and StringUtil::startsWith($partNumber, $pn)) or
+				if(($partMatch and StringUtil::contains($partNumber, $pn)) or
 					(!$partNumber and $partNumber == $pn)){
 					$result[] = $manufacturer . " " . $partNumber;
 				}
