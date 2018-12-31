@@ -60,7 +60,7 @@ class JMicron extends Generator{
 				if($id === str_repeat("0", strlen($id))){
 					continue;
 				}
-				$pn = $info[1];
+				$pn = trim($info[1]);
 
 				switch($manufacturer){
 					case "sandisk":

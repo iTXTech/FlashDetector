@@ -46,8 +46,7 @@ class SandForce extends Generator{
 				$db["info"]["controllers"][] = $controller;
 			}
 			$manufacturer = str_replace(["hynix"], ["skhynix"], strtolower($config[4]));
-			$pn = $config[7];
-			//var_dump($manufacturer, $pn);
+			$pn = trim($config[7]);
 			if(strlen($pn) <= 3 or StringUtil::contains(strtolower($pn), "custom")){
 				continue;
 			}

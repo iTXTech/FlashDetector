@@ -47,6 +47,7 @@ class AlcorMicro extends Generator{
 			}
 			list($manufacturer, $cellLevel, $density, $pn, $processNode) = $blocks;
 			$manufacturer = strtolower($manufacturer);
+			$pn = trim($pn);
 			switch($manufacturer){
 				case "micron":
 					$pn = Micron::removePackage($pn);
@@ -81,6 +82,5 @@ class AlcorMicro extends Generator{
 				];
 			}
 		}
-
 	}
 }
