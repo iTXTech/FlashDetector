@@ -23,12 +23,34 @@
 require_once "env.php";
 
 use iTXTech\FlashDetector\FlashDetector;
+use iTXTech\SimpleFramework\Console\Option\Exception\ParseException;
+use iTXTech\SimpleFramework\Console\Option\HelpFormatter;
+use iTXTech\SimpleFramework\Console\Option\OptionBuilder;
+use iTXTech\SimpleFramework\Console\Option\OptionGroup;
+use iTXTech\SimpleFramework\Console\Option\Options;
+use iTXTech\SimpleFramework\Console\Option\Parser;
 use iTXTech\SimpleFramework\Util\Util;
 
-if(!isset($argv[1])){
-	Util::println("Usage: \"" . PHP_BINARY . "\" \"" . $argv[0] . "\" <flash id>");
-	exit(1);
-}
+$group = new OptionGroup();
+$group->addOption((new OptionBuilder("i"))->desc("Reverse searching Flash Id")->longOpt("flash-id")
+	->hasArg()->argName("Flash Id")->build())
+	->addOption((new OptionBuilder("p"))->desc("Reverse searching Part Number")->longOpt("part-number")
+		->hasArg()->argName("Part Number")->build());
+$group->setRequired(true);
+$options = new Options();
+$options->addOptionGroup($group);
 
-$info = FlashDetector::getFlashPartNumberFromIddb($argv[1], true);
-Util::println(json_encode($info, JSON_PRETTY_PRINT));
+try{
+	$cmd = (new Parser())->parse($options, $argv);
+	if($cmd->hasOption("i")){
+		$info = FlashDetector::searchFlashId($cmd->getOptionValue("i"), true);
+		Util::println(json_encode($info, JSON_PRETTY_PRINT));
+	}
+	if($cmd->hasOption("p")){
+		$info = FlashDetector::searchPartNumber($cmd->getOptionValue("p"), true);
+		Util::println(json_encode($info, JSON_PRETTY_PRINT));
+	}
+}catch(ParseException $e){
+	Util::println($e->getMessage());
+	echo((new HelpFormatter())->generateHelp("rs", $options));
+}

@@ -107,9 +107,9 @@ abstract class FlashDetector{
 		}
 	}
 
-	public static function getFlashPartNumberFromIddb(string $id, bool $partCompare = false) : ?array{
+	public static function searchFlashId(string $id, bool $partMatch = false) : ?array{
 		$id = strtoupper($id);
-		if($partCompare){
+		if($partMatch){
 			$result = [];
 			foreach(self::$iddb as $fid => $partNumber){
 				if(StringUtil::startsWith($fid, $id)){
@@ -119,6 +119,20 @@ abstract class FlashDetector{
 			return $result;
 		}
 		return self::$iddb[strtoupper($id)] ?? null;
+	}
+
+	public static function searchPartNumber(string $pn, bool $partMatch = false) : ?array{
+		$pn = strtoupper($pn);
+		$result = [];
+		foreach(self::$fdb as $manufacturer => $flashes){
+			foreach($flashes as $partNumber => $flash){
+				if(($partMatch and StringUtil::startsWith($partNumber, $pn)) or
+					(!$partNumber and $partNumber == $pn)){
+					$result[] = $manufacturer . " " . $partNumber;
+				}
+			}
+		}
+		return $result;
 	}
 
 	/**

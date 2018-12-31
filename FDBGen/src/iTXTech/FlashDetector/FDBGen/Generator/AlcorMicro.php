@@ -52,7 +52,7 @@ class AlcorMicro extends Generator{
 					$pn = Micron::removePackage($pn);
 					break;
 				case "hynix":
-					$manufacturer = "skynix";
+					$manufacturer = "skhynix";
 					if(StringUtil::contains($pn, "-")){
 						$pn = explode("-", $pn)[0];
 					}

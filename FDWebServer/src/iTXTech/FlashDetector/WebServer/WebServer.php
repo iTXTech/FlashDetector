@@ -23,6 +23,7 @@ namespace iTXTech\FlashDetector\WebServer;
 use iTXTech\FlashDetector\WebServer\Page\DecodePage;
 use iTXTech\FlashDetector\WebServer\Page\IndexPage;
 use iTXTech\FlashDetector\WebServer\Page\SearchIdPage;
+use iTXTech\FlashDetector\WebServer\Page\SearchPnPage;
 use iTXTech\SimpleSwFw\Http\Server;
 
 class WebServer{
@@ -38,6 +39,7 @@ class WebServer{
 		$this->server->registerPage("/", IndexPage::class);
 		$this->server->registerPage("/decode", DecodePage::class);
 		$this->server->registerPage("/searchId", SearchIdPage::class);
+		$this->server->registerPage("/searchPn", SearchPnPage::class);
 		$this->server->load($config);
 	}
 
