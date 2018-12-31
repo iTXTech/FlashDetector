@@ -175,6 +175,7 @@ class FlashInfo{
 
 			$info = FlashDetector::translate($info);
 		}
+		$info["rawManufacturer"] = $this->manufacturer;
 		return $info;
 	}
 
