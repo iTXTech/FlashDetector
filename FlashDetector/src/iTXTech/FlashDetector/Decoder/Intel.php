@@ -53,6 +53,7 @@ class Intel extends Decoder{
 			$flashInfo->setPackage("TSOP");
 		}elseif(StringUtil::startsWith($partNumber, "PF")){
 			$partNumber = substr($partNumber, 2);
+			$flashInfo->setPackage("BGA");
 		}
 		$partNumber = substr($partNumber, 3);
 		$flashInfo->setType(Constants::NAND_TYPE_NAND)
