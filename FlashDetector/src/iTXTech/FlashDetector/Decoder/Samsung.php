@@ -28,13 +28,13 @@ use iTXTech\FlashDetector\Property\FlashInterface;
 use iTXTech\SimpleFramework\Util\StringUtil;
 
 class Samsung extends Decoder{
-	private const CLASSIFICAITION = [
+	private const CLASSIFICATION = [
 		//CellLevel, Die
-		"9" => [4, 8],//never seen
+		"9" => [4, 8],//never seen QLC 8die
 		"A" => [3, 1],
 		"B" => [3, 2],
 		"C" => [2, 4],
-		"D" => [3, -1],//TODO: confirm: 3D TLC V4
+		"D" => [3, 16],
 		"F" => [1, 1],
 		"G" => [2, 1],
 		"H" => [2, 4],
@@ -75,6 +75,13 @@ class Samsung extends Decoder{
 		"LG" => 24 * 1024,
 		"NG" => 96 * 1024,
 		"ZG" => 48 * 1024,
+		"PG" => 171 * 1024,
+		"QG" => 341 * 1024,
+		"RG" => 683 * 1024,
+		"SG" => 1365 * 1024,
+		"KG" => 1024 * 1024,
+		"MG" => 2 * 1024 * 1024,
+		"UG" => 4 * 1024 * 1024,
 		"00" => 0
 	];
 
@@ -94,12 +101,18 @@ class Samsung extends Decoder{
 			->setManufacturer(self::getName())
 			->setType(Constants::NAND_TYPE_NAND);
 		$partNumber = substr($partNumber, 2);//remove K9
-		$c = self::getOrDefault(self::shiftChars($partNumber, 1), self::CLASSIFICAITION, [-1, -1]);
+		$c = self::getOrDefault(self::shiftChars($partNumber, 1), self::CLASSIFICATION, [-1, -1]);
 		$flashInfo->setCellLevel($c[0])
 			->setDensity(self::getOrDefault(self::shiftChars($partNumber, 2), self::DENSITY, 0));
 		$technology = self::shiftChars($partNumber, 1);
+		$extra = ["toggle" => self::getOrDefault($technology, [
+			"D" => "1.0",
+			"Y" => "2.0",
+			"B" => "3.0"
+		], Constants::UNKNOWN)];
 		//only check if is D => DDR
-		$flashInfo->setInterface((new FlashInterface(true))->setToggle($technology === "D"))
+		$flashInfo->setInterface((new FlashInterface(true))
+			->setToggle(in_array($technology, ["D", "Y", "B"])))
 			->setDeviceWidth(self::getOrDefault(self::shiftChars($partNumber, 1), [
 				"0" => 0,
 				"8" => 8,
@@ -132,6 +145,7 @@ class Samsung extends Decoder{
 			"9" => [-1, -1],//1st block OTP
 			"A" => [-1, -1],//Mask Option 1
 			"L" => [-1, -1],//Low grade
+			"C" => [16, -1]
 		], [-1, -1]);
 		$flashInfo->setClassification(new Classification($mode[0], Classification::UNKNOWN_PROP, $mode[1], $c[1]))
 			->setGeneration(self::getOrDefault(self::shiftChars($partNumber, 1), [
@@ -143,17 +157,17 @@ class Samsung extends Decoder{
 				"E" => 6,
 				"Y" => 25,
 				"Z" => 26
-			]));
+			]))->setExtraInfo($extra);
 
 		return $flashInfo;
 	}
 
 	public static function getFlashInfoFromFdb(string $partNumber) : ?array{
 		if(!isset(FlashDetector::getFdb()[strtolower(self::getName())][$partNumber]) and strlen($partNumber) === 10){//standard
-			$c = self::CLASSIFICAITION[substr($partNumber, 2, 1)] ?? -1;
+			$c = self::CLASSIFICATION[substr($partNumber, 2, 1)] ?? -1;
 			//convert part number to single die
 			if($c[1] > 1){//die
-				foreach(self::CLASSIFICAITION as $code => $cf){
+				foreach(self::CLASSIFICATION as $code => $cf){
 					if($cf[0] === $c[0] and $cf[1] === 1){
 						$partNumber{2} = $code;
 						$density = self::DENSITY[substr($partNumber, 3, 2)] ?? -1;
