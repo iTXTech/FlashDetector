@@ -68,7 +68,7 @@ class SiliconMotionUFD extends Generator{
 				if(strlen($info[2]) !== 5){
 					array_splice($info, 2, 0, "");
 				}
-				$info[0] = str_replace(["samaung", "hynix"], ["samsung", "skhynix"], strtolower($info[0]));
+				$info[0] = str_replace(["samaung", "hynix", "speteck"], ["samsung", "skhynix", "spectek"], strtolower($info[0]));
 				if(isset($info[3]) and StringUtil::endsWith($info[3], "LC")){
 					$cellLevel = $info[3];
 					$info[3] = $info[4] ?? "";
