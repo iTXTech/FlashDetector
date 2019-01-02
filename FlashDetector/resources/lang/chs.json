@@ -29,5 +29,16 @@
   "spectek_if_g": "企业级同步",
   "spectek_if_m": "SIM闪存",
   "spectek_if_n": "异步/NV-DDR2",
-  "toshiba_e2nand_not_supported": "东芝 E2NAND 不被支持"
+  "toshiba_e2nand_not_supported": "东芝 E2NAND 不被支持",
+  "samsung_none": "无",
+  "samsung_temp_c": "商用",
+  "samsung_temp_s": "SmartMedia",
+  "samsung_temp_b": "SmartMedia BLUE",
+  "samsung_temp_i": "工业用",
+  "samsung_cbb_b": "包含坏块",
+  "samsung_cbb_c": "菊花链样品",
+  "samsung_cbb_k": "特殊处理",
+  "samsung_cbb_l": "1-5个坏块",
+  "samsung_cbb_n": "ini. 0 blk, add. 10 blk",
+  "samsung_cbb_s": "全是好块"
 }

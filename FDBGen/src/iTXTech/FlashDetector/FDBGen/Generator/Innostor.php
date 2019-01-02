@@ -39,7 +39,9 @@ class Innostor extends Generator{
 			}
 			foreach($flashes as $flash){
 				list($pn, $id, $ce) = explode("-", $flash);
-				$id = substr($id, 0, 12);
+				if(strlen($id) >= 12){
+					continue;
+				}
 				switch($manufacturer){
 					case "sandisk":
 						$pn = str_replace("_", "-", $pn);//_032G -> -032G

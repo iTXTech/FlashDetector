@@ -110,7 +110,6 @@ class Samsung extends Decoder{
 			"Y" => "2.0",
 			"B" => "3.0"
 		], Constants::UNKNOWN)];
-		//only check if is D => DDR
 		$flashInfo->setInterface((new FlashInterface(true))
 			->setToggle(in_array($technology, ["D", "Y", "B"])))
 			->setDeviceWidth(self::getOrDefault(self::shiftChars($partNumber, 1), [
@@ -131,7 +130,7 @@ class Samsung extends Decoder{
 				"U" => "2.7V~3.6V",
 				"V" => "3.3V (3.0V~3.6V)",
 				"W" => "2.7V~5.5V, 3.0V~5.5V",
-				"0" => "NONE",
+				"0" => Constants::SAMSUNG_NONE,
 			]));
 		$mode = self::getOrDefault(self::shiftChars($partNumber, 1), [
 			"0" => [-1, -1],//CE, R/nB
@@ -157,12 +156,66 @@ class Samsung extends Decoder{
 				"E" => 6,
 				"Y" => 25,
 				"Z" => 26
-			]))->setExtraInfo($extra);
+			]));
+
+		self::shiftChars($partNumber, 1);//remove -
+		$flashInfo->setPackage(self::getOrDefault($package = self::shiftChars($partNumber, 1), [
+			"8" => "TSOP1",
+			"9" => "56-TSOP1",
+			"A" => "COB",
+			"B" => "FBGA",
+			"C" => "BGA316",
+			"D" => "TBGA63 or 316",
+			"E" => "ISM",
+			"F" => "WSOP",
+			"G" => "FBGA",
+			"H" => "BGA132 or 136",
+			"I" => "ULGA (12*17)",
+			"J" => "FBGA",
+			"K" => "ULGA (12*17)",
+			"L" => "ULGA (14*18)",
+			"M" => "ULGA52 (13*18)",
+			"P" => "TSOP1",
+			"Q" => "TSOP2",
+			"R" => "56-TSOP1",
+			"S" => "TSOP1",
+			"T" => "WSOP",
+			"U" => "COB (MMC)",
+			"V" => "WSOP",
+			"W" => "Wafer",
+			"Y" => "TSOP1",
+			"Z" => "WELP"
+		]));
+		$extra["leadFree"] = in_array($package,
+			["8", "9", "B", "E", "F", "I", "J", "K", "L", "M", "P", "Q", "R", "S", "T", "Z"]);
+		$extra["halogenFree"] = in_array($package, ["8", "9", "B", "E", "K", "L", "M", "R", "S", "T"]);
+		$extra["cu"] = in_array($package, ["8", "9"]);
+		$extra["temp"] = self::getOrDefault(self::shiftChars($partNumber, 1), [
+			"C" => Constants::SAMSUNG_TEMP_C,
+			"S" => Constants::SAMSUNG_TEMP_S,
+			"B" => Constants::SAMSUNG_TEMP_B,
+			"I" => Constants::SAMSUNG_TEMP_I,
+			"0" => Constants::SAMSUNG_NONE
+		]);
+		$extra["customerBadBlock"] = self::getOrDefault(self::shiftChars($partNumber, 1), [
+			"B" => Constants::SAMSUNG_CBB_B,
+			"D" => Constants::SAMSUNG_CBB_D,
+			"K" => Constants::SAMSUNG_CBB_K,
+			"L" => Constants::SAMSUNG_CBB_L,
+			"N" => Constants::SAMSUNG_CBB_N,
+			"S" => Constants::SAMSUNG_CBB_S,
+			"0" => Constants::SAMSUNG_NONE,
+		]);
+
+		$flashInfo->setExtraInfo($extra);
 
 		return $flashInfo;
 	}
 
 	public static function getFlashInfoFromFdb(string $partNumber) : ?array{
+		if(StringUtil::contains($partNumber, "-")){
+			$partNumber = explode("-", $partNumber)[0];
+		}
 		if(!isset(FlashDetector::getFdb()[strtolower(self::getName())][$partNumber]) and strlen($partNumber) === 10){//standard
 			$c = self::CLASSIFICATION[substr($partNumber, 2, 1)] ?? -1;
 			//convert part number to single die

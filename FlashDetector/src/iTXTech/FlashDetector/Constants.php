@@ -68,4 +68,19 @@ interface Constants{
 
 	//Toshiba
 	public const TOSHIBA_E2NAND_NOT_SUPPORTED = "toshiba_e2nand_not_supported";
+
+	//Samsung
+	public const SAMSUNG_NONE = "samsung_none";
+
+	public const SAMSUNG_TEMP_C = "samsung_temp_c";
+	public const SAMSUNG_TEMP_S = "samsung_temp_s";
+	public const SAMSUNG_TEMP_B = "samsung_temp_b";
+	public const SAMSUNG_TEMP_I = "samsung_temp_i";
+
+	public const SAMSUNG_CBB_B = "samsung_cbb_b";
+	public const SAMSUNG_CBB_D = "samsung_cbb_d";
+	public const SAMSUNG_CBB_K = "samsung_cbb_k";
+	public const SAMSUNG_CBB_L = "samsung_cbb_l";
+	public const SAMSUNG_CBB_N = "samsung_cbb_n";
+	public const SAMSUNG_CBB_S = "samsung_cbb_s";
 }

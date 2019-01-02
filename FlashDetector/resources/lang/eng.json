@@ -29,5 +29,16 @@
   "spectek_if_g": "Enterprise Sync",
   "spectek_if_m": "SIM Flash",
   "spectek_if_n": "Async/NV-DDR2",
-  "toshiba_e2nand_not_supported": "Toshiba E2NAND is not supported"
+  "toshiba_e2nand_not_supported": "Toshiba E2NAND is not supported",
+  "samsung_none": "NONE",
+  "samsung_temp_c": "Commercial",
+  "samsung_temp_s": "SmartMedia",
+  "samsung_temp_b": "SmartMedia BLUE",
+  "samsung_temp_i": "Industrial",
+  "samsung_cbb_b": "Include Bad Block",
+  "samsung_cbb_c": "Daisychain Sample",
+  "samsung_cbb_k": "Special Handling",
+  "samsung_cbb_l": "1-5 Bad Block",
+  "samsung_cbb_n": "ini. 0 blk, add. 10 blk",
+  "samsung_cbb_s": "All Good Block"
 }
