@@ -39,7 +39,10 @@ class SiliconMotionSSD extends Generator{
 				!StringUtil::endsWith($config, "[END]")){
 				list($flash, $info) = explode("=", $data[$k + 1], 2);
 				list($manufacturer, $density, $pn) = explode(",", $flash, 3);
-				$manufacturer = str_replace("hynix", "skhynix", strtolower($manufacturer));
+				$manufacturer = str_replace(
+					["hynix", "stm", "power flash"],
+					["skhynix", "st", "powerchip"],
+					strtolower($manufacturer));
 				$pn = trim(preg_replace('/\(.*?\)/', '', $pn));
 				if(StringUtil::contains($pn, "-")){
 					$pn = trim(explode("-", $pn)[0]);

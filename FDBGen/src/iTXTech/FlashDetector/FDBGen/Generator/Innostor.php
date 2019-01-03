@@ -39,7 +39,7 @@ class Innostor extends Generator{
 			}
 			foreach($flashes as $flash){
 				list($pn, $id, $ce) = explode("-", $flash);
-				if(strlen($id) >= 12){
+				if(strlen($id) > 12){
 					continue;
 				}
 				switch($manufacturer){

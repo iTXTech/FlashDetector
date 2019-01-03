@@ -46,14 +46,13 @@ class AlcorMicro extends Generator{
 				continue;
 			}
 			list($manufacturer, $cellLevel, $density, $pn, $processNode) = $blocks;
-			$manufacturer = strtolower($manufacturer);
+			$manufacturer = str_replace(["powerflash", "hynix"], ["powerchip", "skhynix"], strtolower($manufacturer));
 			$pn = trim($pn);
 			switch($manufacturer){
 				case "micron":
 					$pn = Micron::removePackage($pn);
 					break;
-				case "hynix":
-					$manufacturer = "skhynix";
+				case "skhynix":
 					if(StringUtil::contains($pn, "-")){
 						$pn = explode("-", $pn)[0];
 					}
