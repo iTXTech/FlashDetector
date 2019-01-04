@@ -23,6 +23,10 @@ namespace iTXTech\FlashDetector;
 interface Constants{
 	public const LANG_TRANSLATION_NOT_FOUND = "Translation not found.";
 
+	//base = 1 MBits
+	public const DENSITY_GBITS = 1024;
+	public const DENSITY_TBITS = 1024 * 1024;
+
 	public const MANUFACTURER_INTEL = "intel";
 	public const MANUFACTURER_MICRON = "micron";
 	public const MANUFACTURER_SAMSUNG = "samsung";
