@@ -46,9 +46,9 @@ abstract class FDBGen{
 		self::registerGenerator(SiliconMotionUFD::class);
 		self::registerGenerator(SiliconMotionSSD::class);
 		//may not have complete id
+		self::registerGenerator(Innostor::class);
 		self::registerGenerator(JMicron::class);
 		self::registerGenerator(Maxiotek::class);
-		self::registerGenerator(Innostor::class);
 		//no flash id
 		self::registerGenerator(SandForce::class);
 		self::registerGenerator(AlcorMicro::class);
