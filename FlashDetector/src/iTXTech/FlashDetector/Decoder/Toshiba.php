@@ -144,8 +144,8 @@ class Toshiba extends Decoder{
 			$flashInfo->setPackage("LGA");
 		}
 
-		$extra["leadFree"] = !in_array($package, ["FT", "XB"]);
-		$extra["halogenFree"] = in_array($package, ["TA", "BA", "LA"]);
+		$extra[Constants::LEAD_FREE] = !in_array($package, ["FT", "XB"]);
+		$extra[Constants::HALOGEN_FREE] = in_array($package, ["TA", "BA", "LA"]);
 		$flashInfo->setExtraInfo($extra);
 		$classification = self::getOrDefault(self::shiftChars($partNumber, 1), [
 			"0" => [1, 1],//Ch, nCE

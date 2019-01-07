@@ -23,6 +23,12 @@ namespace iTXTech\FlashDetector;
 interface Constants{
 	public const LANG_TRANSLATION_NOT_FOUND = "Translation not found.";
 
+	public const LEAD_FREE = "leadFree";
+	public const HALOGEN_FREE = "halogenFree";
+	public const WAFER = "wafer";
+	public const OPERATION_TEMPERATURE = "opTemp";
+	public const BAD_BLOCK = "badBlock";
+
 	//base = 1 MBits
 	public const DENSITY_GBITS = 1024;
 	public const DENSITY_TBITS = 1024 * 1024;
@@ -49,11 +55,10 @@ interface Constants{
 
 	//SKHynix
 	public const SKHYNIX_E2NAND_NOT_SUPPORTED = "skhynix_e2nand_not_supported";
-	public const SKHYNIX_OLD_NUMBERING = "skhynix_old_numbering";
-	public const SKHYNIX_PM_WAFER = "skhynix_pm_wafer";
-	public const SKHYNIX_PM_LEAD_FREE = "skhynix_pm_lead_free";
-	public const SKHYNIX_PM_LEADED = "skhynix_pm_leaded";
-	public const SKHYNIX_PM_LEAD_AND_HALOGEN_FREE = "skhynix_pm_lead_and_halogen_free";
+	public const SKHYNIX_OT_C = "skhynix_ot_c";
+	public const SKHYNIX_OT_E = "skhynix_ot_e";
+	public const SKHYNIX_OT_M = "skhynix_ot_m";
+	public const SKHYNIX_OT_I = "skhynix_ot_i";
 
 	//SpecTek
 	public const SPECTEK_OLD_NUMBERING = "spectek_old_numbering";

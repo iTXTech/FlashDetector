@@ -186,18 +186,18 @@ class Samsung extends Decoder{
 			"Y" => "TSOP1",
 			"Z" => "WELP"
 		]));
-		$extra["leadFree"] = in_array($package,
+		$extra[Constants::LEAD_FREE] = in_array($package,
 			["8", "9", "B", "E", "F", "I", "J", "K", "L", "M", "P", "Q", "R", "S", "T", "Z"]);
-		$extra["halogenFree"] = in_array($package, ["8", "9", "B", "E", "K", "L", "M", "R", "S", "T"]);
+		$extra[Constants::HALOGEN_FREE] = in_array($package, ["8", "9", "B", "E", "K", "L", "M", "R", "S", "T"]);
 		$extra["cu"] = in_array($package, ["8", "9"]);
-		$extra["temp"] = self::getOrDefault(self::shiftChars($partNumber, 1), [
+		$extra[Constants::OPERATION_TEMPERATURE] = self::getOrDefault(self::shiftChars($partNumber, 1), [
 			"C" => Constants::SAMSUNG_TEMP_C,
 			"S" => Constants::SAMSUNG_TEMP_S,
 			"B" => Constants::SAMSUNG_TEMP_B,
 			"I" => Constants::SAMSUNG_TEMP_I,
 			"0" => Constants::SAMSUNG_NONE
 		]);
-		$extra["customerBadBlock"] = self::getOrDefault(self::shiftChars($partNumber, 1), [
+		$extra[Constants::BAD_BLOCK] = self::getOrDefault(self::shiftChars($partNumber, 1), [
 			"B" => Constants::SAMSUNG_CBB_B,
 			"D" => Constants::SAMSUNG_CBB_D,
 			"K" => Constants::SAMSUNG_CBB_K,

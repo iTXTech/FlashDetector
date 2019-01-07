@@ -26,6 +26,7 @@ use iTXTech\FlashDetector\Decoder\Micron;
 use iTXTech\FlashDetector\Decoder\Samsung;
 use iTXTech\FlashDetector\Decoder\SanDisk;
 use iTXTech\FlashDetector\Decoder\SKHynix;
+use iTXTech\FlashDetector\Decoder\SKHynixLegacy;
 use iTXTech\FlashDetector\Decoder\SpecTek;
 use iTXTech\FlashDetector\Decoder\Toshiba;
 use iTXTech\SimpleFramework\Util\StringUtil;
@@ -53,6 +54,7 @@ abstract class FlashDetector{
 	public static function init(string $lang = "eng", string $fallbackLang = "eng"){
 		self::registerDecoder(Micron::class);
 		self::registerDecoder(SKHynix::class);
+		self::registerDecoder(SKHynixLegacy::class);
 		self::registerDecoder(Toshiba::class);
 		self::registerDecoder(Samsung::class);
 		self::registerDecoder(Intel::class);

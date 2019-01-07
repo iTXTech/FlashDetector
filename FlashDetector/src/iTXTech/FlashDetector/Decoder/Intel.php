@@ -43,10 +43,10 @@ class Intel extends Decoder{
 	public static function decode(string $partNumber) : FlashInfo{
 		$flashInfo = (new FlashInfo($partNumber))->setManufacturer(self::getName());
 		$extra = [
-			"wafer" => false
+			Constants::WAFER => false
 		];
 		if(StringUtil::startsWith($partNumber, "X")){
-			$extra["wafer"] = true;
+			$extra[Constants::WAFER] = true;
 			$partNumber = substr($partNumber, 1);
 		}elseif(StringUtil::startsWith($partNumber, "JS")){
 			$partNumber = substr($partNumber, 2);
@@ -58,6 +58,9 @@ class Intel extends Decoder{
 		$partNumber = substr($partNumber, 3);
 		$flashInfo->setType(Constants::NAND_TYPE_NAND)
 			->setDensity(self::getOrDefault($density = self::shiftChars($partNumber, 3), [
+				"01G" => 1 * Constants::DENSITY_GBITS,
+				"02G" => 2 * Constants::DENSITY_GBITS,
+				"04G" => 4 * Constants::DENSITY_GBITS,
 				"08G" => 8 * Constants::DENSITY_GBITS,
 				"16G" => 16 * Constants::DENSITY_GBITS,
 				"32G" => 32 * Constants::DENSITY_GBITS,
