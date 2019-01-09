@@ -54,6 +54,7 @@ class Intel extends Decoder{
 		}elseif(StringUtil::startsWith($partNumber, "PF")){
 			$partNumber = substr($partNumber, 2);
 			$flashInfo->setPackage("BGA");
+			$extra[Constants::LEAD_FREE] = true;
 		}
 		$partNumber = substr($partNumber, 3);
 		$flashInfo->setType(Constants::NAND_TYPE_NAND)
@@ -67,7 +68,6 @@ class Intel extends Decoder{
 				"64G" => 64 * Constants::DENSITY_GBITS,
 				"16B" => 128 * Constants::DENSITY_GBITS,
 				"32B" => 256 * Constants::DENSITY_GBITS,
-				//TODO: confirm
 				"64B" => 512 * Constants::DENSITY_GBITS,
 				"01T" => 1 * Constants::DENSITY_TBITS,
 				"02T" => 2 * Constants::DENSITY_TBITS,
@@ -76,7 +76,8 @@ class Intel extends Decoder{
 			], 0))
 			->setDeviceWidth(self::getOrDefault(self::shiftChars($partNumber, 2), [
 				"08" => 8,
-				"16" => 16
+				"16" => 16,
+				//2A = 2 Channel (maybe 8bit)
 			], -1));
 		if(((int) $density{2}) > 0){//same as Micron
 			return Micron::decode($flashInfo->getPartNumber());
@@ -90,15 +91,20 @@ class Intel extends Decoder{
 			"F" => [4, 2, 2, true],
 			"G" => [4, 2, 2, false],
 			"J" => [4, 4, 4, true],
-			"K" => [8, 4, 4, false]
+			"K" => [8, 4, 4, false],
+			"L" => [1, 1, 1, true],
+			"M" => [2, 2, 2, true],
+			"N" => [4, 4, 4, true],
+			"O" => [8, 8, 4, true],
+			"W" => [16, 8, 4, true]
 		], [-1, -1, -1, false]);
 		$flashInfo->setClassification(new Classification(
 			$classification[1], Classification::UNKNOWN_PROP, $classification[2], $classification[0]))
 			->setInterface((new FlashInterface(false))->setAsync(true)->setSync($classification[3]))
 			->setVoltage(self::getOrDefault(self::shiftChars($partNumber, 1), [
 				"A" => "3.3V (2.70V-3.60V)",
-				"B" => "1.8V (1.70V-1.95V)"
-				//TODO: C
+				"B" => "1.8V (1.70V-1.95V)",
+				"C" => "Vcc: 3.3V, VccQ: 1.8V/1.2V"
 			]))
 			->setCellLevel(self::getOrDefault(self::shiftChars($partNumber, 1), [
 				"N" => 1,
@@ -113,7 +119,7 @@ class Intel extends Decoder{
 				"E" => "25 nm",
 				//TODO: confirm
 				"F" => "20 nm",
-				"G" => "3D"
+				"G" => "1Y nm"
 			]))
 			->setGeneration(self::shiftChars($partNumber, 1));
 
