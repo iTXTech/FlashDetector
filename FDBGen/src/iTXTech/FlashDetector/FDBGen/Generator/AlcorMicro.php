@@ -48,6 +48,7 @@ class AlcorMicro extends Generator{
 			list($manufacturer, $cellLevel, $density, $pn, $processNode) = $blocks;
 			$manufacturer = str_replace(["powerflash", "hynix"], ["powerchip", "skhynix"], strtolower($manufacturer));
 			$pn = trim($pn);
+			$processNode = strlen($processNode) > 1 ? $processNode : "";
 			switch($manufacturer){
 				case "micron":
 					$pn = Micron::removePackage($pn);
