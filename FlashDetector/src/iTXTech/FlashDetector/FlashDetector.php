@@ -137,13 +137,13 @@ abstract class FlashDetector{
 		return $result;
 	}
 
-	public static function searchSupportedControllers(string $flashId, bool $partMatch = false) : ?array {
+	public static function searchSupportedControllers(string $flashId, bool $partMatch = false) : ?array{
 		$ids = self::searchFlashId($flashId, $partMatch);
 		$result = [];
 		foreach($ids as $k => $v){
 			$cons = [];
 			foreach($v as $pn){
-				list($vendor, $pn) = explode(" ", $pn);
+				list($vendor, $pn) = explode(" ", $pn, 2);
 				foreach(self::$fdb[$vendor][$pn]["t"] as $con){
 					$cons[$con] = "";
 				}

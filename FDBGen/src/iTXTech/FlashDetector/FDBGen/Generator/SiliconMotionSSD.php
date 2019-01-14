@@ -44,11 +44,10 @@ class SiliconMotionSSD extends Generator{
 					["skhynix", "st", "powerchip"],
 					strtolower($manufacturer));
 				$pn = trim(preg_replace('/\(.*?\)/', '', $pn));
-				if(StringUtil::contains($pn, "-")){
-					$pn = trim(explode("-", $pn)[0]);
-				}
-				if(StringUtil::contains($pn, "_")){
-					$pn = trim(explode("_", $pn)[0]);
+				foreach(["-", "_", " "] as $char){
+					if(StringUtil::contains($pn, $char)){
+						$pn = trim(explode($char, $pn)[0]);
+					}
 				}
 				switch($manufacturer){
 					case "micron":
