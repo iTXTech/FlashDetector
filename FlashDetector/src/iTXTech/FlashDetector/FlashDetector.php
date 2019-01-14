@@ -72,7 +72,7 @@ abstract class FlashDetector{
 	public static function registerDecoder(string $decoder) : bool{
 		if(is_a($decoder, Decoder::class, true)){
 			/** @var $decoder Decoder */
-			self::$decoders[$decoder::getName()] = $decoder;
+			self::$decoders[] = $decoder;
 			return true;
 		}
 		return false;
