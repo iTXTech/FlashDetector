@@ -109,7 +109,8 @@ class Intel extends Decoder{
 			->setCellLevel(self::getOrDefault(self::shiftChars($partNumber, 1), [
 				"N" => 1,
 				"M" => 2,
-				"T" => 3, //TODO: Confirm
+				"T" => 3,
+				"Q" => 4,
 			]))
 			->setProcessNode(self::getOrDefault(self::shiftChars($partNumber, 1), [
 				"A" => "90 nm",
@@ -119,7 +120,8 @@ class Intel extends Decoder{
 				"E" => "25 nm",
 				//TODO: confirm
 				"F" => "20 nm",
-				"G" => "1Y nm"
+				"G" => "3D1/1y nm",
+				"H" => "3D2"
 			]))
 			->setGeneration(self::shiftChars($partNumber, 1));
 
