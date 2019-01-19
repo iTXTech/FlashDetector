@@ -73,5 +73,5 @@ try{
 	}
 }catch(ParseException $e){
 	Util::println($e->getMessage());
-	echo((new HelpFormatter())->generateHelp("fdb_gen", $options));
+	echo((new HelpFormatter())->generateHelp("fdbgen", $options));
 }

@@ -44,9 +44,13 @@ class SiliconMotionSSD extends Generator{
 					["skhynix", "st", "powerchip"],
 					strtolower($manufacturer));
 				$pn = trim(preg_replace('/\(.*?\)/', '', $pn));
-				foreach(["-", "_", " "] as $char){
-					if(StringUtil::contains($pn, $char)){
-						$pn = trim(explode($char, $pn)[0]);
+				if($manufacturer == "sandisk"){
+					$pn = trim(explode("_", $pn)[0]);
+				}else{
+					foreach(["-", "_", " "] as $char){
+						if(StringUtil::contains($pn, $char)){
+							$pn = trim(explode($char, $pn)[0]);
+						}
 					}
 				}
 				switch($manufacturer){

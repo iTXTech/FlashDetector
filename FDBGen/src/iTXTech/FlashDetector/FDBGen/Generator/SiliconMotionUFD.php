@@ -48,10 +48,10 @@ class SiliconMotionUFD extends Generator{
 				if(StringUtil::contains($info, "//")){
 					$comment = trim(substr(strstr($info, "//"), 2));
 				}
+				$info = preg_replace("/3D V(\d)/", "3DV$1", $info);
 				$info = explode(" ", str_replace(
 					[$comment, "NEW DATE CODE", "OLD DATE CODE", " - ", "L84A HP", "SanDisk SanDisk", "-ES"],
-					["", "", "", "-", "L84A_HP", "SanDisk", "ES"],
-					$info));
+					["", "", "", "-", "L84A_HP", "SanDisk", "ES"], $info));
 				//Manufacturer, PartNumber, SMICode, Lithography, CellLevel
 				foreach($info as $k => $v){
 					$v = trim(str_replace(["/", ","], "", $v));
