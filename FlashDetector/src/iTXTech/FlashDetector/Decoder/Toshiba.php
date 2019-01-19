@@ -94,9 +94,9 @@ class Toshiba extends Decoder{
 				"D" => 2,
 				"E" => 2,//eMLC
 				"T" => 3,
-				"U" => 3
+				"U" => 3,//eTLC
 			]));
-		$extra["enterprise"] = in_array($ep, ["H", "E"]);
+		$extra["enterprise"] = in_array($ep, ["H", "E", "U"]);
 		$width = self::shiftChars($partNumber, 1);
 		if(in_array($width, ["0", "1", "2", "3", "4", "A", "B", "C", "D"])){
 			$flashInfo->setDeviceWidth(8);
