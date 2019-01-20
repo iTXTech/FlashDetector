@@ -57,7 +57,7 @@ class WebServer{
 
 		while(true){
 			Worker::loop();
-			sleep(0.1);
+			usleep(Framework::getTickInterval());
 		}
 	}
 }

@@ -72,4 +72,3 @@ try{
 	Util::println($e->getMessage());
 	echo((new HelpFormatter())->generateHelp("pack", $options));
 }
-
