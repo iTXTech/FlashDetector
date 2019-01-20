@@ -37,7 +37,7 @@ Logger::info("Loading iTXTech FlashDetector");
 global $classLoader;
 try{
 	$moduleManager = new ModuleManager($classLoader,
-		__DIR__ . DIRECTORY_SEPARATOR . ".." . DIRECTORY_SEPARATOR, "");
+		__DIR__ . DIRECTORY_SEPARATOR . ".." . DIRECTORY_SEPARATOR, __DIR__ . DIRECTORY_SEPARATOR);
 	$moduleManager->registerModuleDependencyResolver(new WraithSpireMDR($moduleManager,
 		"https://raw.githubusercontent.com/iTXTech/WraithSpireDatabase/master/", []));
 	loadModule($moduleManager, "SimpleHtmlDom_v1.1.0.phar");
