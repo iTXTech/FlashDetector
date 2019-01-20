@@ -18,26 +18,24 @@
  * limitations under the License.
  */
 
-namespace iTXTech\FlashDetector\WebServer;
+namespace iTXTech\FlashDetector\WebServer\Page;
 
-use iTXTech\SimpleFramework\Console\Logger;
-use iTXTech\SimpleFramework\Console\SwooleLoggerHandler;
-use iTXTech\SimpleFramework\Module\Module;
+use EaseCation\WorkerManEE\Page\AbstractPage;
+use iTXTech\FlashDetector\FlashDetector;
 
-class Loader extends Module{
-	/** @var Loader */
-	private static $instance;
-
-	public function load(){
-		self::$instance = $this;
-		SwooleLoggerHandler::init();
-		Logger::setLoggerHandler(SwooleLoggerHandler::class);
-	}
-
-	public function unload(){
-	}
-
-	public static function getInstance() : ?Loader{
-		return self::$instance;
+class DecodePage extends AbstractPage{
+	public static function onRequest(){
+		if(!isset($_GET["pn"])){
+			return json_encode([
+				"result" => false,
+				"message" => "Missing part number"
+			]);
+		}else{
+			return json_encode([
+				"result" => true,
+				"data" => FlashDetector::detect($_GET["pn"])
+					->toArray((($_GET["trans"] ?? 0) == 1) ? false : true)
+			]);
+		}
 	}
 }

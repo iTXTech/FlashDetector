@@ -1,0 +1,16 @@
+{
+  "name": "FDWebServer-W",
+  "version": "1.0.0",
+  "api": 6,
+  "description": "HTTP server for FlashDetector (compatible with PHP for Windows)",
+  "author": "iTX Technologies",
+  "main": "iTXTech\\FlashDetector\\WebServer\\Loader",
+  "order": 2,
+  "website": "https://github.com/iTXTech/FlashDetector",
+  "dependencies": [
+    {
+      "name": "EaseCation/WorkerManEE",
+      "version": "17.10.1"
+    }
+  ]
+}

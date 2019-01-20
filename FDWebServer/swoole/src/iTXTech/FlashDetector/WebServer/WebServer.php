@@ -28,13 +28,10 @@ use iTXTech\FlashDetector\WebServer\Page\SearchPnPage;
 use iTXTech\SimpleSwFw\Http\Server;
 
 class WebServer{
-	/** @var array */
-	private $config;
 	/** @var Server */
 	private $server;
 
 	public function __construct(array $config){
-		$this->config = $config;
 		$this->server = new Server();
 		$this->server->setDefaultPage(IndexPage::class);
 		$this->server->registerPage("/", IndexPage::class);

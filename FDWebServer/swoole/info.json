@@ -1,5 +1,5 @@
 {
-  "name": "FDWebServer",
+  "name": "FDWebServer-S",
   "version": "1.0.0",
   "api": 6,
   "description": "High performance HTTP server for FlashDetector",
