@@ -127,7 +127,7 @@ class Micron extends Decoder{
 		"D" => [false, false, true],
 		//SpecTek
 		"E" => [true, true, false],//TODO: confirm
-		"F" => [false, true, false],
+		"F" => [true, true, false],
 		"G" => [true, true, false],//TODO: confirm
 		"M" => [false, false, false],//TODO: confirm
 		"N" => [false, true, false]
