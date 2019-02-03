@@ -47,6 +47,21 @@
   "halogenFree": "无卤",
   "wafer": "晶圆",
   "opTemp": "操作温度",
-  "bacBlock": "坏块",
-  "sku": "SKU"
+  "badBlock": "坏块",
+  "sku": "SKU",
+  "unsupportedReason": "不支持",
+  "toggle": "TogDDR版本",
+  "cu": "铜工艺",
+  "multiChip": "多晶片",
+  "enterprise": "企业级",
+  "pageSize": "页大小",
+  "blockSize": "块大小",
+  "page": "页",
+  "doubleStackPackage": "多堆封装",
+  "dualInterface": "双接口",
+  "eccEnabled": "ECC已启用",
+  "halfPageAndSize": "半页大小",
+  "packageFunctionalityPartialType": "封装可用部分类型",
+  "interfaceInfo": "接口类型",
+  "densityGrade": "可用容量"
 }

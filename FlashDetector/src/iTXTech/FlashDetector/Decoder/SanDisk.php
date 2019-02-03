@@ -43,11 +43,11 @@ class SanDisk extends Decoder{
 		$partNumber = substr($partNumber, 2);//remove SD
 		if(substr($partNumber, 0, 2) === "IN"){
 			return $flashInfo->setType(Constants::NAND_TYPE_INAND)
-				->setExtraInfo([Constants::NOT_SUPPORTED_REASON => Constants::SANDISK_INAND_NOT_SUPPORTED]);
+				->setExtraInfo([Constants::UNSUPPORTED_REASON => Constants::SANDISK_INAND_NOT_SUPPORTED]);
 		}
 
 		return $flashInfo->setType(Constants::NAND_TYPE_NAND)
-			->setExtraInfo([Constants::NOT_SUPPORTED_REASON => Constants::SANDISK_NAND_NOT_SUPPORTED]);
+			->setExtraInfo([Constants::UNSUPPORTED_REASON => Constants::SANDISK_NAND_NOT_SUPPORTED]);
 	}
 
 	public static function getFlashInfoFromFdb(string $partNumber) : ?array{

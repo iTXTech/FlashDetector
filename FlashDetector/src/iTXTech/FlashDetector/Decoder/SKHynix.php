@@ -166,7 +166,7 @@ class SKHynix extends Decoder{
 		if(in_array($level = self::shiftChars($partNumber, 3), ["H2J", "H2D"])){
 			//TODO: SKHynix E2NAND
 			return $flashInfo->setType(Constants::NAND_TYPE_E2NAND)
-				->setExtraInfo([Constants::NOT_SUPPORTED_REASON => Constants::SKHYNIX_E2NAND_NOT_SUPPORTED]);
+				->setExtraInfo([Constants::UNSUPPORTED_REASON => Constants::SKHYNIX_E2NAND_NOT_SUPPORTED]);
 		}else{
 			$flashInfo->setType(Constants::NAND_TYPE_NAND);
 		}

@@ -42,7 +42,7 @@ class SpecTek extends Micron{
 		$flashInfo = (new FlashInfo($partNumber))
 			->setManufacturer(self::getName())->setType(Constants::NAND_TYPE_NAND);
 		if(strlen($partNumber) == 13){
-			return $flashInfo->setExtraInfo([Constants::NOT_SUPPORTED_REASON => Constants::SPECTEK_OLD_NUMBERING]);
+			return $flashInfo->setExtraInfo([Constants::UNSUPPORTED_REASON => Constants::SPECTEK_OLD_NUMBERING]);
 		}
 		$partNumber = substr($partNumber, 3);//remove Fxx
 		$extra = [

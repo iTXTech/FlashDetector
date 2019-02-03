@@ -21,8 +21,6 @@
 namespace iTXTech\FlashDetector;
 
 interface Constants{
-	public const LANG_TRANSLATION_NOT_FOUND = "Translation not found.";
-
 	public const LEAD_FREE = "leadFree";
 	public const HALOGEN_FREE = "halogenFree";
 	public const WAFER = "wafer";
@@ -48,7 +46,7 @@ interface Constants{
 
 	public const UNKNOWN = "Unknown";
 
-	public const NOT_SUPPORTED_REASON = "notSupportedReason";
+	public const UNSUPPORTED_REASON = "unsupportedReason";
 
 	//SanDisk iNAND/NAND not supported
 	public const SANDISK_INAND_NOT_SUPPORTED = "sandisk_inand_not_supported";
