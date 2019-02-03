@@ -150,6 +150,7 @@ class FlashInfo{
 		}
 
 		if(!$raw){
+			$interface = $info["interface"];
 			$density = $info["density"];
 			if($density !== null and $density > 0){
 				$unit = ["Mb", "Gb", "Tb"];
@@ -176,6 +177,7 @@ class FlashInfo{
 			}
 
 			$info = FlashDetector::translate($info);
+			$info["interface"] = $interface;//hack!
 		}
 		$info["rawManufacturer"] = $this->manufacturer;
 		return $info;
