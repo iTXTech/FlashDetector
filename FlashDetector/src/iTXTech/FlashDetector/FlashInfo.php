@@ -151,7 +151,7 @@ class FlashInfo{
 
 		if(!$raw){
 			$density = $info["density"];
-			if($density !== null){
+			if($density !== null and $density > 0){
 				$unit = ["Mb", "Gb", "Tb"];
 				$i = 0;
 				while($density >= 1024 and isset($unit[$i + 1])){
@@ -159,6 +159,8 @@ class FlashInfo{
 					$i++;
 				}
 				$info["density"] = $density . " " . $unit[$i];
+			}else{
+				$info["density"] = Constants::UNKNOWN;
 			}
 			$deviceWidth = $info["deviceWidth"];
 			if($deviceWidth === -1){

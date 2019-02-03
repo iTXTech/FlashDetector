@@ -34,7 +34,7 @@ class Intel extends Decoder{
 
 	public static function check(string $partNumber) : bool{
 		$code = substr($partNumber, 0, 2);
-		if(in_array($code, ["JS", "PF", "29", "X2"])){
+		if(in_array($code, ["JS", "PF", "29", "X2", "BK", "CU"])){
 			return true;
 		}
 		return false;
@@ -48,15 +48,23 @@ class Intel extends Decoder{
 		if(StringUtil::startsWith($partNumber, "X")){
 			$extra[Constants::WAFER] = true;
 			$partNumber = substr($partNumber, 1);
-		}elseif(StringUtil::startsWith($partNumber, "JS")){
-			$partNumber = substr($partNumber, 2);
-			$flashInfo->setPackage("TSOP");
-		}elseif(StringUtil::startsWith($partNumber, "PF")){
-			$partNumber = substr($partNumber, 2);
-			$flashInfo->setPackage("BGA");
-			$extra[Constants::LEAD_FREE] = true;
+		}else{
+			$package = substr($partNumber, 0, 2);
+			if(in_array($package, ["JS", "PF", "BK", "CU"])){
+				if(in_array($package, ["JS", "PF", "BK"])){
+					$extra[Constants::LEAD_FREE] = true;
+				}
+				$flashInfo->setPackage(self::getOrDefault($package, [
+					"JS" => "TSOP48",
+					"BK" => "LGA",
+					"PF" => "BGA",
+					"CU" => "LSOP"
+				]));
+				$partNumber = substr($partNumber, 2);
+			}
 		}
-		$partNumber = substr($partNumber, 3);
+
+		$partNumber = substr($partNumber, 3);//29F
 		$flashInfo->setType(Constants::NAND_TYPE_NAND)
 			->setDensity(self::getOrDefault($density = self::shiftChars($partNumber, 3), [
 				"01G" => 1 * Constants::DENSITY_GBITS,
@@ -80,7 +88,8 @@ class Intel extends Decoder{
 			->setDeviceWidth(self::getOrDefault($width = self::shiftChars($partNumber, 2), [
 				"08" => 8,
 				"16" => 16,
-				"2A" => 8
+				"2A" => 8,
+				"A8" => 8
 			], -1));
 		if(((int) $density{2}) > 0){//same as Micron
 			return Micron::decode($flashInfo->getPartNumber());

@@ -28,7 +28,7 @@ interface Constants{
 	public const WAFER = "wafer";
 	public const OPERATION_TEMPERATURE = "opTemp";
 	public const BAD_BLOCK = "badBlock";
-	public const SKU = "SKU";
+	public const SKU = "sku";
 
 	//base = 1 MBits
 	public const DENSITY_GBITS = 1024;

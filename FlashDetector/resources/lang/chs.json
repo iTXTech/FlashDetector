@@ -1,4 +1,6 @@
 {
+  "true": "是",
+  "false": "否",
   "Unknown": "未知",
   "intel": "英特尔",
   "micron": "美光",
@@ -40,5 +42,11 @@
   "samsung_cbb_l": "1-5个坏块",
   "samsung_cbb_n": "ini. 0 blk, add. 10 blk",
   "samsung_cbb_s": "全是好块",
-  "intel_sku_s": "客户端"
+  "intel_sku_s": "客户端",
+  "leadFree": "无铅",
+  "halogenFree": "无卤",
+  "wafer": "晶圆",
+  "opTemp": "操作温度",
+  "bacBlock": "坏块",
+  "sku": "SKU"
 }

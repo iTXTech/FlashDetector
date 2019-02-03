@@ -159,7 +159,9 @@ abstract class FlashDetector{
 	 * @return array|string|bool|null
 	 */
 	public static function translate($var){
-		if(is_array($var)){
+		if(is_bool($var)){
+			return self::translateString($var ? "true" : "false");
+		}elseif(is_array($var)){
 			return self::translateArray($var);
 		}elseif(is_string($var)){
 			return self::translateString($var);
@@ -168,10 +170,11 @@ abstract class FlashDetector{
 	}
 
 	public static function translateArray(array $arr) : array{
+		$a = [];
 		foreach($arr as $k => $v){
-			$arr[$k] = self::translate($v);
+			$a[self::translateString($k)] = self::translate($v);
 		}
-		return $arr;
+		return $a;
 	}
 
 	public static function translateString(string $key) : string{

@@ -32,11 +32,11 @@ class SKHynix extends Decoder{
 	public const LARGE_BLOCK = 1;//2048+64 B/page
 
 	protected const VOLTAGE = [
-		"U" => "2.7V~3.6V (3.3V)",
+		"U" => "Vcc: 3.3V, VccQ: 3.3V",
 		"L" => "2.7V",
 		"S" => "1.8V",
 		"J" => "2.7V~3.6V/1.2V",
-		"Q" => "2.7V~3.6V/1.8V"
+		"Q" => "Vcc: 3.3V, VccQ: 1.8V"
 	];
 	protected const DENSITY = [
 		"64" => 64,
@@ -81,7 +81,12 @@ class SKHynix extends Decoder{
 		"M" => [3, 1, self::LARGE_BLOCK],
 		"N" => [3, 2, self::LARGE_BLOCK],
 		"P" => [3, 4, self::LARGE_BLOCK],
-		"Q" => [3, 8, self::LARGE_BLOCK]
+		"Q" => [3, 8, self::LARGE_BLOCK],
+		"2" => [2, 1, self::LARGE_BLOCK],
+		"4" => [2, 2, self::LARGE_BLOCK],
+		"3" => [2, 4, self::LARGE_BLOCK],
+		"5" => [2, 8, self::LARGE_BLOCK],
+		"D" => [2, 1, self::LARGE_BLOCK]
 		//TODO: more
 	];
 	protected const MODE = [
@@ -98,6 +103,8 @@ class SKHynix extends Decoder{
 		"G" => [4, 2, true, 2],//Dual Interface
 		"W" => [6, 6, true, 2],//Dual Interface
 		"H" => [8, 8, true, 2],//Dual Interface
+		"E" => [4, 4, true, 4],
+		"Q" => [4, 4, true, 4]
 	];
 	protected const GENERATION = [
 		"M" => 1,
@@ -120,11 +127,15 @@ class SKHynix extends Decoder{
 		"W" => "Wafer",
 		"C" => "PGD1 (chip)",
 		"K" => "KGD",
-		"D" => "PGD2",
+		"D" => "PGD2 (wafer)",
 		"I" => "VFBGA-100",
 		"J" => "LFBGA-100",
 		"A" => "VLGA",
-		"H" => "XLGA"
+		"H" => "XLGA",
+		"8" => "FBGA-152",
+		"9" => "FBGA-152",
+		"2" => "FBGA-316",
+		"3" => "FBGA-316",
 	];
 	protected const BAD_BLOCK = [
 		"B" => Constants::SAMSUNG_CBB_B,
@@ -164,7 +175,9 @@ class SKHynix extends Decoder{
 			->setDensity(self::getOrDefault(self::shiftChars($partNumber, 2), self::DENSITY, 0))
 			->setDeviceWidth(self::getOrDefault(self::shiftChars($partNumber, 1), [
 				"8" => 8,
-				"6" => 16
+				"6" => 16,
+				"L" => 8,
+				"I" => 8
 			], -1));
 		$classification = self::getOrDefault(self::shiftChars($partNumber, 1),
 			self::CLASSIFICATION, [-1, -1, self::SMALL_BLOCK]);
