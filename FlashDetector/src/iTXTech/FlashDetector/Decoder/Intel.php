@@ -68,16 +68,19 @@ class Intel extends Decoder{
 				"64G" => 64 * Constants::DENSITY_GBITS,
 				"16B" => 128 * Constants::DENSITY_GBITS,
 				"32B" => 256 * Constants::DENSITY_GBITS,
+				"48B" => 384 * Constants::DENSITY_GBITS,
 				"64B" => 512 * Constants::DENSITY_GBITS,
+				"96B" => 768 * Constants::DENSITY_GBITS,
 				"01T" => 1 * Constants::DENSITY_TBITS,
 				"02T" => 2 * Constants::DENSITY_TBITS,
 				"03T" => 3 * Constants::DENSITY_TBITS,
 				"04T" => 4 * Constants::DENSITY_TBITS,
+				"06T" => 6 * Constants::DENSITY_TBITS,
 			], 0))
-			->setDeviceWidth(self::getOrDefault(self::shiftChars($partNumber, 2), [
+			->setDeviceWidth(self::getOrDefault($width = self::shiftChars($partNumber, 2), [
 				"08" => 8,
 				"16" => 16,
-				//2A = 2 Channel (maybe 8bit)
+				"2A" => 8
 			], -1));
 		if(((int) $density{2}) > 0){//same as Micron
 			return Micron::decode($flashInfo->getPartNumber());
@@ -99,7 +102,7 @@ class Intel extends Decoder{
 			"W" => [16, 8, 4, true]
 		], [-1, -1, -1, false]);
 		$flashInfo->setClassification(new Classification(
-			$classification[1], Classification::UNKNOWN_PROP, $classification[2], $classification[0]))
+			$classification[1], $width == "2A" ? 2 : 1, $classification[2], $classification[0]))
 			->setInterface((new FlashInterface(false))->setAsync(true)->setSync($classification[3]))
 			->setVoltage(self::getOrDefault(self::shiftChars($partNumber, 1), [
 				"A" => "3.3V (2.70V-3.60V)",
@@ -112,20 +115,31 @@ class Intel extends Decoder{
 				"T" => 3,
 				"Q" => 4,
 			]))
-			->setProcessNode(self::getOrDefault(self::shiftChars($partNumber, 1), [
+			->setProcessNode($lithography = self::getOrDefault(self::shiftChars($partNumber, 1), [
 				"A" => "90 nm",
 				"B" => "72 nm",
 				"C" => "50 nm",
 				"D" => "34 nm",
 				"E" => "25 nm",
-				//TODO: confirm
 				"F" => "20 nm",
 				"G" => "3D1/1y nm",
 				"H" => "3D2"
-			]))
-			->setGeneration(self::shiftChars($partNumber, 1));
+			]));
+		$gen = self::shiftChars($partNumber, 1);
+		if(is_numeric($gen)){
+			$flashInfo->setGeneration($gen);
+		}else{
+			$extra[Constants::SKU] = self::getOrDefault($gen, [
+				"S" => Constants::INTEL_SKU_S
+			]);
+		}
 
-		return $flashInfo;
+		//Patch for L06B/B0KB TLC
+		if($flashInfo->getCellLevel() == 3 and $lithography == "G" and $density == "01T"){
+			$flashInfo->setDensity(1.5 * Constants::DENSITY_TBITS);
+		}
+
+		return $flashInfo->setExtraInfo($extra);
 	}
 
 	public static function getFlashInfoFromFdb(string $partNumber) : ?array{

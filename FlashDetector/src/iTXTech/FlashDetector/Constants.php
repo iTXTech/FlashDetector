@@ -28,6 +28,7 @@ interface Constants{
 	public const WAFER = "wafer";
 	public const OPERATION_TEMPERATURE = "opTemp";
 	public const BAD_BLOCK = "badBlock";
+	public const SKU = "SKU";
 
 	//base = 1 MBits
 	public const DENSITY_GBITS = 1024;
@@ -92,4 +93,7 @@ interface Constants{
 	public const SAMSUNG_CBB_L = "samsung_cbb_l";
 	public const SAMSUNG_CBB_N = "samsung_cbb_n";
 	public const SAMSUNG_CBB_S = "samsung_cbb_s";
+
+	//Intel
+	public const INTEL_SKU_S = " intel_sku_s";
 }

@@ -39,5 +39,6 @@
   "samsung_cbb_k": "Special Handling",
   "samsung_cbb_l": "1-5 Bad Block",
   "samsung_cbb_n": "ini. 0 blk, add. 10 blk",
-  "samsung_cbb_s": "All Good Block"
+  "samsung_cbb_s": "All Good Block",
+  "intel_sku_s": "Client"
 }

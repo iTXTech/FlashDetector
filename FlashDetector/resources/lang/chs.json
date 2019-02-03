@@ -39,5 +39,6 @@
   "samsung_cbb_k": "特殊处理",
   "samsung_cbb_l": "1-5个坏块",
   "samsung_cbb_n": "ini. 0 blk, add. 10 blk",
-  "samsung_cbb_s": "全是好块"
+  "samsung_cbb_s": "全是好块",
+  "intel_sku_s": "客户端"
 }
