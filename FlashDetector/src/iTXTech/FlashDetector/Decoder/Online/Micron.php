@@ -33,7 +33,7 @@ class Micron{
 			->setUrl(self::MICRON_API_ADDR)
 			->setGet([$param => $value])
 			->exec();
-		if($response->isSuccessfully()){
+		if($response->isSuccessful()){
 			$r = [];
 			$dom = SimpleHtmlDom::initDomFromString($response->getBody());
 			$results = $dom->find("table[id=theResults]", 0);

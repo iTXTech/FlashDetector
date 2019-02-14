@@ -49,7 +49,7 @@ class SpecTek{
 			->setUrl(self::SPECTEK_API_ADDR)
 			->setPost($postData)
 			->exec();
-		if($response->isSuccessfully()){
+		if($response->isSuccessful()){
 			$r = [];
 			$dom = SimpleHtmlDom::initDomFromString($response->getBody());
 			$results = $dom->find("table[class=bdrBlackTbl]", 0);
