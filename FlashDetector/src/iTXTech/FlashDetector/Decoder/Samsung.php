@@ -33,21 +33,21 @@ class Samsung extends Decoder{
 		"9" => [4, 8],//never seen QLC 8die
 		"A" => [3, 1],
 		"B" => [3, 2],
-		"C" => [2, 4],
+		"C" => [3, 4],
 		"D" => [3, 16],
 		"F" => [1, 1],
 		"G" => [2, 1],
 		"H" => [2, 4],
-		"K" => [1, -1],//Die stack
+		"K" => [1, 1],//Die stack
 		"L" => [2, 2],
-		"M" => [2, -1],//Dual stack package = DSP
-		"N" => [1, -1],//DSP
+		"M" => [2, 2],//Dual stack package = DSP
+		"N" => [1, 2],//DSP
 		"O" => [3, 8],
 		"P" => [2, 8],
 		"Q" => [1, 8],
 		"R" => [2, 12],
 		"S" => [2, 6],
-		"T" => [1, -1],//SLC SINGLE (S/B)
+		"T" => [1, 1],//SLC SINGLE (S/B)
 		"U" => [2, 16],
 		"W" => [1, 4]
 	];
