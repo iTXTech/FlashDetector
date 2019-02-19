@@ -90,7 +90,7 @@ class Samsung extends Decoder{
 	}
 
 	public static function check(string $partNumber) : bool{
-		if(StringUtil::startsWith($partNumber, "K")){
+		if(StringUtil::startsWith($partNumber, "K9")){
 			return true;
 		}
 		return false;
