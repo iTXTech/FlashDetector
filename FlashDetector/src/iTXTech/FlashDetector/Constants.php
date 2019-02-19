@@ -43,6 +43,7 @@ interface Constants{
 	public const NAND_TYPE_NAND = "nand";
 	public const NAND_TYPE_E2NAND = "e2nand";
 	public const NAND_TYPE_INAND = "inand";
+	public const NAND_TYPE_ISSD = "issd";
 
 	public const UNKNOWN = "Unknown";
 
@@ -50,7 +51,7 @@ interface Constants{
 
 	//SanDisk iNAND/NAND not supported
 	public const SANDISK_INAND_NOT_SUPPORTED = "sandisk_inand_not_supported";
-	public const SANDISK_NAND_NOT_SUPPORTED = "sandisk_nand_not_supported";
+	public const SANDISK_ISSD_NOT_SUPPORTED = "sandisk_issd_not_supported";
 
 	//SKHynix
 	public const SKHYNIX_E2NAND_NOT_SUPPORTED = "skhynix_e2nand_not_supported";

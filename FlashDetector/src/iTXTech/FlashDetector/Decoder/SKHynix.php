@@ -24,7 +24,6 @@ use iTXTech\FlashDetector\Constants;
 use iTXTech\FlashDetector\FlashDetector;
 use iTXTech\FlashDetector\FlashInfo;
 use iTXTech\FlashDetector\Property\Classification;
-use iTXTech\FlashDetector\Property\FlashInterface;
 use iTXTech\SimpleFramework\Util\StringUtil;
 
 class SKHynix extends Decoder{
@@ -185,7 +184,7 @@ class SKHynix extends Decoder{
 		$mode = self::getOrDefault(self::shiftChars($partNumber, 1), self::MODE, [-1, -1, false, -1]);
 		$flashInfo->setClassification(new Classification(
 			$mode[0], $mode[3], $mode[1], $classification[1]));
-		$flashInfo->setInterface((new FlashInterface(false))->setAsync(true)->setSync(true))//Async default = true
+		$flashInfo//->setInterface((new FlashInterface(false))->setAsync(true)->setSync(true))//Async default = true
 		->setGeneration(self::getOrDefault(self::shiftChars($partNumber, 1), self::GENERATION))
 			->setPackage(self::getOrDefault(self::shiftChars($partNumber, 1), self::PACKAGE));
 
