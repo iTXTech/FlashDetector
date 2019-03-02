@@ -31,20 +31,16 @@ class AlcorMicro extends Generator{
 
 	public static function merge(array &$db, string $data, string $filename) : void{
 		$data = explode("\r\n", $data);
-		$controllers = [];
+		$cons = explode(",", array_shift($data));
+		foreach($cons as $k => $con){
+			$db["info"]["controllers"][] = $con;
+		}
 		foreach($data as $k){
-			$blocks = explode(" ", $k);
-			if(trim($k) == "" or StringUtil::startsWith($k, "#")){
+			if(trim($k) == ""){
 				continue;
 			}
-			if($blocks[0] == "controllers"){
-				array_shift($blocks);
-				$controllers = $blocks;
-				foreach($blocks as $con){
-					$db["info"]["controllers"][] = $con;
-				}
-				continue;
-			}
+			//Vendor,Type,Capacity,Part Number,Process Node,nCE,AU6989SN-GTC,AU6989SN-GTD,AU6989SN-GTE
+			$blocks = explode(",", $k);
 			list($manufacturer, $cellLevel, $density, $pn, $processNode) = $blocks;
 			$manufacturer = str_replace(["powerflash", "hynix"], ["powerchip", "skhynix"], strtolower($manufacturer));
 			$pn = trim($pn);
@@ -67,7 +63,7 @@ class AlcorMicro extends Generator{
 				if($db[$manufacturer][$pn]["l"] == ""){
 					$db[$manufacturer][$pn]["l"] = $processNode;
 				}
-				foreach($controllers as $controller){
+				foreach($cons as $controller){
 					if(!in_array($controller, $db[$manufacturer][$pn]["t"])){
 						$db[$manufacturer][$pn]["t"][] = $controller;
 					}
@@ -77,7 +73,7 @@ class AlcorMicro extends Generator{
 					"id" => [],//Flash ID
 					"l" => $processNode,//Lithography
 					"c" => $cellLevel,//cell level
-					"t" => $controllers,//controller
+					"t" => $cons,//controller
 					"m" => ""
 				];
 			}

@@ -20,6 +20,8 @@
 
 namespace iTXTech\FlashDetector\FDBGen\Generator;
 
+use iTXTech\FlashDetector\Decoder\Micron;
+use iTXTech\FlashDetector\Decoder\SKHynix;
 use iTXTech\SimpleFramework\Util\StringUtil;
 
 class ChipsBank extends Generator{
@@ -71,6 +73,7 @@ class ChipsBank extends Generator{
 				switch($vendor){
 					case "toshiba":
 					case "micron":
+						$pn = Micron::removePackage($pn);
 					case "intel":
 						$pn = explode("(", $pn)[0];
 						break;
@@ -78,6 +81,8 @@ class ChipsBank extends Generator{
 					case "powerchip":
 						$pn = "";
 						break;
+					case "skhynix":
+						$pn = SKHynix::removePackage($pn);
 				}
 				if($pn !== ""){
 					if(in_array($pn{strlen($pn) - 2}, ["_", "*"])){
