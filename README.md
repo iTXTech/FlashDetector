@@ -10,24 +10,40 @@ Universal NAND Flash Part Number Decoder
 * [SimpleFramework 2.1](https://github.com/iTXTech/SimpleFramework)
 * [SimpleHtmlDom](https://github.com/PeratX/SimpleHtmlDom)
 
+## Supported
+
+### Flash Manufacturers
+
+1. `Intel`/`Micron`/`SpecTek`
+1. `Samsung`
+1. `SanDisk`/`Toshiba`
+1. `SKHynix`
+
+### Controllers
+
+1. `SiliconMotion` (`SM321AC, SM321BB, SM321BC, SM324BB, SM324BC, SM3252A, SM3252B, SM3252C, SM3254AE, SM3255AA, SM3255AB, SM3255ENA1, SM3255ENAA, SM3257AA, SM3257ENAA, SM3257ENAA_8CE, SM3257ENBA, SM3257ENBB, SM3257ENLT, SM325AB, SM325AC, SM3260AA, SM3260AB, SM3260AD, SM3261AA, SM3261AB, SM3263AA, SM3263AB, SM3267AA, SM3267AB, SM3267AB_COB, SM3267AE, SM3268AB, SM3269AA, SM3269AA_COB, SM3270AC, SM3280AB, SM3281AB, SM2231, SM2232, SM2240, SM2242, SM2244LT, SM2246EN, SM2246XT, SM2250, SM2256, SM2258XT, SM2258, SM2263XT`)
+1. `Innostor` (`IS902E, IS902, IS903, IS916EN, IS916, IS917`)
+1. `JMicron` (`JMF606, JMF608, JMF670H`)
+1. `Maxiotek` (`MK8115`)
+1. `SandForce` (`SF2141, SF2181, SF2281, SF2282, SF2382, SF2481, SF2241`)
+1. `ChipsBank` (`CBM2099S, CBM2099E, CBM2199S, CBM2199`)
+1. `AlcorMicro` (`AU6989SNL-B, AU6989SN-GTC/D/E`)
+
+## Web Server
+
+There are three types of FDWebServer:
+
+1. [FDWebServer-CGI](https://github.com/iTXTech/FlashDetector/tree/master/FDWebServer/CGI) - Compatible with Apache and PHP-FPM
+1. [FDWebServer-Swoole](https://github.com/iTXTech/FlashDetector/tree/master/FDWebServer/swoole) - Extreme High Performance, using [swoole](https://github.com/swoole/swoole-src)
+1. [FDWebServer-WorkerManEE](https://github.com/iTXTech/FlashDetector/tree/master/FDWebServer/WorkerManEE) - Single Thread Server for Any OS
+
 ## Usage
 
-```powershell
-PS X:\>git clone https://github.com/iTXTech/SimpleFramework.git --depth=1 sf
+See files in [Scripts](https://github.com/iTXTech/FlashDetector/tree/master/Scripts).
 
-PS X:\Scripts>php fd.php TH58TEG7DDJTA20
-PS X:\Scripts>php fd.php H27UDG8M2MTR
-PS X:\Scripts>php fd.php K9HDGD8U5M
+## Flash Database
 
-PS X:\Scripts>php rs.php 98D584327656
-PS X:\Scripts>php rs.php 89A46432AA05
-
-PS X:\Scripts>php mfcmd.php -m -c -v NW634
-PS X:\Scripts>php mfcmd.php -s -p -v FBNL63B71KDK
-
-PS X:\Scripts>php test_output.php -l chs
-PS X:\Scripts>php test_output.php -l eng -r
-```
+See [fdfdb](https://github.com/iTXTech/fdfdb).
 
 ## License
 

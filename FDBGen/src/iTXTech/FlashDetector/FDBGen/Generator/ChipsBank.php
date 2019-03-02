@@ -43,6 +43,7 @@ class ChipsBank extends Generator{
 				continue;
 			}
 			$rec = explode(",", $rec);
+			array_shift($rec);
 			//Num#,Vendor,Capacity,Type,Part Number,FlashId,nCE,ECC bits,Process Node,Bus Width,2099S,2199S,2099E,2199
 			$vendor = str_replace(["hynix"], ["skhynix"], strtolower($rec[0]));
 			$flashId = $rec[4];
@@ -71,9 +72,9 @@ class ChipsBank extends Generator{
 			if(!$found){
 				$pn = $rec[3];
 				switch($vendor){
-					case "toshiba":
 					case "micron":
 						$pn = Micron::removePackage($pn);
+					case "toshiba":
 					case "intel":
 						$pn = explode("(", $pn)[0];
 						break;
@@ -83,6 +84,7 @@ class ChipsBank extends Generator{
 						break;
 					case "skhynix":
 						$pn = SKHynix::removePackage($pn);
+						break;
 				}
 				if($pn !== ""){
 					if(in_array($pn{strlen($pn) - 2}, ["_", "*"])){
