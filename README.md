@@ -17,7 +17,7 @@ Universal NAND Flash Part Number Decoder
 1. `Intel`/`Micron`/`SpecTek`
 1. `Samsung`
 1. `SanDisk`/`Toshiba`
-1. `SKHynix`
+1. `SK hynix`
 
 ### Controllers
 
@@ -27,7 +27,7 @@ Universal NAND Flash Part Number Decoder
 1. `Maxiotek` (`MK8115`)
 1. `SandForce` (`SF2141, SF2181, SF2281, SF2282, SF2382, SF2481, SF2241`)
 1. `ChipsBank` (`CBM2099S, CBM2099E, CBM2199S, CBM2199`)
-1. `AlcorMicro` (`AU6989SNL-B, AU6989SN-GTC/D/E`)
+1. `AlcorMicro` (`AU6987/AN, AU6989SNL, AU6989SNL-B, AU6989SN, AU6989SN-G, AU6989SN-GT, AU6989SN-GTA/B/C/D/E`)
 
 ## Web Server
 

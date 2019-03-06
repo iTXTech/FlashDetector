@@ -63,7 +63,11 @@ class ChipsBank extends Generator{
 			foreach($db[$vendor] as $pn => $flash){
 				foreach($flash["id"] as $ids){
 					if(StringUtil::startsWith($ids, $flashId)){
-						$db[$vendor][$pn]["t"] = array_merge($db[$vendor][$pn]["t"], $sup);
+						foreach($sup as $s){
+							if(!in_array($s, $db[$vendor][$pn]["t"])){
+								$db[$vendor][$pn]["t"][] = $s;
+							}
+						}
 						$found = true;
 						break;
 					}

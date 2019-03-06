@@ -33,7 +33,9 @@ class AlcorMicro extends Generator{
 		$data = explode("\r\n", $data);
 		$cons = explode(",", array_shift($data));
 		foreach($cons as $k => $con){
-			$db["info"]["controllers"][] = $con;
+			if(!in_array($con, $db["info"]["controllers"])){
+				$db["info"]["controllers"][] = $con;
+			}
 		}
 		foreach($data as $k){
 			if(trim($k) == ""){
