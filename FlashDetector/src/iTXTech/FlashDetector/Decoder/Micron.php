@@ -130,7 +130,7 @@ class Micron extends Decoder{
 		"F" => [true, true, false],
 		"G" => [true, true, false],//TODO: confirm
 		"M" => [false, false, false],//TODO: confirm
-		"N" => [false, true, false]
+		"N" => [true, true, false]
 	];
 
 	public static function getName() : string{
