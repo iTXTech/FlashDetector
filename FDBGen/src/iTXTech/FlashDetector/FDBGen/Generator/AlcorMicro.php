@@ -25,6 +25,8 @@ use iTXTech\FlashDetector\Decoder\SKHynix;
 use iTXTech\SimpleFramework\Util\StringUtil;
 
 class AlcorMicro extends Generator{
+	public const CON_OFFSET = 6;
+
 	public static function getDirName() : string{
 		return "al";
 	}
@@ -42,11 +44,20 @@ class AlcorMicro extends Generator{
 				continue;
 			}
 			//Vendor,Type,Capacity,Part Number,Process Node,nCE,AU6989SN-GTC,AU6989SN-GTD,AU6989SN-GTE
-			$blocks = explode(",", $k);
-			list($manufacturer, $cellLevel, $density, $pn, $processNode) = $blocks;
+			$rec = explode(",", $k);
+			list($manufacturer, $cellLevel, $density, $pn, $processNode) = $rec;
 			$manufacturer = str_replace(["powerflash", "hynix"], ["powerchip", "skhynix"], strtolower($manufacturer));
 			$pn = trim($pn);
 			$processNode = strlen($processNode) > 1 ? $processNode : "";
+			$sup = [];
+			for($i = self::CON_OFFSET; $i < count($rec); $i++){
+				if(isset($rec[$i]) and $rec[$i] == "Y"){
+					if(!isset($cons[$i - self::CON_OFFSET])){
+						var_dump($cons, $i, $rec, $filename);
+					}
+					$sup[] = $cons[$i - self::CON_OFFSET];
+				}
+			}
 			switch($manufacturer){
 				case "micron":
 					$pn = Micron::removePackage($pn);
@@ -65,7 +76,7 @@ class AlcorMicro extends Generator{
 				if($db[$manufacturer][$pn]["l"] == ""){
 					$db[$manufacturer][$pn]["l"] = $processNode;
 				}
-				foreach($cons as $controller){
+				foreach($sup as $controller){
 					if(!in_array($controller, $db[$manufacturer][$pn]["t"])){
 						$db[$manufacturer][$pn]["t"][] = $controller;
 					}

@@ -36,7 +36,9 @@ class ChipsBank extends Generator{
 		$cons = explode(",", array_shift($data));
 		foreach($cons as $k => $con){
 			$cons[$k] = "CBM" . $con;
-			$db["info"]["controllers"][] = $cons[$k];
+			if(!in_array($cons[$k], $db["info"]["controllers"])){
+				$db["info"]["controllers"][] = $cons[$k];
+			}
 		}
 		foreach($data as $rec){
 			if(trim($rec) == ""){
@@ -46,7 +48,7 @@ class ChipsBank extends Generator{
 			array_shift($rec);
 			//Num#,Vendor,Capacity,Type,Part Number,FlashId,nCE,ECC bits,Process Node,Bus Width,2099S,2199S,2099E,2199
 			$vendor = str_replace(["hynix"], ["skhynix"], strtolower($rec[0]));
-			$flashId = $rec[4];
+			$flashId = str_replace(" ", "", $rec[4]);
 			if(strlen($flashId) > 12){
 				$flashId = substr($flashId, 0, 12);
 			}
@@ -56,7 +58,7 @@ class ChipsBank extends Generator{
 			$found = false;
 			$sup = [];
 			for($i = self::CON_OFFSET; $i < count($rec); $i++){
-				if($rec[$i] == "Y"){
+				if(isset($rec[$i]) and $rec[$i] == "Y"){
 					$sup[] = $cons[$i - self::CON_OFFSET];
 				}
 			}
