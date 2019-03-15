@@ -130,10 +130,11 @@ class Toshiba extends Decoder{
 			"F" => "32 nm",
 			"G" => "24 nm A-type",
 			"H" => "24 nm B-type",
-			//TODO: confirm
 			"J" => "19 nm",
 			"K" => "A19 nm",
 			"L" => "15 nm",
+			"2" => "3D",
+			"3" => "3D"
 		]));
 		$package = self::shiftChars($partNumber, 2);
 		if(in_array($package, ["FT", "TG", "TA"])){
