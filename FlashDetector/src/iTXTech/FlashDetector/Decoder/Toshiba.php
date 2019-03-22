@@ -134,7 +134,8 @@ class Toshiba extends Decoder{
 			"K" => "A19 nm",
 			"L" => "15 nm",
 			"2" => "3D",
-			"3" => "3D"
+			"3" => "3D",
+			"4" => "3D"
 		]));
 		$package = self::shiftChars($partNumber, 2);
 		if(in_array($package, ["FT", "TG", "TA"])){

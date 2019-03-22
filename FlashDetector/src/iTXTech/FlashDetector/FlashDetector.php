@@ -148,7 +148,9 @@ abstract class FlashDetector{
 					$cons[$con] = "";
 				}
 			}
-			$result[$k] = array_keys($cons);
+			$cons = array_keys($cons);
+			sort($cons);
+			$result[$k] = $cons;
 		}
 		return $result;
 	}
