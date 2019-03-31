@@ -49,12 +49,14 @@ $options->addOption((new OptionBuilder("v"))->longOpt("version")
 		->desc("Input dir or file")->hasArg(true)->argName("file")->build())
 	->addOption((new OptionBuilder("o"))->longOpt("output")->required()
 		->desc("Output file")->hasArg(true)->argName("file")->build())
-	->addOption((new OptionBuilder("p"))->longOpt("pretty")->desc("JSON pretty output")->build());
+	->addOption((new OptionBuilder("p"))->longOpt("pretty")->desc("JSON pretty output")->build())
+	->addOption((new OptionBuilder("e"))->longOpt("extra")->desc("Include Extra.json")->build());
 
 try{
 	$cmd = (new Parser())->parse($options, $argv);
 	if($cmd->hasOption("f")){
-		$fdb = FDBGen::generate($cmd->getOptionValue("v", "Undefined"), $cmd->getOptionValue("d"));
+		$fdb = FDBGen::generate($cmd->getOptionValue("v", "Undefined"),
+			$cmd->getOptionValue("d"), $cmd->hasOption("e"));
 		if($cmd->hasOption("p")){
 			$fdb = json_encode($fdb, JSON_PRETTY_PRINT);
 		}else{
