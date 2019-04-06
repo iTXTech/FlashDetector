@@ -144,7 +144,8 @@ class Samsung extends Decoder{
 			"9" => [-1, -1],//1st block OTP
 			"A" => [-1, -1],//Mask Option 1
 			"L" => [-1, -1],//Low grade
-			"C" => [16, -1]
+			"C" => [16, 2],
+			"J" => [16, 4],
 		], [-1, -1]);
 		$flashInfo->setClassification(new Classification($mode[0], Classification::UNKNOWN_PROP, $mode[1], $c[1]))
 			->setGeneration(self::getOrDefault(self::shiftChars($partNumber, 1), [
