@@ -185,7 +185,9 @@ class Samsung extends Decoder{
 			"V" => "WSOP",
 			"W" => "Wafer",
 			"Y" => "TSOP1",
-			"Z" => "WELP"
+			"Z" => "WELP",
+			"X" => "BGA108",
+			"1" => "BGA108",
 		]));
 		$extra[Constants::LEAD_FREE] = in_array($package,
 			["8", "9", "B", "E", "F", "I", "J", "K", "L", "M", "P", "Q", "R", "S", "T", "Z"]);
