@@ -36,6 +36,7 @@ abstract class FlashDetector{
 	private static $decoders = [];
 	private static $fdb = [];
 	private static $iddb = [];
+	private static $mdb = [];
 	private static $lang = [];
 	private static $fallbackLang = [];
 
@@ -45,6 +46,10 @@ abstract class FlashDetector{
 
 	public static function getIddb() : array{
 		return self::$iddb;
+	}
+
+	public static function getMdb() : array{
+		return self::$mdb;
 	}
 
 	public static function getLang() : array{
@@ -63,6 +68,7 @@ abstract class FlashDetector{
 		if(Loader::getInstance() !== null){
 			self::$fdb = json_decode(Loader::getInstance()->getResourceAsText("fdb.json"), true);
 			self::$iddb = json_decode(Loader::getInstance()->getResourceAsText("iddb.json"), true);
+			self::$mdb = json_decode(Loader::getInstance()->getResourceAsText("mdb.json"), true);
 			self::$lang = json_decode(Loader::getInstance()->getResourceAsText("lang/$lang.json"), true);
 			self::$fallbackLang = json_decode(Loader::getInstance()
 				->getResourceAsText("lang/$fallbackLang.json"), true);
@@ -135,6 +141,16 @@ abstract class FlashDetector{
 			}
 		}
 		return $result;
+	}
+
+	public static function searchMicronFbgaCode(string $code) : string{
+		$code = strtoupper($code);
+		foreach(self::$mdb["micron"] as $c => $pn){
+			if($code == $c){
+				return $pn;
+			}
+		}
+		return "";
 	}
 
 	public static function searchSupportedControllers(string $flashId, bool $partMatch = false) : ?array{

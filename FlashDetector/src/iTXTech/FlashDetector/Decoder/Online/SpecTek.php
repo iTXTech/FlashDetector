@@ -45,7 +45,7 @@ class SpecTek{
 			$postData['ctl00$MainCPH$PartNumberButton.x'] = 1;
 			$postData['ctl00$MainCPH$PartNumberButton.y'] = 1;
 		}
-		$response = (new Curl())->setUserAgent(Util::USER_AGENT)
+		$response = Curl::newInstance()->setUserAgent(Util::USER_AGENT)
 			->setUrl(self::SPECTEK_API_ADDR)
 			->setPost($postData)
 			->exec();

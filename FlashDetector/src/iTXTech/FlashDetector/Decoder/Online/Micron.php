@@ -29,7 +29,7 @@ class Micron{
 	private const MICRON_API_ADDR = "https://www.micron.com/support/tools-and-utilities/fbga";
 
 	private static function query(string $param, string $value){
-		$response = (new Curl())->setUserAgent(Util::USER_AGENT)
+		$response = Curl::newInstance()->setUserAgent(Util::USER_AGENT)
 			->setUrl(self::MICRON_API_ADDR)
 			->setGet([$param => $value])
 			->exec();
@@ -40,7 +40,13 @@ class Micron{
 			if($results !== null){
 				foreach($results->children(1)->find("tr") as $node){
 					/** @var SimpleHtmlDomNode $node */
-					$r[$node->find("td", 0)->innerText()] = $node->find("td", 1)->innerText();
+					$n = $node->find("td", 0);
+					if(($a = $n->find("a", 0)) !== null){
+						$info = $a->innerText();
+					}else{
+						$info = $n->innerText();
+					}
+					$r[$info] = $node->find("td", 1)->innerText();
 				}
 				return $r;
 			}
