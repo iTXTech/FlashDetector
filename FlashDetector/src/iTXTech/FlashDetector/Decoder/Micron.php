@@ -195,7 +195,6 @@ class Micron extends Decoder{
 		self::setInterface(self::shiftChars($partNumber, 1), $flashInfo)
 			->setPackage(self::getOrDefault(self::shiftChars($partNumber, 2), self::PACKAGE))
 			->setExtraInfo($extra);
-		//ignoring package
 
 		return $flashInfo;
 	}

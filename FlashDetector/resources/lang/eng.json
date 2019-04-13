@@ -62,5 +62,6 @@
   "halfPageAndSize": "Half page and size",
   "packageFunctionalityPartialType": "Package functionality partial type",
   "interfaceInfo": "Interface info",
-  "densityGrade": "Density grade"
+  "densityGrade": "Density grade",
+  "micronPartNumber": "Micron Part Number"
 }

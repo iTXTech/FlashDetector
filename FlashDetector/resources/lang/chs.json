@@ -64,5 +64,6 @@
   "halfPageAndSize": "半页大小",
   "packageFunctionalityPartialType": "封装可用部分类型",
   "interfaceInfo": "接口类型",
-  "densityGrade": "可用容量"
+  "densityGrade": "可用容量",
+  "micronPartNumber": "美光料号"
 }

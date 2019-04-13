@@ -60,6 +60,15 @@ class FlashInfo{
 		return $this->cellLevel;
 	}
 
+	public function getExtraInfo(){
+		return $this->extraInfo;
+	}
+
+	public function setPartNumber(string $partNumber) : FlashInfo{
+		$this->partNumber = $partNumber;
+		return $this;
+	}
+
 	public function setManufacturer(string $m) : FlashInfo{
 		$this->manufacturer = $m;
 		return $this;

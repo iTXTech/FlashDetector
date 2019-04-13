@@ -23,6 +23,7 @@ namespace iTXTech\FlashDetector;
 use iTXTech\FlashDetector\Decoder\Decoder;
 use iTXTech\FlashDetector\Decoder\Intel;
 use iTXTech\FlashDetector\Decoder\Micron;
+use iTXTech\FlashDetector\Decoder\MicronFbgaCode;
 use iTXTech\FlashDetector\Decoder\Samsung;
 use iTXTech\FlashDetector\Decoder\SanDisk;
 use iTXTech\FlashDetector\Decoder\SKHynix;
@@ -58,6 +59,7 @@ abstract class FlashDetector{
 
 	public static function init(string $lang = "eng", string $fallbackLang = "eng"){
 		self::registerDecoder(Micron::class);
+		self::registerDecoder(MicronFbgaCode::class);
 		self::registerDecoder(SKHynix::class);
 		self::registerDecoder(SKHynixLegacy::class);
 		self::registerDecoder(Toshiba::class);
@@ -143,14 +145,19 @@ abstract class FlashDetector{
 		return $result;
 	}
 
-	public static function searchMicronFbgaCode(string $code) : string{
+	public static function searchMicronFbgaCode(string $code) : array{
 		$code = strtoupper($code);
 		foreach(self::$mdb["micron"] as $c => $pn){
+			if($code == $c){
+				return [$pn];
+			}
+		}
+		foreach(self::$mdb["spectek"] as $c => $pn){
 			if($code == $c){
 				return $pn;
 			}
 		}
-		return "";
+		return [];
 	}
 
 	public static function searchSupportedControllers(string $flashId, bool $partMatch = false) : ?array{
