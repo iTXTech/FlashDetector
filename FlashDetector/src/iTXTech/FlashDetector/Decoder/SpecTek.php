@@ -26,6 +26,38 @@ use iTXTech\FlashDetector\FlashInfo;
 use iTXTech\FlashDetector\Property\Classification;
 
 class SpecTek extends Micron{
+	public const LEGACY_DENSITY = [
+		"1G" => 1 * Constants::DENSITY_GBITS,
+		"18" => 1.8 * Constants::DENSITY_GBITS,
+		"2G" => 2 * Constants::DENSITY_GBITS,
+		"38" => 3.8 * Constants::DENSITY_GBITS,
+		"4G" => 4 * Constants::DENSITY_GBITS,
+		"78" => 7.8 * Constants::DENSITY_GBITS,
+		"8G" => 8 * Constants::DENSITY_GBITS,
+		"F8" => 15.8 * Constants::DENSITY_GBITS,
+		"HG" => 16 * Constants::DENSITY_GBITS,
+		"31" => 31 * Constants::DENSITY_GBITS,
+		"32" => 32 * Constants::DENSITY_GBITS,
+		"64" => 64 * Constants::DENSITY_GBITS,
+		"NX" => 128,
+		"NY" => 256,
+		"NZ" => 512
+	];
+
+	public const NEWER_DENSITY = [
+		"1" => 1 * Constants::DENSITY_GBITS,
+		"2" => 4 * Constants::DENSITY_GBITS,
+		"3" => 8 * Constants::DENSITY_GBITS,
+		"4" => 16 * Constants::DENSITY_GBITS,
+		"5" => 32 * Constants::DENSITY_GBITS,
+		"6" => 64 * Constants::DENSITY_GBITS,
+		"7" => 128 * Constants::DENSITY_GBITS,
+		"8" => 256 * Constants::DENSITY_GBITS,
+		"9" => 512 * Constants::DENSITY_GBITS,
+		"A" => Constants::DENSITY_TBITS,
+		"B" => 2 * Constants::DENSITY_TBITS
+	];
+
 	public static function getName() : string{
 		return Constants::MANUFACTURER_SPECTEK;
 	}
@@ -58,15 +90,30 @@ class SpecTek extends Micron{
 				"B" => 3,
 				"Q" => 4,
 			], -1))
-			->setProcessNode($cellLevel . self::shiftChars($partNumber, 3))
-			->setDensity(self::matchFromStart($partNumber, self::DENSITY, 0));
-		$extra["densityGrade"] = self::getOrDefault(self::shiftChars($partNumber, 1), [
-			"1" => "94-100%",
-			"9" => "90-100%",
-			"6" => "50-90%",
-			"5" => "40-60%",
-			"0" => Constants::SPECTEK_DENSITY_GRADE_ZERO
-		]);
+			->setProcessNode($cellLevel . self::shiftChars($partNumber, 3));
+		$density = self::matchFromStart($partNumber, self::DENSITY, 0);
+		if($density === 0){//legacy numbering
+			$density = self::getOrDefault($d = self::shiftChars($partNumber, 2), self::LEGACY_DENSITY, 0);
+			if($density === 0){//"newer" numbering
+				$density = self::getOrDefault($d{0}, self::NEWER_DENSITY, 0);
+				if($density > 0){
+					$grade = $d{1};
+				}
+			}
+		}else{
+			$grade = self::shiftChars($partNumber, 1);
+		}
+		$flashInfo->setDensity($density);
+		if(isset($grade)){
+			$extra["densityGrade"] = self::getOrDefault($grade, [
+				"1" => "94-100%",
+				"9" => "90-100%",
+				"6" => "50-90%",
+				"5" => "40-60%",
+				"0" => Constants::SPECTEK_DENSITY_GRADE_ZERO,
+				"A" => Constants::SPECTEK_DENSITY_GRADE_ZERO
+			]);
+		}
 		$configuration = self::shiftChars($partNumber, 1);
 		if(in_array($configuration, ["G", "P"])){
 			$extra["eccEnabled"] = true;
