@@ -192,7 +192,6 @@ class SKHynix extends Decoder{
 
 		$packageMaterial = self::shiftChars($partNumber, 1);
 		$extra = [
-			"page" => $classification[2] === self::SMALL_BLOCK ? "512+16 B" : "2048+64 B",
 			"doubleStackPackage" => $classification[1] === -1,
 			"dualInterface" => $mode[3] > 1,//maybe this property is Channel
 		];
