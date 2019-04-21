@@ -80,6 +80,7 @@ class Micron extends Decoder{
 		"16G" => 16 * Constants::DENSITY_GBITS,
 		"32G" => 32 * Constants::DENSITY_GBITS,
 		"64G" => 64 * Constants::DENSITY_GBITS,
+		"84G" => 84 * Constants::DENSITY_GBITS,
 		"128G" => 128 * Constants::DENSITY_GBITS,
 		"256G" => 256 * Constants::DENSITY_GBITS,
 		"384G" => 384 * Constants::DENSITY_GBITS,
