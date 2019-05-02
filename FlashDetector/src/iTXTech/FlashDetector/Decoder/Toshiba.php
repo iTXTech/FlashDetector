@@ -47,7 +47,7 @@ class Toshiba extends Decoder{
 		];
 		$level = self::shiftChars($partNumber, 2);
 		if(in_array($level, ["GV", "GB"])){
-			//TODO: Toshiba E2NAND
+			//TODO: Toshiba NAND with Controller
 			return $flashInfo->setType(Constants::NAND_TYPE_E2NAND)
 				->setExtraInfo([Constants::UNSUPPORTED_REASON => Constants::TOSHIBA_E2NAND_NOT_SUPPORTED]);
 		}
@@ -64,7 +64,8 @@ class Toshiba extends Decoder{
 				"A" => "Vcc: 3.3V, VccQ: 1.8V",
 				"B" => "Vcc: 3.3V, VccQ: 1.65V-3.6V",
 				"D" => "Vcc: 3.3V/1.8V, VccQ: 3.3V/1.8V",
-				"E" => "Vcc: 3.3V, VccQ: 3.3V/1.8V"
+				"E" => "Vcc: 3.3V, VccQ: 3.3V/1.8V",
+				//TODO: F
 			]))
 			->setDensity(self::getOrDefault(self::shiftChars($partNumber, 2), [
 				"M8" => 256,
@@ -93,8 +94,10 @@ class Toshiba extends Decoder{
 				"H" => 1,//eSLC
 				"D" => 2,
 				"E" => 2,//eMLC
+				"J" => 2,
 				"T" => 3,
 				"U" => 3,//eTLC
+				"V" => 3,
 			]));
 		$extra["enterprise"] = in_array($ep, ["H", "E", "U"]);
 		$width = self::shiftChars($partNumber, 1);
@@ -117,7 +120,8 @@ class Toshiba extends Decoder{
 			"A" => ["8KB", "2MB"],
 			"B" => ["16KB", "8MB"],
 			"C" => ["16KB 1pl", "4MB"],
-			"D" => ["16KB 2pl", "4MB"]
+			"D" => ["16KB 2pl", "4MB"],
+			//TODO: F
 		], [Constants::UNKNOWN, Constants::UNKNOWN]);
 		$extra["pageSize"] = $size[0];
 		$extra["blockSize"] = $size[1];
