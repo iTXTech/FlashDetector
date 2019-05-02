@@ -178,7 +178,8 @@ class SKHynix extends Decoder{
 				"8" => 8,
 				"6" => 16,
 				"L" => 8,
-				"I" => 8
+				"I" => 8,
+				"D" => 8
 			], -1));
 		$classification = self::getOrDefault(self::shiftChars($partNumber, 1),
 			self::CLASSIFICATION, [-1, -1, self::SMALL_BLOCK]);
