@@ -59,12 +59,12 @@ abstract class FlashDetector{
 
 	public static function init(string $lang = "eng", string $fallbackLang = "eng"){
 		self::registerDecoder(Micron::class);
-		self::registerDecoder(MicronFbgaCode::class);
 		self::registerDecoder(SKHynix::class);
 		self::registerDecoder(SKHynixLegacy::class);
 		self::registerDecoder(Toshiba::class);
 		self::registerDecoder(Samsung::class);
 		self::registerDecoder(Intel::class);
+		self::registerDecoder(MicronFbgaCode::class);
 		self::registerDecoder(SpecTek::class);
 		self::registerDecoder(SanDisk::class);
 		if(Loader::getInstance() !== null){

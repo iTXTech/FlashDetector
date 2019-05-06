@@ -94,5 +94,5 @@ interface Constants{
 	public const SAMSUNG_CBB_S = "samsung_cbb_s";
 
 	//Intel
-	public const INTEL_SKU_S = " intel_sku_s";
+	public const INTEL_SKU_S = "intel_sku_s";
 }
