@@ -20,7 +20,7 @@
 
 namespace iTXTech\FlashDetector\FDBGen\Generator;
 
-use iTXTech\FlashDetector\Decoder\SKHynix;
+use iTXTech\SimpleFramework\Console\Logger;
 use iTXTech\SimpleFramework\Util\StringUtil;
 
 class Innostor extends Generator{
@@ -30,49 +30,35 @@ class Innostor extends Generator{
 
 	public static function merge(array &$db, string $data, string $filename) : void{
 		$controller = "IS" . explode("_", $filename)[0];
-		$data = parse_ini_string($data, true);
+		$d = [];
+		foreach(explode("\r\n", $data) as $line){
+			if(!StringUtil::startsWith($line, "//") and !StringUtil::startsWith($line, "~")){
+				$d[] = $line;
+			}
+		}
+		$data = parse_ini_string(implode("\n", $d), true, INI_SCANNER_RAW);
 		$db["info"]["controllers"][] = $controller;
-		foreach($data as $manufacturer => $flashes){
-			$manufacturer = str_replace(["psc", "hynix"], ["powerchip", "skhynix"], strtolower($manufacturer));
-			if($manufacturer == "flashdb version"){
+
+		foreach($data as $id => $flash){
+			if(!isset($flash["Vendor"])){
 				continue;
 			}
-			foreach($flashes as $flash){
-				list($pn, $id, $ce) = explode("-", $flash);
-				if(strlen($id) > 12){
-					continue;
-				}
-				switch($manufacturer){
-					case "sandisk":
-						$pn = str_replace("_", "-", $pn);//_032G -> -032G
-						break;
-					case "skhynix":
-						$pn = SKHynix::removePackage($pn);
-						break;
-				}
-				if(isset($db[$manufacturer][$pn])){
-					$exist = false;
-					foreach($db[$manufacturer][$pn]["id"] as $existedId){
-						if(StringUtil::startsWith($existedId, $id)){
-							$exist = true;
-							break;
+			$vendor = str_replace(["hynix", "psc"], ["skhynix", "powerchip"], strtolower($flash["Vendor"]));
+			$flashId = $flash["FlashID"];
+			$found = false;
+			foreach($db[$vendor] as $pn => $f){
+				foreach($f["id"] as $ids){
+					if(StringUtil::startsWith($ids, $flashId)){
+						if(!in_array($controller, $db[$vendor][$pn]["t"])){
+							$db[$vendor][$pn]["t"][] = $controller;
 						}
+						$found = true;
+						break;
 					}
-					if(!$exist){
-						$db[$manufacturer][$pn]["id"][] = $id;
-					}
-					if(!in_array($controller, $db[$manufacturer][$pn]["t"])){
-						$db[$manufacturer][$pn]["t"][] = $controller;
-					}
-				}else{
-					$db[$manufacturer][$pn] = [
-						"id" => [$id],//Flash ID
-						"l" => "",//Lithography
-						"c" => "",//cell level
-						"t" => [$controller],//controller
-						"m" => ""
-					];
 				}
+			}
+			if(!$found){
+				Logger::info("Not found " . $id);
 			}
 		}
 	}

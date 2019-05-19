@@ -48,7 +48,6 @@ abstract class FDBGen{
 		self::registerGenerator(SiliconMotionUFD::class);
 		self::registerGenerator(SiliconMotionSSD::class);
 		//may not have complete id
-		self::registerGenerator(Innostor::class);
 		self::registerGenerator(JMicron::class);
 		self::registerGenerator(Maxiotek::class);
 		//no flash id
@@ -56,6 +55,7 @@ abstract class FDBGen{
 		self::registerGenerator(AlcorMicro::class);
 		//unreliable Flash PN
 		self::registerGenerator(ChipsBank::class);
+		self::registerGenerator(Innostor::class);
 	}
 
 	public static function generate(string $version, string $db, bool $extra = false) : array{
