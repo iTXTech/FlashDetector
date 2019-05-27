@@ -35,7 +35,7 @@ class SKHynix extends Decoder{
 		"L" => "2.7V",
 		"S" => "1.8V",
 		"J" => "2.7V~3.6V/1.2V",
-		"Q" => "Vcc: 3.3V, VccQ: 1.8V"
+		"Q" => "Vcc: 3.3V, VccQ: 1.8V (Full speed)/ 3.3V"
 	];
 	protected const DENSITY = [
 		"64" => 64,
@@ -198,7 +198,7 @@ class SKHynix extends Decoder{
 		];
 		if(in_array($packageMaterial, ["P", "R"])){
 			$extra[Constants::LEAD_FREE] = true;
-		} elseif($packageMaterial == "L"){
+		}elseif($packageMaterial == "L"){
 			$extra[Constants::LEAD_FREE] = false;
 		}
 		if($packageMaterial == "R"){

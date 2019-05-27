@@ -131,6 +131,7 @@ class Samsung extends Decoder{
 				"V" => "3.3V (3.0V~3.6V)",
 				"W" => "2.7V~5.5V, 3.0V~5.5V",
 				"0" => Constants::SAMSUNG_NONE,
+				//TODO: H
 			]));
 		$mode = self::getOrDefault(self::shiftChars($partNumber, 1), [
 			"0" => [-1, -1],//CE, R/nB

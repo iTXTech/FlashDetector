@@ -17,7 +17,7 @@ Universal NAND Flash Part Number Decoder
 1. `Intel`/`Micron (SpecTek)`
 1. `Samsung`
 1. `Western Digital (SanDisk)`/`Toshiba`
-1. `SKHynix (Dynet)`
+1. `SKHynix`
 
 ### Controllers
 
