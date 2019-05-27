@@ -84,6 +84,7 @@ class Intel extends Decoder{
 				"03T" => 3 * Constants::DENSITY_TBITS,
 				"04T" => 4 * Constants::DENSITY_TBITS,
 				"06T" => 6 * Constants::DENSITY_TBITS,
+				"08T" => 8 * Constants::DENSITY_TBITS
 			], 0))
 			->setDeviceWidth(self::getOrDefault($width = self::shiftChars($partNumber, 2), [
 				"08" => 8,

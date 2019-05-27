@@ -57,7 +57,7 @@ class SKHynix extends Decoder{
 		"VG" => 768 * Constants::DENSITY_GBITS,
 		"1T" => 1 * Constants::DENSITY_TBITS,
 		"2T" => 2 * Constants::DENSITY_TBITS,
-		//TODO: more
+		"4T" => 4 * Constants::DENSITY_TBITS,
 	];
 	protected const CLASSIFICATION = [
 		//Type, Die, Block
