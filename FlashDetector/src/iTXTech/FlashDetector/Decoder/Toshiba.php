@@ -87,7 +87,8 @@ class Toshiba extends Decoder{
 				"G9" => 512 * Constants::DENSITY_GBITS,
 				"GF" => 768 * Constants::DENSITY_GBITS,
 				"T0" => 1 * Constants::DENSITY_TBITS,
-				"T1" => 2 * Constants::DENSITY_TBITS
+				"T1" => 2 * Constants::DENSITY_TBITS,
+				"TG" => 1.5 * Constants::DENSITY_TBITS
 			], 0))
 			->setCellLevel(self::getOrDefault($ep = self::shiftChars($partNumber, 1), [
 				"S" => 1,
@@ -98,6 +99,7 @@ class Toshiba extends Decoder{
 				"T" => 3,
 				"U" => 3,//eTLC
 				"V" => 3,
+				"F" => 4,//QLC
 			]));
 		$extra["enterprise"] = in_array($ep, ["H", "E", "U"]);
 		$width = self::shiftChars($partNumber, 1);
