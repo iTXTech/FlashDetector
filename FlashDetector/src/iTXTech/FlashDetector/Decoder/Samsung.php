@@ -134,7 +134,7 @@ class Samsung extends Decoder{
 				//TODO: H
 			]));
 		$mode = self::getOrDefault(self::shiftChars($partNumber, 1), [
-			"0" => [-1, -1],//CE, R/nB
+			"0" => [1, 1],//CE, R/nB
 			"1" => [2, 2],
 			"3" => [3, 3],
 			"4" => [4, 1],
