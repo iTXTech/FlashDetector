@@ -157,6 +157,9 @@ class Samsung extends Decoder{
 				"C" => 4,
 				"D" => 5,
 				"E" => 6,
+				"F" => 7,
+				"G" => 8,
+				"H" => 9,
 				"Y" => 25,
 				"Z" => 26
 			]));
