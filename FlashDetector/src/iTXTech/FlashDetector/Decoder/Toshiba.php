@@ -96,6 +96,7 @@ class Toshiba extends Decoder{
 				"D" => 2,
 				"E" => 2,//eMLC
 				"J" => 2,
+				"C" => 2,
 				"T" => 3,
 				"U" => 3,//eTLC
 				"V" => 3,

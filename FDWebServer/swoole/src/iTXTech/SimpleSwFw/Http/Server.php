@@ -81,7 +81,7 @@ class Server{
 				$this->defaultPage::status(404, $response);
 			}
 			$query = "";
-			if(count($request->get) > 0){
+			if(isset($request->get)){
 				$query = "?";
 				foreach($request->get as $k => $v){
 					$query .= $k . "=" . $v . "&";
