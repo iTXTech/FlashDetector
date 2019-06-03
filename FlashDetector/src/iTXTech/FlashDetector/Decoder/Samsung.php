@@ -30,7 +30,8 @@ use iTXTech\SimpleFramework\Util\StringUtil;
 class Samsung extends Decoder{
 	private const CLASSIFICATION = [
 		//CellLevel, Die
-		"9" => [4, 8],//never seen QLC 8die
+		"3" => [4, 1],
+		"9" => [4, 8],
 		"A" => [3, 1],
 		"B" => [3, 2],
 		"C" => [3, 4],
@@ -49,7 +50,8 @@ class Samsung extends Decoder{
 		"S" => [2, 6],
 		"T" => [1, 1],//SLC SINGLE (S/B)
 		"U" => [2, 16],
-		"W" => [1, 4]
+		"W" => [1, 4],
+		"X" => [4, -1],//QLC ?die
 	];
 	private const DENSITY = [
 		"12" => 512,
@@ -82,6 +84,7 @@ class Samsung extends Decoder{
 		"KG" => 1 * Constants::DENSITY_TBITS,
 		"MG" => 2 * Constants::DENSITY_TBITS,
 		"UG" => 4 * Constants::DENSITY_TBITS,
+		"VG" => 8 * Constants::DENSITY_TBITS,
 		"00" => 0
 	];
 
