@@ -40,6 +40,22 @@ class SanDisk extends Decoder{
 		"Q" => 2,
 	];
 
+	public const DENSITY = [
+		"1024" => Constants::DENSITY_GBITS, //128M
+		"2048" => 2 * Constants::DENSITY_GBITS, //256M
+		"4096" => 4 * Constants::DENSITY_GBITS,
+		"001G" => 8 * Constants::DENSITY_GBITS,
+		"002G" => 16 * Constants::DENSITY_GBITS,
+		"004G" => 32 * Constants::DENSITY_GBITS,
+		"008G" => 64 * Constants::DENSITY_GBITS,
+		"016G" => 128 * Constants::DENSITY_GBITS,
+		"032G" => 256 * Constants::DENSITY_GBITS,
+		"064G" => 512 * Constants::DENSITY_GBITS,
+		"128G" => Constants::DENSITY_TBITS,
+		"256G" => 2 * Constants::DENSITY_TBITS,
+		"512G" => 4 * Constants::DENSITY_TBITS
+	];
+
 	public static function getName() : string{
 		return Constants::MANUFACTURER_SANDISK;
 	}
@@ -58,8 +74,8 @@ class SanDisk extends Decoder{
 			return $flashInfo->setType(Constants::NAND_TYPE_INAND)
 				->setExtraInfo([Constants::UNSUPPORTED_REASON => Constants::SANDISK_INAND_NOT_SUPPORTED]);
 		}elseif(substr($partNumber, 0, 2) === "IS"){
-			return $flashInfo->setType(Constants::NAND_TYPE_INAND)
-				->setExtraInfo([Constants::UNSUPPORTED_REASON => Constants::SANDISK_INAND_NOT_SUPPORTED]);
+			return $flashInfo->setType(Constants::NAND_TYPE_ISSD)
+				->setExtraInfo([Constants::UNSUPPORTED_REASON => Constants::SANDISK_ISSD_NOT_SUPPORTED]);
 		}
 
 		$flashInfo->setType(Constants::NAND_TYPE_NAND)
@@ -109,21 +125,7 @@ class SanDisk extends Decoder{
 		}
 		if(StringUtil::startsWith($partNumber, "-")){
 			$partNumber = substr($partNumber, 1);
-			$flashInfo->setDensity(self::matchFromStart($partNumber, [
-				"1024" => Constants::DENSITY_GBITS, //128M
-				"2048" => 2 * Constants::DENSITY_GBITS, //256M
-				"4096" => 4 * Constants::DENSITY_GBITS,
-				"001G" => 8 * Constants::DENSITY_GBITS,
-				"002G" => 16 * Constants::DENSITY_GBITS,
-				"004G" => 32 * Constants::DENSITY_GBITS,
-				"008G" => 64 * Constants::DENSITY_GBITS,
-				"016G" => 128 * Constants::DENSITY_GBITS,
-				"032G" => 256 * Constants::DENSITY_GBITS,
-				"064G" => 512 * Constants::DENSITY_GBITS,
-				"128G" => Constants::DENSITY_TBITS,
-				"256G" => 2 * Constants::DENSITY_TBITS,
-				"512G" => 4 * Constants::DENSITY_TBITS
-			], 0));
+			$flashInfo->setDensity(self::matchFromStart($partNumber, self::DENSITY, 0));
 		}
 
 		return $flashInfo;

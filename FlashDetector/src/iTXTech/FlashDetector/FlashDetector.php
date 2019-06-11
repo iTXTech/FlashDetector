@@ -26,6 +26,7 @@ use iTXTech\FlashDetector\Decoder\Micron;
 use iTXTech\FlashDetector\Decoder\MicronFbgaCode;
 use iTXTech\FlashDetector\Decoder\Samsung;
 use iTXTech\FlashDetector\Decoder\SanDisk;
+use iTXTech\FlashDetector\Decoder\SanDiskShortCode;
 use iTXTech\FlashDetector\Decoder\SKHynix;
 use iTXTech\FlashDetector\Decoder\SKHynixLegacy;
 use iTXTech\FlashDetector\Decoder\SpecTek;
@@ -67,6 +68,7 @@ abstract class FlashDetector{
 		self::registerDecoder(MicronFbgaCode::class);
 		self::registerDecoder(SpecTek::class);
 		self::registerDecoder(SanDisk::class);
+		self::registerDecoder(SanDiskShortCode::class);
 		if(Loader::getInstance() !== null){
 			self::$fdb = json_decode(Loader::getInstance()->getResourceAsText("fdb.json"), true);
 			self::$iddb = json_decode(Loader::getInstance()->getResourceAsText("iddb.json"), true);
