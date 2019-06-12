@@ -45,6 +45,10 @@ class SiliconMotionSSD extends Generator{
 					strtolower($manufacturer));
 				$pn = trim(preg_replace('/\(.*?\)/', '', $pn));
 				if($manufacturer == "sandisk"){
+					if(StringUtil::startsWith($pn, "SNDK ") and strlen(substr($pn, 5)) > 5){
+						$pn = str_replace(["-8G", "-16G", "-32G", "-64G"], ["-008G", "-016G", "-032G", "-064G"],
+							str_replace(["  ", " "], "-", substr($pn, 5)));
+					}
 					$pn = trim(explode("_", $pn)[0]);
 				}else{
 					foreach(["-", "_", " "] as $char){
