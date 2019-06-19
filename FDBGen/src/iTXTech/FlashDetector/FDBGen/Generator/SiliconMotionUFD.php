@@ -75,6 +75,7 @@ class SiliconMotionUFD extends Generator{
 					$info[4] = $cellLevel;
 				}elseif(isset($info[5]) and strlen($info[5]) < 5){
 					$info[3] .= " " . $info[5];
+					$info[5] = "";
 				}
 				switch($info[0]){
 					case "skhynix":
@@ -99,8 +100,12 @@ class SiliconMotionUFD extends Generator{
 					if(!in_array($controller, $db[$info[0]][$info[1]]["t"])){
 						$db[$info[0]][$info[1]]["t"][] = $controller;
 					}
-					$db[$info[0]][$info[1]]["l"] = $data["l"];
-					$db[$info[0]][$info[1]]["c"] = $data["c"];
+					if(!isset($db[$info[0]][$info[1]]["l"])){
+						$db[$info[0]][$info[1]]["l"] = $data["l"];
+					}
+					if(!isset($db[$info[0]][$info[1]]["c"])){
+						$db[$info[0]][$info[1]]["c"] = $data["c"];
+					}
 					$db[$info[0]][$info[1]]["m"] = $comment;
 				}else{
 					$db[$info[0]][$info[1]] = $data;

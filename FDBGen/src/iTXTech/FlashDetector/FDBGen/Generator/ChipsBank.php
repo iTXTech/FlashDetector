@@ -96,13 +96,27 @@ class ChipsBank extends Generator{
 					if(in_array($pn{strlen($pn) - 2}, ["_", "*"])){
 						$pn = substr($pn, 0, strlen($pn) - 2);
 					}
-					$db[$vendor][$pn] = [
-						"id" => [$flashId],
-						"l" => $rec[7],
-						"c" => explode("-", $rec[2])[0],
-						"t" => $sup,
-						"m" => ""
-					];
+					if(isset($db[$vendor][$pn])){
+						if(!in_array($flashId, $db[$vendor][$pn]["id"])){
+							$db[$vendor][$pn]["id"][] = $flashId;
+						}
+						foreach($sup as $s){
+							if(!in_array($s, $db[$vendor][$pn]["t"])){
+								$db[$vendor][$pn]["t"][] = $s;
+							}
+						}
+						if(!isset($db[$vendor][$pn]["l"])){
+							$db[$vendor][$pn]["l"] = $data["l"];
+						}
+					}else{
+						$db[$vendor][$pn] = [
+							"id" => [$flashId],
+							"l" => $rec[7],
+							"c" => explode("-", $rec[2])[0],
+							"t" => $sup,
+							"m" => ""
+						];
+					}
 				}
 			}
 		}
