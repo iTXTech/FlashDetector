@@ -88,6 +88,7 @@ class Micron extends Decoder{
 		"256G" => 256 * Constants::DENSITY_GBITS,
 		"384G" => 384 * Constants::DENSITY_GBITS,
 		"512G" => 512 * Constants::DENSITY_GBITS,
+		"768G" => 768 * Constants::DENSITY_GBITS,
 		"1T" => Constants::DENSITY_TBITS,
 		"1T2" => 1.125 * Constants::DENSITY_TBITS,
 		"1HT" => 1.5 * Constants::DENSITY_TBITS,
