@@ -27,6 +27,7 @@ use iTXTech\FlashDetector\Property\Classification;
 use iTXTech\FlashDetector\Property\FlashInterface;
 use iTXTech\SimpleFramework\Util\StringUtil;
 
+//TODO: rename to Kioxia
 class Toshiba extends Decoder{
 	public static function getName() : string{
 		return Constants::MANUFACTURER_TOSHIBA;
@@ -55,6 +56,7 @@ class Toshiba extends Decoder{
 			"N" => Constants::NAND_TYPE_NAND,
 			"D" => Constants::NAND_TYPE_NAND,
 			"T" => Constants::NAND_TYPE_NAND,
+			"L" => Constants::NAND_TYPE_NAND,
 		]);
 		$flashInfo->setType($level)
 			->setInterface((new FlashInterface(true))->setToggle($if === "T"))
@@ -65,7 +67,7 @@ class Toshiba extends Decoder{
 				"B" => "Vcc: 3.3V, VccQ: 1.65V-3.6V",
 				"D" => "Vcc: 3.3V/1.8V, VccQ: 3.3V/1.8V",
 				"E" => "Vcc: 3.3V, VccQ: 3.3V/1.8V",
-				//TODO: F
+				//TODO: F, J
 			]))
 			->setDensity(self::getOrDefault(self::shiftChars($partNumber, 2), [
 				"M8" => 256,
@@ -140,9 +142,9 @@ class Toshiba extends Decoder{
 			"J" => "19 nm",
 			"K" => "A19 nm",
 			"L" => "15 nm",
-			"2" => "3D",
-			"3" => "3D",
-			"4" => "3D"
+			"2" => "BiCS2",
+			"3" => "BiCS3",
+			"4" => "BiCS4"
 		]));
 		$package = self::shiftChars($partNumber, 2);
 		if(in_array($package, ["FT", "TG", "TA"])){

@@ -26,8 +26,7 @@ use iTXTech\FlashDetector\FlashInfo;
 use iTXTech\FlashDetector\Property\Classification;
 use iTXTech\SimpleFramework\Util\StringUtil;
 
-//There is no datasheet or guide available!
-//Let's guess
+//TODO: rename to Western Digital
 class SanDisk extends Decoder{
 	public const CELL_LEVEL = [
 		"C" => 3,
@@ -83,13 +82,16 @@ class SanDisk extends Decoder{
 				"T" => "TSOP",
 				"Y" => "BGA",
 				"Z" => "LGA",
+				"Q" => "BGA"
 				//W ?
 			]));
-		$partNumber = substr($partNumber, 1);//remove N for NAND
+		if($partNumber{0} == "N"){
+			$partNumber = substr($partNumber, 1);//remove N for NAND
+		}
 		$flashInfo->setProcessNode(self::getOrDefault(self::shiftChars($partNumber, 1), [
-			//F, G, H .... unknown
-			"A" => "3D T22",
-			"B" => "3D T23",
+			"A" => "BiCS2",
+			"B" => "BiCS3",
+			"C" => "BiCS4",
 			"L" => "56 nm",
 			"M" => "43 nm",
 			"N" => "32 nm",
