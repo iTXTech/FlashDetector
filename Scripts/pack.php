@@ -20,7 +20,6 @@
 
 require_once "env.php";
 
-use iTXTech\SimpleFramework\Console\Command\PackModuleCommand;
 use iTXTech\SimpleFramework\Console\Logger;
 use iTXTech\SimpleFramework\Console\Option\Exception\ParseException;
 use iTXTech\SimpleFramework\Console\Option\HelpFormatter;
@@ -66,8 +65,8 @@ try{
 		$path = $name = "FlashDetector";
 	}
 	loadModule($moduleManager, $path);
-	$generator = new PackModuleCommand($moduleManager);
-	$generator->execute("", [$name]);
+	$module = $moduleManager->getModule($name);
+	$module->pack(__DIR__ . DIRECTORY_SEPARATOR, $name . ".phar", true, true, true);
 }catch(ParseException $e){
 	Util::println($e->getMessage());
 	echo((new HelpFormatter())->generateHelp("pack", $options));
