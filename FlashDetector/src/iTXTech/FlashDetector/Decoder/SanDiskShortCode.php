@@ -22,10 +22,9 @@
 namespace iTXTech\FlashDetector\Decoder;
 
 use iTXTech\FlashDetector\Constants;
-use iTXTech\FlashDetector\FlashDetector;
 use iTXTech\FlashDetector\FlashInfo;
 
-class SanDiskShortCode extends Decoder{
+class SanDiskShortCode extends SanDisk{
 
 	public static function check(string $partNumber) : bool{
 		//example: 05055-032G
@@ -47,9 +46,5 @@ class SanDiskShortCode extends Decoder{
 			->setDensity(self::matchFromStart(explode("-", $partNumber, 2)[1],
 				SanDisk::DENSITY, 0));
 		return $flashInfo;
-	}
-
-	public static function getFlashInfoFromFdb(string $partNumber) : ?array{
-		return FlashDetector::getFdb()[strtolower(self::getName())][$partNumber] ?? null;
 	}
 }

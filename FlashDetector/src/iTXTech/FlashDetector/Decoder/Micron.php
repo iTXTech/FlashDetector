@@ -213,8 +213,8 @@ class Micron extends Decoder{
 			->setSync($i[0])->setAsync($i[1])->setSpi($i[2]));
 	}
 
-	public static function getFlashInfoFromFdb(string $partNumber) : ?array{
-		return FlashDetector::getFdb()[strtolower(self::getName())][self::removePackage($partNumber)] ?? null;
+	public static function getFlashInfoFromFdb(FlashInfo $info) : ?array{
+		return FlashDetector::getFdb()[strtolower(self::getName())][self::removePackage($info->getPartNumber())] ?? null;
 	}
 
 	public static function removePackage(string $pn) : string{

@@ -133,7 +133,27 @@ class SanDisk extends Decoder{
 		return $flashInfo;
 	}
 
-	public static function getFlashInfoFromFdb(string $partNumber) : ?array{
-		return FlashDetector::getFdb()[strtolower(self::getName())][$partNumber] ?? null;
+	public static function getFlashInfoFromFdb(FlashInfo $info) : ?array{
+		$data = FlashDetector::getFdb()[strtolower(self::getName())][$info->getPartNumber()] ?? null;
+		if($data != null){
+			$comment = "";
+			$parts = explode("/", $data["m"] ?? "");
+			$extraInfo = $info->getExtraInfo() ?? [];
+			foreach($parts as $part){
+				if($part == "CODE"){
+					$extraInfo[Constants::SANDISK_CODE] = true;
+				}elseif($part{0} == "T"){
+					$extraInfo[Constants::MANUFACTURER_TOSHIBA] = substr($part, 1);
+				}else{
+					$comment .= $part . "/";
+				}
+			}
+			if($comment != ""){
+				$comment = substr($comment, 0, strlen($comment) - 1);
+			}
+			$data["m"] = $comment;
+			$info->setExtraInfo($extraInfo);
+		}
+		return $data;
 	}
 }

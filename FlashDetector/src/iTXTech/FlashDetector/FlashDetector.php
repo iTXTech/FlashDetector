@@ -31,6 +31,7 @@ use iTXTech\FlashDetector\Decoder\SKHynix;
 use iTXTech\FlashDetector\Decoder\SKHynixLegacy;
 use iTXTech\FlashDetector\Decoder\SpecTek;
 use iTXTech\FlashDetector\Decoder\Toshiba;
+use iTXTech\FlashDetector\Property\Classification;
 use iTXTech\SimpleFramework\Util\StringUtil;
 
 abstract class FlashDetector{
@@ -104,7 +105,7 @@ abstract class FlashDetector{
 
 	public static function combineDataFromFdb(FlashInfo $info, string $decoder){
 		/** @var Decoder $decoder */
-		if(($data = $decoder::getFlashInfoFromFdb($info->getPartNumber())) !== null){
+		if(($data = $decoder::getFlashInfoFromFdb($info)) !== null){
 			$info->setFlashId($data["id"]);
 			$info->setController($data["t"]);
 			if($data["l"] !== ""){
@@ -115,6 +116,22 @@ abstract class FlashDetector{
 			}
 			if($info->getCellLevel() === null and $data["c"] !== ""){
 				$info->setCellLevel($data["c"]);
+			}
+			if(isset($data["d"]) or isset($data["e"]) or isset($data["r"]) or isset($data["n"])){
+				$c = $info->getClassification() ?? new Classification();
+				if(isset($data["d"])){
+					$c->setDie($data["d"]);
+				}
+				if(isset($data["e"])){
+					$c->setCe($data["e"]);
+				}
+				if(isset($data["r"])){
+					$c->setRnb($data["r"]);
+				}
+				if(isset($data["n"])){
+					$c->setCh($data["n"]);
+				}
+				$info->setClassification($c);
 			}
 		}
 	}

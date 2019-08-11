@@ -52,6 +52,7 @@ interface Constants{
 	//SanDisk iNAND/NAND not supported
 	public const SANDISK_INAND_NOT_SUPPORTED = "sandisk_inand_not_supported";
 	public const SANDISK_ISSD_NOT_SUPPORTED = "sandisk_issd_not_supported";
+	public const SANDISK_CODE = "sandisk_code";
 
 	//SKHynix
 	public const SKHYNIX_E2NAND_NOT_SUPPORTED = "skhynix_e2nand_not_supported";

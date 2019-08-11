@@ -217,7 +217,8 @@ class SKHynix extends Decoder{
 		return $flashInfo;
 	}
 
-	public static function getFlashInfoFromFdb(string $partNumber) : ?array{
+	public static function getFlashInfoFromFdb(FlashInfo $info) : ?array{
+		$partNumber = $info->getPartNumber();
 		if(StringUtil::contains($partNumber, "-")){
 			$partNumber = explode("-", $partNumber)[0];
 		}

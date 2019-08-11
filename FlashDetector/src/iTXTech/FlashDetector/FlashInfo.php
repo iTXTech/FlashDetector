@@ -64,6 +64,10 @@ class FlashInfo{
 		return $this->extraInfo;
 	}
 
+	public function getClassification() : ?Classification{
+		return $this->classification;
+	}
+
 	public function setPartNumber(string $partNumber) : FlashInfo{
 		$this->partNumber = $partNumber;
 		return $this;

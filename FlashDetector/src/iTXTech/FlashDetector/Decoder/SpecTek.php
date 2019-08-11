@@ -21,7 +21,6 @@
 namespace iTXTech\FlashDetector\Decoder;
 
 use iTXTech\FlashDetector\Constants;
-use iTXTech\FlashDetector\FlashDetector;
 use iTXTech\FlashDetector\FlashInfo;
 use iTXTech\FlashDetector\Property\Classification;
 
@@ -174,9 +173,5 @@ class SpecTek extends Micron{
 		$flashInfo->setExtraInfo($extra);
 
 		return $flashInfo;
-	}
-
-	public static function getFlashInfoFromFdb(string $partNumber) : ?array{
-		return FlashDetector::getFdb()[strtolower(self::getName())][$partNumber] ?? null;
 	}
 }

@@ -52,7 +52,7 @@ class MicronFbgaCode extends Decoder{
 		}
 	}
 
-	public static function getFlashInfoFromFdb(string $partNumber) : ?array{
+	public static function getFlashInfoFromFdb(FlashInfo $info) : ?array{
 		return null;
 	}
 }
