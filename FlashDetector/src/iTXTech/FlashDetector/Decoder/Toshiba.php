@@ -171,7 +171,9 @@ class Toshiba extends Decoder{
 			"A" => [Classification::CHANNEL_SINGLE_OR_DUAL, 6],
 			"U" => [Classification::CHANNEL_SINGLE_OR_DUAL, 6],
 			"B" => [Classification::CHANNEL_SINGLE_OR_DUAL, 8],
-			"V" => [Classification::CHANNEL_SINGLE_OR_DUAL, 8]
+			"V" => [Classification::CHANNEL_SINGLE_OR_DUAL, 8],
+			"D" => [4, 4],
+			"E" => [4, 8]
 		], [-1, -1]);
 		$flashInfo->setClassification(new Classification($classification[1], $classification[0]));
 		//last symbol ignored
