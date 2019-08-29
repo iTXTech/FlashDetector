@@ -66,6 +66,8 @@ class Toshiba extends Decoder{
 				"B" => "Vcc: 3.3V, VccQ: 1.65V-3.6V",
 				"D" => "Vcc: 3.3V/1.8V, VccQ: 3.3V/1.8V",
 				"E" => "Vcc: 3.3V, VccQ: 3.3V/1.8V",
+				"F" => "Vcc: 3.3V, VccQ: 3.3V/1.8V (UNOFFICIAL)",
+				"J" => "Vcc: 3.3V, VccQ: 1.8V (UNOFFICIAL)"
 				//TODO: F, J
 			]))
 			->setDensity(self::getOrDefault(self::shiftChars($partNumber, 2), [
@@ -89,6 +91,7 @@ class Toshiba extends Decoder{
 				"GF" => 768 * Constants::DENSITY_GBITS,
 				"T0" => 1 * Constants::DENSITY_TBITS,
 				"T1" => 2 * Constants::DENSITY_TBITS,
+				"T2" => 4 * Constants::DENSITY_TBITS,
 				"TG" => 1.5 * Constants::DENSITY_TBITS
 			], 0))
 			->setCellLevel(self::getOrDefault($ep = self::shiftChars($partNumber, 1), [
@@ -103,7 +106,7 @@ class Toshiba extends Decoder{
 				"V" => 3,
 				"F" => 4,//QLC
 			]));
-		$extra["enterprise"] = in_array($ep, ["H", "E", "U"]);
+		$extra[Constants::ENTERPRISE] = in_array($ep, ["H", "E", "U"]);
 		$width = self::shiftChars($partNumber, 1);
 		if(in_array($width, ["0", "1", "2", "3", "4", "A", "B", "C", "D"])){
 			$flashInfo->setDeviceWidth(8);
@@ -147,11 +150,11 @@ class Toshiba extends Decoder{
 		]));
 		$package = self::shiftChars($partNumber, 2);
 		if(in_array($package, ["FT", "TG", "TA"])){
-			$flashInfo->setPackage("TSOP");
+			$package = "TSOP48";
 		}elseif(in_array($package, ["XB", "XG", "BA"])){
-			$flashInfo->setPackage("BGA");
+			$package = "BGA";
 		}elseif(in_array($package, ["XL", "LA"])){
-			$flashInfo->setPackage("LGA");
+			$package = "LGA";
 		}
 
 		$extra[Constants::LEAD_FREE] = !in_array($package, ["FT", "XB"]);
@@ -176,7 +179,47 @@ class Toshiba extends Decoder{
 			"E" => [4, 8]
 		], [-1, -1]);
 		$flashInfo->setClassification(new Classification($classification[1], $classification[0]));
-		//last symbol ignored
+		$detailedPackage = [
+			"LGA" => [
+				"1" => "LGA40 (12 x 18 x 0.7)",
+				"2" => "LGA40 (12 x 18 x 1.15)",
+				"3" => "LGA40 (12 x 17 x 0.65)",
+				"4" => "LGA40 (12 x 17 x 1.0)",
+				"5" => "LGA40 (12 x 17 x 1.04)",
+				"6" => "LGA40 (13 x 17 x 1.04)",
+				"7" => "LGA52 (14 x 18 x 1.4)",
+				"8" => "LGA52 (14 x 18 x 1.04)",
+				"9" => "LGA52 (14 x 18 x 1.0)",
+				"A" => "LGA52 (12 x 17 x 1.04/1.0)",
+				"B" => "LGA52 (12 x 17 x 1.4)",
+				"C" => "LGA52 (11 x 14 x 0.9)",
+			],
+			"BGA" => [
+				"1" => "BGA224 (14 x 18 x 1.46)",
+				"2" => "BGA224 (14 x 18 x 1.46)",
+				"3" => "BGA60 (8.5 x 13)",
+				"4" => "BGA60 (9 x 11)",
+				"5" => "BGA60 (10 x 13)",
+				"6" => "BGA60 (8.5 x 13)",
+				"7" => "BGA60 (9 x 11)",
+				"8" => "BGA60 (10 x 13)",
+				"9" => "BGA132 (12 x 18 x 1.4)",
+				"A" => "BGA132 (12 x 18 x 1.85)",
+				"B" => "BGA224 (14 x 18 x 1.35)",
+				"C" => "BGA132",
+				"D" => "BGA132",
+				"E" => "BGA272",
+				"F" => "BGA272",
+				"H" => "BGA132",
+				"J" => "BGA152",
+				"K" => "BGA152",
+				"N" => "BGA152",
+				"P" => "BGA132"
+			]
+		];
+
+		$p = self::shiftChars($partNumber, 1);
+		$flashInfo->setPackage($detailedPackage[$package][$p] ?? $package);
 
 		return $flashInfo;
 	}

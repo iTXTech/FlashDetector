@@ -108,7 +108,8 @@ abstract class FlashDetector{
 		if(($data = $decoder::getFlashInfoFromFdb($info)) !== null){
 			$info->setFlashId($data["id"]);
 			$info->setController($data["t"]);
-			if($data["l"] !== ""){
+			if($data["l"] !== "" and ($info->getProcessNode() == Constants::UNKNOWN or
+					$info->getProcessNode() == null)){
 				$info->setProcessNode($data["l"]);
 			}
 			if(isset($data["m"])){

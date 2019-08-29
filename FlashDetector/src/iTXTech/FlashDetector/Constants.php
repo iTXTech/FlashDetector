@@ -27,6 +27,7 @@ interface Constants{
 	public const OPERATION_TEMPERATURE = "opTemp";
 	public const BAD_BLOCK = "badBlock";
 	public const SKU = "sku";
+	public const ENTERPRISE = "enterprise";
 
 	//base = 1 MBits
 	public const DENSITY_GBITS = 1024;

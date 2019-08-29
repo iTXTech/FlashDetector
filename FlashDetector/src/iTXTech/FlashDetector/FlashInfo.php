@@ -68,6 +68,22 @@ class FlashInfo{
 		return $this->classification;
 	}
 
+	public function getProcessNode() : ?string{
+		return $this->processNode;
+	}
+
+	public function getDensity() : ?int{
+		return $this->density;
+	}
+
+	public function getPackage() : ?string{
+		return $this->package;
+	}
+
+	public function getFlashId() : ?array{
+		return $this->flashId;
+	}
+
 	public function setPartNumber(string $partNumber) : FlashInfo{
 		$this->partNumber = $partNumber;
 		return $this;

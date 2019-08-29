@@ -140,7 +140,9 @@ class SanDisk extends Decoder{
 			$parts = explode("/", $data["m"] ?? "");
 			$extraInfo = $info->getExtraInfo() ?? [];
 			foreach($parts as $part){
-				if($part == "CODE"){
+				if($part == ""){
+					continue;
+				}elseif($part == "CODE"){
 					$extraInfo[Constants::SANDISK_CODE] = true;
 				}elseif($part{0} == "T"){
 					$extraInfo[Constants::MANUFACTURER_TOSHIBA] = substr($part, 1);

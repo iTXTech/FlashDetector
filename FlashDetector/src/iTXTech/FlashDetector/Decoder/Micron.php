@@ -158,9 +158,7 @@ class Micron extends Decoder{
 			$partNumber = substr($partNumber, 2);//remove MT
 		}
 		$partNumber = substr($partNumber, 2);//remove 29
-		$extra = [
-			"enterprise" => self::shiftChars($partNumber, 1) === "E"
-		];
+		$extra[Constants::ENTERPRISE] = self::shiftChars($partNumber, 1) === "E";
 		$flashInfo
 			->setType(Constants::NAND_TYPE_NAND)
 			->setDensity(self::matchFromStart($partNumber, self::DENSITY, 0))
