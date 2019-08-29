@@ -155,6 +155,8 @@ class Toshiba extends Decoder{
 			$package = "BGA";
 		}elseif(in_array($package, ["XL", "LA"])){
 			$package = "LGA";
+		}else{
+			$package = Constants::UNKNOWN;
 		}
 
 		$extra[Constants::LEAD_FREE] = !in_array($package, ["FT", "XB"]);

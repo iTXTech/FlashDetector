@@ -6,8 +6,8 @@ Universal NAND Flash Part Number Decoder
 
 ## Requirements
 
-* [PHP 7.2](https://secure.php.net)
-* [SimpleFramework 2.1](https://github.com/iTXTech/SimpleFramework)
+* [PHP 7.2+](https://secure.php.net)
+* [SimpleFramework 2.1+](https://github.com/iTXTech/SimpleFramework)
 * [SimpleHtmlDom](https://github.com/PeratX/SimpleHtmlDom)
 
 ## Supported

@@ -32,9 +32,9 @@ class Classification implements Arrayable{
 	private $die;
 
 	public function __construct(int $ce = self::UNKNOWN_PROP,
-								int $ch = self::UNKNOWN_PROP,
-								int $rnb = self::UNKNOWN_PROP,
-								int $die = self::UNKNOWN_PROP){
+	                            int $ch = self::UNKNOWN_PROP,
+	                            int $rnb = self::UNKNOWN_PROP,
+	                            int $die = self::UNKNOWN_PROP){
 		$this->ce = $ce;
 		$this->ch = $ch;
 		$this->rnb = $rnb;
@@ -59,6 +59,25 @@ class Classification implements Arrayable{
 	public function setRnb(int $rnb) : Classification{
 		$this->rnb = $rnb;
 		return $this;
+	}
+
+	/**
+	 * @return int
+	 */
+	public function getCe() : int{
+		return $this->ce;
+	}
+
+	public function getCh() : int{
+		return $this->ch;
+	}
+
+	public function getDie() : int{
+		return $this->die;
+	}
+
+	public function getRnb() : int{
+		return $this->rnb;
 	}
 
 	public function toArray() : array{
