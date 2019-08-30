@@ -72,12 +72,29 @@ abstract class FlashDetector{
 		self::registerDecoder(SanDiskShortCode::class);
 		if(Loader::getInstance() !== null){
 			self::$fdb = json_decode(Loader::getInstance()->getResourceAsText("fdb.json"), true);
-			self::$iddb = json_decode(Loader::getInstance()->getResourceAsText("iddb.json"), true);
+			self::$iddb = self::generateIddb(self::$fdb);
 			self::$mdb = json_decode(Loader::getInstance()->getResourceAsText("mdb.json"), true);
 			self::$lang = json_decode(Loader::getInstance()->getResourceAsText("lang/$lang.json"), true);
 			self::$fallbackLang = json_decode(Loader::getInstance()
 				->getResourceAsText("lang/$fallbackLang.json"), true);
 		}
+	}
+
+	public static function generateIddb(array $fdb) : array{
+		$iddb = [];
+		unset($fdb["info"]);
+		foreach($fdb as $k => $v){
+			foreach($v as $partNumber => $i){
+				foreach($i["id"] as $id){
+					if(!isset($iddb[$id])){
+						$iddb[$id] = [$k . " " . $partNumber];
+					}else{
+						$iddb[$id][] = $k . " " . $partNumber;
+					}
+				}
+			}
+		}
+		return $iddb;
 	}
 
 	public static function registerDecoder(string $decoder) : bool{
@@ -230,5 +247,20 @@ abstract class FlashDetector{
 			return self::$fallbackLang[$key];
 		}
 		return $key;
+	}
+
+	public static function getHumanReadableDensity(int $density, bool $useByte = false){
+		if($useByte){
+			$density /= 8;
+			$unit = ["MB", "GB", "TB"];
+		} else{
+			$unit = ["Mb", "Gb", "Tb"];
+		}
+		$i = 0;
+		while($density >= 1024 and isset($unit[$i + 1])){
+			$density /= 1024;
+			$i++;
+		}
+		return $density . $unit[$i];
 	}
 }

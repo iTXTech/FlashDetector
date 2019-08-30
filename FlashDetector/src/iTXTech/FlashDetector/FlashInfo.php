@@ -182,13 +182,7 @@ class FlashInfo{
 			$interface = $info["interface"];
 			$density = $info["density"];
 			if($density !== null and $density > 0){
-				$unit = ["Mb", "Gb", "Tb"];
-				$i = 0;
-				while($density >= 1024 and isset($unit[$i + 1])){
-					$density /= 1024;
-					$i++;
-				}
-				$info["density"] = $density . " " . $unit[$i];
+				$info["density"] = FlashDetector::getHumanReadableDensity($info["density"]);
 			}else{
 				$info["density"] = Constants::UNKNOWN;
 			}

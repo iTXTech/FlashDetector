@@ -27,7 +27,6 @@ use iTXTech\FlashDetector\FDBGen\IDDBGen;
 use iTXTech\SimpleFramework\Console\Option\Exception\ParseException;
 use iTXTech\SimpleFramework\Console\Option\HelpFormatter;
 use iTXTech\SimpleFramework\Console\Option\OptionBuilder;
-use iTXTech\SimpleFramework\Console\Option\OptionGroup;
 use iTXTech\SimpleFramework\Console\Option\Options;
 use iTXTech\SimpleFramework\Console\Option\Parser;
 use iTXTech\SimpleFramework\Util\Util;
@@ -38,14 +37,9 @@ loadModule($moduleManager, "FDBGen");
 FDBGen::init();
 
 $options = new Options();
-$group = new OptionGroup();
-$group->addOption((new OptionBuilder("f"))->longOpt("fdb")->desc("Generate Flash Database")->build())
-	->addOption((new OptionBuilder("i"))->longOpt("iddb")->desc("Generate Flash Id Database")->build());
-$group->setRequired(true);
-$options->addOptionGroup($group);
 $options->addOption((new OptionBuilder("v"))->longOpt("version")
 	->desc("FDB file version, optional")->hasArg(true)->argName("ver")->build())
-	->addOption((new OptionBuilder("d"))->longOpt("input")->required()
+	->addOption((new OptionBuilder("i"))->longOpt("input")->required()
 		->desc("Input dir or file")->hasArg(true)->argName("file")->build())
 	->addOption((new OptionBuilder("o"))->longOpt("output")->required()
 		->desc("Output file")->hasArg(true)->argName("file")->build())
@@ -54,25 +48,14 @@ $options->addOption((new OptionBuilder("v"))->longOpt("version")
 
 try{
 	$cmd = (new Parser())->parse($options, $argv);
-	if($cmd->hasOption("f")){
-		$fdb = FDBGen::generate($cmd->getOptionValue("v", "Undefined"),
-			$cmd->getOptionValue("d"), $cmd->hasOption("e"));
-		if($cmd->hasOption("p")){
-			$fdb = json_encode($fdb, JSON_PRETTY_PRINT);
-		}else{
-			$fdb = json_encode($fdb);
-		}
-		file_put_contents($cmd->getOptionValue("o"), $fdb);
+	$fdb = FDBGen::generate($cmd->getOptionValue("v", "Undefined"),
+		$cmd->getOptionValue("i"), $cmd->hasOption("e"));
+	if($cmd->hasOption("p")){
+		$fdb = json_encode($fdb, JSON_PRETTY_PRINT);
+	}else{
+		$fdb = json_encode($fdb);
 	}
-	if($cmd->hasOption("i")){
-		$iddb = IDDBGen::generate(json_decode(file_get_contents($cmd->getOptionValue("d")), true));
-		if($cmd->hasOption("p")){
-			$iddb = json_encode($iddb, JSON_PRETTY_PRINT);
-		}else{
-			$iddb = json_encode($iddb);
-		}
-		file_put_contents($cmd->getOptionValue("o"), $iddb);
-	}
+	file_put_contents($cmd->getOptionValue("o"), $fdb);
 }catch(ParseException $e){
 	Util::println($e->getMessage());
 	echo((new HelpFormatter())->generateHelp("fdbgen", $options));
