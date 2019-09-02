@@ -18,7 +18,7 @@
  * limitations under the License.
  */
 
-//Originally custimized for Fangli Technology Ltd.
+//Originally customized for Fangli Technology Ltd.
 
 require_once "env.php";
 

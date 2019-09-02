@@ -3,7 +3,7 @@
 /*
  * iTXTech FlashDetector
  *
- * Copyright (C) 2018 iTX Technologies
+ * Copyright (C) 2018-2019 iTX Technologies
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -51,3 +51,5 @@ if($moduleManager->getModule("FlashDetector") === null){
 
 header("X-SimpleFramework: " . Framework::PROG_VERSION);
 FlashDetector::init("chs");
+
+header("Content-Type: application/json");

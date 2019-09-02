@@ -20,6 +20,7 @@
 
 namespace iTXTech\FlashDetector\WebServer\Page;
 
+use iTXTech\FlashDetector\FlashDetector;
 use iTXTech\SimpleSwFw\Http\Page\AbstractPage;
 use Swoole\Http\Request;
 use Swoole\Http\Response;
@@ -32,6 +33,8 @@ class IndexPage extends AbstractPage{
 		self::sendJsonData($response, [
 			"result" => true,
 			"time" => time(),
+			"server" => "FDWebServer-Swoole",
+			"fdb_info" => FlashDetector::getFdb()["info"]
 		]);
 	}
 }
