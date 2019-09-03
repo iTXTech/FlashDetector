@@ -21,6 +21,7 @@
 namespace iTXTech\FlashDetector\Decoder;
 
 use iTXTech\FlashDetector\Constants;
+use iTXTech\FlashDetector\Fdb\PartNumber;
 use iTXTech\FlashDetector\FlashDetector;
 use iTXTech\FlashDetector\FlashInfo;
 use iTXTech\FlashDetector\Property\Classification;
@@ -211,8 +212,8 @@ class Micron extends Decoder{
 			->setSync($i[0])->setAsync($i[1])->setSpi($i[2]));
 	}
 
-	public static function getFlashInfoFromFdb(FlashInfo $info) : ?array{
-		return FlashDetector::getFdb()[strtolower(self::getName())][self::removePackage($info->getPartNumber())] ?? null;
+	public static function getFlashInfoFromFdb(FlashInfo $info) : ?PartNumber{
+		return FlashDetector::getFdb()->getPartNumber(self::getName(), self::removePackage($info->getPartNumber()));
 	}
 
 	public static function removePackage(string $pn) : string{

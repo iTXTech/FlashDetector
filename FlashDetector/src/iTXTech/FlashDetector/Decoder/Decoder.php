@@ -21,6 +21,7 @@
 namespace iTXTech\FlashDetector\Decoder;
 
 use iTXTech\FlashDetector\Constants;
+use iTXTech\FlashDetector\Fdb\PartNumber;
 use iTXTech\FlashDetector\FlashDetector;
 use iTXTech\FlashDetector\FlashInfo;
 use iTXTech\SimpleFramework\Util\StringUtil;
@@ -74,7 +75,7 @@ abstract class Decoder{
 		return $default;
 	}
 
-	public static function getFlashInfoFromFdb(FlashInfo $info) : ?array{
-		return FlashDetector::getFdb()[strtolower($info->getManufacturer())][$info->getPartNumber()] ?? null;
+	public static function getFlashInfoFromFdb(FlashInfo $info) : ?PartNumber{
+		return FlashDetector::getFdb()->getPartNumber($info->getManufacturer(), $info->getPartNumber());
 	}
 }

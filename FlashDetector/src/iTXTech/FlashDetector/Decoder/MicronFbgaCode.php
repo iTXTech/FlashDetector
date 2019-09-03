@@ -21,6 +21,7 @@
 namespace iTXTech\FlashDetector\Decoder;
 
 use iTXTech\FlashDetector\Constants;
+use iTXTech\FlashDetector\Fdb\PartNumber;
 use iTXTech\FlashDetector\FlashDetector;
 use iTXTech\FlashDetector\FlashInfo;
 use iTXTech\SimpleFramework\Util\StringUtil;
@@ -52,7 +53,7 @@ class MicronFbgaCode extends Decoder{
 		}
 	}
 
-	public static function getFlashInfoFromFdb(FlashInfo $info) : ?array{
+	public static function getFlashInfoFromFdb(FlashInfo $info) : ?PartNumber{
 		return null;
 	}
 }

@@ -21,6 +21,7 @@
 namespace iTXTech\FlashDetector\Decoder;
 
 use iTXTech\FlashDetector\Constants;
+use iTXTech\FlashDetector\Fdb\PartNumber;
 use iTXTech\FlashDetector\FlashDetector;
 use iTXTech\FlashDetector\FlashInfo;
 use iTXTech\FlashDetector\Property\Classification;
@@ -133,11 +134,11 @@ class SanDisk extends Decoder{
 		return $flashInfo;
 	}
 
-	public static function getFlashInfoFromFdb(FlashInfo $info) : ?array{
-		$data = FlashDetector::getFdb()[strtolower(self::getName())][$info->getPartNumber()] ?? null;
+	public static function getFlashInfoFromFdb(FlashInfo $info) : ?PartNumber{
+		$data = FlashDetector::getFdb()->getPartNumber(self::getName(), $info->getPartNumber());
 		if($data != null){
 			$comment = "";
-			$parts = explode("/", $data["m"] ?? "");
+			$parts = explode("/", $data->getComment() ?? "");
 			$extraInfo = $info->getExtraInfo() ?? [];
 			foreach($parts as $part){
 				if($part == ""){
@@ -153,7 +154,7 @@ class SanDisk extends Decoder{
 			if($comment != ""){
 				$comment = substr($comment, 0, strlen($comment) - 1);
 			}
-			$data["m"] = $comment;
+			$data->setComment($comment);
 			$info->setExtraInfo($extraInfo);
 		}
 		return $data;

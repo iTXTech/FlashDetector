@@ -21,6 +21,7 @@
 namespace iTXTech\FlashDetector\Decoder;
 
 use iTXTech\FlashDetector\Constants;
+use iTXTech\FlashDetector\Fdb\PartNumber;
 use iTXTech\FlashDetector\FlashDetector;
 use iTXTech\FlashDetector\FlashInfo;
 use iTXTech\FlashDetector\Property\Classification;
@@ -217,12 +218,12 @@ class SKHynix extends Decoder{
 		return $flashInfo;
 	}
 
-	public static function getFlashInfoFromFdb(FlashInfo $info) : ?array{
+	public static function getFlashInfoFromFdb(FlashInfo $info) : ?PartNumber{
 		$partNumber = $info->getPartNumber();
 		if(StringUtil::contains($partNumber, "-")){
 			$partNumber = explode("-", $partNumber)[0];
 		}
-		return FlashDetector::getFdb()[strtolower(self::getName())][self::removePackage($partNumber)] ?? null;
+		return FlashDetector::getFdb()->getPartNumber(self::getName(), self::removePackage($partNumber));
 	}
 
 	public static function removePackage(string $pn) : string{

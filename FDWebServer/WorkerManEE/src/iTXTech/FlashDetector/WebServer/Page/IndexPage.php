@@ -29,7 +29,7 @@ class IndexPage extends AbstractPage{
 			"status" => true,
 			"time" => time(),
 			"server" => "FDWebServer-WorkerManEE",
-			"fdb_info" => FlashDetector::getFdb()["info"]
+			"fdb_info" => FlashDetector::getFdb()->getInfo()->getVersion()
 		]);
 	}
 }

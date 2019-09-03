@@ -21,6 +21,7 @@
 namespace iTXTech\FlashDetector\Decoder;
 
 use iTXTech\FlashDetector\Constants;
+use iTXTech\FlashDetector\Fdb\PartNumber;
 use iTXTech\FlashDetector\FlashDetector;
 use iTXTech\FlashDetector\FlashInfo;
 use iTXTech\FlashDetector\Property\Classification;
@@ -223,12 +224,12 @@ class Samsung extends Decoder{
 		return $flashInfo;
 	}
 
-	public static function getFlashInfoFromFdb(FlashInfo $info) : ?array{
+	public static function getFlashInfoFromFdb(FlashInfo $info) : ?PartNumber{
 		$partNumber = $info->getPartNumber();
 		if(StringUtil::contains($partNumber, "-")){
 			$partNumber = explode("-", $partNumber)[0];
 		}
-		if(!isset(FlashDetector::getFdb()[strtolower(self::getName())][$partNumber]) and strlen($partNumber) === 10){//standard
+		if(!FlashDetector::getFdb()->hasPartNumber(self::getName(), $partNumber) and strlen($partNumber) === 10){//standard
 			$c = self::CLASSIFICATION[substr($partNumber, 2, 1)] ?? -1;
 			//convert part number to single die
 			if($c[1] > 1){//die
@@ -247,12 +248,12 @@ class Samsung extends Decoder{
 				}
 			}
 			$partNumber{8} = "0";
-			$info = FlashDetector::getFdb()[strtolower(self::getName())][$partNumber] ?? null;
+			$info = FlashDetector::getFdb()->getPartNumber(self::getName(), $partNumber) ?? null;
 			if($info !== null){
-				$info["m"] .= " (" . $c[1] . " x " . $partNumber . ")";
+				$info->setComment($info->getComment() . " (" . $c[1] . " x " . $partNumber . ")");
 			}
 			return $info;
 		}
-		return FlashDetector::getFdb()[strtolower(self::getName())][$partNumber] ?? null;
+		return FlashDetector::getFdb()->getPartNumber(self::getName(), $partNumber);
 	}
 }

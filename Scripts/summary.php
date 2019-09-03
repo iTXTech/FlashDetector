@@ -28,13 +28,12 @@ use iTXTech\FlashDetector\Property\Classification;
 use iTXTech\SimpleFramework\Util\StringUtil;
 
 $fdb = FlashDetector::getFdb();
-unset($fdb["info"]);
 
 $csv = "Part Number,Vendor,Density,Cell Level,Package,CE Pins,Flash IDs" . PHP_EOL;
 
-foreach($fdb as $vendor){
-	foreach($vendor as $pn => $info){
-		$i = FlashDetector::detect($pn, true);
+foreach($fdb->getVendors() as $vendor){
+	foreach($vendor->getPartNumbers() as $pn){
+		$i = FlashDetector::detect($pn->getPartNumber(), true);
 		$ids = $i->getFlashId();
 		if($ids != null and $i->getDensity() > 0){
 			$cell = $i->getCellLevel();
@@ -42,7 +41,7 @@ foreach($fdb as $vendor){
 			if(($i->getExtraInfo()[Constants::ENTERPRISE] ?? false) === true){
 				$cell = "e" . $cell;
 			}
-			$csv .= $pn . "," . strtoupper($i->getManufacturer()) . "," .
+			$csv .= $pn->getPartNumber() . "," . strtoupper($i->getManufacturer()) . "," .
 				FlashDetector::getHumanReadableDensity($i->getDensity(), true) . "," .
 				$cell . "," . str_replace(",", " ", $i->getPackage()) . "," . $ce . "," .
 				implode(" ", $ids) . PHP_EOL;

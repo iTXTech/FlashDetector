@@ -22,14 +22,14 @@ namespace iTXTech\FlashDetector\Property;
 
 use iTXTech\FlashDetector\Arrayable;
 
-class Classification implements Arrayable{
+class Classification extends Arrayable{
 	public const UNKNOWN_PROP = -1;
 	public const CHANNEL_SINGLE_OR_DUAL = -2;
 
-	private $ce;
-	private $ch;
-	private $rnb;
-	private $die;
+	protected $ce;
+	protected $ch;
+	protected $rnb;
+	protected $die;
 
 	public function __construct(int $ce = self::UNKNOWN_PROP,
 	                            int $ch = self::UNKNOWN_PROP,
@@ -78,21 +78,5 @@ class Classification implements Arrayable{
 
 	public function getRnb() : int{
 		return $this->rnb;
-	}
-
-	public function toArray() : array{
-		$reflectionClass = new \ReflectionClass($this);
-		$properties = $reflectionClass->getProperties();
-		$info = [];
-		foreach($properties as $property){
-			if(is_object($this->{$property->getName()})){
-				/** @var Arrayable $prop */
-				$prop = $this->{$property->getName()};
-				$info[$property->getName()] = $prop->toArray();
-			}else{
-				$info[$property->getName()] = $this->{$property->getName()};
-			}
-		}
-		return $info;
 	}
 }

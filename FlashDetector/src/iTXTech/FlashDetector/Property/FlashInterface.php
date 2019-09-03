@@ -22,16 +22,16 @@ namespace iTXTech\FlashDetector\Property;
 
 use iTXTech\FlashDetector\Arrayable;
 
-class FlashInterface implements Arrayable{
+class FlashInterface extends Arrayable{
 	//is ToggleDDR or ONFi?
-	private $isToggle;
+	protected $isToggle;
 	//For ONFi
-	private $async = false;
-	private $sync = false;
+	protected $async = false;
+	protected $sync = false;
 	///For Toggle DDR
-	private $toggle = false;
+	protected $toggle = false;
 	//SPI (Seems only Micron has this)
-	private $spi = false;
+	protected $spi = false;
 
 	public function __construct(bool $isToggle){
 		$this->isToggle = $isToggle;

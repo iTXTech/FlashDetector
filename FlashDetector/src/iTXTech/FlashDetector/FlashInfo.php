@@ -24,25 +24,25 @@ use iTXTech\FlashDetector\Decoder\Decoder;
 use iTXTech\FlashDetector\Property\Classification;
 use iTXTech\FlashDetector\Property\FlashInterface;
 
-class FlashInfo{
-	private $partNumber;
-	private $manufacturer;//Intel/Samsung
-	private $type;//NAND/iNAND/E2NAND
-	private $density;//256Gb
-	private $deviceWidth;//x8 x16 x4
-	private $processNode;//22nm 19nm 1ynm 1znm
-	private $cellLevel;//SLC MLC TLC QLC
-	private $classification;//CE, Ch, Die, R/nB
-	private $voltage;//3.3V/1.8V
-	private $generation;//1 2 3 4
-	private $interface;//Async/Sync ToggleDDR
-	private $package;//TSOP48 BGA152 LGA52
+class FlashInfo extends Arrayable{
+	protected $partNumber;
+	protected $manufacturer;//Intel/Samsung
+	protected $type;//NAND/iNAND/E2NAND
+	protected $density;//256Gb
+	protected $deviceWidth;//x8 x16 x4
+	protected $processNode;//22nm 19nm 1ynm 1znm
+	protected $cellLevel;//SLC MLC TLC QLC
+	protected $classification;//CE, Ch, Die, R/nB
+	protected $voltage;//3.3V/1.8V
+	protected $generation;//1 2 3 4
+	protected $interface;//Async/Sync ToggleDDR
+	protected $package;//TSOP48 BGA152 LGA52
 
-	private $extraInfo;
+	protected $extraInfo;
 	//data from Flash Database
-	private $flashId;
-	private $controller;
-	private $comment;
+	protected $flashId;
+	protected $controller;
+	protected $comment;
 
 	public function __construct(string $partNumber = ""){
 		$this->partNumber = strtoupper($partNumber);
@@ -165,18 +165,7 @@ class FlashInfo{
 	}
 
 	public function toArray(bool $raw = true) : array{
-		$reflectionClass = new \ReflectionClass($this);
-		$properties = $reflectionClass->getProperties();
-		$info = [];
-		foreach($properties as $property){
-			if(is_object($this->{$property->getName()})){
-				/** @var Arrayable $prop */
-				$prop = $this->{$property->getName()};
-				$info[$property->getName()] = $prop->toArray();
-			}else{
-				$info[$property->getName()] = $this->{$property->getName()};
-			}
-		}
+		$info = parent::toArray();
 
 		if(!$raw){
 			$interface = $info["interface"];

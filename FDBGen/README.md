@@ -5,8 +5,7 @@ Flash Database Generator for FlashDetector
 ## Usage
 
 ```powershell
-PS X:\Scripts>php fdbgen.php -f -v fdb-version -d path-to-fdbs -o fdb.json
-PS X:\Scripts>php fdbgen.php -i -d fdb.json -o iddb.json
+PS X:\Scripts>php fdbgen.php
 ```
 
 ## License

@@ -31,19 +31,21 @@ use iTXTech\FlashDetector\Decoder\SKHynix;
 use iTXTech\FlashDetector\Decoder\SKHynixLegacy;
 use iTXTech\FlashDetector\Decoder\SpecTek;
 use iTXTech\FlashDetector\Decoder\Toshiba;
+use iTXTech\FlashDetector\Fdb\Fdb;
 use iTXTech\FlashDetector\Property\Classification;
 use iTXTech\SimpleFramework\Util\StringUtil;
 
 abstract class FlashDetector{
 	/** @var Decoder[] */
 	private static $decoders = [];
-	private static $fdb = [];
+	/** @var Fdb */
+	private static $fdb;
 	private static $iddb = [];
 	private static $mdb = [];
 	private static $lang = [];
 	private static $fallbackLang = [];
 
-	public static function getFdb() : array{
+	public static function getFdb() : Fdb{
 		return self::$fdb;
 	}
 
@@ -71,8 +73,9 @@ abstract class FlashDetector{
 		self::registerDecoder(SanDisk::class);
 		self::registerDecoder(SanDiskShortCode::class);
 		if(Loader::getInstance() !== null){
-			self::$fdb = json_decode(Loader::getInstance()->getResourceAsText("fdb.json"), true);
-			self::$iddb = self::generateIddb(self::$fdb);
+			$fdb = json_decode(Loader::getInstance()->getResourceAsText("fdb.json"), true);
+			self::$fdb = new Fdb($fdb);
+			self::$iddb = self::generateIddb($fdb);
 			self::$mdb = json_decode(Loader::getInstance()->getResourceAsText("mdb.json"), true);
 			self::$lang = json_decode(Loader::getInstance()->getResourceAsText("lang/$lang.json"), true);
 			self::$fallbackLang = json_decode(Loader::getInstance()
@@ -123,34 +126,31 @@ abstract class FlashDetector{
 	public static function combineDataFromFdb(FlashInfo $info, string $decoder){
 		/** @var Decoder $decoder */
 		if(($data = $decoder::getFlashInfoFromFdb($info)) !== null){
-			$info->setFlashId($data["id"]);
-			$info->setController($data["t"]);
-			if($data["l"] !== "" and ($info->getProcessNode() == Constants::UNKNOWN or
+			$info->setFlashId($data->getFlashIds());
+			$info->setController($data->getControllers());
+			if($data->getProcessNode() !== "" and ($info->getProcessNode() == Constants::UNKNOWN or
 					$info->getProcessNode() == null)){
-				$info->setProcessNode($data["l"]);
+				$info->setProcessNode($data->getProcessNode());
 			}
-			if(isset($data["m"])){
-				$info->setComment($data["m"]);
+			$info->setComment($data->getComment());
+			if($info->getCellLevel() === null and $data->getCellLevel() !== ""){
+				$info->setCellLevel($data->getCellLevel());
 			}
-			if($info->getCellLevel() === null and $data["c"] !== ""){
-				$info->setCellLevel($data["c"]);
+
+			$c = $info->getClassification() ?? new Classification();
+			if($data->getDie() != Classification::UNKNOWN_PROP){
+				$c->setDie($data->getDie());
 			}
-			if(isset($data["d"]) or isset($data["e"]) or isset($data["r"]) or isset($data["n"])){
-				$c = $info->getClassification() ?? new Classification();
-				if(isset($data["d"])){
-					$c->setDie($data["d"]);
-				}
-				if(isset($data["e"])){
-					$c->setCe($data["e"]);
-				}
-				if(isset($data["r"])){
-					$c->setRnb($data["r"]);
-				}
-				if(isset($data["n"])){
-					$c->setCh($data["n"]);
-				}
-				$info->setClassification($c);
+			if($data->getCe() != Classification::UNKNOWN_PROP){
+				$c->setCe($data->getCe());
 			}
+			if($data->getRb() != Classification::UNKNOWN_PROP){
+				$c->setRnb($data->getRb());
+			}
+			if($data->getCh() != Classification::UNKNOWN_PROP){
+				$c->setCh($data->getCh());
+			}
+			$info->setClassification($c);
 		}
 	}
 
@@ -171,11 +171,11 @@ abstract class FlashDetector{
 	public static function searchPartNumber(string $pn, bool $partMatch = false) : ?array{
 		$pn = strtoupper($pn);
 		$result = [];
-		foreach(self::$fdb as $manufacturer => $flashes){
-			foreach($flashes as $partNumber => $flash){
-				if(($partMatch and StringUtil::contains($partNumber, $pn)) or
-					(!$partNumber and $partNumber == $pn)){
-					$result[] = $manufacturer . " " . $partNumber;
+		foreach(self::$fdb->getVendors() as $vendor){
+			foreach($vendor->getPartNumbers() as $partNumber){
+				if(($partMatch and StringUtil::contains($partNumber->getPartNumber(), $pn)) or
+					(!$partNumber and $partNumber->getPartNumber() == $pn)){
+					$result[] = $vendor->getName() . " " . $partNumber->getPartNumber();
 				}
 			}
 		}
@@ -204,7 +204,7 @@ abstract class FlashDetector{
 			$cons = [];
 			foreach($v as $pn){
 				list($vendor, $pn) = explode(" ", $pn, 2);
-				foreach(self::$fdb[$vendor][$pn]["t"] as $con){
+				foreach(self::$fdb->getPartNumber($vendor, $pn)->getControllers() as $con){
 					$cons[$con] = "";
 				}
 			}
@@ -253,7 +253,7 @@ abstract class FlashDetector{
 		if($useByte){
 			$density /= 8;
 			$unit = ["MB", "GB", "TB"];
-		} else{
+		}else{
 			$unit = ["Mb", "Gb", "Tb"];
 		}
 		$i = 0;

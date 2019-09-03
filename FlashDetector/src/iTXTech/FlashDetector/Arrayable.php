@@ -20,6 +20,29 @@
 
 namespace iTXTech\FlashDetector;
 
-interface Arrayable{
-	public function toArray() : array;
+abstract class Arrayable{
+
+	public function __construct(array $arr = null){
+		if($arr != null){
+			foreach($arr as $k => $v){
+				$this->{$k} = $v;
+			}
+		}
+	}
+
+	public function toArray() : array{
+		$reflectionClass = new \ReflectionClass($this);
+		$properties = $reflectionClass->getProperties();
+		$info = [];
+		foreach($properties as $property){
+			if(is_object($this->{$property->getName()})){
+				/** @var Arrayable $prop */
+				$prop = $this->{$property->getName()};
+				$info[$property->getName()] = $prop->toArray();
+			}else{
+				$info[$property->getName()] = $this->{$property->getName()};
+			}
+		}
+		return $info;
+	}
 }
