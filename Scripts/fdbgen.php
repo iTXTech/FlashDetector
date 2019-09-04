@@ -23,7 +23,6 @@
 require_once "env.php";
 
 use iTXTech\FlashDetector\FDBGen\FDBGen;
-use iTXTech\FlashDetector\FDBGen\IDDBGen;
 use iTXTech\SimpleFramework\Console\Option\Exception\ParseException;
 use iTXTech\SimpleFramework\Console\Option\HelpFormatter;
 use iTXTech\SimpleFramework\Console\Option\OptionBuilder;

@@ -22,6 +22,7 @@ namespace iTXTech\FlashDetector\FDBGen\Generator;
 
 use iTXTech\FlashDetector\Decoder\Micron;
 use iTXTech\FlashDetector\Decoder\SKHynix;
+use iTXTech\FlashDetector\Fdb\Fdb;
 use iTXTech\SimpleFramework\Util\StringUtil;
 
 class SiliconMotionUFD extends Generator{
@@ -30,7 +31,7 @@ class SiliconMotionUFD extends Generator{
 	}
 
 	//Don't look at it, may do harm to you
-	public static function merge(array &$db, string $data, string $filename) : void{
+	public static function merge(Fdb $fdb, string $data, string $filename) : void{
 		$data = explode("\r\n", mb_convert_encoding($data, "UTF-8", "UTF-8"));
 		//SMI DBF is in CRLF (Windows) format
 		$controller = "SM" . str_replace(["flash_", ".dbf"], "", $filename);
@@ -68,7 +69,7 @@ class SiliconMotionUFD extends Generator{
 				if(strlen($info[2]) !== 5){
 					array_splice($info, 2, 0, "");
 				}
-				$info[0] = str_replace(["samaung", "hynix", "speteck"], ["samsung", "skhynix", "spectek"], strtolower($info[0]));
+				$vendor = str_replace(["samaung", "hynix", "speteck"], ["samsung", "skhynix", "spectek"], strtolower($info[0]));
 				if(isset($info[3]) and StringUtil::endsWith($info[3], "LC")){
 					$cellLevel = $info[3];
 					$info[3] = $info[4] ?? "";
@@ -77,7 +78,7 @@ class SiliconMotionUFD extends Generator{
 					$info[3] .= " " . $info[5];
 					$info[5] = "";
 				}
-				switch($info[0]){
+				switch($vendor){
 					case "skhynix":
 						$info[1] = SKHynix::removePackage($info[1]);
 						break;
@@ -85,30 +86,17 @@ class SiliconMotionUFD extends Generator{
 						$info[1] = Micron::removePackage($info[1]);
 						break;
 				}
-				$data = [
-					"id" => [$id],//Flash ID
-					"l" => $info[3] ?? "",//Lithography
-					"c" => $info[4] ?? "",//cell level
-					//"s" => $info[2] ?? "",//SMICode
-					"t" => [$controller],//controller
-					"m" => $comment
-				];
-				if(isset($db[$info[0]][$info[1]])){
-					if(!in_array($id, $db[$info[0]][$info[1]]["id"])){
-						$db[$info[0]][$info[1]]["id"][] = $id;
-					}
-					if(!in_array($controller, $db[$info[0]][$info[1]]["t"])){
-						$db[$info[0]][$info[1]]["t"][] = $controller;
-					}
-					if(!isset($db[$info[0]][$info[1]]["l"])){
-						$db[$info[0]][$info[1]]["l"] = $data["l"];
-					}
-					if(!isset($db[$info[0]][$info[1]]["c"])){
-						$db[$info[0]][$info[1]]["c"] = $data["c"];
-					}
-					$db[$info[0]][$info[1]]["m"] = $comment;
-				}else{
-					$db[$info[0]][$info[1]] = $data;
+
+				$pn = $fdb->getPartNumber($vendor, $info[1], true)
+					->addFlashId($id)
+					->addController($controller)
+					->setComment($comment);
+
+				if(($info[3] ?? null) != null){
+					$pn->setProcessNode($info[3]);
+				}
+				if(($info[4] ?? null) != null){
+					$pn->setCellLevel($info[4]);
 				}
 			}
 		}

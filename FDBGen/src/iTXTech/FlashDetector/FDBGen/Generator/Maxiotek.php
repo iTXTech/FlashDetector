@@ -20,12 +20,14 @@
 
 namespace iTXTech\FlashDetector\FDBGen\Generator;
 
+use iTXTech\FlashDetector\Fdb\Fdb;
+
 class Maxiotek extends JMicron{
 	public static function getDirName() : string{
 		return "mk";
 	}
 
-	public static function merge(array &$db, string $data, string $filename) : void{
-		self::mergeInternal($db, $data, $filename, "MK");
+	public static function merge(Fdb $fdb, string $data, string $filename) : void{
+		self::mergeInternal($fdb, $data, $filename, "MK");
 	}
 }

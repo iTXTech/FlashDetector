@@ -22,13 +22,14 @@ namespace iTXTech\FlashDetector\Fdb;
 
 use iTXTech\FlashDetector\Arrayable;
 use iTXTech\FlashDetector\Property\Classification;
+use iTXTech\SimpleFramework\Util\StringUtil;
 
 class PartNumber extends Arrayable{
 	protected $pn;
-	protected $id;//Flash Ids
+	protected $id = [];//Flash Ids
 	protected $l;//process node
 	protected $c;//cell level
-	protected $t;//supported controllers
+	protected $t = [];//supported controllers
 	protected $m;//additional info
 	protected $d;//die
 	protected $e;//ce
@@ -80,8 +81,109 @@ class PartNumber extends Arrayable{
 		return $this->n ?? Classification::UNKNOWN_PROP;
 	}
 
-	public function setComment(string $comment) : PartNumber{
-		$this->m = $comment;
+	public function setDie(int $die) : PartNumber{
+		if($this->d == null){
+			$this->d = $die;
+		}
 		return $this;
+	}
+
+	public function setCe(int $ce) : PartNumber{
+		if($this->e == null){
+			$this->e = $ce;
+		}
+		return $this;
+	}
+
+	public function setRb(int $rb) : PartNumber{
+		if($this->r == null){
+			$this->r = $rb;
+		}
+		return $this;
+	}
+
+	public function setCh(int $ch) : PartNumber{
+		if($this->n == null){
+			$this->n = $ch;
+		}
+		return $this;
+	}
+
+	public function setComment(string $comment) : PartNumber{
+		if($this->m == null and $comment != ""){
+			$this->m = $comment;
+		}
+		return $this;
+	}
+
+	public function setProcessNode(string $processNode) : PartNumber{
+		if($this->l != null){
+			$this->l = $processNode;
+		}
+		return $this;
+	}
+
+	public function setCellLevel(string $cellLevel) : PartNumber{
+		if($this->c != null){
+			$this->c = $cellLevel;
+		}
+		return $this;
+	}
+
+	public function addController($controller) : PartNumber{
+		if(!is_array($controller)){
+			$controller = [$controller];
+		}
+		foreach($controller as $con){
+			if(!in_array($con, $this->t)){
+				$this->t[] = $con;
+			}
+		}
+		return $this;
+	}
+
+	public function addFlashId($ids) : PartNumber{
+		if(!is_array($ids)){
+			$ids = [$ids];
+		}
+		foreach($ids as $id){
+			if(!in_array($id, $this->id)){
+				$found = false;
+				for($i = 0; $i < count($this->id); $i++){
+					if(strlen($this->id[$i]) > strlen($id) and StringUtil::startsWith($this->id[$i], $id)){
+						$found = true;
+						break;
+					}
+				}
+				if(!$found){
+					$this->id[] = $id;
+				}
+			}
+		}
+		return $this;
+	}
+
+	public function merge(PartNumber $partNumber) : PartNumber{
+		$this->setCe($partNumber->getCe());
+		$this->setCh($partNumber->getCh());
+		$this->setDie($partNumber->getDie());
+		$this->setRb($partNumber->getRb());
+		$this->setProcessNode($partNumber->getProcessNode());
+		$this->setCellLevel($partNumber->getCellLevel());
+		$this->addController($partNumber->getControllers());
+		$this->addFlashId($partNumber->getFlashIds());
+		$this->setComment($partNumber->getComment());
+		return $this;
+	}
+
+	public function toArray() : array{
+		$arr = parent::toArray();
+		unset($arr["pn"]);
+		foreach($arr as $k => $v){
+			if($v == -1 or $v == null){
+				unset($arr[$k]);
+			}
+		}
+		return $arr;
 	}
 }

@@ -20,7 +20,7 @@
 
 namespace iTXTech\FlashDetector\FDBGen\Generator;
 
-use iTXTech\SimpleFramework\Console\Logger;
+use iTXTech\FlashDetector\Fdb\Fdb;
 use iTXTech\SimpleFramework\Util\StringUtil;
 
 class Innostor extends Generator{
@@ -28,7 +28,7 @@ class Innostor extends Generator{
 		return "is";
 	}
 
-	public static function merge(array &$db, string $data, string $filename) : void{
+	public static function merge(Fdb $fdb, string $data, string $filename) : void{
 		$controller = "IS" . explode("_", $filename)[0];
 		$d = [];
 		foreach(explode("\r\n", $data) as $line){
@@ -37,7 +37,7 @@ class Innostor extends Generator{
 			}
 		}
 		$data = parse_ini_string(implode("\n", $d), true, INI_SCANNER_RAW);
-		$db["info"]["controllers"][] = $controller;
+		$fdb->getInfo()->addController($controller);
 
 		foreach($data as $id => $flash){
 			if(!isset($flash["Vendor"])){
@@ -45,20 +45,13 @@ class Innostor extends Generator{
 			}
 			$vendor = str_replace(["hynix", "psc"], ["skhynix", "powerchip"], strtolower($flash["Vendor"]));
 			$flashId = $flash["FlashID"];
-			$found = false;
-			foreach($db[$vendor] as $pn => $f){
-				foreach($f["id"] as $ids){
-					if(StringUtil::startsWith($ids, $flashId)){
-						if(!in_array($controller, $db[$vendor][$pn]["t"])){
-							$db[$vendor][$pn]["t"][] = $controller;
-						}
-						$found = true;
+			foreach($fdb->getVendor($vendor)->getPartNumbers() as $partNumber){
+				foreach($partNumber->getFlashIds() as $id){
+					if(StringUtil::startsWith($id, $flashId)){
+						$partNumber->addController($controller);
 						break;
 					}
 				}
-			}
-			if(!$found){
-				Logger::info("Not found " . $id);
 			}
 		}
 	}

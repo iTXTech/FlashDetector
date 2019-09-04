@@ -22,6 +22,7 @@ namespace iTXTech\FlashDetector\FDBGen\Generator;
 
 use iTXTech\FlashDetector\Decoder\Micron;
 use iTXTech\FlashDetector\Decoder\SKHynix;
+use iTXTech\FlashDetector\Fdb\Fdb;
 use iTXTech\SimpleFramework\Util\StringUtil;
 
 class JMicron extends Generator{
@@ -29,14 +30,14 @@ class JMicron extends Generator{
 		return "jm";
 	}
 
-	public static function merge(array &$db, string $data, string $filename) : void{
-		self::mergeInternal($db, $data, $filename, "JMF");
+	public static function merge(Fdb $fdb, string $data, string $filename) : void{
+		self::mergeInternal($fdb, $data, $filename, "JMF");
 	}
 
-	protected static function mergeInternal(array &$db, string $data, string $filename, string $prefix) : void{
+	protected static function mergeInternal(Fdb $fdb, string $data, string $filename, string $prefix) : void{
 		$controller = $prefix . explode("_", $filename)[0];
 		$data = parse_ini_string($data, true);
-		$db["info"]["controllers"][] = $controller;
+		$fdb->getInfo()->addController($controller);
 		foreach($data as $manufacturer => $flashes){
 			$manufacturer = str_replace(["hynix"], ["skhynix"], strtolower($manufacturer));
 			if(in_array($manufacturer, ["version", "vendor"])){
@@ -79,21 +80,10 @@ class JMicron extends Generator{
 						break;
 				}
 
-				if(isset($db[$manufacturer][$pn])){
-					if(strlen($id) == 12 and !in_array($id, $db[$manufacturer][$pn]["id"])){
-						$db[$manufacturer][$pn]["id"][] = $id;
-					}
-					if(!in_array($controller, $db[$manufacturer][$pn]["t"])){
-						$db[$manufacturer][$pn]["t"][] = $controller;
-					}
-				}else{
-					$db[$manufacturer][$pn] = [
-						"id" => [$id],//Flash ID
-						"l" => "",//Lithography
-						"c" => "",//cell level
-						"t" => [$controller],//controller
-						"m" => ""
-					];
+				$partNumber = $fdb->getPartNumber($manufacturer, $pn, true)
+					->addController($controller);
+				if(strlen($id) == 12){
+					$partNumber->addFlashId($id);
 				}
 			}
 		}

@@ -88,7 +88,7 @@ abstract class FlashDetector{
 		unset($fdb["info"]);
 		foreach($fdb as $k => $v){
 			foreach($v as $partNumber => $i){
-				foreach($i["id"] as $id){
+				foreach($i["id"] ?? [] as $id){
 					if(!isset($iddb[$id])){
 						$iddb[$id] = [$k . " " . $partNumber];
 					}else{

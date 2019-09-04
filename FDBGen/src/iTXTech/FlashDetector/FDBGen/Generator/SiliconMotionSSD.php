@@ -22,6 +22,7 @@ namespace iTXTech\FlashDetector\FDBGen\Generator;
 
 use iTXTech\FlashDetector\Decoder\Micron;
 use iTXTech\FlashDetector\Decoder\SKHynix;
+use iTXTech\FlashDetector\Fdb\Fdb;
 use iTXTech\SimpleFramework\Util\StringUtil;
 
 class SiliconMotionSSD extends Generator{
@@ -29,7 +30,7 @@ class SiliconMotionSSD extends Generator{
 		return "smssd";
 	}
 
-	public static function merge(array &$db, string $data, string $filename) : void{
+	public static function merge(Fdb $fdb, string $data, string $filename) : void{
 		$controller = "SM" . explode("_", $filename)[0];
 		$db["info"]["controllers"][] = $controller;
 		$data = explode("\r\n", $data);
@@ -70,22 +71,10 @@ class SiliconMotionSSD extends Generator{
 				for($i = 0; $i < 6; $i++){
 					$id .= $rawId[$i];
 				}
-				if(isset($db[$manufacturer][$pn])){
-					if(!in_array($id, $db[$manufacturer][$pn]["id"])){
-						$db[$manufacturer][$pn]["id"][] = $id;
-					}
-					if(!in_array($controller, $db[$manufacturer][$pn]["t"])){
-						$db[$manufacturer][$pn]["t"][] = $controller;
-					}
-				}else{
-					$db[$manufacturer][$pn] = [
-						"id" => [$id],//Flash ID
-						"l" => "",//Lithography
-						"c" => "",//cell level
-						"t" => [$controller],//controller
-						"m" => ""
-					];
-				}
+
+				$fdb->getPartNumber($manufacturer, $pn, true)
+					->addFlashId($id)
+					->addController($controller);
 			}
 		}
 	}

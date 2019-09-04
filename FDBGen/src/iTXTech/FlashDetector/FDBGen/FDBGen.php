@@ -20,6 +20,7 @@
 
 namespace iTXTech\FlashDetector\FDBGen;
 
+use iTXTech\FlashDetector\Fdb\Fdb;
 use iTXTech\FlashDetector\FDBGen\Generator\AlcorMicro;
 use iTXTech\FlashDetector\FDBGen\Generator\ChipsBank;
 use iTXTech\FlashDetector\FDBGen\Generator\Extra;
@@ -62,7 +63,7 @@ abstract class FDBGen{
 		if(!StringUtil::endsWith($db, DIRECTORY_SEPARATOR)){
 			$db .= DIRECTORY_SEPARATOR;
 		}
-		$fdb = [
+		$fdb = new Fdb([
 			"info" => [
 				"name" => "iTXTech FlashDetector Flash Database",
 				"website" => "https://github.com/iTXTech/FlashDetector",
@@ -70,7 +71,7 @@ abstract class FDBGen{
 				"time" => date("r"),
 				"controllers" => []
 			]
-		];
+		]);
 		$dirs = array_keys(self::$generators);
 		foreach($dirs as $dir){
 			if(file_exists($db . $dir)){
@@ -87,34 +88,7 @@ abstract class FDBGen{
 		if($extra){
 			Extra::merge($fdb, file_get_contents($db . DIRECTORY_SEPARATOR . "extra.json"));
 		}
-		//check FlashId, HACK!
-		foreach($fdb as $v => $vendor){
-			if($v == "info"){
-				continue;
-			}
-			foreach($vendor as $pn => $data){
-				$ids = $data["id"] ?? [];
-				$n = [];
-				for($i = 0; $i < count($ids); $i++){
-					$found = false;
-					if(strlen($ids[$i]) < 12){
-						for($j = $i + 1; $j < count($ids); $j++){
-							if(strlen($ids[$j]) > strlen($ids[$i]) and StringUtil::startsWith($ids[$j], $ids[$i])){
-								$found = true;
-								break;
-							}
-						}
-					}
-					if(!$found){
-						$n[] = $ids[$i];
-					}
-				}
-				$fdb[$v][$pn]["id"] = $n;
-			}
-		}
 
-
-
-		return $fdb;
+		return $fdb->toArray();
 	}
 }

@@ -20,8 +20,10 @@
 
 namespace iTXTech\FlashDetector\FDBGen\Generator;
 
+use iTXTech\FlashDetector\Fdb\Fdb;
+
 abstract class Generator{
 	public abstract static function getDirName() : string;
 
-	public abstract static function merge(array &$db, string $data, string $filename) : void;
+	public abstract static function merge(Fdb $fdb, string $data, string $filename) : void;
 }

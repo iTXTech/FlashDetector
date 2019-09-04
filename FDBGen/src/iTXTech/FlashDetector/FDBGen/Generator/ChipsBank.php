@@ -22,6 +22,7 @@ namespace iTXTech\FlashDetector\FDBGen\Generator;
 
 use iTXTech\FlashDetector\Decoder\Micron;
 use iTXTech\FlashDetector\Decoder\SKHynix;
+use iTXTech\FlashDetector\Fdb\Fdb;
 use iTXTech\SimpleFramework\Util\StringUtil;
 
 class ChipsBank extends Generator{
@@ -31,14 +32,12 @@ class ChipsBank extends Generator{
 		return "cbm";
 	}
 
-	public static function merge(array &$db, string $data, string $filename) : void{
+	public static function merge(Fdb $fdb, string $data, string $filename) : void{
 		$data = explode("\r\n", $data);
 		$cons = explode(",", array_shift($data));
 		foreach($cons as $k => $con){
 			$cons[$k] = "CBM" . $con;
-			if(!in_array($cons[$k], $db["info"]["controllers"])){
-				$db["info"]["controllers"][] = $cons[$k];
-			}
+			$fdb->getInfo()->addController($cons[$k]);
 		}
 		foreach($data as $rec){
 			if(trim($rec) == ""){
@@ -52,7 +51,7 @@ class ChipsBank extends Generator{
 			if(strlen($flashId) > 12){
 				$flashId = substr($flashId, 0, 12);
 			}
-			if(!isset($db[$vendor])){
+			if($fdb->getVendor($vendor) == null){
 				continue;
 			}
 			$found = false;
@@ -62,14 +61,10 @@ class ChipsBank extends Generator{
 					$sup[] = $cons[$i - self::CON_OFFSET];
 				}
 			}
-			foreach($db[$vendor] as $pn => $flash){
-				foreach($flash["id"] as $ids){
+			foreach($fdb->getVendor($vendor)->getPartNumbers() as $pn => $flash){
+				foreach($flash->getFlashIds() as $ids){
 					if(StringUtil::startsWith($ids, $flashId)){
-						foreach($sup as $s){
-							if(!in_array($s, $db[$vendor][$pn]["t"])){
-								$db[$vendor][$pn]["t"][] = $s;
-							}
-						}
+						$flash->addController($sup);
 						$found = true;
 						break;
 					}
@@ -96,27 +91,12 @@ class ChipsBank extends Generator{
 					if(in_array($pn{strlen($pn) - 2}, ["_", "*"])){
 						$pn = substr($pn, 0, strlen($pn) - 2);
 					}
-					if(isset($db[$vendor][$pn])){
-						if(!in_array($flashId, $db[$vendor][$pn]["id"])){
-							$db[$vendor][$pn]["id"][] = $flashId;
-						}
-						foreach($sup as $s){
-							if(!in_array($s, $db[$vendor][$pn]["t"])){
-								$db[$vendor][$pn]["t"][] = $s;
-							}
-						}
-						if(!isset($db[$vendor][$pn]["l"])){
-							$db[$vendor][$pn]["l"] = $data["l"];
-						}
-					}else{
-						$db[$vendor][$pn] = [
-							"id" => [$flashId],
-							"l" => $rec[7],
-							"c" => explode("-", $rec[2])[0],
-							"t" => $sup,
-							"m" => ""
-						];
-					}
+
+					$fdb->getPartNumber($vendor, $pn, true)
+						->addFlashId($flashId)
+						->addController($sup)
+						->setProcessNode($rec[7])
+						->setCellLevel(explode("-", $rec[2])[0]);
 				}
 			}
 		}

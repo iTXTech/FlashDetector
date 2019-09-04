@@ -22,6 +22,7 @@ namespace iTXTech\FlashDetector\FDBGen\Generator;
 
 use iTXTech\FlashDetector\Decoder\Micron;
 use iTXTech\FlashDetector\Decoder\SKHynix;
+use iTXTech\FlashDetector\Fdb\Fdb;
 use iTXTech\SimpleFramework\Util\StringUtil;
 
 class SandForce extends Generator{
@@ -29,7 +30,7 @@ class SandForce extends Generator{
 		return "sf";
 	}
 
-	public static function merge(array &$db, string $data, string $filename) : void{
+	public static function merge(Fdb $fdb, string $data, string $filename) : void{
 		$data = explode("\r\n", $data);//CRLF Windows Format csv
 		array_shift($data);//remove header
 		$controllers = [];
@@ -43,7 +44,7 @@ class SandForce extends Generator{
 			$controller = "SF" . $controller;
 			if(!isset($controllers[$controller])){
 				$controllers[$controller] = "";
-				$db["info"]["controllers"][] = $controller;
+				$fdb->getInfo()->addController($controller);
 			}
 			$manufacturer = str_replace(["hynix"], ["skhynix"], strtolower($config[4]));
 			$pn = trim($config[7]);
@@ -71,19 +72,9 @@ class SandForce extends Generator{
 					}
 					break;
 			}
-			if(isset($db[$manufacturer][$pn])){
-				if(!in_array($controller, $db[$manufacturer][$pn]["t"])){
-					$db[$manufacturer][$pn]["t"][] = $controller;
-				}
-			}else{
-				$db[$manufacturer][$pn] = [
-					"id" => [],//Flash ID
-					"l" => "",//Lithography
-					"c" => "",//cell level
-					"t" => [$controller],//controller
-					"m" => ""
-				];
-			}
+
+			$fdb->getPartNumber($manufacturer, $pn, true)
+				->addController($controller);
 		}
 	}
 }

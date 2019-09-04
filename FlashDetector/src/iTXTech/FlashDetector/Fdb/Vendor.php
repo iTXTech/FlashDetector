@@ -49,6 +49,10 @@ class Vendor extends Arrayable{
 		return $this->pns[strtoupper($partNumber)] ?? null;
 	}
 
+	public function addPartNumber(PartNumber $pn){
+		$this->pns[strtoupper($pn->getPartNumber())] = $pn;
+	}
+
 	public function toArray() : array{
 		$arr = [];
 		foreach($this->pns as $pn){

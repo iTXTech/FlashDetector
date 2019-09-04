@@ -20,29 +20,14 @@
 
 namespace iTXTech\FlashDetector\FDBGen\Generator;
 
+use iTXTech\FlashDetector\Fdb\Fdb;
+use iTXTech\FlashDetector\Fdb\PartNumber;
+
 class Extra{
-	public static function merge(array &$db, string $data) : void{
+	public static function merge(Fdb $fdb, string $data) : void{
 		foreach(json_decode($data, true) as $vendor => $pns){
-			$vendor = strtolower($vendor);
 			foreach($pns as $pn => $data){
-				$pn = strtoupper($pn);
-				if(isset($db[$vendor][$pn])){
-					$existedData = $db[$vendor][$pn];
-					foreach($existedData as $k => $v){
-						if(is_array($v)){
-							foreach($data[$k] as $n){
-								if(!in_array($n, $v)){
-									$existedData[$k][] = $n;
-								}
-							}
-						}elseif($v == "" and isset($data[$k])){
-							$existedData[$k] = $data[$k];
-						}
-					}
-					$db[$vendor][$pn] = $existedData;
-				}else{
-					$db[$vendor][$pn] = $data;
-				}
+				$fdb->getPartNumber($vendor, $pn, true)->merge(new PartNumber($pn, $data));
 			}
 		}
 	}

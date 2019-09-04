@@ -27,7 +27,7 @@ class Info extends Arrayable{
 	protected $version;
 	protected $website;
 	protected $time;
-	protected $controllers;
+	protected $controllers = [];
 
 	public function getName() : ?string{
 		return $this->name;
@@ -66,7 +66,14 @@ class Info extends Arrayable{
 		return $this->controllers;
 	}
 
-	public function setControllers(array $controllers){
-		$this->controllers = $controllers;
+	public function addController($con){
+		if(!is_array($con)){
+			$con = [$con];
+		}
+		foreach($con as $c){
+			if(!in_array($c, $this->controllers)){
+				$this->controllers[] = $c;
+			}
+		}
 	}
 }

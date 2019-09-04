@@ -22,6 +22,7 @@ namespace iTXTech\FlashDetector\FDBGen\Generator;
 
 use iTXTech\FlashDetector\Decoder\Micron;
 use iTXTech\FlashDetector\Decoder\SKHynix;
+use iTXTech\FlashDetector\Fdb\Fdb;
 use iTXTech\SimpleFramework\Util\StringUtil;
 
 class AlcorMicro extends Generator{
@@ -31,13 +32,11 @@ class AlcorMicro extends Generator{
 		return "al";
 	}
 
-	public static function merge(array &$db, string $data, string $filename) : void{
+	public static function merge(Fdb $fdb, string $data, string $filename) : void{
 		$data = explode("\r\n", $data);
 		$cons = explode(",", array_shift($data));
 		foreach($cons as $k => $con){
-			if(!in_array($con, $db["info"]["controllers"])){
-				$db["info"]["controllers"][] = $con;
-			}
+			$fdb->getInfo()->addController($con);
 		}
 		foreach($data as $k){
 			if(trim($k) == ""){
@@ -52,9 +51,6 @@ class AlcorMicro extends Generator{
 			$sup = [];
 			for($i = self::CON_OFFSET; $i < count($rec); $i++){
 				if(isset($rec[$i]) and $rec[$i] == "Y"){
-					if(!isset($cons[$i - self::CON_OFFSET])){
-						var_dump($cons, $i, $rec, $filename);
-					}
 					$sup[] = $cons[$i - self::CON_OFFSET];
 				}
 			}
@@ -69,27 +65,11 @@ class AlcorMicro extends Generator{
 					$pn = SKHynix::removePackage($pn);
 					break;
 			}
-			if(isset($db[$manufacturer][$pn])){
-				if($db[$manufacturer][$pn]["c"] == ""){
-					$db[$manufacturer][$pn]["c"] = $cellLevel;
-				}
-				if($db[$manufacturer][$pn]["l"] == ""){
-					$db[$manufacturer][$pn]["l"] = $processNode;
-				}
-				foreach($sup as $controller){
-					if(!in_array($controller, $db[$manufacturer][$pn]["t"])){
-						$db[$manufacturer][$pn]["t"][] = $controller;
-					}
-				}
-			}else{
-				$db[$manufacturer][$pn] = [
-					"id" => [],//Flash ID
-					"l" => $processNode,//Lithography
-					"c" => $cellLevel,//cell level
-					"t" => $cons,//controller
-					"m" => ""
-				];
-			}
+
+			$fdb->getPartNumber($manufacturer, $pn, true)
+				->setCellLevel($cellLevel)
+				->setProcessNode($processNode)
+				->addController($sup);
 		}
 	}
 }

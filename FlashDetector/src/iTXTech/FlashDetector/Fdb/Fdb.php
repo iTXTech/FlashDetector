@@ -45,19 +45,35 @@ class Fdb extends Arrayable{
 		return $this->vendors;
 	}
 
+	public function getVendor(string $vendor) : ?Vendor{
+		return $this->vendors[strtolower($vendor)] ?? null;
+	}
+
 	public function setVendors(array $vendors){
 		$this->vendors = $vendors;
 	}
 
-	public function getPartNumber(string $vendor, string $partNumber) : ?PartNumber{
+	public function getPartNumber(string $vendor, string $partNumber, bool $real = false) : ?PartNumber{
 		$vendor = strtolower($vendor);
+		$partNumber = strtoupper($partNumber);
 		if(isset($this->vendors[$vendor])){
 			$pn = $this->vendors[$vendor]->getPartNumber($partNumber);
 			if($pn != null){
-				return clone $pn;
+				return $real ? $pn : clone $pn;
+			}elseif($real){
+				return $this->addPartNumber($vendor, $partNumber);
 			}
 		}
-		return null;
+		return $real ? $this->addPartNumber($vendor, $partNumber) : null;
+	}
+
+	private function addPartNumber(string $vendor, string $partNumber) : PartNumber{
+		if(!isset($this->vendors[$vendor])){
+			$this->vendors[$vendor] = new Vendor($vendor);
+		}
+		$pn = new PartNumber($partNumber);
+		$this->vendors[$vendor]->addPartNumber($pn);
+		return $pn;
 	}
 
 	public function hasPartNumber(string $vendor, string $partNumber) : bool{
