@@ -26,5 +26,5 @@ echo json_encode([
 	"result" => true,
 	"time" => time(),
 	"server" => "FDWebServer-WorkerManEE",
-	"fdb_info" => FlashDetector::getFdb()->getInfo()->getVersion()
+	"fdb_info" => FlashDetector::getFdb()->getInfo()->toArray()
 ]);

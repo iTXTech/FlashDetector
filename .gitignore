@@ -1,5 +1,6 @@
 .idea/
 sf/
 module/
-Tools/*.json
+Scripts/*.json
+Scripts/*.csv
 *.phar

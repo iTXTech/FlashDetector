@@ -34,7 +34,7 @@ class IndexPage extends AbstractPage{
 			"result" => true,
 			"time" => time(),
 			"server" => "FDWebServer-Swoole",
-			"fdb_info" => FlashDetector::getFdb()->getInfo()->getVersion()
+			"fdb_info" => FlashDetector::getFdb()->getInfo()->toArray()
 		]);
 	}
 }
