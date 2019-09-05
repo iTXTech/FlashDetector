@@ -152,7 +152,7 @@ class SKHynix extends Decoder{
 	];
 
 	public static function getName() : string{
-		return Constants::MANUFACTURER_SKHYNIX;
+		return Constants::VENDOR_SKHYNIX;
 	}
 
 	public static function check(string $partNumber) : bool{
@@ -164,7 +164,7 @@ class SKHynix extends Decoder{
 
 	public static function decode(string $partNumber) : FlashInfo{
 		$flashInfo = (new FlashInfo($partNumber))
-			->setManufacturer(self::getName());
+			->setVendor(self::getName());
 		if(in_array($level = self::shiftChars($partNumber, 3), ["H2J", "H2D"])){
 			//TODO: SKHynix E2NAND
 			return $flashInfo->setType(Constants::NAND_TYPE_E2NAND)

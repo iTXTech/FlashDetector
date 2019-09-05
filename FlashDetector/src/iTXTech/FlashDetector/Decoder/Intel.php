@@ -28,7 +28,7 @@ use iTXTech\SimpleFramework\Util\StringUtil;
 
 class Intel extends Decoder{
 	public static function getName() : string{
-		return Constants::MANUFACTURER_INTEL;
+		return Constants::VENDOR_INTEL;
 	}
 
 	public static function check(string $partNumber) : bool{
@@ -40,7 +40,7 @@ class Intel extends Decoder{
 	}
 
 	public static function decode(string $partNumber) : FlashInfo{
-		$flashInfo = (new FlashInfo($partNumber))->setManufacturer(self::getName());
+		$flashInfo = (new FlashInfo($partNumber))->setVendor(self::getName());
 		$extra = [
 			Constants::WAFER => false
 		];

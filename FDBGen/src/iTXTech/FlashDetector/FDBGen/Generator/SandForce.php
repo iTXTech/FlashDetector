@@ -46,12 +46,12 @@ class SandForce extends Generator{
 				$controllers[$controller] = "";
 				$fdb->getInfo()->addController($controller);
 			}
-			$manufacturer = str_replace(["hynix"], ["skhynix"], strtolower($config[4]));
+			$vendor = str_replace(["hynix"], ["skhynix"], strtolower($config[4]));
 			$pn = trim($config[7]);
 			if(strlen($pn) <= 3 or StringUtil::contains(strtolower($pn), "custom")){
 				continue;
 			}
-			switch($manufacturer){
+			switch($vendor){
 				case "skhynix":
 					if(StringUtil::contains($pn, "-")){
 						$pn = explode("-", $pn)[0];
@@ -73,7 +73,7 @@ class SandForce extends Generator{
 					break;
 			}
 
-			$fdb->getPartNumber($manufacturer, $pn, true)
+			$fdb->getPartNumber($vendor, $pn, true)
 				->addController($controller);
 		}
 	}

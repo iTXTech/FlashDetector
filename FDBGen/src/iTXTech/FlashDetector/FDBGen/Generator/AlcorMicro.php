@@ -44,8 +44,8 @@ class AlcorMicro extends Generator{
 			}
 			//Vendor,Type,Capacity,Part Number,Process Node,nCE,AU6989SN-GTC,AU6989SN-GTD,AU6989SN-GTE
 			$rec = explode(",", $k);
-			list($manufacturer, $cellLevel, $density, $pn, $processNode) = $rec;
-			$manufacturer = str_replace(["powerflash", "hynix"], ["powerchip", "skhynix"], strtolower($manufacturer));
+			list($vendor, $cellLevel, $density, $pn, $processNode) = $rec;
+			$vendor = str_replace(["powerflash", "hynix"], ["powerchip", "skhynix"], strtolower($vendor));
 			$pn = trim($pn);
 			$processNode = strlen($processNode) > 1 ? $processNode : "";
 			$sup = [];
@@ -54,7 +54,7 @@ class AlcorMicro extends Generator{
 					$sup[] = $cons[$i - self::CON_OFFSET];
 				}
 			}
-			switch($manufacturer){
+			switch($vendor){
 				case "micron":
 					$pn = Micron::removePackage($pn);
 					break;
@@ -66,7 +66,7 @@ class AlcorMicro extends Generator{
 					break;
 			}
 
-			$fdb->getPartNumber($manufacturer, $pn, true)
+			$fdb->getPartNumber($vendor, $pn, true)
 				->setCellLevel($cellLevel)
 				->setProcessNode($processNode)
 				->addController($sup);

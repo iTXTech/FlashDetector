@@ -32,20 +32,20 @@ class SiliconMotionSSD extends Generator{
 
 	public static function merge(Fdb $fdb, string $data, string $filename) : void{
 		$controller = "SM" . explode("_", $filename)[0];
-		$db["info"]["controllers"][] = $controller;
+		$fdb->getInfo()->addController($controller);
 		$data = explode("\r\n", $data);
 		foreach($data as $k => $config){
 			if(StringUtil::startsWith($config, "A") and
 				!StringUtil::startsWith($data[$k + 1], "A") and
 				!StringUtil::endsWith($config, "[END]")){
 				list($flash, $info) = explode("=", $data[$k + 1], 2);
-				list($manufacturer, $density, $pn) = explode(",", $flash, 3);
-				$manufacturer = str_replace(
+				list($vendor, $density, $pn) = explode(",", $flash, 3);
+				$vendor = str_replace(
 					["hynix", "stm", "power flash"],
 					["skhynix", "st", "powerchip"],
-					strtolower($manufacturer));
+					strtolower($vendor));
 				$pn = trim(preg_replace('/\(.*?\)/', '', $pn));
-				if($manufacturer == "sandisk"){
+				if($vendor == "sandisk"){
 					if(StringUtil::startsWith($pn, "SNDK ") and strlen(substr($pn, 5)) > 5){
 						$pn = str_replace(["-8G", "-16G", "-32G", "-64G"], ["-008G", "-016G", "-032G", "-064G"],
 							str_replace(["  ", " "], "-", substr($pn, 5)));
@@ -58,7 +58,7 @@ class SiliconMotionSSD extends Generator{
 						}
 					}
 				}
-				switch($manufacturer){
+				switch($vendor){
 					case "micron":
 						$pn = Micron::removePackage($pn);
 						break;
@@ -72,7 +72,7 @@ class SiliconMotionSSD extends Generator{
 					$id .= $rawId[$i];
 				}
 
-				$fdb->getPartNumber($manufacturer, $pn, true)
+				$fdb->getPartNumber($vendor, $pn, true)
 					->addFlashId($id)
 					->addController($controller);
 			}

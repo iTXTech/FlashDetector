@@ -120,7 +120,7 @@ abstract class FlashDetector{
 				return $info;
 			}
 		}
-		return (new FlashInfo($partNumber))->setManufacturer(Constants::UNKNOWN);
+		return (new FlashInfo($partNumber))->setVendor(Constants::UNKNOWN);
 	}
 
 	public static function combineDataFromFdb(FlashInfo $info, string $decoder){

@@ -29,7 +29,7 @@ use iTXTech\SimpleFramework\Util\StringUtil;
 //TODO: rename to Kioxia
 class Toshiba extends Decoder{
 	public static function getName() : string{
-		return Constants::MANUFACTURER_TOSHIBA;
+		return Constants::VENDOR_TOSHIBA;
 	}
 
 	public static function check(string $partNumber) : bool{
@@ -41,7 +41,7 @@ class Toshiba extends Decoder{
 
 	public static function decode(string $partNumber) : FlashInfo{
 		//Info with asterisk(*) means "Unique character for product variety control."
-		$flashInfo = (new FlashInfo($partNumber))->setManufacturer(self::getName());
+		$flashInfo = (new FlashInfo($partNumber))->setVendor(self::getName());
 		$extra = [
 			"multiChip" => self::shiftChars($partNumber, 2) === "TH"
 		];

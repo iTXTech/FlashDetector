@@ -35,7 +35,7 @@ class SiliconMotionUFD extends Generator{
 		$data = explode("\r\n", mb_convert_encoding($data, "UTF-8", "UTF-8"));
 		//SMI DBF is in CRLF (Windows) format
 		$controller = "SM" . str_replace(["flash_", ".dbf"], "", $filename);
-		$db["info"]["controllers"][] = $controller;
+		$fdb->getInfo()->addController($controller);
 		foreach($data as $record){
 			if(StringUtil::startsWith($record, "@")){
 				$record = substr($record, 2);
@@ -53,7 +53,7 @@ class SiliconMotionUFD extends Generator{
 				$info = explode(" ", str_replace(
 					[$comment, "NEW DATE CODE", "OLD DATE CODE", " - ", "L84A HP", "SanDisk SanDisk", "-ES"],
 					["", "", "", "-", "L84A_HP", "SanDisk", "ES"], $info));
-				//Manufacturer, PartNumber, SMICode, Lithography, CellLevel
+				//Vendor, PartNumber, SMICode, Lithography, CellLevel
 				foreach($info as $k => $v){
 					$v = trim(str_replace(["/", ","], "", $v));
 					if($v === ""){

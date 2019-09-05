@@ -90,7 +90,7 @@ class Samsung extends Decoder{
 	];
 
 	public static function getName() : string{
-		return Constants::MANUFACTURER_SAMSUNG;
+		return Constants::VENDOR_SAMSUNG;
 	}
 
 	public static function check(string $partNumber) : bool{
@@ -102,7 +102,7 @@ class Samsung extends Decoder{
 
 	public static function decode(string $partNumber) : FlashInfo{
 		$flashInfo = (new FlashInfo($partNumber))
-			->setManufacturer(self::getName())
+			->setVendor(self::getName())
 			->setType(Constants::NAND_TYPE_NAND);
 		$partNumber = substr($partNumber, 2);//remove K9
 		$c = self::getOrDefault(self::shiftChars($partNumber, 1), self::CLASSIFICATION, [-1, -1]);

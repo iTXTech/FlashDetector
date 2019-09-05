@@ -38,15 +38,6 @@ Logger::$logLevel = 1;
 
 FDBGen::init();
 
-class CurlWithProxy extends Curl{
-	public static $proxy;
-
-	public function exec(){
-		$this->setProxy(self::$proxy);
-		return parent::exec();
-	}
-}
-
 $options = new Options();
 $options
 	->addOption((new OptionBuilder("f"))->longOpt("file")->hasArg()->argName("file")
@@ -57,8 +48,7 @@ $options
 try{
 	$cmd = (new Parser())->parse($options, $argv);
 	if($cmd->hasOption("p")){
-		CurlWithProxy::$proxy = $cmd->getOptionValue("p");
-		Curl::setCurlClass(CurlWithProxy::class);
+		Curl::$GLOBAL_PROXY = $cmd->getOptionValue("p");
 	}
 	$db = new MicronDatabase($cmd->getOptionValue("f"));
 	$db->update();

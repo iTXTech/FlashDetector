@@ -58,7 +58,7 @@ class SpecTek extends Micron{
 	];
 
 	public static function getName() : string{
-		return Constants::MANUFACTURER_SPECTEK;
+		return Constants::VENDOR_SPECTEK;
 	}
 
 	public static function check(string $partNumber) : bool{
@@ -71,7 +71,7 @@ class SpecTek extends Micron{
 
 	public static function decode(string $partNumber) : FlashInfo{
 		$flashInfo = (new FlashInfo($partNumber))
-			->setManufacturer(self::getName())->setType(Constants::NAND_TYPE_NAND);
+			->setVendor(self::getName())->setType(Constants::NAND_TYPE_NAND);
 		if(strlen($partNumber) == 13){
 			return $flashInfo->setExtraInfo([Constants::UNSUPPORTED_REASON => Constants::SPECTEK_OLD_NUMBERING]);
 		}

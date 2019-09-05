@@ -57,7 +57,7 @@ class SanDisk extends Decoder{
 	];
 
 	public static function getName() : string{
-		return Constants::MANUFACTURER_SANDISK;
+		return Constants::VENDOR_SANDISK;
 	}
 
 	public static function check(string $partNumber) : bool{
@@ -68,7 +68,7 @@ class SanDisk extends Decoder{
 	}
 
 	public static function decode(string $partNumber) : FlashInfo{
-		$flashInfo = (new FlashInfo($partNumber))->setManufacturer(self::getName());
+		$flashInfo = (new FlashInfo($partNumber))->setVendor(self::getName());
 		$partNumber = substr($partNumber, 2);//remove SD
 		if(substr($partNumber, 0, 2) === "IN"){
 			return $flashInfo->setType(Constants::NAND_TYPE_INAND)
@@ -146,7 +146,7 @@ class SanDisk extends Decoder{
 				}elseif($part == "CODE"){
 					$extraInfo[Constants::SANDISK_CODE] = true;
 				}elseif($part{0} == "T"){
-					$extraInfo[Constants::MANUFACTURER_TOSHIBA] = substr($part, 1);
+					$extraInfo[Constants::VENDOR_TOSHIBA] = substr($part, 1);
 				}else{
 					$comment .= $part . "/";
 				}

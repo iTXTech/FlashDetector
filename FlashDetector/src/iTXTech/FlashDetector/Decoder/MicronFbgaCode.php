@@ -49,7 +49,7 @@ class MicronFbgaCode extends Decoder{
 			$extra["micronPartNumber"] = $pn;
 			return $info->setExtraInfo($extra);
 		}else{
-			return (new FlashInfo($partNumber))->setManufacturer(Constants::UNKNOWN);
+			return (new FlashInfo($partNumber))->setVendor(Constants::UNKNOWN);
 		}
 	}
 

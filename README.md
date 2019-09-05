@@ -12,7 +12,7 @@ Universal NAND Flash Part Number Decoder
 
 ## Supported
 
-### Flash Manufacturers
+### Flash Vendors
 
 1. `Intel`/`Micron (SpecTek)`
 1. `Samsung`

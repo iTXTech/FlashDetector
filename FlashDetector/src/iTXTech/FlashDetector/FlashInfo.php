@@ -26,7 +26,7 @@ use iTXTech\FlashDetector\Property\FlashInterface;
 
 class FlashInfo extends Arrayable{
 	protected $partNumber;
-	protected $manufacturer;//Intel/Samsung
+	protected $vendor;//Intel/Samsung
 	protected $type;//NAND/iNAND/E2NAND
 	protected $density;//256Gb
 	protected $deviceWidth;//x8 x16 x4
@@ -52,8 +52,8 @@ class FlashInfo extends Arrayable{
 		return $this->partNumber;
 	}
 
-	public function getManufacturer() : string{
-		return $this->manufacturer;
+	public function getVendor() : string{
+		return $this->vendor;
 	}
 
 	public function getCellLevel() : ?string{
@@ -89,8 +89,8 @@ class FlashInfo extends Arrayable{
 		return $this;
 	}
 
-	public function setManufacturer(string $m) : FlashInfo{
-		$this->manufacturer = $m;
+	public function setVendor(string $m) : FlashInfo{
+		$this->vendor = $m;
 		return $this;
 	}
 
@@ -191,7 +191,7 @@ class FlashInfo extends Arrayable{
 			$info = FlashDetector::translate($info);
 			$info["interface"] = $interface;//hack!
 		}
-		$info["rawManufacturer"] = $this->manufacturer;
+		$info["rawVendor"] = $this->vendor;
 		return $info;
 	}
 

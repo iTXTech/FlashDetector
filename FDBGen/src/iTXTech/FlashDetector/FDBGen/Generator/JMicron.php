@@ -38,9 +38,9 @@ class JMicron extends Generator{
 		$controller = $prefix . explode("_", $filename)[0];
 		$data = parse_ini_string($data, true);
 		$fdb->getInfo()->addController($controller);
-		foreach($data as $manufacturer => $flashes){
-			$manufacturer = str_replace(["hynix"], ["skhynix"], strtolower($manufacturer));
-			if(in_array($manufacturer, ["version", "vendor"])){
+		foreach($data as $vendor => $flashes){
+			$vendor = str_replace(["hynix"], ["skhynix"], strtolower($vendor));
+			if(in_array($vendor, ["version", "vendor"])){
 				continue;
 			}
 			foreach($flashes as $flash){
@@ -63,7 +63,7 @@ class JMicron extends Generator{
 				}
 				$pn = trim($info[1]);
 
-				switch($manufacturer){
+				switch($vendor){
 					case "sandisk":
 						$pn = substr_replace($pn, "-", strpos($pn, "0"), 0);
 						break;
@@ -80,7 +80,7 @@ class JMicron extends Generator{
 						break;
 				}
 
-				$partNumber = $fdb->getPartNumber($manufacturer, $pn, true)
+				$partNumber = $fdb->getPartNumber($vendor, $pn, true)
 					->addController($controller);
 				if(strlen($id) == 12){
 					$partNumber->addFlashId($id);

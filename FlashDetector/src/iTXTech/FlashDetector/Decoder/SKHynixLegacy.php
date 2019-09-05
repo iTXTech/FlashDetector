@@ -36,7 +36,7 @@ class SKHynixLegacy extends SKHynix{
 
 	public static function decode(string $partNumber) : FlashInfo{
 		$flashInfo = (new FlashInfo($partNumber))->setType(Constants::NAND_TYPE_NAND)
-			->setManufacturer(self::getName());
+			->setVendor(self::getName());
 		self::shiftChars($partNumber, 4);//remove HY27
 		$flashInfo->setVoltage(self::getOrDefault(self::shiftChars($partNumber, 1), self::VOLTAGE));
 		$classification = self::getOrDefault(self::shiftChars($partNumber, 1),

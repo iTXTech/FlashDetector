@@ -25,7 +25,6 @@ require_once "env.php";
 use iTXTech\FlashDetector\Constants;
 use iTXTech\FlashDetector\FlashDetector;
 use iTXTech\FlashDetector\Property\Classification;
-use iTXTech\SimpleFramework\Util\StringUtil;
 
 $fdb = FlashDetector::getFdb();
 
@@ -41,7 +40,7 @@ foreach($fdb->getVendors() as $vendor){
 			if(($i->getExtraInfo()[Constants::ENTERPRISE] ?? false) === true){
 				$cell = "e" . $cell;
 			}
-			$csv .= $pn->getPartNumber() . "," . strtoupper($i->getManufacturer()) . "," .
+			$csv .= $pn->getPartNumber() . "," . strtoupper($i->getVendor()) . "," .
 				FlashDetector::getHumanReadableDensity($i->getDensity(), true) . "," .
 				$cell . "," . str_replace(",", " ", $i->getPackage()) . "," . $ce . "," .
 				implode(" ", $ids) . PHP_EOL;

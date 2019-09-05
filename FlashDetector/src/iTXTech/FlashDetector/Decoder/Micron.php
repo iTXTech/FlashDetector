@@ -143,7 +143,7 @@ class Micron extends Decoder{
 	];
 
 	public static function getName() : string{
-		return Constants::MANUFACTURER_MICRON;
+		return Constants::VENDOR_MICRON;
 	}
 
 	public static function check(string $partNumber) : bool{
@@ -154,7 +154,7 @@ class Micron extends Decoder{
 	}
 
 	public static function decode(string $partNumber) : FlashInfo{
-		$flashInfo = (new FlashInfo($partNumber))->setManufacturer(self::getName());
+		$flashInfo = (new FlashInfo($partNumber))->setVendor(self::getName());
 		if(!StringUtil::startsWith($partNumber, "29")){
 			$partNumber = substr($partNumber, 2);//remove MT
 		}

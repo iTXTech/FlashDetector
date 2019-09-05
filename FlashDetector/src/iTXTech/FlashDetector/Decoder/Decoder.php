@@ -76,6 +76,6 @@ abstract class Decoder{
 	}
 
 	public static function getFlashInfoFromFdb(FlashInfo $info) : ?PartNumber{
-		return FlashDetector::getFdb()->getPartNumber($info->getManufacturer(), $info->getPartNumber());
+		return FlashDetector::getFdb()->getPartNumber($info->getVendor(), $info->getPartNumber());
 	}
 }

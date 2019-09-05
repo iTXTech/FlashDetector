@@ -38,11 +38,11 @@ class SanDiskShortCode extends SanDisk{
 	}
 
 	public static function getName() : string{
-		return Constants::MANUFACTURER_SANDISK;
+		return Constants::VENDOR_SANDISK;
 	}
 
 	public static function decode(string $partNumber) : FlashInfo{
-		$flashInfo = (new FlashInfo($partNumber))->setManufacturer(self::getName())
+		$flashInfo = (new FlashInfo($partNumber))->setVendor(self::getName())
 			->setDensity(self::matchFromStart(explode("-", $partNumber, 2)[1],
 				SanDisk::DENSITY, 0));
 		return $flashInfo;
