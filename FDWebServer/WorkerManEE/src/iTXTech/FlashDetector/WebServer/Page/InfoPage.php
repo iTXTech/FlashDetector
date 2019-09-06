@@ -27,7 +27,8 @@ class InfoPage extends AbstractPage{
 	public static function onRequest(){
 		return json_encode([
 			"result" => true,
-			"fdb" => FlashDetector::getFdb()->getInfo()->toArray()
+			"ver" => FlashDetector::getVersion(),
+			"info" => FlashDetector::getInfo()
 		]);
 	}
 }

@@ -24,5 +24,6 @@ use iTXTech\FlashDetector\FlashDetector;
 
 echo json_encode([
 	"result" => true,
-	"fdb" => FlashDetector::getFdb()->getInfo()->toArray()
+	"ver" => FlashDetector::getVersion(),
+	"info" => FlashDetector::getInfo()
 ]);

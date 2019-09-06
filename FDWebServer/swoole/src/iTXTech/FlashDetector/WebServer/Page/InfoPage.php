@@ -30,7 +30,8 @@ class InfoPage extends AbstractPage{
 	public static function process(Request $request, Response $response, Server $server){
 		self::sendJsonData($response, [
 			"result" => true,
-			"info" => FlashDetector::getFdb()->getInfo()->toArray()
+			"ver" => FlashDetector::getVersion(),
+			"info" => FlashDetector::getInfo()
 		]);
 	}
 }

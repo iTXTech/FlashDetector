@@ -44,6 +44,7 @@ abstract class FlashDetector{
 	private static $mdb = [];
 	private static $lang = [];
 	private static $fallbackLang = [];
+	private static $info;
 
 	public static function getFdb() : Fdb{
 		return self::$fdb;
@@ -51,6 +52,26 @@ abstract class FlashDetector{
 
 	public static function getVersion() : int{
 		return self::$fdb->getInfo()->getVersion();
+	}
+
+	public static function getInfo() : array{
+		if(self::$info == null){
+			$cnt = 0;
+			foreach(self::$fdb->getVendors() as $vendor){
+				$cnt += count($vendor->getPartNumbers());
+			}
+			$c = 0;
+			foreach(self::$mdb as $v){
+				$c += count($v);
+			}
+			self::$info = [
+				"fdb" => self::$fdb->getInfo()->toArray(),
+				"flash_cnt" => $cnt,
+				"id_cnt" => count(self::$iddb) - 1,
+				"mdb_cnt" => $c
+			];
+		}
+		return self::$info;
 	}
 
 	public static function getIddb() : array{
