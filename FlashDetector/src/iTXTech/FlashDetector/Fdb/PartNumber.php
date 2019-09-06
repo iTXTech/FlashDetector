@@ -109,8 +109,8 @@ class PartNumber extends Arrayable{
 		return $this;
 	}
 
-	public function setComment(string $comment) : PartNumber{
-		if($this->m == null and $comment != ""){
+	public function setComment(string $comment, bool $force = false) : PartNumber{
+		if($force or ($this->m == null and $comment != "")){
 			$this->m = $comment;
 		}
 		return $this;

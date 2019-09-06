@@ -86,6 +86,9 @@ class SanDisk extends Decoder{
 				"Q" => "BGA"
 				//W ?
 			]));
+		if(strlen($partNumber) == 0){
+			return $flashInfo;
+		}
 		if($partNumber{0} == "N"){
 			$partNumber = substr($partNumber, 1);//remove N for NAND
 		}
@@ -154,7 +157,7 @@ class SanDisk extends Decoder{
 			if($comment != ""){
 				$comment = substr($comment, 0, strlen($comment) - 1);
 			}
-			$data->setComment($comment);
+			$data->setComment($comment, true);
 			$info->setExtraInfo($extraInfo);
 		}
 		return $data;
