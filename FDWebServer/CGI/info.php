@@ -18,16 +18,11 @@
  * limitations under the License.
  */
 
-namespace iTXTech\FlashDetector\WebServer\Page;
+require_once "env.php";
 
-use EaseCation\WorkerManEE\Page\AbstractPage;
+use iTXTech\FlashDetector\FlashDetector;
 
-class IndexPage extends AbstractPage{
-	public static function onRequest(){
-		return json_encode([
-			"result" => true,
-			"time" => time(),
-			"server" => "FDWebServer-WorkerManEE"
-		]);
-	}
-}
+echo json_encode([
+	"result" => true,
+	"fdb" => FlashDetector::getFdb()->getInfo()->toArray()
+]);

@@ -20,11 +20,8 @@
 
 require_once "env.php";
 
-use iTXTech\FlashDetector\FlashDetector;
-
 echo json_encode([
 	"result" => true,
 	"time" => time(),
-	"server" => "FDWebServer-WorkerManEE",
-	"fdb_info" => FlashDetector::getFdb()->getInfo()->toArray()
+	"server" => "FDWebServer-CGI"
 ]);

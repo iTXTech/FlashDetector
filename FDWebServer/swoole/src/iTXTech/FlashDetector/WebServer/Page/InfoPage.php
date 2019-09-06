@@ -20,14 +20,17 @@
 
 namespace iTXTech\FlashDetector\WebServer\Page;
 
-use EaseCation\WorkerManEE\Page\AbstractPage;
+use iTXTech\FlashDetector\FlashDetector;
+use iTXTech\SimpleSwFw\Http\Page\AbstractPage;
+use Swoole\Http\Request;
+use Swoole\Http\Response;
+use Swoole\Http\Server;
 
-class IndexPage extends AbstractPage{
-	public static function onRequest(){
-		return json_encode([
+class InfoPage extends AbstractPage{
+	public static function process(Request $request, Response $response, Server $server){
+		self::sendJsonData($response, [
 			"result" => true,
-			"time" => time(),
-			"server" => "FDWebServer-WorkerManEE"
+			"info" => FlashDetector::getFdb()->getInfo()->toArray()
 		]);
 	}
 }

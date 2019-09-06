@@ -192,6 +192,9 @@ class FlashInfo extends Arrayable{
 			$info["interface"] = $interface;//hack!
 		}
 		$info["rawVendor"] = $this->vendor;
+		//backward compatibility
+		$info["manufacturer"] = $info["vendor"];
+		$info["rawManufacturer"] = $info["rawVendor"];
 		return $info;
 	}
 

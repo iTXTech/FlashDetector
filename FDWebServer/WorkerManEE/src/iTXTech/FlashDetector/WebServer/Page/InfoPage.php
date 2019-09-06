@@ -21,13 +21,13 @@
 namespace iTXTech\FlashDetector\WebServer\Page;
 
 use EaseCation\WorkerManEE\Page\AbstractPage;
+use iTXTech\FlashDetector\FlashDetector;
 
-class IndexPage extends AbstractPage{
+class InfoPage extends AbstractPage{
 	public static function onRequest(){
 		return json_encode([
 			"result" => true,
-			"time" => time(),
-			"server" => "FDWebServer-WorkerManEE"
+			"fdb" => FlashDetector::getFdb()->getInfo()->toArray()
 		]);
 	}
 }

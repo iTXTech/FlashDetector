@@ -6,7 +6,7 @@ High performance HTTP server for FlashDetector
 
 ### swoole-powered
 
-* [swoole 4.2](https://github.com/swoole/swoole-src)
+* [swoole 4.2+](https://github.com/swoole/swoole-src)
 * Windows 10 should use WSL
 * Windows 7/8/8.1 can use cygwin/Msys2
 
@@ -31,7 +31,9 @@ $ php ws.php -s -a 0.0.0.0 -p 8080 // -s for swoole, -w for WorkerManEE
 * Protocol: `HTTP(S)`
 * Method: `GET`
 
-### / - *index page*
+### / - *get FDWebServer information*
+
+### /info - *get FlashDetector information*
 
 ### /decode - *decode part number*
 

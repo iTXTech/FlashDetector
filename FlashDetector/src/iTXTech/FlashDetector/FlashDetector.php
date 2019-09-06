@@ -49,6 +49,10 @@ abstract class FlashDetector{
 		return self::$fdb;
 	}
 
+	public static function getVersion() : int{
+		return self::$fdb->getInfo()->getVersion();
+	}
+
 	public static function getIddb() : array{
 		return self::$iddb;
 	}
