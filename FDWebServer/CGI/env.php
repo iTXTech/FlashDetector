@@ -28,14 +28,13 @@ use iTXTech\SimpleFramework\Console\Logger;
 use iTXTech\SimpleFramework\Framework;
 use iTXTech\SimpleFramework\Module\ModuleManager;
 
-
 Logger::$logLevel = 4;//disable logger
 
 global $classLoader;
 try{
 	$moduleManager = new ModuleManager($classLoader,
 		__DIR__ . DIRECTORY_SEPARATOR . DIRECTORY_SEPARATOR, "");
-	loadModule($moduleManager, "FlashDetector");
+	loadModule($moduleManager, file_exists("FlashDetector") ? "FlashDetector" : "FlashDetector.phar");
 }catch(Throwable $e){
 	Logger::logException($e);
 }
