@@ -10,7 +10,7 @@
   "dependencies": [
     {
       "name": "iTXTech/FlashDetector",
-      "version": "1.0.0"
+      "version": "32"
     }
   ],
   "extensions": [

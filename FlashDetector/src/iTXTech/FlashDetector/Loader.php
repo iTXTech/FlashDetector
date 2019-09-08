@@ -21,12 +21,18 @@
 namespace iTXTech\FlashDetector;
 
 use iTXTech\SimpleFramework\Module\Module;
+use iTXTech\SimpleFramework\Module\ModuleInfo;
 
 class Loader extends Module{
 	private static $instance;
 
 	public function load(){
 		self::$instance = $this;
+		FlashDetector::loadDatabase();
+		$info = new \ReflectionClass(ModuleInfo::class);
+		$prop = $info->getProperty("version");
+		$prop->setAccessible(true);
+		$prop->setValue($this->getInfo(), FlashDetector::getVersion());
 	}
 
 	public function unload(){

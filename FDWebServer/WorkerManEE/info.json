@@ -5,9 +5,13 @@
   "description": "HTTP server for FlashDetector (compatible with PHP for Windows)",
   "author": "iTX Technologies",
   "main": "iTXTech\\FlashDetector\\WebServer\\Loader",
-  "order": 2,
+  "order": 1,
   "website": "https://github.com/iTXTech/FlashDetector",
   "dependencies": [
+    {
+      "name": "iTXTech/FlashDetector",
+      "version": "32"
+    },
     {
       "name": "EaseCation/WorkerManEE",
       "version": "17.10.1"

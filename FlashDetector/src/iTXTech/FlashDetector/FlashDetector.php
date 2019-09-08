@@ -86,6 +86,15 @@ abstract class FlashDetector{
 		return self::$lang;
 	}
 
+	public static function loadDatabase(){
+		if(Loader::getInstance() !== null){
+			$fdb = json_decode(Loader::getInstance()->getResourceAsText("fdb.json"), true);
+			self::$fdb = new Fdb($fdb);
+			self::$iddb = self::generateIddb($fdb);
+			self::$mdb = json_decode(Loader::getInstance()->getResourceAsText("mdb.json"), true);
+		}
+	}
+
 	public static function init(string $lang = "eng", string $fallbackLang = "eng"){
 		self::registerDecoder(Micron::class);
 		self::registerDecoder(SKHynix::class);
@@ -98,10 +107,6 @@ abstract class FlashDetector{
 		self::registerDecoder(SanDisk::class);
 		self::registerDecoder(SanDiskShortCode::class);
 		if(Loader::getInstance() !== null){
-			$fdb = json_decode(Loader::getInstance()->getResourceAsText("fdb.json"), true);
-			self::$fdb = new Fdb($fdb);
-			self::$iddb = self::generateIddb($fdb);
-			self::$mdb = json_decode(Loader::getInstance()->getResourceAsText("mdb.json"), true);
 			self::$lang = json_decode(Loader::getInstance()->getResourceAsText("lang/$lang.json"), true);
 			self::$fallbackLang = json_decode(Loader::getInstance()
 				->getResourceAsText("lang/$fallbackLang.json"), true);
