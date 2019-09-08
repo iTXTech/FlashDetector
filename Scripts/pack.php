@@ -66,7 +66,13 @@ try{
 	}
 	loadModule($moduleManager, $path);
 	$module = $moduleManager->getModule($name);
-	$module->pack(__DIR__ . DIRECTORY_SEPARATOR, $name . ".phar", true, true, true);
+	$module->pack(__DIR__ . DIRECTORY_SEPARATOR, $file = $name . ".phar", true, true, true);
+	if(file_exists($file)){
+		$phar = new Phar($file);
+		$metadata = $phar->getMetadata();
+		$metadata["gitCommitId"] = Util::getLatestGitCommitId(".." . DIRECTORY_SEPARATOR);
+		$phar->setMetadata($metadata);
+	}
 }catch(ParseException $e){
 	Util::println($e->getMessage());
 	echo((new HelpFormatter())->generateHelp("pack", $options));
