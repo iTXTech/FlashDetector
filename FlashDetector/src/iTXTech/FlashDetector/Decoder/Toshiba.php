@@ -212,6 +212,7 @@ class Toshiba extends Decoder{
 				"D" => "BGA132",
 				"E" => "BGA272",
 				"F" => "BGA272",
+				"G" => "BGA272",
 				"H" => "BGA132",
 				"J" => "BGA152",
 				"K" => "BGA152",
