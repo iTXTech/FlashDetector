@@ -20,7 +20,7 @@
 
 //Runtime Environment Initializer
 ob_start();
-require_once "sf/autoload.php";
+require_once "sfloader.php";
 ob_clean();
 
 use iTXTech\FlashDetector\FlashDetector;

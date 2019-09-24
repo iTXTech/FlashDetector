@@ -20,7 +20,7 @@
 
 //Runtime Environment Initializer
 
-require_once "../sf/autoload.php";
+require_once "../sfloader.php";
 
 use iTXTech\FlashDetector\FlashDetector;
 use iTXTech\SimpleFramework\Console\Logger;
