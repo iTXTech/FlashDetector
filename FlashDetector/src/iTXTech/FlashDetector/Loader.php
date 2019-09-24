@@ -38,7 +38,7 @@ class Loader extends Module{
 	public function unload(){
 	}
 
-	public static function getInstance() : Loader{
+	public static function getInstance() : ?Loader{
 		return self::$instance;
 	}
 }
