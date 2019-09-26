@@ -58,7 +58,7 @@ class Toshiba extends Decoder{
 			"L" => Constants::NAND_TYPE_NAND,
 		]);
 		$flashInfo->setType($level)
-			->setInterface((new FlashInterface(true))->setToggle($if === "T"))
+			->setInterface((new FlashInterface(true))->setToggle(in_array($if, ["T", "L"])))
 			->setVoltage(self::getOrDefault(self::shiftChars($partNumber, 1), [
 				"V" => "3.3V",
 				"Y" => "1.8V",
