@@ -14,16 +14,37 @@
  *
  */
 
-if(file_exists($f = __DIR__ . DIRECTORY_SEPARATOR . "sf") and is_dir($f)){
+if(isset($argv[1]) and substr($argv[1], 0, 2) == "sf"){
+	$f = explode("=", $argv[1], 2)[1];
+	array_splice($argv, 1, 1);
+	if(is_file($f)){
+		$phar = new Phar($f);
+		if(($phar->getMetadata()["name"]) ?? "" == "SimpleFramework"){
+			require_once "phar://" . $f . DIRECTORY_SEPARATOR . "autoload.php";
+		}else{
+			require_once $f;
+		}
+	}else{
+		require_once $f . DIRECTORY_SEPARATOR . "autoload.php";
+	}
+}elseif(file_exists($f = __DIR__ . DIRECTORY_SEPARATOR . "autoload.php")){
+	require_once $f;
+}elseif(file_exists($f = __DIR__ . DIRECTORY_SEPARATOR . "sf") and is_dir($f)){
 	require_once $f . DIRECTORY_SEPARATOR . "autoload.php";
 }elseif(isset($_ENV["SF_HOME"])){
 	require_once $_ENV["SF_HOME"] . DIRECTORY_SEPARATOR . "autoload.php";
+}elseif(isset($_ENV["SF_ARCHIVE"])){
+	require_once "phar://" . $_ENV["SF_ARCHIVE"] . DIRECTORY_SEPARATOR . "autoload.php";
 }elseif(file_exists($f = __DIR__ . DIRECTORY_SEPARATOR . "sf.json")){
 	$config = json_decode(file_get_contents($f), true);
 	if(file_exists($config["home"])){
 		require_once $config["home"] . DIRECTORY_SEPARATOR . "autoload.php";
 	}
 }else{
-	echo "SimpleFramework Loader cannot find SimpleFramework autoload.php" . PHP_EOL;
+	echo "SimpleFramework Loader cannot locate SimpleFramework autoload.php" . PHP_EOL;
 	echo "Run \"git clone https://github.com/iTXTech/SimpleFramework.git --depth=1 sf\"" . PHP_EOL;
+}
+
+function isSimpleFrameworkLoaded() : bool{
+	return class_exists("iTXTech\SimpleFramework\Initializer");
 }

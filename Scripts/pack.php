@@ -70,7 +70,7 @@ try{
 	if(file_exists($file)){
 		$phar = new Phar($file);
 		$metadata = $phar->getMetadata();
-		$metadata["gitCommitId"] = Util::getLatestGitCommitId(".." . DIRECTORY_SEPARATOR);
+		$metadata["revision"] = Util::getLatestGitCommitId(".." . DIRECTORY_SEPARATOR);
 		$phar->setMetadata($metadata);
 	}
 }catch(ParseException $e){
