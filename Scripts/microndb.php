@@ -52,7 +52,7 @@ try{
 	}
 	$db = new MicronDatabase($cmd->getOptionValue("f"));
 	$db->update();
-	$db->save();
+	$db->save(JSON_PRETTY_PRINT);
 }catch(ParseException $e){
 	Util::println($e->getMessage());
 	echo((new HelpFormatter())->generateHelp("microndb", $options));

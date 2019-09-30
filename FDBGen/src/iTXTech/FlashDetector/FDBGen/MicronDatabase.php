@@ -48,9 +48,9 @@ class MicronDatabase{
 		$this->file->save(0);
 	}
 
-	public function save(){
+	public function save(int $option = 0){
 		$this->file->setAll($this->data);
-		$this->file->save(0);
+		$this->file->save($option);
 	}
 
 	public function update(){

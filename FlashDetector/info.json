@@ -7,6 +7,7 @@
   "main": "iTXTech\\FlashDetector\\Loader",
   "order": 1,
   "website": "https://github.com/iTXTech/FlashDetector",
+  "packer": "iTXTech\\FlashDetector\\Packer",
   "stub": "stub.php",
   "sfloader": true,
   "dependencies": [
