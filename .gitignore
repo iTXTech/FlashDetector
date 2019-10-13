@@ -4,4 +4,3 @@ module/
 Scripts/*.json
 Scripts/*.csv
 *.phar
-sf.json

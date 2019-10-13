@@ -5,7 +5,6 @@
   "description": "Flash Database Generator for FlashDetector",
   "author": "iTX Technologies",
   "main": "iTXTech\\FlashDetector\\FDBGen\\Loader",
-  "order": 0,
   "website": "https://github.com/iTXTech/FlashDetector",
   "dependencies": [
     {

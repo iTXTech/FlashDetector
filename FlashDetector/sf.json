@@ -5,7 +5,6 @@
   "description": "Universal NAND Flash Part Number Decoder",
   "author": "iTX Technologies",
   "main": "iTXTech\\FlashDetector\\Loader",
-  "order": 1,
   "website": "https://github.com/iTXTech/FlashDetector",
   "packer": "iTXTech\\FlashDetector\\Packer",
   "stub": "stub.php",

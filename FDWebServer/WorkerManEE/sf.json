@@ -5,7 +5,6 @@
   "description": "HTTP server for FlashDetector (compatible with PHP for Windows)",
   "author": "iTX Technologies",
   "main": "iTXTech\\FlashDetector\\WebServer\\Loader",
-  "order": 1,
   "website": "https://github.com/iTXTech/FlashDetector",
   "dependencies": [
     {
