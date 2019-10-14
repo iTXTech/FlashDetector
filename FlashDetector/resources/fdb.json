@@ -1,9 +1,9 @@
 {
     "info": {
         "name": "iTXTech FlashDetector Flash Database",
-        "version": "34",
+        "version": "35",
         "website": "https:\/\/github.com\/iTXTech\/FlashDetector",
-        "time": "Mon, 30 Sep 2019 01:08:05 +0000",
+        "time": "Mon, 14 Oct 2019 12:36:16 +0000",
         "controllers": [
             "SM321AC",
             "SM321BB",
@@ -19370,6 +19370,7 @@
         "MT29F2T08CUCBB": {
             "id": [
                 "2CC4E532AA04",
+                "89C4E532AA01",
                 "2CC4E532AA05"
             ],
             "t": [
@@ -45843,6 +45844,7 @@
             "id": [
                 "45DEA4827656",
                 "45DEA7827E56",
+                "45DEA1327A56",
                 "45DE94837656"
             ],
             "t": [
@@ -45880,9 +45882,9 @@
                 "CBM2096",
                 "CBM2098P",
                 "CBM2098E",
+                "CBM2098S",
                 "CBM2099",
                 "CBM2099E",
-                "CBM2098S",
                 "CBM2099S",
                 "CBM2199",
                 "CBM2199S",
