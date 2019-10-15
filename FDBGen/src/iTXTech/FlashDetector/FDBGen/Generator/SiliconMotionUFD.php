@@ -53,7 +53,7 @@ class SiliconMotionUFD extends Generator{
 				$info = explode(" ", str_replace(
 					[$comment, "NEW DATE CODE", "OLD DATE CODE", " - ", "L84A HP", "SanDisk SanDisk", "-ES"],
 					["", "", "", "-", "L84A_HP", "SanDisk", "ES"], $info));
-				//Vendor, PartNumber, SMICode, Lithography, CellLevel
+				//Vendor, PartNumber, SMIPackageCode, Lithography, CellLevel, NodeCodename
 				foreach($info as $k => $v){
 					$v = trim(str_replace(["/", ","], "", $v));
 					if($v === ""){
@@ -94,9 +94,6 @@ class SiliconMotionUFD extends Generator{
 
 				if(($info[3] ?? null) != null){
 					$pn->setProcessNode($info[3]);
-				}
-				if(($info[4] ?? null) != null){
-					$pn->setCellLevel($info[4]);
 				}
 			}
 		}

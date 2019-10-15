@@ -117,14 +117,14 @@ class PartNumber extends Arrayable{
 	}
 
 	public function setProcessNode(string $processNode) : PartNumber{
-		if($this->l != null){
+		if($this->l == null){
 			$this->l = $processNode;
 		}
 		return $this;
 	}
 
 	public function setCellLevel(string $cellLevel) : PartNumber{
-		if($this->c != null){
+		if($this->c == null){
 			$this->c = $cellLevel;
 		}
 		return $this;
