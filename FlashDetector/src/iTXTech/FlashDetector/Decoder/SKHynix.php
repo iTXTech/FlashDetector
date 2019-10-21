@@ -167,10 +167,13 @@ class SKHynix extends Decoder{
 			->setVendor(self::getName());
 		if(in_array($level = self::shiftChars($partNumber, 3), ["H2J", "H2D"])){
 			//TODO: SKHynix E2NAND
-			return $flashInfo->setType(Constants::NAND_TYPE_E2NAND)
-				->setExtraInfo([Constants::UNSUPPORTED_REASON => Constants::SKHYNIX_E2NAND_NOT_SUPPORTED]);
+			return $flashInfo->setType(Constants::NAND_TYPE_CON)
+				->setExtraInfo([Constants::UNSUPPORTED_REASON => Constants::SKHYNIX_UNSUPPORTED]);
 		}else{
 			$flashInfo->setType(Constants::NAND_TYPE_NAND);
+		}
+		if($level == "H25"){
+			return $flashInfo->setExtraInfo([Constants::UNSUPPORTED_REASON => Constants::SKHYNIX_UNSUPPORTED]);
 		}
 		$flashInfo
 			->setVoltage(self::getOrDefault(self::shiftChars($partNumber, 1), self::VOLTAGE))

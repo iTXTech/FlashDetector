@@ -45,6 +45,7 @@ interface Constants{
 	public const NAND_TYPE_E2NAND = "e2nand";
 	public const NAND_TYPE_INAND = "inand";
 	public const NAND_TYPE_ISSD = "issd";
+	public const NAND_TYPE_CON = "nandcon";
 
 	public const UNKNOWN = "Unknown";
 
@@ -56,7 +57,7 @@ interface Constants{
 	public const SANDISK_CODE = "sandisk_code";
 
 	//SKHynix
-	public const SKHYNIX_E2NAND_NOT_SUPPORTED = "skhynix_e2nand_not_supported";
+	public const SKHYNIX_UNSUPPORTED = "skhynix_unsupported";
 	public const SKHYNIX_OT_C = "skhynix_ot_c";
 	public const SKHYNIX_OT_E = "skhynix_ot_e";
 	public const SKHYNIX_OT_M = "skhynix_ot_m";
@@ -78,7 +79,7 @@ interface Constants{
 	public const SPECTEK_IF_N = "spectek_if_n";
 
 	//Toshiba
-	public const TOSHIBA_E2NAND_NOT_SUPPORTED = "toshiba_e2nand_not_supported";
+	public const TOSHIBA_UNSUPPORTED = "toshiba_unsupported";
 
 	//Samsung
 	public const SAMSUNG_NONE = "samsung_none";

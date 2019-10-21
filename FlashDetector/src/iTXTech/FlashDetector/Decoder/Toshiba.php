@@ -48,8 +48,8 @@ class Toshiba extends Decoder{
 		$level = self::shiftChars($partNumber, 2);
 		if(in_array($level, ["GV", "GB"])){
 			//TODO: Toshiba NAND with Controller
-			return $flashInfo->setType(Constants::NAND_TYPE_E2NAND)
-				->setExtraInfo([Constants::UNSUPPORTED_REASON => Constants::TOSHIBA_E2NAND_NOT_SUPPORTED]);
+			return $flashInfo->setType(Constants::NAND_TYPE_CON)
+				->setExtraInfo([Constants::UNSUPPORTED_REASON => Constants::TOSHIBA_UNSUPPORTED]);
 		}
 		$level = self::getOrDefault($if = self::shiftChars($partNumber, 1), [
 			"N" => Constants::NAND_TYPE_NAND,
