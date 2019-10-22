@@ -1,9 +1,9 @@
 {
     "info": {
         "name": "iTXTech FlashDetector Flash Database",
-        "version": "36",
+        "version": "37",
         "website": "https:\/\/github.com\/iTXTech\/FlashDetector",
-        "time": "Tue, 15 Oct 2019 05:28:54 +0000",
+        "time": "Tue, 22 Oct 2019 04:44:29 +0000",
         "controllers": [
             "SM321AC",
             "SM321BB",
@@ -14056,7 +14056,7 @@
                 "AU6989SN-GTE"
             ]
         },
-        "H25QFT8A1A8R": {
+        "H25QFT8A1A": {
             "id": [
                 "AD5E28221090",
                 "AD5E283300A0",
@@ -14066,9 +14066,11 @@
             "c": "TLC",
             "t": [
                 "SM3268AB",
+                "SM3271AB",
                 "SM3281AB",
                 "SM3281BB",
                 "SM2258XT",
+                "SM2258",
                 "AU6989SN-GTC",
                 "AU6989SN-GTD",
                 "AU6989SN-GTE",
@@ -14086,17 +14088,7 @@
                 "SM3281BB"
             ]
         },
-        "H25QFT8A1A": {
-            "id": [
-                "AD5E28221090"
-            ],
-            "l": "3DV4",
-            "t": [
-                "SM3271AB",
-                "CBM2199"
-            ]
-        },
-        "H25BFT8B3M8R": {
+        "H25BFT8B3M": {
             "id": [
                 "AD5E283300A0"
             ],
@@ -14105,7 +14097,7 @@
                 "SM3271AB"
             ]
         },
-        "H25BFT8A1M8R": {
+        "H25BFT8A1M": {
             "id": [
                 "AD5E283300A0"
             ],
@@ -14825,7 +14817,7 @@
                 "SM2258"
             ]
         },
-        "H25QFTMF4A9R": {
+        "H25QFTMF4A": {
             "id": [
                 "AD5E29221090"
             ],
@@ -14896,15 +14888,6 @@
                 "AU6989SN-GTC",
                 "AU6989SN-GTD",
                 "AU6989SN-GTE",
-                "CBM2199"
-            ]
-        },
-        "H25QFT8A1ADA": {
-            "id": [
-                "AD5E28221090"
-            ],
-            "t": [
-                "SM2258",
                 "CBM2199"
             ]
         },
@@ -15397,7 +15380,7 @@
                 "AU6989SN-GTE"
             ]
         },
-        "H25QFT8B3A8R": {
+        "H25QFT8B3A": {
             "l": "3D V4",
             "c": "TLC",
             "t": [
@@ -15406,7 +15389,7 @@
                 "AU6989SN-GTE"
             ]
         },
-        "H25QFT8D4A8R": {
+        "H25QFT8D4A": {
             "l": "3D V4",
             "c": "TLC",
             "t": [
