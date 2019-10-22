@@ -69,11 +69,11 @@ class SKHynix extends Decoder{
 		"G" => [1, 2, self::LARGE_BLOCK],
 		"H" => [1, 4, self::LARGE_BLOCK],
 		"J" => [1, 8, self::LARGE_BLOCK],
-		"K" => [1, -1, self::LARGE_BLOCK],//Double Stack Package
+		"K" => [1, 2, self::LARGE_BLOCK],//Double Stack Package
 		"T" => [2, 1, self::LARGE_BLOCK],
 		"U" => [2, 2, self::LARGE_BLOCK],
 		"V" => [2, 4, self::LARGE_BLOCK],
-		"W" => [2, -1, self::LARGE_BLOCK],//Double Stack Package
+		"W" => [2, 2, self::LARGE_BLOCK],//Double Stack Package
 		"Y" => [2, 8, self::LARGE_BLOCK],
 		"R" => [2, 6, self::LARGE_BLOCK],
 		"Z" => [2, 12, self::LARGE_BLOCK],
@@ -105,14 +105,6 @@ class SKHynix extends Decoder{
 		"H" => [8, 8, true, 2],//Dual Interface
 		"E" => [4, 4, true, 4],
 		"Q" => [4, 4, true, 4]
-	];
-	protected const GENERATION = [
-		"M" => 1,
-		"A" => 2,
-		"B" => 3,
-		"C" => 4,
-		"D" => 5,
-		"E" => 6
 	];
 	protected const PACKAGE = [
 		"T" => "TSOP1",
@@ -156,7 +148,7 @@ class SKHynix extends Decoder{
 	}
 
 	public static function check(string $partNumber) : bool{
-		if(StringUtil::startsWith($partNumber, "H2")){//TODO: E2NAND
+		if(StringUtil::startsWith($partNumber, "H2")){
 			return true;
 		}
 		return false;
@@ -165,7 +157,7 @@ class SKHynix extends Decoder{
 	public static function decode(string $partNumber) : FlashInfo{
 		$flashInfo = (new FlashInfo($partNumber))
 			->setVendor(self::getName());
-		if(in_array($level = self::shiftChars($partNumber, 3), ["H2J", "H2D"])){
+		if(in_array($level = self::shiftChars($partNumber, 3), ["H2J", "H2D", "H26"])){
 			//TODO: SKHynix E2NAND
 			return $flashInfo->setType(Constants::NAND_TYPE_CON)
 				->setExtraInfo([Constants::UNSUPPORTED_REASON => Constants::SKHYNIX_UNSUPPORTED]);
@@ -192,7 +184,7 @@ class SKHynix extends Decoder{
 		$flashInfo->setClassification(new Classification(
 			$mode[0], $mode[3], $mode[1], $classification[1]));
 		$flashInfo//->setInterface((new FlashInterface(false))->setAsync(true)->setSync(true))//Async default = true
-		->setGeneration(self::getOrDefault(self::shiftChars($partNumber, 1), self::GENERATION))
+		->setGeneration(self::getOrDefault(self::shiftChars($partNumber, 1), Samsung::GENERATION))
 			->setPackage(self::getOrDefault(self::shiftChars($partNumber, 1), self::PACKAGE));
 
 		$packageMaterial = self::shiftChars($partNumber, 1);

@@ -88,6 +88,19 @@ class Samsung extends Decoder{
 		"VG" => 8 * Constants::DENSITY_TBITS,
 		"00" => 0
 	];
+	public const GENERATION = [
+		"M" => 1,
+		"A" => 2,
+		"B" => 3,
+		"C" => 4,
+		"D" => 5,
+		"E" => 6,
+		"F" => 7,
+		"G" => 8,
+		"H" => 9,
+		"Y" => 25,
+		"Z" => 26
+	];
 
 	public static function getName() : string{
 		return Constants::VENDOR_SAMSUNG;
@@ -154,19 +167,7 @@ class Samsung extends Decoder{
 			"J" => [16, 4],
 		], [-1, -1]);
 		$flashInfo->setClassification(new Classification($mode[0], Classification::UNKNOWN_PROP, $mode[1], $c[1]))
-			->setGeneration(self::getOrDefault(self::shiftChars($partNumber, 1), [
-				"M" => 1,
-				"A" => 2,
-				"B" => 3,
-				"C" => 4,
-				"D" => 5,
-				"E" => 6,
-				"F" => 7,
-				"G" => 8,
-				"H" => 9,
-				"Y" => 25,
-				"Z" => 26
-			]));
+			->setGeneration(self::getOrDefault(self::shiftChars($partNumber, 1), self::GENERATION));
 
 		self::shiftChars($partNumber, 1);//remove -
 		$flashInfo->setPackage(self::getOrDefault($package = self::shiftChars($partNumber, 1), [
