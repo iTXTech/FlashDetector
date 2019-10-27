@@ -36,7 +36,7 @@ class SKHynix extends Decoder{
 		"L" => "2.7V",
 		"S" => "1.8V",
 		"J" => "2.7V~3.6V/1.2V",
-		"Q" => "Vcc: 3.3V, VccQ: 1.8V (Full speed)/ 3.3V"
+		"Q" => "Vcc: 2.7V~3.6V, VccQ: 1.7V~1.95V/2.7V~3.6V"
 	];
 	protected const DENSITY = [
 		"64" => 64,
