@@ -40,7 +40,7 @@ class SKHynix25 extends SKHynix{
 		//B => ToggleDDR 4.0, Q => ToggleDDR 2.0 | maybe voltage
 		$flashInfo->setExtraInfo([
 			"toggle" => self::getOrDefault(self::shiftChars($partNumber, 1), ["B" => "4.0", "Q" => "2.0"])
-		])->setVoltage("Vcc: 3.3V, VccQ: 1.8V (UNOFFICIAL)");
+		])->setVoltage("Vcc: 2.7V ~ 3.6V, VccQ: 1.7V ~ 1.95V/1.14V~1.26V");
 		self::shiftChars($partNumber, 1);//E, F ???
 		$flashInfo->setCellLevel($level = self::getOrDefault(self::shiftChars($partNumber, 1), [
 			"M" => 2,
