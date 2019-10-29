@@ -42,7 +42,6 @@ interface Constants{
 	public const VENDOR_TOSHIBA = "toshiba";
 
 	public const NAND_TYPE_NAND = "nand";
-	public const NAND_TYPE_E2NAND = "e2nand";
 	public const NAND_TYPE_INAND = "inand";
 	public const NAND_TYPE_ISSD = "issd";
 	public const NAND_TYPE_CON = "nandcon";

@@ -25,6 +25,7 @@ use iTXTech\FlashDetector\Fdb\PartNumber;
 use iTXTech\FlashDetector\FlashDetector;
 use iTXTech\FlashDetector\FlashInfo;
 use iTXTech\FlashDetector\Property\Classification;
+use iTXTech\FlashDetector\Property\FlashInterface;
 use iTXTech\SimpleFramework\Util\StringUtil;
 
 class SKHynix extends Decoder{
@@ -94,7 +95,7 @@ class SKHynix extends Decoder{
 		"2" => [1, 1, false, 1],
 		"4" => [2, 2, true, 1],
 		"5" => [2, 2, false, 1],
-		"D" => [-1, -1, false, 2],//Dual Interface
+		"D" => [2, 2, false, 2],//Dual Interface
 		"F" => [4, 4, false, 2],//Dual Interface
 		"T" => [5, 5, false, 1],
 		"U" => [6, 6, false, 1],
@@ -158,17 +159,13 @@ class SKHynix extends Decoder{
 		$flashInfo = (new FlashInfo($partNumber))
 			->setVendor(self::getName());
 		if(in_array($level = self::shiftChars($partNumber, 3), ["H2J", "H2D", "H26"])){
-			//TODO: SKHynix E2NAND
 			return $flashInfo->setType(Constants::NAND_TYPE_CON)
 				->setExtraInfo([Constants::UNSUPPORTED_REASON => Constants::SKHYNIX_UNSUPPORTED]);
 		}else{
 			$flashInfo->setType(Constants::NAND_TYPE_NAND);
 		}
-		if($level == "H25"){
-			return $flashInfo->setExtraInfo([Constants::UNSUPPORTED_REASON => Constants::SKHYNIX_UNSUPPORTED]);
-		}
 		$flashInfo
-			->setVoltage(self::getOrDefault(self::shiftChars($partNumber, 1), self::VOLTAGE))
+			->setVoltage(self::getOrDefault($voltage = self::shiftChars($partNumber, 1), self::VOLTAGE))
 			->setDensity(self::getOrDefault(self::shiftChars($partNumber, 2), self::DENSITY, 0))
 			->setDeviceWidth(self::getOrDefault(self::shiftChars($partNumber, 1), [
 				"8" => 8,
@@ -183,15 +180,16 @@ class SKHynix extends Decoder{
 		$mode = self::getOrDefault(self::shiftChars($partNumber, 1), self::MODE, [-1, -1, false, -1]);
 		$flashInfo->setClassification(new Classification(
 			$mode[0], $mode[3], $mode[1], $classification[1]));
-		$flashInfo//->setInterface((new FlashInterface(false))->setAsync(true)->setSync(true))//Async default = true
-		->setGeneration(self::getOrDefault(self::shiftChars($partNumber, 1), Samsung::GENERATION))
+		if($voltage == "Q"){
+			$flashInfo->setInterface((new FlashInterface(false))->setAsync(true)->setSync(true));
+		}else{
+			$flashInfo->setInterface((new FlashInterface(false))->setAsync(true)->setSync(false));
+		}
+		$flashInfo->setGeneration(self::getOrDefault(self::shiftChars($partNumber, 1), Samsung::GENERATION))
 			->setPackage(self::getOrDefault(self::shiftChars($partNumber, 1), self::PACKAGE));
 
 		$packageMaterial = self::shiftChars($partNumber, 1);
-		$extra = [
-			"doubleStackPackage" => $classification[1] === -1,
-			"dualInterface" => $mode[3] > 1,//maybe this property is Channel
-		];
+		$extra = [];
 		if(in_array($packageMaterial, ["P", "R"])){
 			$extra[Constants::LEAD_FREE] = true;
 		}elseif($packageMaterial == "L"){
