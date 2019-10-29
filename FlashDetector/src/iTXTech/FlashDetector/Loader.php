@@ -32,7 +32,7 @@ class Loader extends Module{
 		$info = new \ReflectionClass(ModuleInfo::class);
 		$prop = $info->getProperty("version");
 		$prop->setAccessible(true);
-		$prop->setValue($this->getInfo(), FlashDetector::getVersion());
+		$prop->setValue($this->getInfo(), FlashDetector::getVersion() . "." . $this->getInfo()->getVersion());
 	}
 
 	public function unload(){
