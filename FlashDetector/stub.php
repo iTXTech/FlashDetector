@@ -7,7 +7,9 @@ use iTXTech\SimpleFramework\Module\ModuleManager;
 use iTXTech\SimpleFramework\Util\Util;
 
 $m = (new Phar(__FILE__))->getMetadata();
-echo "iTXTech FlashDetector version " . $m["version"] . PHP_EOL .
+echo "iTXTech FlashDetector version " . $m["version"] .
+	(file_exists("phar://" . __FILE__ . DIRECTORY_SEPARATOR . "vendor") ?
+		" [with simplehtmldom]" : " [without simplehtmldom]") . PHP_EOL .
 	"Revision: " . $m["revision"] . PHP_EOL .
 	"Created on " . date("r", $m["creationDate"]) . PHP_EOL .
 	"Copyright (C) 2018-2019 iTX Technologies

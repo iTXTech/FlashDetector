@@ -20,6 +20,7 @@
 
 require_once "env.php";
 
+use iTXTech\FlashDetector\Packer;
 use iTXTech\SimpleFramework\Console\Logger;
 use iTXTech\SimpleFramework\Console\Option\Exception\ParseException;
 use iTXTech\SimpleFramework\Console\Option\HelpFormatter;
@@ -27,6 +28,7 @@ use iTXTech\SimpleFramework\Console\Option\OptionBuilder;
 use iTXTech\SimpleFramework\Console\Option\OptionGroup;
 use iTXTech\SimpleFramework\Console\Option\Options;
 use iTXTech\SimpleFramework\Console\Option\Parser;
+use iTXTech\SimpleFramework\Module\Module;
 use iTXTech\SimpleFramework\Module\WraithSpireMDR;
 use iTXTech\SimpleFramework\Util\Util;
 
@@ -66,14 +68,19 @@ try{
 	}
 	loadModule($moduleManager, $path);
 	$module = $moduleManager->getModule($name);
-	$module->pack(__DIR__ . DIRECTORY_SEPARATOR, $file = $name . ".phar", true, true, true);
+	packModule(Packer::VARIANT_TYPICAL, $name . ".phar", $module);
+	packModule(Packer::VARIANT_COMPOSER, $name . "_composer.phar", $module);
+}catch(ParseException $e){
+	Util::println($e->getMessage());
+	echo((new HelpFormatter())->generateHelp("pack", $options));
+}
+
+function packModule(int $variant, string $file, Module $module){
+	$module->pack($variant, __DIR__ . DIRECTORY_SEPARATOR, $file, true, true, true);
 	if(file_exists($file)){
 		$phar = new Phar($file);
 		$metadata = $phar->getMetadata();
 		$metadata["revision"] = Util::getLatestGitCommitId(".." . DIRECTORY_SEPARATOR);
 		$phar->setMetadata($metadata);
 	}
-}catch(ParseException $e){
-	Util::println($e->getMessage());
-	echo((new HelpFormatter())->generateHelp("pack", $options));
 }

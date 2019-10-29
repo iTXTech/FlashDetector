@@ -8,7 +8,15 @@ Universal NAND Flash Part Number Decoder
 
 * [PHP 7.2+](https://secure.php.net)
 * [SimpleFramework 2.1+](https://github.com/iTXTech/SimpleFramework)
-* [SimpleHtmlDom](https://github.com/PeratX/SimpleHtmlDom)
+* [Composer](https://github.com/composer/composer)
+
+## Setup
+
+```shell script
+$ git clone https://github.com/iTXTech/FlashDetector.git
+$ cd FlashDetector/FlashDetector
+$ composer install
+```
 
 ## Supported
 

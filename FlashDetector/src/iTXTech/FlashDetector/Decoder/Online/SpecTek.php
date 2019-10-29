@@ -22,7 +22,7 @@ namespace iTXTech\FlashDetector\Decoder\Online;
 
 use iTXTech\SimpleFramework\Util\Curl\Curl;
 use iTXTech\SimpleFramework\Util\Util;
-use PeratX\SimpleHtmlDom\SimpleHtmlDom;
+use simplehtmldom\HtmlDocument;
 
 class SpecTek{
 	private const SPECTEK_API_ADDR = "https://www.spectek.com/menus/mark_code.aspx";
@@ -51,7 +51,7 @@ class SpecTek{
 			->exec();
 		if($response->isSuccessful()){
 			$r = [];
-			$dom = SimpleHtmlDom::initDomFromString($response->getBody());
+			$dom = new HtmlDocument($response->getBody());
 			$results = $dom->find("table[class=bdrBlackTbl]", 0);
 			if($results !== null){
 				foreach($results->find("tr") as $node){

@@ -24,11 +24,17 @@ use iTXTech\SimpleFramework\Module\Packer as AbstractPacker;
 use iTXTech\SimpleFramework\Util\StringUtil;
 
 class Packer extends AbstractPacker{
-	public function processFile(\Phar $phar, string $file, string $path){
-		if(StringUtil::endsWith($file, ".json")){
-			$phar->addFromString($path, json_encode(json_decode(file_get_contents($file))));
-		}else{
-			$phar->addFile($file, $path);
+	public function processFile(int $variant, \Phar $phar, string $file, string $path){
+		if($variant == self::VARIANT_COMPOSER or
+			($variant == self::VARIANT_TYPICAL
+				and !StringUtil::startsWith($path, "vendor")
+				and !StringUtil::endsWith($path, "composer.lock")
+				and !StringUtil::endsWith($path, "composer.json"))){
+			if(StringUtil::endsWith($file, ".json")){
+				$phar->addFromString($path, json_encode(json_decode(file_get_contents($file))));
+			}else{
+				$phar->addFile($file, $path);
+			}
 		}
 	}
 }

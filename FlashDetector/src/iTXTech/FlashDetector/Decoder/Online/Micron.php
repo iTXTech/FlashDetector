@@ -22,8 +22,7 @@ namespace iTXTech\FlashDetector\Decoder\Online;
 
 use iTXTech\SimpleFramework\Util\Curl\Curl;
 use iTXTech\SimpleFramework\Util\Util;
-use PeratX\SimpleHtmlDom\SimpleHtmlDom;
-use PeratX\SimpleHtmlDom\SimpleHtmlDomNode;
+use simplehtmldom\HtmlDocument;
 
 class Micron{
 	private const MICRON_API_ADDR = "https://www.micron.com/support/tools-and-utilities/fbga";
@@ -35,18 +34,17 @@ class Micron{
 			->exec();
 		if($response->isSuccessful()){
 			$r = [];
-			$dom = SimpleHtmlDom::initDomFromString($response->getBody());
+			$dom = new HtmlDocument($response->getBody());
 			$results = $dom->find("table[id=theResults]", 0);
 			if($results !== null){
 				foreach($results->children(1)->find("tr") as $node){
-					/** @var SimpleHtmlDomNode $node */
 					$n = $node->find("td", 0);
 					if(($a = $n->find("a", 0)) !== null){
-						$info = $a->innerText();
+						$info = $a->innertext;
 					}else{
-						$info = $n->innerText();
+						$info = $n->innertext;
 					}
-					$r[$info] = $node->find("td", 1)->innerText();
+					$r[$info] = $node->find("td", 1)->innertext;
 				}
 				return $r;
 			}

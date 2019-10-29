@@ -4,3 +4,5 @@ module/
 Scripts/*.json
 Scripts/*.csv
 *.phar
+FlashDetector/composer.lock
+FlashDetector/vendor

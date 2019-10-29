@@ -9,11 +9,5 @@
   "packer": "iTXTech\\FlashDetector\\Packer",
   "stub": "stub.php",
   "sfloader": true,
-  "dependencies": [
-    {
-      "name": "PeratX/SimpleHtmlDom",
-      "version": "1.1.0",
-      "optional": true
-    }
-  ]
+  "composer": true
 }
