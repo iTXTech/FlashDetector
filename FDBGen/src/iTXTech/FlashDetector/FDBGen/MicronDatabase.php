@@ -53,7 +53,7 @@ class MicronDatabase{
 		$this->file->save($option);
 	}
 
-	public function update(){
+	public function update(int $option = 0){
 		foreach(self::MICRON_HEADER as $h){
 			for($i = self::START_FROM[$h]; $i < 1000; $i++){
 				if(!isset($this->data["micron"][$code = self::getCode($h, $i)])){
@@ -61,7 +61,7 @@ class MicronDatabase{
 						$pn = array_keys($res)[0];
 						Logger::info("$code => $pn");
 						$this->data["micron"][$code] = $pn;
-						$this->save();
+						$this->save($option);
 					}
 				}
 			}
@@ -75,7 +75,7 @@ class MicronDatabase{
 						$pn = $res[$code]["partNumber"];
 						Logger::info("$code => " . json_encode($pn));
 						$this->data["spectek"][$code] = $pn;
-						$this->save();
+						$this->save($option);
 					}
 				}
 			}

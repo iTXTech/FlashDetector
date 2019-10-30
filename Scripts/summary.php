@@ -28,7 +28,7 @@ use iTXTech\FlashDetector\Property\Classification;
 
 $fdb = FlashDetector::getFdb();
 
-$csv = "Part Number,Vendor,Density,Cell Level,Package,CE Pins,Flash IDs" . PHP_EOL;
+$csv = "Part Number,Vendor,Density,Cell Level,Process Node,Package,CE Pins,Flash IDs" . PHP_EOL;
 
 foreach($fdb->getVendors() as $vendor){
 	foreach($vendor->getPartNumbers() as $pn){
@@ -37,20 +37,21 @@ foreach($fdb->getVendors() as $vendor){
 		if($ids != null and $i->getDensity() > 0){
 			$cell = $i->getCellLevel();
 			$ce = ($i->getClassification() ?? new Classification())->getCe();
+			$ce = ($ce < 0) ? "Unknown" : $ce;
 			if(($i->getExtraInfo()[Constants::ENTERPRISE] ?? false) === true){
 				$cell = "e" . $cell;
 			}
 			$csv .= $pn->getPartNumber() . "," . strtoupper($i->getVendor()) . "," .
 				FlashDetector::getHumanReadableDensity($i->getDensity(), true) . "," .
-				$cell . "," . str_replace(",", " ", $i->getPackage()) . "," . $ce . "," .
-				implode(" ", $ids) . PHP_EOL;
+				$cell . "," . $i->getProcessNode() . "," . str_replace(",", " ", $i->getPackage()) .
+				"," . $ce . "," . implode(" ", $ids) . PHP_EOL;
 		}
 	}
 }
 
 file_put_contents("summary.csv", $csv);
 
-$csv = "Micron FBGA Code,Part Number,Density,Cell Level,Package,CE Pins,Flash IDs" . PHP_EOL;
+$csv = "Micron FBGA Code,Part Number,Density,Cell Level,Process Node,Package,CE Pins,Flash IDs" . PHP_EOL;
 
 $mdb = FlashDetector::getMdb();
 
@@ -69,8 +70,8 @@ foreach($mdb as $vendor){
 		}
 		$csv .= $code . "," . implode("  ", $pns) . "," .
 			FlashDetector::getHumanReadableDensity($d, true) . "," . $cell .
-			"," . str_replace(",", " ", $info->getPackage()) . "," . $ce . "," .
-			implode("  ", $ids) . PHP_EOL;
+			"," . $info->getProcessNode() . "," . str_replace(",", " ", $info->getPackage()) .
+			"," . $ce . "," . implode("  ", $ids) . PHP_EOL;
 	}
 }
 

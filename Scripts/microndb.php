@@ -51,7 +51,7 @@ try{
 		Curl::$GLOBAL_PROXY = $cmd->getOptionValue("p");
 	}
 	$db = new MicronDatabase($cmd->getOptionValue("f"));
-	$db->update();
+	$db->update(JSON_PRETTY_PRINT);
 	$db->save(JSON_PRETTY_PRINT);
 }catch(ParseException $e){
 	Util::println($e->getMessage());

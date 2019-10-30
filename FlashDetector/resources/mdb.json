@@ -1878,7 +1878,12 @@
         "NW971": "MT29F1T08ELHBFG7-R:B",
         "NW972": "MT29F2T08EQHBFG8-R:B",
         "NW973": "MT29F1T08GBLBEJ4-M:B",
-        "NW974": "MT29F2T08GELBEJ4-M:B"
+        "NW974": "MT29F2T08GELBEJ4-M:B",
+        "NW975": "MT29F512G08EBLCEJ4-T:C",
+        "NW976": "MT29F1T08EELCEJ4-T:C",
+        "NW977": "MT29F2T08EMLCEJ4-T:C",
+        "NW978": "MT29F4T08EULCEM4-T:C",
+        "NW979": "MT29F8T08EWLCEM5-T:C"
     },
     "spectek": {
         "PF001": [
@@ -6131,6 +6136,12 @@
         ],
         "PF695": [
             "FBMM70MNAK3BAAH4"
+        ],
+        "PF696": [
+            "FBMM16A256G6KDBANJ4"
+        ],
+        "PF697": [
+            "FBMM16A256G9KDBANJ4"
         ]
     }
 }

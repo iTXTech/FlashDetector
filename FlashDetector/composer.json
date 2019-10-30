@@ -1,0 +1,14 @@
+{
+  "name": "itxtech/flashdetector",
+  "description": "Universal NAND Flash Part Number Decoder",
+  "license": "Apache License 2.0",
+  "authors": [
+    {
+      "name": "PeratX",
+      "email": "peratx@itxtech.org"
+    }
+  ],
+  "require": {
+    "simplehtmldom/simplehtmldom": "dev-master"
+  }
+}

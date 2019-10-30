@@ -52,7 +52,7 @@ class SKHynixLegacy extends SKHynix{
 		$mode = self::getOrDefault(self::shiftChars($partNumber, 1), self::MODE, [-1, -1, false, -1]);
 		$flashInfo->setClassification(new Classification(
 			$mode[0], $mode[3], $mode[1], $classification[1]))
-			->setGeneration(self::getOrDefault(self::shiftChars($partNumber, 1), self::GENERATION));
+			->setGeneration(self::getOrDefault(self::shiftChars($partNumber, 1), Samsung::GENERATION));
 
 		self::shiftChars($partNumber, 1);
 
