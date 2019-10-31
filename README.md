@@ -24,7 +24,7 @@ $ composer install
 
 1. `Intel`/`Micron (SpecTek)`
 1. `Samsung`
-1. `Western Digital (SanDisk)`/`Toshiba`
+1. `Western Digital (SanDisk)`/`Kioxia (Toshiba)`
 1. `SKHynix`
 
 ### Controllers

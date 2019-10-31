@@ -25,13 +25,13 @@ use iTXTech\FlashDetector\Decoder\Intel;
 use iTXTech\FlashDetector\Decoder\Micron;
 use iTXTech\FlashDetector\Decoder\MicronFbgaCode;
 use iTXTech\FlashDetector\Decoder\Samsung;
-use iTXTech\FlashDetector\Decoder\SanDisk;
-use iTXTech\FlashDetector\Decoder\SanDiskShortCode;
+use iTXTech\FlashDetector\Decoder\WesternDigital;
+use iTXTech\FlashDetector\Decoder\WesternDigitalShortCode;
 use iTXTech\FlashDetector\Decoder\SKHynix;
 use iTXTech\FlashDetector\Decoder\SKHynix3D;
 use iTXTech\FlashDetector\Decoder\SKHynixLegacy;
 use iTXTech\FlashDetector\Decoder\SpecTek;
-use iTXTech\FlashDetector\Decoder\Toshiba;
+use iTXTech\FlashDetector\Decoder\Kioxia;
 use iTXTech\FlashDetector\Fdb\Fdb;
 use iTXTech\FlashDetector\Property\Classification;
 use iTXTech\SimpleFramework\Util\StringUtil;
@@ -101,13 +101,13 @@ abstract class FlashDetector{
 		self::registerDecoder(SKHynix3D::class);
 		self::registerDecoder(SKHynix::class);
 		self::registerDecoder(SKHynixLegacy::class);
-		self::registerDecoder(Toshiba::class);
+		self::registerDecoder(Kioxia::class);
 		self::registerDecoder(Samsung::class);
 		self::registerDecoder(Intel::class);
 		self::registerDecoder(MicronFbgaCode::class);
 		self::registerDecoder(SpecTek::class);
-		self::registerDecoder(SanDisk::class);
-		self::registerDecoder(SanDiskShortCode::class);
+		self::registerDecoder(WesternDigital::class);
+		self::registerDecoder(WesternDigitalShortCode::class);
 		if(Loader::getInstance() !== null){
 			self::$lang = json_decode(Loader::getInstance()->getResourceAsText("lang/$lang.json"), true);
 			self::$fallbackLang = json_decode(Loader::getInstance()

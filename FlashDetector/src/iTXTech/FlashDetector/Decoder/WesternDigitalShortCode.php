@@ -23,8 +23,7 @@ namespace iTXTech\FlashDetector\Decoder;
 use iTXTech\FlashDetector\Constants;
 use iTXTech\FlashDetector\FlashInfo;
 
-class SanDiskShortCode extends SanDisk{
-
+class WesternDigitalShortCode extends WesternDigital{
 	public static function check(string $partNumber) : bool{
 		//example: 05055-032G
 		if(strlen($partNumber) == 10){
@@ -36,14 +35,10 @@ class SanDiskShortCode extends SanDisk{
 		return false;
 	}
 
-	public static function getName() : string{
-		return Constants::VENDOR_SANDISK;
-	}
-
 	public static function decode(string $partNumber) : FlashInfo{
 		$flashInfo = (new FlashInfo($partNumber))->setVendor(self::getName())
 			->setDensity(self::matchFromStart(explode("-", $partNumber, 2)[1],
-				SanDisk::DENSITY, 0));
+				WesternDigital::DENSITY, 0));
 		return $flashInfo;
 	}
 }

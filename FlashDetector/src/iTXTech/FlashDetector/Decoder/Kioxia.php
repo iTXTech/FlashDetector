@@ -21,15 +21,16 @@
 namespace iTXTech\FlashDetector\Decoder;
 
 use iTXTech\FlashDetector\Constants;
+use iTXTech\FlashDetector\Fdb\PartNumber;
+use iTXTech\FlashDetector\FlashDetector;
 use iTXTech\FlashDetector\FlashInfo;
 use iTXTech\FlashDetector\Property\Classification;
 use iTXTech\FlashDetector\Property\FlashInterface;
 use iTXTech\SimpleFramework\Util\StringUtil;
 
-//TODO: rename to Kioxia
-class Toshiba extends Decoder{
+class Kioxia extends Decoder{
 	public static function getName() : string{
-		return Constants::VENDOR_TOSHIBA;
+		return Constants::VENDOR_KIOXIA;
 	}
 
 	public static function check(string $partNumber) : bool{
@@ -225,5 +226,10 @@ class Toshiba extends Decoder{
 		$flashInfo->setPackage($detailedPackage[$package][$p] ?? $package);
 
 		return $flashInfo;
+	}
+
+	public static function getFlashInfoFromFdb(FlashInfo $info) : ?PartNumber{
+		return FlashDetector::getFdb()->getPartNumber($info->getVendor(), $info->getPartNumber()) ??
+			FlashDetector::getFdb()->getPartNumber(Constants::VENDOR_TOSHIBA, $info->getPartNumber());
 	}
 }

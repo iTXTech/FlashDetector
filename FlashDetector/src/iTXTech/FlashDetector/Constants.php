@@ -36,10 +36,12 @@ interface Constants{
 	public const VENDOR_INTEL = "intel";
 	public const VENDOR_MICRON = "micron";
 	public const VENDOR_SAMSUNG = "samsung";
-	public const VENDOR_SANDISK = "sandisk";
+	public const VENDOR_WESTERN_DIGITAL = "westerndigital";
 	public const VENDOR_SKHYNIX = "skhynix";
 	public const VENDOR_SPECTEK = "spectek";
+	public const VENDOR_KIOXIA = "kioxia";
 	public const VENDOR_TOSHIBA = "toshiba";
+	public const VENDOR_SANDISK = "sandisk";
 
 	public const NAND_TYPE_NAND = "nand";
 	public const NAND_TYPE_INAND = "inand";

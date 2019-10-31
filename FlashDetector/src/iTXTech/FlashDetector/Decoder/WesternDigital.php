@@ -27,8 +27,7 @@ use iTXTech\FlashDetector\FlashInfo;
 use iTXTech\FlashDetector\Property\Classification;
 use iTXTech\SimpleFramework\Util\StringUtil;
 
-//TODO: rename to Western Digital
-class SanDisk extends Decoder{
+class WesternDigital extends Decoder{
 	public const CELL_LEVEL = [
 		"C" => 3,
 		"F" => 2,
@@ -57,7 +56,7 @@ class SanDisk extends Decoder{
 	];
 
 	public static function getName() : string{
-		return Constants::VENDOR_SANDISK;
+		return Constants::VENDOR_WESTERN_DIGITAL;
 	}
 
 	public static function check(string $partNumber) : bool{
@@ -138,7 +137,8 @@ class SanDisk extends Decoder{
 	}
 
 	public static function getFlashInfoFromFdb(FlashInfo $info) : ?PartNumber{
-		$data = FlashDetector::getFdb()->getPartNumber(self::getName(), $info->getPartNumber());
+		$data = FlashDetector::getFdb()->getPartNumber(self::getName(), $info->getPartNumber()) ??
+			FlashDetector::getFdb()->getPartNumber(Constants::VENDOR_SANDISK, $info->getPartNumber());
 		if($data != null){
 			$comment = "";
 			$parts = explode("/", $data->getComment() ?? "");
@@ -149,7 +149,7 @@ class SanDisk extends Decoder{
 				}elseif($part == "CODE"){
 					$extraInfo[Constants::SANDISK_CODE] = true;
 				}elseif($part{0} == "T"){
-					$extraInfo[Constants::VENDOR_TOSHIBA] = substr($part, 1);
+					$extraInfo[Constants::VENDOR_KIOXIA] = substr($part, 1);
 				}else{
 					$comment .= $part . "/";
 				}
