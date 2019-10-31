@@ -69,7 +69,9 @@ try{
 	loadModule($moduleManager, $path);
 	$module = $moduleManager->getModule($name);
 	packModule(Packer::VARIANT_TYPICAL, $name . ".phar", $module);
-	packModule(Packer::VARIANT_COMPOSER, $name . "_composer.phar", $module);
+	if($module->getInfo()->composer()){
+		packModule(Packer::VARIANT_COMPOSER, $name . "_composer.phar", $module);
+	}
 }catch(ParseException $e){
 	Util::println($e->getMessage());
 	echo((new HelpFormatter())->generateHelp("pack", $options));
