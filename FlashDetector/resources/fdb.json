@@ -1,9 +1,9 @@
 {
     "info": {
         "name": "iTXTech FlashDetector Flash Database",
-        "version": "39",
+        "version": "40",
         "website": "https:\/\/github.com\/iTXTech\/FlashDetector",
-        "time": "Thu, 31 Oct 2019 00:33:29 +0000",
+        "time": "Fri, 01 Nov 2019 17:21:29 +0800",
         "controllers": [
             "SM321AC",
             "SM321BB",
@@ -6084,7 +6084,8 @@
                 "SM3280AB",
                 "SM3281AB",
                 "SM3281BB",
-                "SM2258XT"
+                "SM2258XT",
+                "SM2258"
             ]
         },
         "K9OMGY8H5A": {
@@ -6094,7 +6095,8 @@
             "l": "3D V4",
             "t": [
                 "SM3281AB",
-                "SM3281BB"
+                "SM3281BB",
+                "SM2258"
             ]
         },
         "K9DUGY8H5A": {
@@ -6104,7 +6106,8 @@
             "l": "3D V4",
             "t": [
                 "SM3281AB",
-                "SM3281BB"
+                "SM3281BB",
+                "SM2258"
             ]
         },
         "K9CMGY8J5M": {
@@ -6115,7 +6118,8 @@
             "t": [
                 "SM3281AB",
                 "SM3281BB",
-                "SM2258XT"
+                "SM2258XT",
+                "SM2258"
             ]
         },
         "K9K1G08U0A": {
@@ -8661,6 +8665,70 @@
                 "EC1CD55368C9"
             ],
             "l": "3DV3",
+            "t": [
+                "SM2258"
+            ]
+        },
+        "K9OMGB8H1A": {
+            "id": [
+                "EC1F9A3F8CCB"
+            ],
+            "t": [
+                "SM2258"
+            ]
+        },
+        "K9OUGY8J5M": {
+            "id": [
+                "EC5FD93F88CB"
+            ],
+            "t": [
+                "SM2258"
+            ]
+        },
+        "K9PMGY8J5A": {
+            "id": [
+                "EC5ED5D368CB"
+            ],
+            "t": [
+                "SM2258"
+            ]
+        },
+        "K90UGY8J5M": {
+            "id": [
+                "EC5FD93F88CB"
+            ],
+            "t": [
+                "SM2258"
+            ]
+        },
+        "K90UGB8J1M": {
+            "id": [
+                "EC519A3F8CCB"
+            ],
+            "t": [
+                "SM2258"
+            ]
+        },
+        "K9PMGB8J1A": {
+            "id": [
+                "EC5F96D36CCB"
+            ],
+            "t": [
+                "SM2258"
+            ]
+        },
+        "K9DUGB8H1A": {
+            "id": [
+                "EC119B3F8ECB"
+            ],
+            "t": [
+                "SM2258"
+            ]
+        },
+        "K9DVGB8J1M": {
+            "id": [
+                "EC529B3F8ECB"
+            ],
             "t": [
                 "SM2258"
             ]
@@ -44317,6 +44385,15 @@
             ],
             "t": [
                 "SM2258"
+            ]
+        },
+        "TC58TEG9THLTA20": {
+            "id": [
+                "983C99A37A51"
+            ],
+            "t": [
+                "SM2258",
+                "IS917"
             ]
         },
         "TH58TEG7D2HBA49": {
