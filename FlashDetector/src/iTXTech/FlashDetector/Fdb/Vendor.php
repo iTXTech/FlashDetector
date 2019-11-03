@@ -21,8 +21,13 @@
 namespace iTXTech\FlashDetector\Fdb;
 
 use iTXTech\FlashDetector\Arrayable;
+use iTXTech\FlashDetector\Constants;
 
 class Vendor extends Arrayable{
+	public const VENDOR_PATCH = [
+		"sandisk" => Constants::VENDOR_WESTERN_DIGITAL,
+		"toshiba" => Constants::VENDOR_KIOXIA
+	];
 	protected $name;
 	/** @var PartNumber[] */
 	protected $pns;
@@ -35,7 +40,7 @@ class Vendor extends Arrayable{
 	}
 
 	public function getName() : string{
-		return $this->name;
+		return self::VENDOR_PATCH[$this->name] ?? $this->name;
 	}
 
 	/**
