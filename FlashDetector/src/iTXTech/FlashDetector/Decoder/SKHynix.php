@@ -130,7 +130,10 @@ class SKHynix extends Decoder{
 		"2" => "FBGA-316",
 		"3" => "FBGA-316",
 		//TODO: confirm
-		"6" => "FBGA-132"
+		"6" => "FBGA-132",
+		"0" => "FBGA-132",
+		"5" => "FBGA-132",
+		"L" => "FBGA-132",
 	];
 	protected const BAD_BLOCK = [
 		"B" => Constants::SAMSUNG_CBB_B,
