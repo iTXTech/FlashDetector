@@ -39,21 +39,21 @@ class MicronDatabase{
 	private $file;
 	private $data;
 
-	public function __construct(string $file){
+	public function __construct(string $file, int $option = JSON_PRETTY_PRINT){
 		$this->file = new Config($file, Config::JSON, [
 			"micron" => [],
 			"spectek" => []
 		]);
 		$this->data = $this->file->getAll();
-		$this->file->save(0);
+		$this->file->save($option);
 	}
 
-	public function save(int $option = 0){
+	public function save(int $option = JSON_PRETTY_PRINT){
 		$this->file->setAll($this->data);
 		$this->file->save($option);
 	}
 
-	public function update(int $option = 0){
+	public function update(int $option = JSON_PRETTY_PRINT){
 		foreach(self::MICRON_HEADER as $h){
 			for($i = self::START_FROM[$h]; $i < 1000; $i++){
 				if(!isset($this->data["micron"][$code = self::getCode($h, $i)])){

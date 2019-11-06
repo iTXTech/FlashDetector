@@ -1,9 +1,9 @@
 {
     "info": {
         "name": "iTXTech FlashDetector Flash Database",
-        "version": "40",
+        "version": "41",
         "website": "https:\/\/github.com\/iTXTech\/FlashDetector",
-        "time": "Fri, 01 Nov 2019 17:21:29 +0800",
+        "time": "Wed, 06 Nov 2019 15:16:56 +0800",
         "controllers": [
             "SM321AC",
             "SM321BB",
@@ -9691,6 +9691,11 @@
                 "EC3AD5F3A8C6"
             ],
             "l": "16nm"
+        },
+        "K9QFGY8S7M": {
+            "id": [
+                "ECA7A06A68C4"
+            ]
         }
     },
     "skhynix": {
@@ -35700,7 +35705,7 @@
             ]
         }
     },
-    "toshiba": {
+    "kioxia": {
         "TC58DVM92A1FT00": {
             "id": [
                 "9876A5C00680",
@@ -46873,7 +46878,7 @@
             ]
         }
     },
-    "sandisk": {
+    "westerndigital": {
         "SDTNFBH-1024": {
             "id": [
                 "9879A5C08680",

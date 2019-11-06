@@ -61,9 +61,6 @@ class Classification extends Arrayable{
 		return $this;
 	}
 
-	/**
-	 * @return int
-	 */
 	public function getCe() : int{
 		return $this->ce;
 	}
