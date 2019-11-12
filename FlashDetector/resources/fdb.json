@@ -1,9 +1,9 @@
 {
     "info": {
         "name": "iTXTech FlashDetector Flash Database",
-        "version": "41",
+        "version": "42",
         "website": "https:\/\/github.com\/iTXTech\/FlashDetector",
-        "time": "Wed, 06 Nov 2019 15:16:56 +0800",
+        "time": "Tue, 12 Nov 2019 15:25:17 +0800",
         "controllers": [
             "SM321AC",
             "SM321BB",
@@ -14089,6 +14089,7 @@
             "id": [
                 "AD3A15030850",
                 "AD3A14030850",
+                "ADDE14AB424A",
                 "AD5A14030850"
             ],
             "l": "14nm",
@@ -14102,7 +14103,12 @@
                 "AU6989SN-GTC",
                 "AU6989SN-GTD",
                 "AU6989SN-GTE",
-                "CBM2199"
+                "CBM2098P",
+                "CBM2098E",
+                "CBM2099",
+                "CBM2099E",
+                "CBM2199",
+                "IS917"
             ]
         },
         "H27Q1T8YEC": {
@@ -14201,6 +14207,15 @@
                 "AU6989SN-GTC",
                 "AU6989SN-GTD",
                 "AU6989SN-GTE"
+            ]
+        },
+        "H25JGT8A1M": {
+            "id": [
+                "AD89285300B0"
+            ],
+            "l": "3DV6",
+            "t": [
+                "SM3281BB"
             ]
         },
         "HY27UT08AG5B": {
@@ -40810,7 +40825,8 @@
         },
         "TC58LJG8T24TA0D": {
             "id": [
-                "983C98B376E3"
+                "983C98B376E3",
+                "983C98B37663"
             ],
             "l": "3DV4",
             "t": [
@@ -40824,7 +40840,9 @@
         },
         "TC58LJG9T24TA0D": {
             "id": [
-                "983E98B376E3"
+                "983E98B376E3",
+                "983E98B3766B",
+                "983E98B37663"
             ],
             "l": "3DV4",
             "t": [
@@ -50747,6 +50765,7 @@
         "SDUNCIAMA-032GB": {
             "id": [
                 "453C98B3766B",
+                "453C98B37663",
                 "453E99B37A6B"
             ],
             "l": "3DV4",
@@ -50798,12 +50817,12 @@
         },
         "SDUNCIAMA-064GCE": {
             "id": [
-                "453E98B3766B"
+                "453E98B3766B",
+                "453E98B37663"
             ],
             "l": "3DV4",
             "t": [
-                "SM3271AB",
-                "SM3281BB"
+                "SM3271AB"
             ]
         },
         "SDYNBIAMA-016G_SI2": {
@@ -50966,11 +50985,13 @@
         "SDUNCIAMA-064GB": {
             "id": [
                 "453E98B3766B",
+                "453E98B37663",
                 "453E99B37A6B"
             ],
             "l": "3DV4",
             "t": [
                 "SM3281AB",
+                "SM3281BB",
                 "SM2258XT"
             ]
         },
