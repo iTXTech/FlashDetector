@@ -33,6 +33,8 @@ abstract class AbstractPage{
 	}
 
 	public static function sendJsonData(Response $response, array $data){
+		$response->header("Access-Control-Allow-Origin", "*");
+		$response->header("Access-Control-Allow-Headers", "*");
 		$response->header("Content-Type", "application/json");
 		$response->end(json_encode($data));
 	}

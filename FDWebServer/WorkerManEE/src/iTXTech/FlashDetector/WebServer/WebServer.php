@@ -47,6 +47,8 @@ class WebServer{
 		RequestHandler::registerPage("/info", InfoPage::class);
 		$this->webServer = new WNWS("http://" . $config["address"] . ":" . $config["port"]);
 		$this->webServer->onReceive = function (TcpConnection $connection){
+			Http::header("Access-Control-Allow-Origin: *");
+			Http::header("Access-Control-Allow-Headers: *");
 			Http::header("Content-Type: application/json");
 			Http::header("X-SimpleFramework: " . Framework::PROG_VERSION);
 			Logger::info("Got request " . $_SERVER["REQUEST_URI"] . " from " . $_SERVER["REMOTE_ADDR"] . ":" . $_SERVER["REMOTE_PORT"]);

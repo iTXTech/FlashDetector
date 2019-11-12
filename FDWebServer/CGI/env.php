@@ -51,4 +51,6 @@ if($moduleManager->getModule("FlashDetector") === null){
 header("X-SimpleFramework: " . Framework::PROG_VERSION);
 FlashDetector::init("chs");
 
+header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Headers: *");
 header("Content-Type: application/json");
