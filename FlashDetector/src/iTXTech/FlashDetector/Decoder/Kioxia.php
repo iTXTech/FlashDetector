@@ -93,6 +93,7 @@ class Kioxia extends Decoder{
 				"T0" => 1 * Constants::DENSITY_TBITS,
 				"T1" => 2 * Constants::DENSITY_TBITS,
 				"T2" => 4 * Constants::DENSITY_TBITS,
+				"T3" => 8 * Constants::DENSITY_TBITS,
 				"TG" => 1.5 * Constants::DENSITY_TBITS
 			], 0))
 			->setCellLevel(self::getOrDefault($ep = self::shiftChars($partNumber, 1), [
