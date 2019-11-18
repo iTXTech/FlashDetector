@@ -33,7 +33,9 @@ class Intel extends Decoder{
 
 	public static function check(string $partNumber) : bool{
 		$code = substr($partNumber, 0, 2);
-		if(in_array($code, ["JS", "29", "X2", "BK", "CU"]) or StringUtil::startsWith($partNumber, "PF29F")){
+		if(in_array($code, ["JS", "29", "X2", "BK", "CU"]) or
+			StringUtil::startsWith($partNumber, "PF29F") or
+			StringUtil::startsWith($partNumber, "PF29R")){
 			return true;
 		}
 		return false;
@@ -102,6 +104,7 @@ class Intel extends Decoder{
 			"E" => [2, 2, 2, false],
 			"F" => [4, 2, 2, true],
 			"G" => [4, 2, 2, false],
+			"H" => [8, 4, 4, true],
 			"J" => [4, 4, 4, true],
 			"K" => [8, 4, 4, false],
 			"L" => [1, 1, 1, true],
