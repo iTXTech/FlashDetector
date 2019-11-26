@@ -111,7 +111,8 @@ class Intel extends Decoder{
 			"M" => [2, 2, 2, true],
 			"N" => [4, 4, 4, true],
 			"O" => [8, 8, 4, true],
-			"P" => [8, 8, 8, true],//L74
+			"P" => [8, 8, 4, true],//L74
+			"S" => [16, 4, 4, true],
 			"W" => [16, 8, 4, true]
 		], [-1, -1, -1, false]);
 		$flashInfo->setClassification(new Classification(
@@ -135,8 +136,8 @@ class Intel extends Decoder{
 				"D" => "34 nm",
 				"E" => "25 nm",
 				"F" => "20 nm",
-				"G" => "3D1/1y nm",
-				"H" => "3D2/B16/B17"
+				"G" => "3D1",
+				"H" => "3D2"
 			]));
 		$gen = self::shiftChars($partNumber, 1);
 		if(is_numeric($gen)){
