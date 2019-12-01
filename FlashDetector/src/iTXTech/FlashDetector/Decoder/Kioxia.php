@@ -106,6 +106,8 @@ class Kioxia extends Decoder{
 				"T" => 3,
 				"U" => 3,//eTLC
 				"V" => 3,
+				"X" => 3,
+				"W" => 3,
 				"F" => 4,//QLC
 			]));
 		$extra[Constants::ENTERPRISE] = in_array($ep, ["H", "E", "U"]);
@@ -130,7 +132,7 @@ class Kioxia extends Decoder{
 			"B" => ["16KB", "8MB"],
 			"C" => ["16KB 1pl", "4MB"],
 			"D" => ["16KB 2pl", "4MB"],
-			//TODO: F
+			"F" => ["16KB 4pl", "4MB"]
 		], [Constants::UNKNOWN, Constants::UNKNOWN]);
 		$extra["pageSize"] = $size[0];
 		$extra["blockSize"] = $size[1];
@@ -153,7 +155,7 @@ class Kioxia extends Decoder{
 		$package = self::shiftChars($partNumber, 2);
 		if(in_array($package, ["FT", "TG", "TA"])){
 			$package = "TSOP48";
-		}elseif(in_array($package, ["XB", "XG", "BA"])){
+		}elseif(in_array($package, ["XB", "XG", "BA", "BB"])){
 			$package = "BGA";
 		}elseif(in_array($package, ["XL", "LA"])){
 			$package = "LGA";
