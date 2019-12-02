@@ -27,13 +27,29 @@ use iTXTech\FlashDetector\FlashInfo;
 use iTXTech\SimpleFramework\Util\StringUtil;
 
 class MicronFbgaCode extends Decoder{
+	protected const COUNTRY_CODE = [
+		"1" => Constants::USA,
+		"2" => Constants::SINGAPORE,
+		"3" => Constants::ITALY,
+		"4" => Constants::JAPAN,
+		"5" => Constants::CHINA,
+		"7" => Constants::TAIWAN,
+		"8" => Constants::KOREA,
+		"9" => Constants::MIXED,
+		"B" => Constants::ISRAEL,
+		"C" => Constants::IRELAND,
+		"D" => Constants::MALAYSIA,
+		"F" => Constants::PHILIPPINES
+	];
+
 	public static function getName() : string{
 		return "MicronFBGACode";
 	}
 
 	public static function check(string $partNumber) : bool{
 		foreach(["NW", "NX", "NQ", "PF"] as $h){
-			if(StringUtil::startsWith($partNumber, $h)){
+			if(StringUtil::startsWith($partNumber, $h) or
+				(strlen($partNumber) == 10 and substr($partNumber, 5, 2) == $h)){
 				return true;
 			}
 		}
@@ -41,12 +57,22 @@ class MicronFbgaCode extends Decoder{
 	}
 
 	public static function decode(string $partNumber) : FlashInfo{
+		if(strlen($partNumber) == 10){
+			$i = self::shiftChars($partNumber, 5);
+		}
 		$pn = FlashDetector::searchMicronFbgaCode($partNumber);
 		if(count($pn) > 0){
 			$pn = $pn[0];
 			$info = FlashDetector::detect($pn)->setPartNumber($partNumber);
 			$extra = $info->getExtraInfo();
-			$extra["micronPartNumber"] = $pn;
+			$extra[Constants::MICRON_PN] = $pn;
+			if(isset($i)){
+				$extra[Constants::PROD_DATE] = self::shiftChars($i, 1) .
+					((ord(self::shiftChars($i, 1)) - 64) * 2);
+				self::shiftChars($i, 1);
+				$extra[Constants::DIFFUSION] = self::getOrDefault(self::shiftChars($i, 1), self::COUNTRY_CODE);
+				$extra[Constants::ENCAPSULATION] = self::getOrDefault(self::shiftChars($i, 1), self::COUNTRY_CODE);
+			}
 			return $info->setExtraInfo($extra);
 		}else{
 			return (new FlashInfo($partNumber))->setVendor(Constants::UNKNOWN);

@@ -22,16 +22,16 @@ namespace iTXTech\FlashDetector;
 
 use iTXTech\FlashDetector\Decoder\Decoder;
 use iTXTech\FlashDetector\Decoder\Intel;
+use iTXTech\FlashDetector\Decoder\Kioxia;
 use iTXTech\FlashDetector\Decoder\Micron;
 use iTXTech\FlashDetector\Decoder\MicronFbgaCode;
 use iTXTech\FlashDetector\Decoder\Samsung;
-use iTXTech\FlashDetector\Decoder\WesternDigital;
-use iTXTech\FlashDetector\Decoder\WesternDigitalShortCode;
 use iTXTech\FlashDetector\Decoder\SKHynix;
 use iTXTech\FlashDetector\Decoder\SKHynix3D;
 use iTXTech\FlashDetector\Decoder\SKHynixLegacy;
 use iTXTech\FlashDetector\Decoder\SpecTek;
-use iTXTech\FlashDetector\Decoder\Kioxia;
+use iTXTech\FlashDetector\Decoder\WesternDigital;
+use iTXTech\FlashDetector\Decoder\WesternDigitalShortCode;
 use iTXTech\FlashDetector\Fdb\Fdb;
 use iTXTech\FlashDetector\Property\Classification;
 use iTXTech\SimpleFramework\Util\StringUtil;
@@ -208,6 +208,13 @@ abstract class FlashDetector{
 				if(($partMatch and StringUtil::contains($partNumber->getPartNumber(), $pn)) or
 					(!$partNumber and $partNumber->getPartNumber() == $pn)){
 					$result[] = $vendor->getName() . " " . $partNumber->getPartNumber();
+				}
+			}
+		}
+		if(Micron::check($pn)){
+			foreach(self::$mdb["micron"] as $c => $p){
+				if(StringUtil::startsWith($p, $pn)){
+					$result[] = Micron::getName() . " " . $c . " " . $p;
 				}
 			}
 		}

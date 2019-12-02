@@ -142,6 +142,34 @@ class Micron extends Decoder{
 		"M" => [false, false, false],//TODO: confirm
 		"N" => [true, true, false]
 	];
+	protected const SPEED_GRADE = [
+		"12" => "166 MT/s",
+		"10" => "200 MT/s",
+		"6" => "333 MT/s",
+		"5" => "400 MT/s",
+		"37" => "533 MT/s",
+		"3" => "667 MT/s"
+	];
+	protected const OPERATING_TEMP_RANGE = [
+		"AAT" => Constants::MICRON_OTR_AAT,
+		"AIT" => Constants::MICRON_OTR_AIT,
+		"IT" => Constants::MICRON_OTR_IT,
+		"WT" => Constants::MICRON_OTR_WT,
+	];
+	protected const FEATURES = [
+		"E" => Constants::MICRON_F_E,
+		"M" => Constants::MICRON_F_M,
+		"R" => Constants::MICRON_F_R,
+		"T" => Constants::MICRON_F_T,
+		"S" => Constants::MICRON_F_S,
+		"X" => Constants::MICRON_F_X,
+		"Z" => Constants::MICRON_F_Z,
+	];
+	protected const PROD_STATUS = [
+		"ES" => Constants::MICRON_P_ES,
+		"QS" => Constants::MICRON_P_QS,
+		"MS" => Constants::MICRON_P_MS
+	];
 
 	public static function getName() : string{
 		return Constants::VENDOR_MICRON;
@@ -173,7 +201,6 @@ class Micron extends Decoder{
 				"A" => 1,
 				"C" => 2,
 				"E" => 3,
-				//TODO: confirm
 				"G" => 4
 			]));
 
@@ -201,10 +228,26 @@ class Micron extends Decoder{
 				"D" => 4
 			]));
 		self::setInterface(self::shiftChars($partNumber, 1), $flashInfo)
-			->setPackage(self::getOrDefault(self::shiftChars($partNumber, 2), self::PACKAGE))
-			->setExtraInfo($extra);
+			->setPackage(self::getOrDefault(self::shiftChars($partNumber, 2), self::PACKAGE));
 
-		return $flashInfo;
+		if(self::shiftChars($partNumber, 1) == "-"){
+			$speed = self::matchFromStart($partNumber, self::SPEED_GRADE);
+			if($speed != Constants::UNKNOWN){
+				$extra[Constants::SPEED_GRADE] = $speed;
+			}
+			$extra[Constants::OPERATION_TEMPERATURE] = self::matchFromStart($partNumber, self::OPERATING_TEMP_RANGE, Constants::MICRON_OTR_C);
+			$features = self::getOrDefault(self::shiftChars($partNumber, 1), self::FEATURES);
+			if($features != Constants::UNKNOWN){
+				$extra[Constants::FEATURES] = $features;
+			}
+			$extra[Constants::PROD_STATUS] = self::matchFromStart($partNumber, self::PROD_STATUS, Constants::MICRON_P);
+			if(self::shiftChars($partNumber, 1) == ":" and ($rev = self::shiftChars($partNumber, 1)) != ""){
+				$extra[Constants::DESIGN_REV] = $rev;
+			}
+		}
+
+
+		return $flashInfo->setExtraInfo($extra);
 	}
 
 	protected static function setInterface(string $interface, FlashInfo $info) : FlashInfo{

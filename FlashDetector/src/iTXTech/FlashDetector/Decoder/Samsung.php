@@ -203,7 +203,7 @@ class Samsung extends Decoder{
 		$extra[Constants::LEAD_FREE] = in_array($package,
 			["8", "9", "B", "E", "F", "I", "J", "K", "L", "M", "P", "Q", "R", "S", "T", "Z"]);
 		$extra[Constants::HALOGEN_FREE] = in_array($package, ["8", "9", "B", "E", "K", "L", "M", "R", "S", "T"]);
-		$extra["cu"] = in_array($package, ["8", "9"]);
+		$extra[Constants::SAMSUNG_CU] = in_array($package, ["8", "9"]);
 		$extra[Constants::OPERATION_TEMPERATURE] = self::getOrDefault(self::shiftChars($partNumber, 1), [
 			"C" => Constants::SAMSUNG_TEMP_C,
 			"S" => Constants::SAMSUNG_TEMP_S,

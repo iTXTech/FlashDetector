@@ -134,8 +134,8 @@ class Kioxia extends Decoder{
 			"D" => ["16KB 2pl", "4MB"],
 			"F" => ["16KB 4pl", "4MB"]
 		], [Constants::UNKNOWN, Constants::UNKNOWN]);
-		$extra["pageSize"] = $size[0];
-		$extra["blockSize"] = $size[1];
+		$extra[Constants::PAGE_SIZE] = $size[0];
+		$extra[Constants::BLOCK_SIZE] = $size[1];
 		$flashInfo->setProcessNode(self::getOrDefault(self::shiftChars($partNumber, 1), [
 			"A" => "130 nm",
 			"B" => "90 nm",

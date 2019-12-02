@@ -81,9 +81,13 @@ interface Constants{
 
 	//Toshiba
 	public const TOSHIBA_UNSUPPORTED = "toshiba_unsupported";
+	public const PAGE_SIZE = "pageSize";
+	public const BLOCK_SIZE = "blockSize";
 
 	//Samsung
 	public const SAMSUNG_NONE = "samsung_none";
+
+	public const SAMSUNG_CU = "cu";
 
 	public const SAMSUNG_TEMP_C = "samsung_temp_c";
 	public const SAMSUNG_TEMP_S = "samsung_temp_s";
@@ -99,4 +103,48 @@ interface Constants{
 
 	//Intel
 	public const INTEL_SKU_S = "intel_sku_s";
+
+	//Micron
+	public const MICRON_PN = "micronPartNumber";
+
+	public const MICRON_OTR_AAT = "micron_otr_aat";
+	public const MICRON_OTR_AIT = "micron_otr_ait";
+	public const MICRON_OTR_IT = "micron_otr_it";
+	public const MICRON_OTR_WT = "micron_otr_wt";
+	public const MICRON_OTR_C = "micron_otr_c";
+
+	public const MICRON_F_E = "micron_f_e";
+	public const MICRON_F_M = "micron_f_m";
+	public const MICRON_F_R = "micron_f_r";
+	public const MICRON_F_S = "micron_f_s";
+	public const MICRON_F_T = "micron_f_t";
+	public const MICRON_F_X = "micron_f_x";
+	public const MICRON_F_Z = "micron_f_z";
+
+	public const MICRON_P = "micron_p";
+	public const MICRON_P_ES = "micron_p_es";
+	public const MICRON_P_QS = "micron_p_qs";
+	public const MICRON_P_MS = "micron_p_ms";
+
+	public const SPEED_GRADE = "speed_grade";
+	public const FEATURES = "features";
+	public const PROD_STATUS = "prod_status";
+	public const DESIGN_REV = "design_rev";
+	public const PROD_DATE = "prod_date";
+
+	public const USA = "cty_usa";
+	public const SINGAPORE = "cty_sg";
+	public const ITALY = "cty_it";
+	public const JAPAN = "cty_jp";
+	public const CHINA = "cty_cn";
+	public const TAIWAN = "cty_tw";
+	public const KOREA = "cty_kr";
+	public const MIXED = "cty_mixed";
+	public const ISRAEL = "cty_il";
+	public const IRELAND = "cty_ie";
+	public const MALAYSIA = "cty_my";
+	public const PHILIPPINES = "cty_ph";
+
+	public const DIFFUSION = "diffusion_loc";
+	public const ENCAPSULATION = "encapsulation_loc";
 }
