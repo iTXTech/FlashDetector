@@ -1,9 +1,9 @@
 {
     "info": {
         "name": "iTXTech FlashDetector Flash Database",
-        "version": "42",
+        "version": "43",
         "website": "https:\/\/github.com\/iTXTech\/FlashDetector",
-        "time": "Tue, 12 Nov 2019 15:25:17 +0800",
+        "time": "Mon, 02 Dec 2019 08:30:43 +0800",
         "controllers": [
             "SM321AC",
             "SM321BB",
@@ -55683,6 +55683,15 @@
             "m": "T0DDL",
             "d": 8,
             "e": 4
+        },
+        "15062-064G": {
+            "id": [
+                "454C95937A57"
+            ],
+            "l": "19nm",
+            "c": "MLC",
+            "d": 8,
+            "e": 2
         }
     },
     "infineon": {

@@ -1,6 +1,6 @@
 {
   "name": "FlashDetector",
-  "version": "2",
+  "version": "0",
   "api": 6,
   "description": "Universal NAND Flash Part Number Decoder",
   "author": "iTX Technologies",
