@@ -143,17 +143,23 @@ class Micron extends Decoder{
 		"N" => [true, true, false]
 	];
 	protected const SPEED_GRADE = [
-		"12" => "166 MT/s",
-		"10" => "200 MT/s",
-		"6" => "333 MT/s",
-		"5" => "400 MT/s",
-		"37" => "533 MT/s",
-		"3" => "667 MT/s"
+		"15" => "NV-DDR TM3 133MT/s",
+		"12" => "NV-DDR TM4 166MT/s",
+		"10" => "NV-DDR TM5 200MT/s",
+		"75" => "NV-DDR2 TM5 266MT/s",
+		"6" => "NV-DDR2 TM6 333MT/s",
+		"5" => "NV-DDR2 TM7 400MT/s",
+		"37" => "NV-DDR2 TM8 533MT/s",
+		"3" => "NV-DDR3 TM9 666MT/s",
+		"25" => "NV-DDR3 TM10 800MT/s",
+		"18" => "NV-DDR3 TM11 1066MT/s",
+		"16" => "NV-DDR3 TM12 1200MT/s"
 	];
 	protected const OPERATING_TEMP_RANGE = [
 		"AAT" => Constants::MICRON_OTR_AAT,
 		"AIT" => Constants::MICRON_OTR_AIT,
 		"IT" => Constants::MICRON_OTR_IT,
+		"ET" => Constants::MICRON_OTR_IT,
 		"WT" => Constants::MICRON_OTR_WT,
 	];
 	protected const FEATURES = [
@@ -231,6 +237,13 @@ class Micron extends Decoder{
 			->setPackage(self::getOrDefault(self::shiftChars($partNumber, 2), self::PACKAGE));
 
 		if(self::shiftChars($partNumber, 1) == "-"){
+			foreach(self::PROD_STATUS as $k => $stat){
+				if(StringUtil::contains($partNumber, $k)){
+					$extra[Constants::PROD_STATUS] = $stat;
+					$partNumber = str_replace($k, "", $partNumber);
+					break;
+				}
+			}
 			$speed = self::matchFromStart($partNumber, self::SPEED_GRADE);
 			if($speed != Constants::UNKNOWN){
 				$extra[Constants::SPEED_GRADE] = $speed;
@@ -240,7 +253,6 @@ class Micron extends Decoder{
 			if($features != Constants::UNKNOWN){
 				$extra[Constants::FEATURES] = $features;
 			}
-			$extra[Constants::PROD_STATUS] = self::matchFromStart($partNumber, self::PROD_STATUS, Constants::MICRON_P);
 			if(self::shiftChars($partNumber, 1) == ":" and ($rev = self::shiftChars($partNumber, 1)) != ""){
 				$extra[Constants::DESIGN_REV] = $rev;
 			}

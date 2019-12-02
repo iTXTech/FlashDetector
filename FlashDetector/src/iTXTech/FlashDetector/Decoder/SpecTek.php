@@ -170,8 +170,14 @@ class SpecTek extends Micron{
 		if($ifInfo !== ""){
 			$extra["interfaceInfo"] = $ifInfo;
 		}
-		$flashInfo->setExtraInfo($extra);
 
-		return $flashInfo;
+		if(self::shiftChars($partNumber, 1) == "-"){
+			$speed = self::matchFromStart($partNumber, self::SPEED_GRADE);
+			if($speed != Constants::UNKNOWN){
+				$extra[Constants::SPEED_GRADE] = $speed;
+			}
+		}
+
+		return $flashInfo->setExtraInfo($extra);
 	}
 }

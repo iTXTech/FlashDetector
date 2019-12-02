@@ -142,7 +142,7 @@ abstract class FlashDetector{
 	}
 
 	public static function detect(string $partNumber, bool $combineFdb = true) : FlashInfo{
-		$partNumber = strtoupper($partNumber);
+		$partNumber = str_replace([" ", ",", "&", ".", "|"], "", strtoupper($partNumber));
 		foreach(self::$decoders as $decoder){
 			if($decoder::check($partNumber)){
 				$info = $decoder::decode($partNumber);
