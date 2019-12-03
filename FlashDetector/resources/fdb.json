@@ -1,9 +1,9 @@
 {
     "info": {
         "name": "iTXTech FlashDetector Flash Database",
-        "version": "44",
+        "version": "45",
         "website": "https:\/\/github.com\/iTXTech\/FlashDetector",
-        "time": "Tue, 03 Dec 2019 08:25:45 +0800",
+        "time": "Tue, 03 Dec 2019 22:36:40 +0800",
         "controllers": [
             "SM321AC",
             "SM321BB",
@@ -6030,6 +6030,18 @@
                 "SM2258"
             ]
         },
+        "K9OKGY8S7C": {
+            "id": [
+                "EC1A881F70C8"
+            ],
+            "t": [
+                "SM3268AB",
+                "SM2258",
+                "CBM2099E",
+                "CBM2199"
+            ],
+            "m": "Toggle"
+        },
         "K9GCGD8U0F": {
             "id": [
                 "ECDE94C3A4CA"
@@ -8592,16 +8604,6 @@
             ],
             "t": [
                 "SM2258XT"
-            ]
-        },
-        "K9OKGY8S7C": {
-            "id": [
-                "EC1A881F70C8"
-            ],
-            "t": [
-                "SM2258",
-                "CBM2099E",
-                "CBM2199"
             ]
         },
         "K9OKGY8S8F": {
@@ -51008,7 +51010,8 @@
             ],
             "l": "3DV4",
             "t": [
-                "SM3271AB"
+                "SM3271AB",
+                "SM2258XT"
             ]
         },
         "SDYNBIAMA-016G_SI2": {

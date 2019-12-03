@@ -110,7 +110,7 @@ class Kioxia extends Decoder{
 				"W" => 3,
 				"F" => 4,//QLC
 			]));
-		$extra[Constants::ENTERPRISE] = in_array($ep, ["H", "E", "U"]);
+		$extra[Constants::ENTERPRISE] = in_array($ep, ["H", "E", "U", "V"]);
 		$width = self::shiftChars($partNumber, 1);
 		if(in_array($width, ["0", "1", "2", "3", "4", "A", "B", "C", "D"])){
 			$flashInfo->setDeviceWidth(8);
@@ -184,7 +184,8 @@ class Kioxia extends Decoder{
 			"D" => [4, 4],
 			"E" => [4, 8]
 		], [-1, -1]);
-		$flashInfo->setClassification(new Classification($classification[1], $classification[0]));
+		$flashInfo->setClassification(new Classification($classification[1], $classification[0],
+			Classification::UNKNOWN_PROP, !$extra["multiChip"] ? 1 : Classification::UNKNOWN_PROP));
 		$detailedPackage = [
 			"LGA" => [
 				"1" => "LGA40 (12 x 18 x 0.7)",

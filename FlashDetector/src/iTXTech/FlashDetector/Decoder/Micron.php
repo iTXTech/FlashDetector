@@ -237,6 +237,7 @@ class Micron extends Decoder{
 			->setPackage(self::getOrDefault(self::shiftChars($partNumber, 2), self::PACKAGE));
 
 		if(self::shiftChars($partNumber, 1) == "-"){
+			$extra[Constants::PROD_STATUS] = Constants::MICRON_P;
 			foreach(self::PROD_STATUS as $k => $stat){
 				if(StringUtil::contains($partNumber, $k)){
 					$extra[Constants::PROD_STATUS] = $stat;

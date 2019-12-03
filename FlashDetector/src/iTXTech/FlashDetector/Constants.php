@@ -132,7 +132,7 @@ interface Constants{
 	public const DESIGN_REV = "design_rev";
 	public const PROD_DATE = "prod_date";
 
-	public const USA = "cty_usa";
+	public const USA = "cty_us";
 	public const SINGAPORE = "cty_sg";
 	public const ITALY = "cty_it";
 	public const JAPAN = "cty_jp";
