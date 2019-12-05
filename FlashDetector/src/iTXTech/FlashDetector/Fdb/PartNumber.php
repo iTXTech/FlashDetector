@@ -118,7 +118,7 @@ class PartNumber extends Arrayable{
 
 	public function setProcessNode(string $processNode) : PartNumber{
 		if($this->l == null){
-			$this->l = $processNode;
+			$this->l = trim(str_replace("toggle", "", $processNode));
 		}
 		return $this;
 	}

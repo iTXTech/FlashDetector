@@ -29,6 +29,7 @@ use iTXTech\FlashDetector\FDBGen\Generator\Innostor;
 use iTXTech\FlashDetector\FDBGen\Generator\JMicron;
 use iTXTech\FlashDetector\FDBGen\Generator\Maxiotek;
 use iTXTech\FlashDetector\FDBGen\Generator\SandForce;
+use iTXTech\FlashDetector\FDBGen\Generator\SiliconMotionForceFlash;
 use iTXTech\FlashDetector\FDBGen\Generator\SiliconMotionSSD;
 use iTXTech\FlashDetector\FDBGen\Generator\SiliconMotionUFD;
 use iTXTech\SimpleFramework\Util\StringUtil;
@@ -45,6 +46,8 @@ abstract class FDBGen{
 	}
 
 	public static function init(){
+		//Full Flash Database
+		self::registerGenerator(SiliconMotionForceFlash::class);
 		//have 6Bytes FlashId
 		self::registerGenerator(SiliconMotionUFD::class);
 		self::registerGenerator(SiliconMotionSSD::class);
