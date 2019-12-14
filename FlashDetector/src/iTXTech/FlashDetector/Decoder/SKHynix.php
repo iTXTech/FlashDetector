@@ -105,7 +105,8 @@ class SKHynix extends Decoder{
 		"W" => [6, 6, true, 2],//Dual Interface
 		"H" => [8, 8, true, 2],//Dual Interface
 		"E" => [4, 4, true, 4],
-		"Q" => [4, 4, true, 4]
+		"Q" => [4, 4, true, 4],
+		"A" => [4, 4, true, 2],//TODO: confirm
 	];
 	protected const PACKAGE = [
 		"T" => "TSOP1",

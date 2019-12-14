@@ -112,7 +112,7 @@ class Kioxia extends Decoder{
 			]));
 		$extra[Constants::ENTERPRISE] = in_array($ep, ["H", "E", "U", "V"]);
 		$width = self::shiftChars($partNumber, 1);
-		if(in_array($width, ["0", "1", "2", "3", "4", "A", "B", "C", "D"])){
+		if(in_array($width, ["0", "1", "2", "3", "4", "A", "B", "C", "D", "F"])){
 			$flashInfo->setDeviceWidth(8);
 		}elseif(in_array($width, ["5", "6", "7", "8", "9"])){
 			$flashInfo->setDeviceWidth(16);
