@@ -1,19 +1,19 @@
 {
     "info": {
-        "name": "iTXTech FlashDetector Flash Database",
-        "version": "46",
-        "website": "https:\/\/github.com\/iTXTech\/FlashDetector",
-        "time": "Thu, 05 Dec 2019 13:34:13 +0800",
-        "controllers": [
-            "SM321AC",
-            "SM321BB",
-            "SM321BC",
-            "SM324BB",
-            "SM324BC",
-            "SM3252A",
-            "SM3252B",
-            "SM3252C",
-            "SM3254AE",
+      "name": "iTXTech FlashDetector Flash Database",
+      "version": "47",
+      "website": "https:\/\/github.com\/iTXTech\/FlashDetector",
+      "time": "Thu, 19 Dec 2019 09:16:58 +0800",
+      "controllers": [
+        "SM321AC",
+        "SM321BB",
+        "SM321BC",
+        "SM324BB",
+        "SM324BC",
+        "SM3252A",
+        "SM3252B",
+        "SM3252C",
+        "SM3254AE",
             "SM3255AA",
             "SM3255AB",
             "SM3255ENA1",
@@ -34254,16 +34254,22 @@
                 "CBM2199S"
             ]
         },
-        "I29F128G08CBCBB": {
-            "id": [
-                "B5845832A1"
-            ],
-            "l": "3D",
-            "c": "TLC",
-            "t": [
-                "CBM2199"
-            ]
-        }
+      "I29F128G08CBCBB": {
+        "id": [
+          "B5845832A1"
+        ],
+        "l": "3D",
+        "c": "TLC",
+        "t": [
+          "CBM2199"
+        ]
+      },
+      "MT29F1T08EMHBF": {
+        "id": [
+          "2CA40832A104"
+        ],
+        "l": "B16C"
+      }
     },
     "westerndigital": {
         "SDTNMNAHEM-002G": {
