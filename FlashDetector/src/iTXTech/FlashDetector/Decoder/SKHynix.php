@@ -37,7 +37,8 @@ class SKHynix extends Decoder{
 		"L" => "2.7V",
 		"S" => "1.8V",
 		"J" => "2.7V~3.6V/1.2V",
-		"Q" => "Vcc: 2.7V~3.6V, VccQ: 1.7V~1.95V/2.7V~3.6V"
+		"Q" => "Vcc: 2.7V~3.6V, VccQ: 1.7V~1.95V/2.7V~3.6V",
+		"T" => "Vcc: 3.3V, VccQ: 1.8V/3.3V"
 	];
 	protected const DENSITY = [
 		"64" => 64,
@@ -184,7 +185,7 @@ class SKHynix extends Decoder{
 		$mode = self::getOrDefault(self::shiftChars($partNumber, 1), self::MODE, [-1, -1, false, -1]);
 		$flashInfo->setClassification(new Classification(
 			$mode[0], $mode[3], $mode[1], $classification[1]));
-		if($voltage == "Q"){
+		if(in_array($voltage, ["Q", "T"])){
 			$flashInfo->setInterface((new FlashInterface(false))->setAsync(true)->setSync(true));
 		}else{
 			$flashInfo->setInterface((new FlashInterface(false))->setAsync(true)->setSync(false));
