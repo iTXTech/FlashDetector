@@ -27,11 +27,14 @@ class Fdb extends Arrayable{
 	protected $info;
 	/** @var Vendor[] */
 	protected $vendors = [];
+	/** @var Iddb */
+	protected $iddb;
 
 	public function __construct(array $arr = null){
 		if($arr != null){
 			$this->info = new Info($arr["info"]);
-			unset($arr["info"]);
+			$this->iddb = new Iddb($arr["iddb"]);
+			unset($arr["info"], $arr["iddb"]);
 			foreach($arr as $vendor => $pns){
 				$this->vendors[$vendor] = new Vendor($vendor, $pns);
 			}
@@ -84,9 +87,18 @@ class Fdb extends Arrayable{
 		return $this->info;
 	}
 
+	public function setIddb(Iddb $iddb){
+		$this->iddb = $iddb;
+	}
+
+	public function getIddb() : Iddb{
+		return $this->iddb;
+	}
+
 	public function toArray() : array{
 		$arr = [
 			"info" => $this->info->toArray(),
+			"iddb" => $this->iddb->toArray()
 		];
 		foreach($this->vendors as $vendor){
 			$arr[$vendor->getName()] = $vendor->toArray();

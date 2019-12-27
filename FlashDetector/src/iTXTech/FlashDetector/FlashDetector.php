@@ -41,7 +41,6 @@ abstract class FlashDetector{
 	private static $decoders = [];
 	/** @var Fdb */
 	private static $fdb;
-	private static $iddb = [];
 	private static $mdb = [];
 	private static $lang = [];
 	private static $fallbackLang = [];
@@ -68,15 +67,11 @@ abstract class FlashDetector{
 			self::$info = [
 				"fdb" => self::$fdb->getInfo()->toArray(),
 				"flash_cnt" => $cnt,
-				"id_cnt" => count(self::$iddb) - 1,
+				"id_cnt" => count(self::$fdb->getIddb()->getFlashIds()) - 1,
 				"mdb_cnt" => $c
 			];
 		}
 		return self::$info;
-	}
-
-	public static function getIddb() : array{
-		return self::$iddb;
 	}
 
 	public static function getMdb() : array{
@@ -91,7 +86,6 @@ abstract class FlashDetector{
 		if(Loader::getInstance() !== null){
 			$fdb = json_decode(Loader::getInstance()->getResourceAsText("fdb.json"), true);
 			self::$fdb = new Fdb($fdb);
-			self::$iddb = self::generateIddb($fdb);
 			self::$mdb = json_decode(Loader::getInstance()->getResourceAsText("mdb.json"), true);
 		}
 	}
@@ -155,6 +149,16 @@ abstract class FlashDetector{
 		return (new FlashInfo($partNumber))->setVendor(Constants::UNKNOWN);
 	}
 
+	public static function getVendor(string $pn) : string{
+		$pn = str_replace([" ", ",", "&", ".", "|"], "", strtoupper($pn));
+		foreach(self::$decoders as $decoder){
+			if($decoder::check($pn)){
+				return $decoder::getName();
+			}
+		}
+		return Constants::UNKNOWN;
+	}
+
 	public static function combineDataFromFdb(FlashInfo $info, string $decoder){
 		/** @var Decoder $decoder */
 		if(($data = $decoder::getFlashInfoFromFdb($info)) !== null){
@@ -190,14 +194,14 @@ abstract class FlashDetector{
 		$id = strtoupper($id);
 		if($partMatch){
 			$result = [];
-			foreach(self::$iddb as $fid => $partNumber){
-				if(StringUtil::startsWith($fid, $id)){
-					$result[$fid] = $partNumber;
+			foreach(self::$fdb->getIddb()->getFlashIds() as $flashId){
+				if(StringUtil::startsWith($flashId->getFlashId(), $id)){
+					$result[$flashId->getFlashId()] = $flashId->getPartNumbers();
 				}
 			}
 			return $result;
 		}
-		return self::$iddb[strtoupper($id)] ?? null;
+		return self::$fdb->getIddb()->getFlashIds()[$id] ?? null;
 	}
 
 	public static function searchPartNumber(string $pn, bool $partMatch = false) : ?array{

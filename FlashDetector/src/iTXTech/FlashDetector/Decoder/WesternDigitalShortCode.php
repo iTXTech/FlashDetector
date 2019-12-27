@@ -20,7 +20,6 @@
 
 namespace iTXTech\FlashDetector\Decoder;
 
-use iTXTech\FlashDetector\Constants;
 use iTXTech\FlashDetector\FlashInfo;
 
 class WesternDigitalShortCode extends WesternDigital{

@@ -21,6 +21,8 @@
 namespace iTXTech\FlashDetector\FDBGen;
 
 use iTXTech\FlashDetector\Fdb\Fdb;
+use iTXTech\FlashDetector\Fdb\FlashId;
+use iTXTech\FlashDetector\Fdb\Iddb;
 use iTXTech\FlashDetector\FDBGen\Generator\AlcorMicro;
 use iTXTech\FlashDetector\FDBGen\Generator\ChipsBank;
 use iTXTech\FlashDetector\FDBGen\Generator\Extra;
@@ -73,7 +75,8 @@ abstract class FDBGen{
 				"version" => $version,
 				"time" => date("r"),
 				"controllers" => []
-			]
+			],
+			"iddb" => []
 		]);
 		$dirs = array_keys(self::$generators);
 		foreach($dirs as $dir){
@@ -91,6 +94,21 @@ abstract class FDBGen{
 		if($extra){
 			Extra::merge($fdb, file_get_contents($db . DIRECTORY_SEPARATOR . "extra.json"));
 		}
+
+		$iddb = new Iddb();
+		foreach($fdb->getVendors() as $vendor){
+			foreach($vendor->getPartNumbers() as $partNumber){
+				foreach($partNumber->getFlashIds() as $id){
+					$flashId = $iddb->getFlashId($id) ?? new FlashId($id);
+					$flashId->addPartNumber($vendor->getName() . " " . $partNumber->getPartNumber());
+					$iddb->addFlashId($flashId);
+				}
+			}
+		}
+
+		//TODO: GENERATOR
+
+		$fdb->setIddb($iddb);
 
 		return $fdb->toArray();
 	}
