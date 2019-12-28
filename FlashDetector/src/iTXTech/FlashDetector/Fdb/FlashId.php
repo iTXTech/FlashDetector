@@ -34,26 +34,29 @@ class FlashId extends Arrayable{
 		parent::__construct($arr);
 	}
 
-	public function addPartNumber(string $pn){
+	public function addPartNumber(string $pn) : FlashId{
 		if(!in_array($pn, $this->n)){
 			$this->n[] = $pn;
 		}
+		return $this;
 	}
 
 	public function getPageSize() : int{
 		return $this->s ?? Classification::UNKNOWN_PROP;
 	}
 
-	public function getPages() : int{
+	public function getPagesPerBlock() : int{
 		return $this->p ?? Classification::UNKNOWN_PROP;
 	}
 
-	public function setPageSize(int $size){
+	public function setPageSize(int $size) : FlashId{
 		$this->s = $size;
+		return $this;
 	}
 
-	public function setPages(int $pages){
+	public function setPagesPerBlock(int $pages) : FlashId{
 		$this->p = $pages;
+		return $this;
 	}
 
 	public function getFlashId() : string{

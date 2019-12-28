@@ -40,7 +40,21 @@ class SiliconMotionForceFlash extends Generator{
 						}
 					}
 					$d = implode("", $d);//FlashID
-					$info = explode(",", explode("=", $data[$line + 1])[1]);
+					$index = explode("=", $data[$line + 1])[1];
+					if(StringUtil::contains($index, "Page")){
+						$end = $start = strpos($index, "Page");
+						while($index{--$start} == "0" or ((int) $index{$start} > 0)) ;
+						$start++;
+						$fdb->getIddb()->getFlashId($d, true)
+							->setPagesPerBlock((int) substr($index, $start, $end - $start));
+					}
+					foreach(["12", "16", "4", "8", "2"] as $p){
+						if(StringUtil::contains($index, $p . "K")){
+							$fdb->getIddb()->getFlashId($d, true)->setPageSize((int) $p);
+							break;
+						}
+					}
+					$info = explode(",", $index);
 					$pn = explode("_", str_replace(" ", "", explode("(", @end($info))[0]))[0];
 					$vendor = str_replace([" ", "tsb", "ss", "hy", "hynix"], ["", "toshiba", "samsung", "hynix", "skhynix"],
 						strtolower(explode("_", $info[0])[0]));

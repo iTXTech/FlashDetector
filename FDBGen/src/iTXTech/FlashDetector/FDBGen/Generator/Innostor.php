@@ -49,6 +49,8 @@ class Innostor extends Generator{
 				foreach($partNumber->getFlashIds() as $id){
 					if(StringUtil::startsWith($id, $flashId)){
 						$partNumber->addController($controller);
+						$fdb->getIddb()->getFlashId($id, true)->setPageSize(round($flash["PageSize"] / 1024))
+							->setPagesPerBlock($flash["Pagesperblock"]);
 						break;
 					}
 				}

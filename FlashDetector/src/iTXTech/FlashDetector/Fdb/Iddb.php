@@ -36,8 +36,12 @@ class Iddb extends Arrayable{
 		$this->flashIds[$id->getFlashId()] = $id;
 	}
 
-	public function getFlashId(string $id) : ?FlashId{
-		return $this->flashIds[strtoupper($id)] ?? null;
+	public function getFlashId(string $id, bool $force = false) : ?FlashId{
+		$id = strtoupper($id);
+		if($force and !isset($this->flashIds[$id])){
+			$this->flashIds[$id] = new FlashId($id);
+		}
+		return $this->flashIds[$id] ?? null;
 	}
 
 	/**

@@ -30,7 +30,6 @@ class SiliconMotionUFD extends Generator{
 		return "smufd";
 	}
 
-	//Don't look at it, may do harm to you
 	public static function merge(Fdb $fdb, string $data, string $filename) : void{
 		$data = explode("\r\n", mb_convert_encoding($data, "UTF-8", "UTF-8"));
 		//SMI DBF is in CRLF (Windows) format
