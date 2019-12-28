@@ -2,7 +2,7 @@
 
 [![License](https://img.shields.io/github/license/iTXTech/FlashDetector.svg)](https://github.com/iTXTech/FlashDetector/blob/master/LICENSE)
 
-Universal NAND Flash Part Number Decoder
+Universal NAND Flash Part Number Decoder and Flash Id Search Engine.
 
 ## Requirements
 

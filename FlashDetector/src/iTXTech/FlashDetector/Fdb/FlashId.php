@@ -43,7 +43,7 @@ class FlashId extends Arrayable{
 		return $this;
 	}
 
-	public function getPageSize() : int{
+	public function getPageSize() : float{
 		return $this->s ?? Classification::UNKNOWN_PROP;
 	}
 
@@ -78,7 +78,7 @@ class FlashId extends Arrayable{
 		return $this;
 	}
 
-	public function setPageSize(int $size) : FlashId{
+	public function setPageSize(float $size) : FlashId{
 		if($size > 0){
 			$this->s = $size;
 		}

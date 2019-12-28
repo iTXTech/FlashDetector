@@ -98,7 +98,15 @@ class ChipsBank extends Generator{
 						->setProcessNode($rec[7])
 						->setCellLevel(explode("-", $rec[2])[0]);
 
-					$fdb->getIddb()->getFlashId($flashId, true)->addController($sup);
+					$pageSize = explode("-", $rec[2])[1];
+					if(StringUtil::endsWith($pageSize, "K")){
+						$pageSize = substr($pageSize, 0, strlen($pageSize) - 1);
+					}elseif(is_numeric($pageSize)){
+						$pageSize /= 1024;
+					}else{
+						$pageSize = 0;
+					}
+					$fdb->getIddb()->getFlashId($flashId, true)->setPageSize($pageSize)->addController($sup);
 				}
 			}
 		}
