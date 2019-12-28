@@ -43,7 +43,6 @@ class WebServer{
 		RequestHandler::registerPage("/decode", DecodePage::class);
 		RequestHandler::registerPage("/searchId", SearchIdPage::class);
 		RequestHandler::registerPage("/searchPn", SearchPnPage::class);
-		RequestHandler::registerPage("/searchController", SearchControllerPage::class);
 		RequestHandler::registerPage("/info", InfoPage::class);
 		$this->webServer = new WNWS("http://" . $config["address"] . ":" . $config["port"]);
 		$this->webServer->onReceive = function (TcpConnection $connection){

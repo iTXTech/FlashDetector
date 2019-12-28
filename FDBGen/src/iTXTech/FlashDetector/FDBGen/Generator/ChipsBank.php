@@ -97,6 +97,8 @@ class ChipsBank extends Generator{
 						->addController($sup)
 						->setProcessNode($rec[7])
 						->setCellLevel(explode("-", $rec[2])[0]);
+
+					$fdb->getIddb()->getFlashId($flashId, true)->addController($sup);
 				}
 			}
 		}

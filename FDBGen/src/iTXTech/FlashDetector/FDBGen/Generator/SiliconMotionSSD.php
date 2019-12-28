@@ -83,6 +83,7 @@ class SiliconMotionSSD extends Generator{
 				$fdb->getPartNumber($vendor, $pn, true)
 					->addFlashId($id)
 					->addController($controller);
+				$fdb->getIddb()->getFlashId($id, true)->addController($controller);
 			}
 		}
 	}

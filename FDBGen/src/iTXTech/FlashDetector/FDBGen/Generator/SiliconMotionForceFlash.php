@@ -40,17 +40,17 @@ class SiliconMotionForceFlash extends Generator{
 						}
 					}
 					$d = implode("", $d);//FlashID
+					$fid = $fdb->getIddb()->getFlashId($d, true);
 					$index = explode("=", $data[$line + 1])[1];
 					if(StringUtil::contains($index, "Page")){
 						$end = $start = strpos($index, "Page");
 						while($index{--$start} == "0" or ((int) $index{$start} > 0)) ;
 						$start++;
-						$fdb->getIddb()->getFlashId($d, true)
-							->setPagesPerBlock((int) substr($index, $start, $end - $start));
+						$fid->setPagesPerBlock((int) substr($index, $start, $end - $start));
 					}
 					foreach(["12", "16", "4", "8", "2"] as $p){
 						if(StringUtil::contains($index, $p . "K")){
-							$fdb->getIddb()->getFlashId($d, true)->setPageSize((int) $p);
+							$fid->setPageSize((int) $p);
 							break;
 						}
 					}
@@ -64,6 +64,11 @@ class SiliconMotionForceFlash extends Generator{
 
 					$fdb->getPartNumber($vendor, $pn, true)
 						->addFlashId($d);
+
+					$da = explode(",", explode("=", $data[$line + 2])[1]);
+					if(isset($da[11])){
+						$fid->setBlocks(hexdec($da[11] . $da[12]));
+					}
 				}
 			}
 		}

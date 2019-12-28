@@ -39,7 +39,6 @@ class WebServer{
 		$this->server->registerPage("/decode", DecodePage::class);
 		$this->server->registerPage("/searchId", SearchIdPage::class);
 		$this->server->registerPage("/searchPn", SearchPnPage::class);
-		$this->server->registerPage("/searchController", SearchControllerPage::class);
 		$this->server->registerPage("/info", InfoPage::class);
 		$this->server->load($config);
 	}

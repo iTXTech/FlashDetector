@@ -196,7 +196,13 @@ abstract class FlashDetector{
 			$result = [];
 			foreach(self::$fdb->getIddb()->getFlashIds() as $flashId){
 				if(StringUtil::startsWith($flashId->getFlashId(), $id)){
-					$result[$flashId->getFlashId()] = $flashId->getPartNumbers();
+					$result[$flashId->getFlashId()] = [
+						"partNumbers" => $flashId->getPartNumbers(),
+						"pageSize" => $flashId->getPageSize(),
+						"pagesPerBlock" => $flashId->getPagesPerBlock(),
+						"blocks" => $flashId->getBlocks(),
+						"controllers" => $flashId->getControllers()
+					];
 				}
 			}
 			return $result;
@@ -238,24 +244,6 @@ abstract class FlashDetector{
 			}
 		}
 		return [];
-	}
-
-	public static function searchSupportedControllers(string $flashId, bool $partMatch = false) : ?array{
-		$ids = self::searchFlashId($flashId, $partMatch);
-		$result = [];
-		foreach($ids as $k => $v){
-			$cons = [];
-			foreach($v as $pn){
-				list($vendor, $pn) = explode(" ", $pn, 2);
-				foreach(self::$fdb->getPartNumber($vendor, $pn)->getControllers() as $con){
-					$cons[$con] = "";
-				}
-			}
-			$cons = array_keys($cons);
-			sort($cons);
-			$result[$k] = $cons;
-		}
-		return $result;
 	}
 
 	/**

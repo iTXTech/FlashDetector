@@ -91,6 +91,8 @@ class SiliconMotionUFD extends Generator{
 					->addController($controller)
 					->setComment($comment);
 
+				$fdb->getIddb()->getFlashId($id, true)->addController($controller);
+
 				if(($info[3] ?? null) != null){
 					$pn->setProcessNode($info[3]);
 				}

@@ -27,7 +27,9 @@ class FlashId extends Arrayable{
 	protected $id;
 	protected $s;//page size
 	protected $p;//pages
-	protected $n = [];
+	protected $b;//blocks
+	protected $t = [];//controllers
+	protected $n = [];//part numbers
 
 	public function __construct(string $id, array $arr = null){
 		$this->id = strtoupper($id);
@@ -49,13 +51,44 @@ class FlashId extends Arrayable{
 		return $this->p ?? Classification::UNKNOWN_PROP;
 	}
 
+	public function getBlocks() : int{
+		return $this->b ?? Classification::UNKNOWN_PROP;
+	}
+
+	public function getControllers() : array{
+		return $this->t ?? [];
+	}
+
+	public function addController($controller) : FlashId{
+		if(!is_array($controller)){
+			$controller = [$controller];
+		}
+		foreach($controller as $con){
+			if(!in_array($con, $this->t)){
+				$this->t[] = $con;
+			}
+		}
+		return $this;
+	}
+
+	public function setBlocks(int $blocks) : FlashId{
+		if($blocks > 0){
+			$this->b = $blocks;
+		}
+		return $this;
+	}
+
 	public function setPageSize(int $size) : FlashId{
-		$this->s = $size;
+		if($size > 0){
+			$this->s = $size;
+		}
 		return $this;
 	}
 
 	public function setPagesPerBlock(int $pages) : FlashId{
-		$this->p = $pages;
+		if($pages > 0){
+			$this->p = $pages;
+		}
 		return $this;
 	}
 

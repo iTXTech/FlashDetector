@@ -84,6 +84,7 @@ class JMicron extends Generator{
 					->addController($controller);
 				if(strlen($id) == 12){
 					$partNumber->addFlashId($id);
+					$fdb->getIddb()->getFlashId($id, true)->addController($controller);
 				}
 			}
 		}
