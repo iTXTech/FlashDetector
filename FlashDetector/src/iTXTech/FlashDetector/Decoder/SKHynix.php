@@ -92,7 +92,7 @@ class SKHynix extends Decoder{
 		//TODO: more
 	];
 	protected const MODE = [
-		"1" => [1, 1, true, 1],//CE, RnB, Sync
+		"1" => [1, 1, true, 1],//CE, RB, Sync
 		"2" => [1, 1, false, 1],
 		"4" => [2, 2, true, 1],
 		"5" => [2, 2, false, 1],

@@ -102,7 +102,7 @@ class Micron extends Decoder{
 		"16T" => 16 * Constants::DENSITY_TBITS,
 	];
 	protected const CLASSIFICATION = [
-		"A" => [1, 0, 0, 1],//die, ce, rnb, ch
+		"A" => [1, 0, 0, 1],//die, ce, rb, ch
 		"B" => [1, 1, 1, 1],
 		"D" => [2, 1, 1, 1],
 		"E" => [2, 2, 2, 2],

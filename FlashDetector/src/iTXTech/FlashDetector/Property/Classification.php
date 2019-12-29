@@ -28,16 +28,16 @@ class Classification extends Arrayable{
 
 	protected $ce;
 	protected $ch;
-	protected $rnb;
+	protected $rb;
 	protected $die;
 
 	public function __construct(int $ce = self::UNKNOWN_PROP,
 	                            int $ch = self::UNKNOWN_PROP,
-	                            int $rnb = self::UNKNOWN_PROP,
+	                            int $rb = self::UNKNOWN_PROP,
 	                            int $die = self::UNKNOWN_PROP){
 		$this->ce = $ce;
 		$this->ch = $ch;
-		$this->rnb = $rnb;
+		$this->rb = $rb;
 		$this->die = $die;
 	}
 
@@ -56,8 +56,8 @@ class Classification extends Arrayable{
 		return $this;
 	}
 
-	public function setRnb(int $rnb) : Classification{
-		$this->rnb = $rnb;
+	public function setRb(int $rb) : Classification{
+		$this->rb = $rb;
 		return $this;
 	}
 
@@ -73,7 +73,7 @@ class Classification extends Arrayable{
 		return $this->die;
 	}
 
-	public function getRnb() : int{
-		return $this->rnb;
+	public function getRb() : int{
+		return $this->rb;
 	}
 }

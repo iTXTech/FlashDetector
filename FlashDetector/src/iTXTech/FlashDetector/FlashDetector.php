@@ -181,7 +181,7 @@ abstract class FlashDetector{
 				$c->setCe($data->getCe());
 			}
 			if($data->getRb() != Classification::UNKNOWN_PROP){
-				$c->setRnb($data->getRb());
+				$c->setRb($data->getRb());
 			}
 			if($data->getCh() != Classification::UNKNOWN_PROP){
 				$c->setCh($data->getCh());

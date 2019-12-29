@@ -97,7 +97,7 @@ class Intel extends Decoder{
 			return Micron::decode($flashInfo->getPartNumber());
 		}
 		$classification = self::getOrDefault(self::shiftChars($partNumber, 1), [
-			"A" => [1, 1, 1, true],//Die, CE, RnB, I/O Common/Separate (Sync/Async only)
+			"A" => [1, 1, 1, true],//Die, CE, RB, I/O Common/Separate (Sync/Async only)
 			"B" => [2, 1, 1, true],
 			"C" => [2, 2, 2, true],
 			"D" => [2, 2, 2, true],
