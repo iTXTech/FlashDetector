@@ -67,7 +67,7 @@ abstract class FlashDetector{
 			self::$info = [
 				"fdb" => self::$fdb->getInfo()->toArray(),
 				"flash_cnt" => $cnt,
-				"id_cnt" => count(self::$fdb->getIddb()->getFlashIds()) - 1,
+				"id_cnt" => count(self::$fdb->getIddb()->getFlashIds()),
 				"mdb_cnt" => $c
 			];
 		}
@@ -107,23 +107,6 @@ abstract class FlashDetector{
 			self::$fallbackLang = json_decode(Loader::getInstance()
 				->getResourceAsText("lang/$fallbackLang.json"), true);
 		}
-	}
-
-	public static function generateIddb(array $fdb) : array{
-		$iddb = [];
-		unset($fdb["info"]);
-		foreach($fdb as $k => $v){
-			foreach($v as $partNumber => $i){
-				foreach($i["id"] ?? [] as $id){
-					if(!isset($iddb[$id])){
-						$iddb[$id] = [$k . " " . $partNumber];
-					}else{
-						$iddb[$id][] = $k . " " . $partNumber;
-					}
-				}
-			}
-		}
-		return $iddb;
 	}
 
 	public static function registerDecoder(string $decoder) : bool{

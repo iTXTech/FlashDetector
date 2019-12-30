@@ -22,6 +22,7 @@ namespace iTXTech\FlashDetector\FDBGen\Generator;
 
 use iTXTech\FlashDetector\Decoder\Micron;
 use iTXTech\FlashDetector\Decoder\SKHynix;
+use iTXTech\FlashDetector\Decoder\SpecTek;
 use iTXTech\FlashDetector\Fdb\Fdb;
 use iTXTech\SimpleFramework\Util\StringUtil;
 
@@ -83,6 +84,9 @@ class SiliconMotionUFD extends Generator{
 						break;
 					case "micron":
 						$info[1] = Micron::removePackage($info[1]);
+						break;
+					case "spectek":
+						$info[1] = SpecTek::removePackage($info[1]);
 						break;
 				}
 

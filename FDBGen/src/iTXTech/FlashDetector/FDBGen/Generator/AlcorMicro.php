@@ -22,6 +22,7 @@ namespace iTXTech\FlashDetector\FDBGen\Generator;
 
 use iTXTech\FlashDetector\Decoder\Micron;
 use iTXTech\FlashDetector\Decoder\SKHynix;
+use iTXTech\FlashDetector\Decoder\SpecTek;
 use iTXTech\FlashDetector\Fdb\Fdb;
 use iTXTech\SimpleFramework\Util\StringUtil;
 
@@ -55,6 +56,9 @@ class AlcorMicro extends Generator{
 				}
 			}
 			switch($vendor){
+				case "spectek":
+					$pn = SpecTek::removePackage($pn);
+					break;
 				case "micron":
 					$pn = Micron::removePackage($pn);
 					break;

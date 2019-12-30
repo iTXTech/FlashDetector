@@ -22,6 +22,7 @@ namespace iTXTech\FlashDetector\FDBGen\Generator;
 
 use iTXTech\FlashDetector\Decoder\Micron;
 use iTXTech\FlashDetector\Decoder\SKHynix;
+use iTXTech\FlashDetector\Decoder\SpecTek;
 use iTXTech\FlashDetector\Fdb\Fdb;
 use iTXTech\SimpleFramework\Util\StringUtil;
 
@@ -62,8 +63,9 @@ class ChipsBank extends Generator{
 				}
 			}
 			foreach($fdb->getVendor($vendor)->getPartNumbers() as $pn => $flash){
-				foreach($flash->getFlashIds() as $ids){
-					if(StringUtil::startsWith($ids, $flashId)){
+				foreach($flash->getFlashIds() as $id){
+					if(StringUtil::startsWith($id, $flashId)){
+						$fdb->getIddb()->getFlashId($id)->addController($sup);
 						$flash->addController($sup);
 						$found = true;
 						break;
@@ -73,6 +75,9 @@ class ChipsBank extends Generator{
 			if(!$found){
 				$pn = str_replace(["(T)", "(TOG)", "(TOG"], "", $rec[3]);
 				switch($vendor){
+					case "spectek":
+						$pn = SpecTek::removePackage($pn);
+						break;
 					case "micron":
 						$pn = Micron::removePackage($pn);
 					case "toshiba":

@@ -23,6 +23,7 @@ namespace iTXTech\FlashDetector\Decoder;
 use iTXTech\FlashDetector\Constants;
 use iTXTech\FlashDetector\FlashInfo;
 use iTXTech\FlashDetector\Property\Classification;
+use iTXTech\SimpleFramework\Util\StringUtil;
 
 class SpecTek extends Micron{
 	public const LEGACY_DENSITY = [
@@ -179,5 +180,15 @@ class SpecTek extends Micron{
 		}
 
 		return $flashInfo->setExtraInfo($extra);
+	}
+
+	public static function removePackage(string $pn) : string{
+		$pn = explode("-", $pn)[0];
+		foreach(array_keys(self::PACKAGE) as $package){
+			if(StringUtil::endsWith($pn, $package)){
+				return substr($pn, 0, strlen($pn) - 2);
+			}
+		}
+		return $pn;
 	}
 }
