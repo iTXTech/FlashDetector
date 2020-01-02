@@ -4,13 +4,20 @@ Flash Database Generator for FlashDetector
 
 ## Usage
 
-```powershell
+```
 PS X:\Scripts>php fdbgen.php
+Missing required options: i, o
+usage: fdbgen
+ -e,--extra           Include Extra.json
+ -i,--input <file>    Input dir or file
+ -o,--output <file>   Output file
+ -p,--pretty          JSON pretty output
+ -v,--version <ver>   FDB file version, optional
 ```
 
 ## License
 
-    Copyright (C) 2018-2019 iTX Technologies
+    Copyright (C) 2018-2020 iTX Technologies
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.

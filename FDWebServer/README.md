@@ -21,9 +21,8 @@ High performance HTTP server for FlashDetector
 
 ## Startup
 
-```powershell
-PS X:\Scripts>bash
-$ php ws.php -s -a 0.0.0.0 -p 8080 // -s for swoole, -w for WorkerManEE
+```
+php ws.php -a 0.0.0.0 -p 8080 -s // -s for swoole, -w for WorkerManEE
 ```
 
 ## API
@@ -42,27 +41,21 @@ $ php ws.php -s -a 0.0.0.0 -p 8080 // -s for swoole, -w for WorkerManEE
 |pn|String|Part Number|
 |trans|Integer|Automatic Translation (Optional)|0 = false, 1 = true|
 
-### /searchId - *reverse search Flash Id*
+### /searchId - *search Flash Id in Flash Database*
 
 |Argument|Type|Description|Comment|
 |---|---|---|---|
 |id|String|Flash Id|
 
-### /searchPn - *search part number in Flash DB*
+### /searchPn - *search Part Number in Flash DB*
 
 |Argument|Type|Description|Comment|
 |---|---|---|---|
 |pn|String|Part Number|
 
-### /searchController - *search supported controllers in Flash DB*
-
-|Argument|Type|Description|Comment|
-|---|---|---|---|
-|id|String|Flash Id|
-
 ## License
 
-    Copyright (C) 2018-2019 iTX Technologies
+    Copyright (C) 2018-2020 iTX Technologies
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
