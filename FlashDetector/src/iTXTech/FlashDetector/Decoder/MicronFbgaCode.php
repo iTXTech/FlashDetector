@@ -67,8 +67,9 @@ class MicronFbgaCode extends Decoder{
 			$extra = $info->getExtraInfo();
 			$extra[Constants::MICRON_PN] = $pn;
 			if(isset($i)){
-				$extra[Constants::PROD_DATE] = self::shiftChars($i, 1) .
-					((ord(self::shiftChars($i, 1)) - 64) * 2);
+				$extra[Constants::PROD_DATE] = self::shiftChars($i, 1);
+				$week = ((ord(self::shiftChars($i, 1)) - 64) * 2);
+				$extra[Constants::PROD_DATE] .= strlen($week) == 1 ? "0" . $week : $week;
 				self::shiftChars($i, 1);
 				$extra[Constants::DIFFUSION] = self::getOrDefault(self::shiftChars($i, 1), self::COUNTRY_CODE);
 				$extra[Constants::ENCAPSULATION] = self::getOrDefault(self::shiftChars($i, 1), self::COUNTRY_CODE);
