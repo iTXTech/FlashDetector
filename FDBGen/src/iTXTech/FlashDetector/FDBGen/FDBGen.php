@@ -27,6 +27,7 @@ use iTXTech\FlashDetector\FDBGen\Generator\Extra;
 use iTXTech\FlashDetector\FDBGen\Generator\Generator;
 use iTXTech\FlashDetector\FDBGen\Generator\Innostor;
 use iTXTech\FlashDetector\FDBGen\Generator\JMicron;
+use iTXTech\FlashDetector\FDBGen\Generator\Maxio;
 use iTXTech\FlashDetector\FDBGen\Generator\Maxiotek;
 use iTXTech\FlashDetector\FDBGen\Generator\SandForce;
 use iTXTech\FlashDetector\FDBGen\Generator\SiliconMotionForceFlash;
@@ -54,6 +55,7 @@ abstract class FDBGen{
 		//may not have complete id
 		self::registerGenerator(JMicron::class);
 		self::registerGenerator(Maxiotek::class);
+		self::registerGenerator(Maxio::class);
 		//no flash id
 		self::registerGenerator(SandForce::class);
 		self::registerGenerator(AlcorMicro::class);
