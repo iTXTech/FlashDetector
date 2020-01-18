@@ -68,7 +68,7 @@ class JMicron extends Generator{
 						$pn = substr_replace($pn, "-", strpos($pn, "0"), 0);
 						break;
 					case "toshiba":
-						if(strlen($pn) == 17){
+						if(strlen($pn) > 15){
 							$pn = substr($pn, 0, 15);
 						}
 						break;

@@ -1,9 +1,9 @@
 {
     "info": {
         "name": "iTXTech FlashDetector Flash Database",
-        "version": "51",
+        "version": "52",
         "website": "https:\/\/github.com\/iTXTech\/FlashDetector",
-        "time": "Fri, 17 Jan 2020 21:54:55 +0800",
+        "time": "Sat, 18 Jan 2020 17:57:42 +0800",
         "controllers": [
             "SM321AC",
             "SM321BB",
@@ -4012,7 +4012,7 @@
             "n": [
                 "skhynix H27UAG8T2A",
                 "skhynix H27UBG8U5A",
-                "skhynix H27UAG82ATR"
+                "skhynix H27UAG82AT"
             ]
         },
         "ADD7188D0442": {
@@ -4661,8 +4661,7 @@
                 "IS917"
             ],
             "n": [
-                "skhynix H27UCG8T2A",
-                "skhynix H27UCG8T2ATR_2D"
+                "skhynix H27UCG8T2A"
             ]
         },
         "ADD594DA74C4": {
@@ -5607,8 +5606,7 @@
             "n": [
                 "skhynix H27QFG8NDA",
                 "skhynix H27Q2T8QEA",
-                "skhynix H27Q2T8QQA",
-                "skhynix H27Q2T8QEA9R00"
+                "skhynix H27Q2T8QQA"
             ]
         },
         "AD5C282A0190": {
@@ -5638,8 +5636,7 @@
                 "skhynix H27Q1T8PEA",
                 "skhynix H27Q2T8QAA",
                 "skhynix H27Q4T8LAA",
-                "skhynix H27Q1T8PQA",
-                "skhynix H27QEG8M2A8R00"
+                "skhynix H27Q1T8PQA"
             ]
         },
         "AD5E28221090": {
@@ -22770,7 +22767,7 @@
             "n": [
                 "kioxia TH58TFT1T23BA8H",
                 "kioxia TH58TFT1T22BA8H",
-                "kioxia TH58TFT1V23BA8HE"
+                "kioxia TH58TFT1V23BA8H"
             ]
         },
         "983C98B376F2": {
@@ -22796,8 +22793,8 @@
                 "kioxia TH58TFT0T22BA8C",
                 "kioxia TH58TFG9T23BA4C",
                 "kioxia TH58TFT0T23BA8C",
-                "kioxia TH58TFG9V23BA4CE",
-                "kioxia TH58TFT0V23BA8CE"
+                "kioxia TH58TFG9V23BA4C",
+                "kioxia TH58TFT0V23BA8C"
             ]
         },
         "983C98B37671": {
@@ -22853,8 +22850,8 @@
                 "kioxia TH58TFG9T22BA4C",
                 "kioxia TC58TFG8T22TA00",
                 "kioxia TH58TFT0T22BA8C",
-                "kioxia TH58TFG9V22BA4CE",
-                "kioxia TH58TFT0V22BA8CE"
+                "kioxia TH58TFG9V22BA4C",
+                "kioxia TH58TFT0V22BA8C"
             ]
         },
         "983C98B376F9": {
@@ -22906,7 +22903,6 @@
                 "kioxia TH58TFT0T22TA2D",
                 "kioxia TH58TFT1T22BA8H",
                 "kioxia TH58TFT0T22TA2D_256G_S1_8DIE",
-                "kioxia TH58TFT1T22BA8HE",
                 "kioxia TH58TFT1V22BA8H"
             ]
         },
@@ -56103,6 +56099,7 @@
                 "SM3281BB",
                 "SM2258XT",
                 "SM2263XT",
+                "MAS0902",
                 "AU6989SN-GTC",
                 "AU6989SN-GTD",
                 "AU6989SN-GTE",
@@ -58878,7 +58875,7 @@
                 "IS917"
             ]
         },
-        "H27UAG82ATR": {
+        "H27UAG82AT": {
             "id": [
                 "ADD5942544AD"
             ],
@@ -58901,17 +58898,6 @@
                 "CBM2099S",
                 "CBM2199",
                 "CBM2199S"
-            ]
-        },
-        "H27UCG8T2ATR_2D": {
-            "id": [
-                "AD3A95DA78C4"
-            ],
-            "l": "20nm",
-            "t": [
-                "SM3257ENBA",
-                "SM3257ENBB",
-                "IS917"
             ]
         },
         "H27Q1T8QEB": {
@@ -59623,7 +59609,8 @@
             "t": [
                 "SM2258XT",
                 "SM2258",
-                "SM2263XT"
+                "SM2263XT",
+                "MAS0902"
             ]
         },
         "H27Q4T8LEA": {
@@ -59807,23 +59794,6 @@
                 "SF2281"
             ]
         },
-        "H27QEG8M2A8R00": {
-            "id": [
-                "AD5C282A0190"
-            ],
-            "t": [
-                "MAS0902",
-                "CBM2199"
-            ]
-        },
-        "H27Q2T8QEA9R00": {
-            "id": [
-                "AD5C292A0190"
-            ],
-            "t": [
-                "MAS0902"
-            ]
-        },
         "H27QCG8UDB": {
             "t": [
                 "SF2181",
@@ -59851,11 +59821,6 @@
         "H27QCG8T2B": {
             "t": [
                 "SF2241"
-            ]
-        },
-        "H27QEG8VEE5R?BCF": {
-            "t": [
-                "SF2281"
             ]
         },
         "H27QFG8YHE": {
@@ -95029,6 +94994,7 @@
                 "SM2256",
                 "SM2258XT",
                 "SM2258",
+                "MAS0902",
                 "IS917"
             ]
         },
@@ -99126,11 +99092,6 @@
                 "JMF670H"
             ]
         },
-        "TH58TEG9DDKBA8HS": {
-            "t": [
-                "JMF670H"
-            ]
-        },
         "TC58TFG7DDLBA0D": {
             "t": [
                 "JMF670H"
@@ -99205,15 +99166,7 @@
                 "IS917"
             ]
         },
-        "TH58TFT1T22BA8HE": {
-            "id": [
-                "983E99B37AF1"
-            ],
-            "t": [
-                "MAS0902"
-            ]
-        },
-        "TH58TFG9V22BA4CE": {
+        "TH58TFG9V22BA4C": {
             "id": [
                 "983C98B376F1"
             ],
@@ -99224,7 +99177,7 @@
                 "IS917"
             ]
         },
-        "TH58TFT0V22BA8CE": {
+        "TH58TFT0V22BA8C": {
             "id": [
                 "983C98B376F1"
             ],
@@ -99298,7 +99251,7 @@
                 "MAS0902"
             ]
         },
-        "TH58TFG9V23BA4CE": {
+        "TH58TFG9V23BA4C": {
             "id": [
                 "983C98B376F2"
             ],
@@ -99308,7 +99261,7 @@
                 "CBM2199"
             ]
         },
-        "TH58TFT0V23BA8CE": {
+        "TH58TFT0V23BA8C": {
             "id": [
                 "983C98B376F2"
             ],
@@ -99318,7 +99271,7 @@
                 "CBM2199"
             ]
         },
-        "TH58TFT1V23BA8HE": {
+        "TH58TFT1V23BA8H": {
             "id": [
                 "983E99B37AF2"
             ],

@@ -225,7 +225,7 @@ class SKHynix extends Decoder{
 	}
 
 	public static function removePackage(string $pn) : string{
-		if(strlen($pn) == 12 and (StringUtil::startsWith($pn, "H27") or StringUtil::startsWith($pn, "H25"))){
+		if(StringUtil::startsWith($pn, "H27") or StringUtil::startsWith($pn, "H25")){
 			$pn = substr($pn, 0, 10);
 		}
 		return $pn;
