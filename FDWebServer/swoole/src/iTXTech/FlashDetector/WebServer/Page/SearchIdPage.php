@@ -36,7 +36,8 @@ class SearchIdPage extends AbstractPage{
 		}else{
 			self::sendJsonData($response, [
 				"result" => true,
-				"data" => FlashDetector::searchFlashId($request->get["id"], true)
+				"data" => FlashDetector::searchFlashId($request->get["id"], true,
+					($request->get["trans"] ?? 0) == 1)
 			]);
 		}
 	}

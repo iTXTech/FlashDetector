@@ -36,7 +36,7 @@ class SearchPnPage extends AbstractPage{
 		}else{
 			self::sendJsonData($response, [
 				"result" => true,
-				"data" => FlashDetector::searchPartNumber($request->get["pn"], true)
+				"data" => FlashDetector::searchPartNumber($request->get["pn"], true, $request->get["trans"] ?? 0) == 1
 			]);
 		}
 	}

@@ -173,19 +173,24 @@ abstract class FlashDetector{
 		}
 	}
 
-	public static function searchFlashId(string $id, bool $partMatch = false) : ?array{
+	public static function searchFlashId(string $id, bool $partMatch = false, bool $translate = false) : ?array{
 		$id = strtoupper($id);
 		if($partMatch){
 			$result = [];
 			foreach(self::$fdb->getIddb()->getFlashIds() as $flashId){
 				if(StringUtil::startsWith($flashId->getFlashId(), $id)){
-					$result[$flashId->getFlashId()] = [
+					$pageSize = $flashId->getPageSize();
+					if($translate && $pageSize != -1){
+						$pageSize = $pageSize < 1 ? ($pageSize * 1024) . "B" : $pageSize . "K";
+					}
+					$data = [
 						"partNumbers" => $flashId->getPartNumbers(),
-						"pageSize" => $flashId->getPageSize(),
+						"pageSize" => $pageSize,
 						"pagesPerBlock" => $flashId->getPagesPerBlock(),
 						"blocks" => $flashId->getBlocks(),
 						"controllers" => $flashId->getControllers()
 					];
+					$result[$flashId->getFlashId()] = $translate ? self::translateArray($data, false) : $data;
 				}
 			}
 			return $result;
@@ -193,14 +198,15 @@ abstract class FlashDetector{
 		return self::$fdb->getIddb()->getFlashIds()[$id] ?? null;
 	}
 
-	public static function searchPartNumber(string $pn, bool $partMatch = false) : ?array{
+	public static function searchPartNumber(string $pn, bool $partMatch = false, bool $translate = false) : ?array{
 		$pn = strtoupper($pn);
 		$result = [];
 		foreach(self::$fdb->getVendors() as $vendor){
 			foreach($vendor->getPartNumbers() as $partNumber){
 				if(($partMatch and StringUtil::contains($partNumber->getPartNumber(), $pn)) or
 					(!$partNumber and $partNumber->getPartNumber() == $pn)){
-					$result[] = $vendor->getName() . " " . $partNumber->getPartNumber();
+					$result[] = ($translate ? self::translateString($vendor->getName()) : $vendor->getName()) .
+						" " . $partNumber->getPartNumber();
 				}
 			}
 		}
@@ -241,14 +247,16 @@ abstract class FlashDetector{
 			return self::translateArray($var);
 		}elseif(is_string($var)){
 			return self::translateString($var);
+		}elseif($var == -1){
+			return self::translateString(Constants::UNKNOWN);
 		}
 		return $var;
 	}
 
-	public static function translateArray(array $arr) : array{
+	public static function translateArray(array $arr, bool $translateKey = true) : array{
 		$a = [];
 		foreach($arr as $k => $v){
-			$a[self::translateString($k)] = self::translate($v);
+			$a[$translateKey ? self::translateString($k) : $k] = self::translate($v);
 		}
 		return $a;
 	}

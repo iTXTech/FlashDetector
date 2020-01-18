@@ -37,7 +37,7 @@ class DecodePage extends AbstractPage{
 			self::sendJsonData($response, [
 				"result" => true,
 				"data" => FlashDetector::detect($request->get["pn"])
-					->toArray((($request->get["trans"] ?? 0) == 1) ? false : true)
+					->toArray(!(($request->get["trans"] ?? 0) == 1))
 			]);
 		}
 	}

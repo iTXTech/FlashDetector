@@ -35,9 +35,7 @@ $group = new OptionGroup();
 $group->addOption((new OptionBuilder("i"))->desc("Reverse searching Flash Id")->longOpt("flash-id")
 	->hasArg()->argName("Flash Id")->build())
 	->addOption((new OptionBuilder("p"))->desc("Reverse searching Part Number")->longOpt("part-number")
-		->hasArg()->argName("Part Number")->build())
-	->addOption((new OptionBuilder("c"))->desc("Reverse searching supported controllers")->longOpt("controllers")
-		->hasArg()->argName("Flash Id")->build());
+		->hasArg()->argName("Part Number")->build());
 $group->setRequired(true);
 $options = new Options();
 $options->addOptionGroup($group);
@@ -45,13 +43,10 @@ $options->addOptionGroup($group);
 try{
 	$cmd = (new Parser())->parse($options, $argv);
 	if($cmd->hasOption("i")){
-		$info = FlashDetector::searchFlashId($cmd->getOptionValue("i"), true);
+		$info = FlashDetector::searchFlashId($cmd->getOptionValue("i"), true, true);
 	}
 	if($cmd->hasOption("p")){
-		$info = FlashDetector::searchPartNumber($cmd->getOptionValue("p"), true);
-	}
-	if($cmd->hasOption("c")){
-		$info = FlashDetector::searchSupportedControllers($cmd->getOptionValue("c"), true);
+		$info = FlashDetector::searchPartNumber($cmd->getOptionValue("p"), true, true);
 	}
 	Util::println(json_encode($info, JSON_PRETTY_PRINT));
 }catch(ParseException $e){

@@ -33,7 +33,7 @@ class SearchPnPage extends AbstractPage{
 		}else{
 			return json_encode([
 				"result" => true,
-				"data" => FlashDetector::searchPartNumber($_GET["pn"], true)
+				"data" => FlashDetector::searchPartNumber($_GET["pn"], true, ($_GET["trans"] ?? 0) == 1)
 			]);
 		}
 	}
