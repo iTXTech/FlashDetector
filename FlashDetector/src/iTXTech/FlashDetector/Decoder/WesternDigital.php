@@ -140,8 +140,8 @@ class WesternDigital extends Decoder{
 		$data = FlashDetector::getFdb()->getPartNumber(self::getName(), $info->getPartNumber()) ??
 			FlashDetector::getFdb()->getPartNumber(Constants::VENDOR_SANDISK, $info->getPartNumber());
 		if($data != null){
-			$comment = "";
-			$parts = explode("/", $data->getComment() ?? "");
+			$remark = "";
+			$parts = explode("/", $data->getRemark() ?? "");
 			$extraInfo = $info->getExtraInfo() ?? [];
 			foreach($parts as $part){
 				if($part == ""){
@@ -151,13 +151,13 @@ class WesternDigital extends Decoder{
 				}elseif($part{0} == "T"){
 					$extraInfo[Constants::VENDOR_KIOXIA] = substr($part, 1);
 				}else{
-					$comment .= $part . "/";
+					$remark .= $part . "/";
 				}
 			}
-			if($comment != ""){
-				$comment = substr($comment, 0, strlen($comment) - 1);
+			if($remark != ""){
+				$remark = substr($remark, 0, strlen($remark) - 1);
 			}
-			$data->setComment($comment, true);
+			$data->setRemark($remark, true);
 			$info->setExtraInfo($extraInfo);
 		}
 		return $data;

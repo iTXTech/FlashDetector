@@ -132,6 +132,41 @@ abstract class FlashDetector{
 		return (new FlashInfo($partNumber))->setVendor(Constants::UNKNOWN);
 	}
 
+	public static function getSummary(string $partNumber) : string{
+		$info = self::detect($partNumber, true)->toArray(false);
+		$base = self::translateString("summary");
+		$unknown = self::translateString(Constants::UNKNOWN);
+		if($info["interface"] == null){
+			$sync = $unknown;
+			$async = $unknown;
+		}elseif(isset($info["interface"]["toggle"])){
+			$async = self::translate(true);
+			$sync = self::translate($info["interface"]["toggle"]);
+		}else{
+			$async = self::translate($info["interface"]["async"]);
+			$sync = self::translate($info["interface"]["sync"]);
+		}
+
+		$i = "";
+		if(is_array($info["extraInfo"])){
+			foreach($info["extraInfo"] as $k => $v){
+				$i .= $k . ": " . $v . ", ";
+			}
+			$i = substr($i, 0, strlen($i) - 2);
+		}
+
+		$trans = [$info["partNumber"], $info["vendor"], $info["type"], $info["density"], $info["deviceWidth"],
+			$info["cellLevel"], $info["processNode"], $info["generation"], $sync, $async,
+			$info["classification"]["ce"] ?? $unknown, $info["classification"]["ch"] ?? $unknown,
+			$info["classification"]["die"] ?? $unknown, $info["classification"]["rb"] ?? $unknown,
+			$info["voltage"], $info["package"], @implode(", ", $info["controller"]), $info["remark"],
+			$i, @implode(", ", $info["flashId"])];
+		for($i = 0; $i < count($trans); $i++){
+			$base = str_replace("{" . $i . "}", $trans[$i], $base);
+		}
+		return $base;
+	}
+
 	public static function getVendor(string $pn) : string{
 		$pn = str_replace([" ", ",", "&", ".", "|"], "", strtoupper($pn));
 		foreach(self::$decoders as $decoder){
@@ -151,7 +186,7 @@ abstract class FlashDetector{
 					$info->getProcessNode() == null)){
 				$info->setProcessNode($data->getProcessNode());
 			}
-			$info->setComment($data->getComment());
+			$info->setRemark($data->getRemark());
 			if($info->getCellLevel() === null and $data->getCellLevel() !== ""){
 				$info->setCellLevel($data->getCellLevel());
 			}

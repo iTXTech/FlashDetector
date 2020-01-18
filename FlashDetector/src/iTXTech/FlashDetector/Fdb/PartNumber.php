@@ -61,7 +61,7 @@ class PartNumber extends Arrayable{
 		return $this->t ?? [];
 	}
 
-	public function getComment() : string{
+	public function getRemark() : string{
 		return $this->m ?? "";
 	}
 
@@ -109,9 +109,9 @@ class PartNumber extends Arrayable{
 		return $this;
 	}
 
-	public function setComment(string $comment, bool $force = false) : PartNumber{
-		if($force or ($this->m == null and $comment != "")){
-			$this->m = $comment;
+	public function setRemark(string $remark, bool $force = false) : PartNumber{
+		if($force or ($this->m == null and $remark != "")){
+			$this->m = $remark;
 		}
 		return $this;
 	}
@@ -172,7 +172,7 @@ class PartNumber extends Arrayable{
 		$this->setCellLevel($partNumber->getCellLevel());
 		$this->addController($partNumber->getControllers());
 		$this->addFlashId($partNumber->getFlashIds());
-		$this->setComment($partNumber->getComment());
+		$this->setRemark($partNumber->getRemark());
 		return $this;
 	}
 

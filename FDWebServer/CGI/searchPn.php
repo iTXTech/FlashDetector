@@ -30,6 +30,6 @@ if(!isset($_GET["pn"])){
 }else{
 	echo json_encode([
 		"result" => true,
-		"data" => FlashDetector::searchPartNumber($_GET["pn"], true, true)
+		"data" => FlashDetector::searchPartNumber($_GET["pn"], true, (($_GET["trans"] ?? 0) == 1))
 	]);
 }

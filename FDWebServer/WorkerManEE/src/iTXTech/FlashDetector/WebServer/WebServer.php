@@ -24,9 +24,9 @@ use EaseCation\WorkerManEE\RequestHandler;
 use iTXTech\FlashDetector\WebServer\Page\DecodePage;
 use iTXTech\FlashDetector\WebServer\Page\IndexPage;
 use iTXTech\FlashDetector\WebServer\Page\InfoPage;
-use iTXTech\FlashDetector\WebServer\Page\SearchControllerPage;
 use iTXTech\FlashDetector\WebServer\Page\SearchIdPage;
 use iTXTech\FlashDetector\WebServer\Page\SearchPnPage;
+use iTXTech\FlashDetector\WebServer\Page\SummaryPage;
 use iTXTech\SimpleFramework\Console\Logger;
 use iTXTech\SimpleFramework\Framework;
 use Workerman\Connection\TcpConnection;
@@ -43,9 +43,10 @@ class WebServer{
 		RequestHandler::registerPage("/decode", DecodePage::class);
 		RequestHandler::registerPage("/searchId", SearchIdPage::class);
 		RequestHandler::registerPage("/searchPn", SearchPnPage::class);
+		RequestHandler::registerPage("/summary", SummaryPage::class);
 		RequestHandler::registerPage("/info", InfoPage::class);
 		$this->webServer = new WNWS("http://" . $config["address"] . ":" . $config["port"]);
-		$this->webServer->onReceive = function (TcpConnection $connection){
+		$this->webServer->onReceive = function(TcpConnection $connection){
 			Http::header("Access-Control-Allow-Origin: *");
 			Http::header("Access-Control-Allow-Headers: *");
 			Http::header("Content-Type: application/json");

@@ -31,6 +31,6 @@ if(!isset($_GET["pn"])){
 	echo json_encode([
 		"result" => true,
 		"data" => FlashDetector::detect($_GET["pn"])
-			->toArray((($_GET["trans"] ?? 0) == 1) ? false : true)
+			->toArray(!(($_GET["trans"] ?? 0) == 1))
 	]);
 }

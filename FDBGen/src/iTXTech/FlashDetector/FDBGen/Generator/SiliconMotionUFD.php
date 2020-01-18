@@ -45,13 +45,13 @@ class SiliconMotionUFD extends Generator{
 				for($i = 0; $i < 6; $i++){
 					$id .= $fid[$i];
 				}
-				$comment = "";
+				$remark = "";
 				if(StringUtil::contains($info, "//")){
-					$comment = trim(substr(strstr($info, "//"), 2));
+					$remark = trim(substr(strstr($info, "//"), 2));
 				}
 				$info = preg_replace("/3D V(\d)/", "3DV$1", $info);
 				$info = explode(" ", str_replace(
-					[$comment, "NEW DATE CODE", "OLD DATE CODE", " - ", "L84A HP", "SanDisk SanDisk", "-ES"],
+					[$remark, "NEW DATE CODE", "OLD DATE CODE", " - ", "L84A HP", "SanDisk SanDisk", "-ES"],
 					["", "", "", "-", "L84A_HP", "SanDisk", "ES"], $info));
 				//Vendor, PartNumber, SMIPackageCode, Lithography, CellLevel, NodeCodename
 				foreach($info as $k => $v){
@@ -93,7 +93,7 @@ class SiliconMotionUFD extends Generator{
 				$pn = $fdb->getPartNumber($vendor, $info[1], true)
 					->addFlashId($id)
 					->addController($controller)
-					->setComment($comment);
+					->setRemark($remark);
 
 				$fdb->getIddb()->getFlashId($id, true)->addController($controller);
 

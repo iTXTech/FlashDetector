@@ -42,7 +42,7 @@ class FlashInfo extends Arrayable{
 	//data from Flash Database
 	protected $flashId;
 	protected $controller;
-	protected $comment;
+	protected $remark;
 
 	public function __construct(string $partNumber = ""){
 		$this->partNumber = strtoupper($partNumber);
@@ -159,8 +159,8 @@ class FlashInfo extends Arrayable{
 		return $this;
 	}
 
-	public function setComment($comment) : FlashInfo{
-		$this->comment = $comment;
+	public function setRemark($remark) : FlashInfo{
+		$this->remark = $remark;
 		return $this;
 	}
 

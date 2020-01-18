@@ -18,26 +18,18 @@
  * limitations under the License.
  */
 
-namespace iTXTech\FlashDetector\WebServer\Page;
+require_once "env.php";
 
 use iTXTech\FlashDetector\FlashDetector;
-use iTXTech\SimpleSwFw\Http\Page\AbstractPage;
-use Swoole\Http\Request;
-use Swoole\Http\Response;
-use Swoole\Http\Server;
 
-class SearchPnPage extends AbstractPage{
-	public static function process(Request $request, Response $response, Server $server){
-		if(!isset($request->get["pn"])){
-			self::sendJsonData($response, [
-				"result" => false,
-				"message" => "Missing part number"
-			]);
-		}else{
-			self::sendJsonData($response, [
-				"result" => true,
-				"data" => FlashDetector::searchPartNumber($request->get["pn"], true, ($request->get["trans"] ?? 0) == 1)
-			]);
-		}
-	}
+if(!isset($_GET["pn"])){
+	echo json_encode([
+		"result" => false,
+		"message" => "Missing part number"
+	]);
+}else{
+	echo json_encode([
+		"result" => true,
+		"data" => FlashDetector::getSummary($_GET["pn"])
+	]);
 }

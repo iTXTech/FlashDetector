@@ -98,5 +98,6 @@
   "cty_il": "Israel",
   "cty_ie": "Ireland",
   "cty_my": "Malaysia",
-  "cty_ph": "Philippines"
+  "cty_ph": "Philippines",
+  "summary": "Part Number: {0}, Vendor: {1}, Type: {2}, Density: {3}\nDevice Width: {4}, Cell Level: {5}, Process Node: {6}, Generation: {7}\nSync: {8}, Async: {9}, CE: {10}, Ch: {11}, Die: {12}, R/B: {13}\nVoltage: {14}\nPackage: {15}\nController: {16}\nRemark: {17}\nExtra Info: {18}\nFlash ID: {19}"
 }

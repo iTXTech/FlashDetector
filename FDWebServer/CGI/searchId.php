@@ -30,6 +30,6 @@ if(!isset($_GET["id"])){
 }else{
 	echo json_encode([
 		"result" => true,
-		"data" => FlashDetector::searchFlashId($_GET["id"], true, true)
+		"data" => FlashDetector::searchFlashId($_GET["id"], true, (($_GET["trans"] ?? 0) == 1))
 	]);
 }

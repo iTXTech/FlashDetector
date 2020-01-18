@@ -252,7 +252,7 @@ class Samsung extends Decoder{
 			$partNumber{8} = "0";
 			$info = FlashDetector::getFdb()->getPartNumber(self::getName(), $partNumber) ?? null;
 			if($info !== null){
-				$info->setComment($info->getComment() . " (" . $c[1] . " x " . $partNumber . ")");
+				$info->setRemark($info->getRemark() . " (" . $c[1] . " x " . $partNumber . ")");
 			}
 			return $info;
 		}
