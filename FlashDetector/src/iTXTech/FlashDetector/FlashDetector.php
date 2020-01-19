@@ -45,6 +45,12 @@ abstract class FlashDetector{
 	private static $lang = [];
 	private static $fallbackLang = [];
 	private static $info;
+	/** @var Processor[] */
+	private static $processors = [];
+
+	public static function registerProcessor(Processor $processor){
+		self::$processors[] = $processor;
+	}
 
 	public static function getFdb() : Fdb{
 		return self::$fdb;
@@ -126,10 +132,15 @@ abstract class FlashDetector{
 				if($combineFdb){
 					self::combineDataFromFdb($info, $decoder);
 				}
-				return $info;
 			}
 		}
-		return (new FlashInfo($partNumber))->setVendor(Constants::UNKNOWN);
+		if(!isset($info)){
+			$info = (new FlashInfo($partNumber))->setVendor(Constants::UNKNOWN);
+		}
+		foreach(self::$processors as $processor){
+			$processor->process($info);
+		}
+		return $info;
 	}
 
 	public static function getSummary(string $partNumber) : string{
