@@ -85,6 +85,7 @@
   "interfaceInfo": "接口类型",
   "densityGrade": "可用容量",
   "micronPartNumber": "美光料号",
+  "micron_website": "美光官网",
   "diffusion_loc": "生产位置",
   "encapsulation_loc": "封装位置",
   "cty_us": "美国",

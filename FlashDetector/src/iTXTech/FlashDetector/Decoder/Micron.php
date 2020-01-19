@@ -191,6 +191,7 @@ class Micron extends Decoder{
 
 	public static function decode(string $partNumber) : FlashInfo{
 		$flashInfo = (new FlashInfo($partNumber))->setVendor(self::getName());
+		$flashInfo->addUrl(Constants::MICRON_WEBSITE, "https://www.micron.com/support/tools-and-utilities/fbga?matpart=$partNumber");
 		if(!StringUtil::startsWith($partNumber, "29")){
 			$partNumber = substr($partNumber, 2);//remove MT
 		}

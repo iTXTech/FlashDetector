@@ -23,6 +23,7 @@ namespace iTXTech\FlashDetector;
 use iTXTech\FlashDetector\Decoder\Decoder;
 use iTXTech\FlashDetector\Property\Classification;
 use iTXTech\FlashDetector\Property\FlashInterface;
+use iTXTech\FlashDetector\Property\Url;
 
 class FlashInfo extends Arrayable{
 	protected $partNumber;
@@ -38,11 +39,12 @@ class FlashInfo extends Arrayable{
 	protected $interface;//Async/Sync ToggleDDR
 	protected $package;//TSOP48 BGA152 LGA52
 
-	protected $extraInfo;
+	protected $extraInfo = [];
 	//data from Flash Database
-	protected $flashId;
-	protected $controller;
+	protected $flashId = [];
+	protected $controller = [];
 	protected $remark;
+	protected $url = [];
 
 	public function __construct(string $partNumber = ""){
 		$this->partNumber = strtoupper($partNumber);
@@ -161,6 +163,11 @@ class FlashInfo extends Arrayable{
 
 	public function setRemark($remark) : FlashInfo{
 		$this->remark = $remark;
+		return $this;
+	}
+
+	public function addUrl(string $description, string $url) : FlashInfo{
+		$this->url[$description] = $url;
 		return $this;
 	}
 

@@ -106,6 +106,7 @@ interface Constants{
 
 	//Micron
 	public const MICRON_PN = "micronPartNumber";
+	public const MICRON_WEBSITE = "micron_website";
 
 	public const MICRON_OTR_AAT = "micron_otr_aat";
 	public const MICRON_OTR_AIT = "micron_otr_ait";

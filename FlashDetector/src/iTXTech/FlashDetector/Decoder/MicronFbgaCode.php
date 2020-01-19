@@ -64,6 +64,9 @@ class MicronFbgaCode extends Decoder{
 		if(count($pn) > 0){
 			$pn = $pn[0];
 			$info = FlashDetector::detect($pn)->setPartNumber($partNumber);
+			if($info->getVendor() == Micron::getName()){
+				$info->addUrl(Constants::MICRON_WEBSITE, "https://www.micron.com/support/tools-and-utilities/fbga?fbga=$partNumber");
+			}
 			$extra = $info->getExtraInfo();
 			$extra[Constants::MICRON_PN] = $pn;
 			if(isset($i)){

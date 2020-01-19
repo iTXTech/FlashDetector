@@ -85,6 +85,7 @@
   "interfaceInfo": "Interface info",
   "densityGrade": "Density grade",
   "micronPartNumber": "Micron Part Number",
+  "micron_website": "Micron Website",
   "diffusion_loc": "Diffusion Location",
   "encapsulation_loc": "Encapsulation Location",
   "cty_us": "USA",
