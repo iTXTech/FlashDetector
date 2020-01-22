@@ -132,10 +132,11 @@ class SKHynix extends Decoder{
 		"2" => "FBGA-316",
 		"3" => "FBGA-316",
 		//TODO: confirm
-		"6" => "FBGA-132",
-		"0" => "FBGA-132",
-		"5" => "FBGA-132",
-		"L" => "FBGA-132",
+		"6" => "BGA-132",
+		"0" => "BGA-132",
+		"5" => "BGA-132",
+		"L" => "BGA-132",
+		"4" => "BGA-132",
 	];
 	protected const BAD_BLOCK = [
 		"B" => Constants::SAMSUNG_CBB_B,
@@ -163,7 +164,8 @@ class SKHynix extends Decoder{
 	public static function decode(string $partNumber) : FlashInfo{
 		$flashInfo = (new FlashInfo($partNumber))
 			->setVendor(self::getName());
-		if(in_array($level = self::shiftChars($partNumber, 3), ["H2J", "H2D", "H26"])){
+		//H2J, H2D => E2NAND, H23 => E3NAND, H26 => e-NAND (eMMC)
+		if(in_array($level = self::shiftChars($partNumber, 3), ["H2J", "H2D", "H26", "H23"])){
 			return $flashInfo->setType(Constants::NAND_TYPE_CON)
 				->setExtraInfo([Constants::UNSUPPORTED_REASON => Constants::SKHYNIX_UNSUPPORTED]);
 		}else{

@@ -23,7 +23,6 @@ namespace iTXTech\FlashDetector;
 use iTXTech\FlashDetector\Decoder\Decoder;
 use iTXTech\FlashDetector\Property\Classification;
 use iTXTech\FlashDetector\Property\FlashInterface;
-use iTXTech\FlashDetector\Property\Url;
 
 class FlashInfo extends Arrayable{
 	protected $partNumber;
