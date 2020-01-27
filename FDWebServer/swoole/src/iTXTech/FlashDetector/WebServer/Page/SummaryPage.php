@@ -28,16 +28,14 @@ use Swoole\Http\Server;
 
 class SummaryPage extends AbstractPage{
 	public static function process(Request $request, Response $response, Server $server){
-		if(!isset($request->get["pn"])){
-			self::sendJsonData($response, [
-				"result" => false,
-				"message" => "Missing part number"
-			]);
-		}else{
-			self::sendJsonData($response, [
-				"result" => true,
-				"data" => FlashDetector::getSummary($request->get["pn"])
-			]);
+		$c = [];
+
+		foreach(FlashDetector::getProcessors() as $processor){
+			if(!$processor->summary(self::getQuery($request), self::getClientIp($request), $request->get["pn"] ?? null, $c)){
+				break;
+			}
 		}
+
+		self::sendJsonData($response, $c);
 	}
 }

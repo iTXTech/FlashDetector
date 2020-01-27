@@ -22,19 +22,18 @@ namespace iTXTech\FlashDetector\WebServer\Page;
 
 use EaseCation\WorkerManEE\Page\AbstractPage;
 use iTXTech\FlashDetector\FlashDetector;
+use iTXTech\FlashDetector\WebServer\WebServer;
 
 class SummaryPage extends AbstractPage{
 	public static function onRequest(){
-		if(!isset($_GET["pn"])){
-			return json_encode([
-				"result" => false,
-				"message" => "Missing part number"
-			]);
-		}else{
-			return json_encode([
-				"result" => true,
-				"data" => FlashDetector::getSummary($_GET["pn"])
-			]);
+		$c = [];
+
+		foreach(FlashDetector::getProcessors() as $processor){
+			if(!$processor->summary(WebServer::getQuery(), WebServer::getRemote(), $_GET["pn"] ?? null, $c)){
+				break;
+			}
 		}
+
+		return json_encode($c);
 	}
 }

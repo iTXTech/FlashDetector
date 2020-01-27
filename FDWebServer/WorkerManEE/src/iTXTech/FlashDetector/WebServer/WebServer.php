@@ -51,7 +51,7 @@ class WebServer{
 			Http::header("Access-Control-Allow-Headers: *");
 			Http::header("Content-Type: application/json");
 			Http::header("X-SimpleFramework: " . Framework::PROG_VERSION);
-			Logger::info("Got request " . $_SERVER["REQUEST_URI"] . " from " . $_SERVER["REMOTE_ADDR"] . ":" . $_SERVER["REMOTE_PORT"]);
+			Logger::info("Got request " . self::getQuery() . " from " . $_SERVER["REMOTE_ADDR"] . ":" . $_SERVER["REMOTE_PORT"]);
 			return RequestHandler::process();
 		};
 	}
@@ -63,5 +63,13 @@ class WebServer{
 			Worker::loop();
 			usleep(Framework::getTickInterval());
 		}
+	}
+
+	public static function getQuery() : string{
+		return $_SERVER["REQUEST_URI"];
+	}
+
+	public static function getRemote() : string{
+		return $_SERVER["REMOTE_ADDR"];
 	}
 }

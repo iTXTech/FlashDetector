@@ -20,6 +20,7 @@
 
 namespace iTXTech\FlashDetector;
 
+use iTXTech\FlashDetector\Processor\DefaultProcessor;
 use iTXTech\SimpleFramework\Module\Module;
 use iTXTech\SimpleFramework\Module\ModuleInfo;
 
@@ -33,6 +34,8 @@ class Loader extends Module{
 		$prop = $info->getProperty("version");
 		$prop->setAccessible(true);
 		$prop->setValue($this->getInfo(), FlashDetector::getVersion() . "." . $this->getInfo()->getVersion());
+
+		FlashDetector::registerProcessor(new DefaultProcessor());
 	}
 
 	public function unload(){

@@ -22,13 +22,18 @@ namespace iTXTech\FlashDetector\WebServer\Page;
 
 use EaseCation\WorkerManEE\Page\AbstractPage;
 use iTXTech\FlashDetector\FlashDetector;
+use iTXTech\FlashDetector\WebServer\WebServer;
 
 class InfoPage extends AbstractPage{
 	public static function onRequest(){
-		return json_encode([
-			"result" => true,
-			"ver" => FlashDetector::getVersion(),
-			"info" => FlashDetector::getInfo()
-		]);
+		$c = [];
+
+		foreach(FlashDetector::getProcessors() as $processor){
+			if(!$processor->info(WebServer::getQuery(), WebServer::getRemote(), $c)){
+				break;
+			}
+		}
+
+		return json_encode($c);
 	}
 }

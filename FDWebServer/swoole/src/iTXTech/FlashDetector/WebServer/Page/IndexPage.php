@@ -20,6 +20,7 @@
 
 namespace iTXTech\FlashDetector\WebServer\Page;
 
+use iTXTech\FlashDetector\FlashDetector;
 use iTXTech\SimpleSwFw\Http\Page\AbstractPage;
 use Swoole\Http\Request;
 use Swoole\Http\Response;
@@ -27,10 +28,14 @@ use Swoole\Http\Server;
 
 class IndexPage extends AbstractPage{
 	public static function process(Request $request, Response $response, Server $server){
-		self::sendJsonData($response, [
-			"result" => true,
-			"time" => time(),
-			"server" => "FDWebServer-Swoole"
-		]);
+		$c = [];
+
+		foreach(FlashDetector::getProcessors() as $processor){
+			if(!$processor->index(self::getQuery($request), self::getClientIp($request), "FDWebServer-Swoole", $c)){
+				break;
+			}
+		}
+
+		self::sendJsonData($response, $c);
 	}
 }

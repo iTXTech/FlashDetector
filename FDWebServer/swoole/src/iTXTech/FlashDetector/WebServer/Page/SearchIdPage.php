@@ -28,17 +28,15 @@ use Swoole\Http\Server;
 
 class SearchIdPage extends AbstractPage{
 	public static function process(Request $request, Response $response, Server $server){
-		if(!isset($request->get["id"])){
-			self::sendJsonData($response, [
-				"result" => false,
-				"message" => "Missing Flash Id"
-			]);
-		}else{
-			self::sendJsonData($response, [
-				"result" => true,
-				"data" => FlashDetector::searchFlashId($request->get["id"], true,
-					($request->get["trans"] ?? 0) == 1)
-			]);
+		$c = [];
+
+		foreach(FlashDetector::getProcessors() as $processor){
+			if(!$processor->searchId(self::getQuery($request), self::getClientIp($request),
+				($request->get["trans"] ?? 0) == 1, $request->get["id"] ?? null, $c)){
+				break;
+			}
 		}
+
+		self::sendJsonData($response, $c);
 	}
 }

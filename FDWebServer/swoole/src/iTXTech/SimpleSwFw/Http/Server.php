@@ -80,15 +80,7 @@ class Server{
 			}else{
 				$this->defaultPage::status(404, $response);
 			}
-			$query = "";
-			if(isset($request->get)){
-				$query = "?";
-				foreach($request->get as $k => $v){
-					$query .= $k . "=" . $v . "&";
-				}
-				$query = substr($query, 0, strlen($query) - 1);
-			}
-			Logger::info("Request " . TextFormat::LIGHT_PURPLE . $request->server["request_uri"] . $query .
+			Logger::info("Request " . TextFormat::LIGHT_PURPLE . $this->defaultPage::getQuery($request) .
 				TextFormat::WHITE . " from " . TextFormat::AQUA . $this->defaultPage::getClientIp($request));
 		});
 		$this->server = $server;

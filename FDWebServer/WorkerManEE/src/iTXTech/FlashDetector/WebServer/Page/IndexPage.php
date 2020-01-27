@@ -21,13 +21,19 @@
 namespace iTXTech\FlashDetector\WebServer\Page;
 
 use EaseCation\WorkerManEE\Page\AbstractPage;
+use iTXTech\FlashDetector\FlashDetector;
+use iTXTech\FlashDetector\WebServer\WebServer;
 
 class IndexPage extends AbstractPage{
 	public static function onRequest(){
-		return json_encode([
-			"result" => true,
-			"time" => time(),
-			"server" => "FDWebServer-WorkerManEE"
-		]);
+		$c = [];
+
+		foreach(FlashDetector::getProcessors() as $processor){
+			if(!$processor->index(WebServer::getQuery(), WebServer::getRemote(), "FDWebServer-WorkerManEE", $c)){
+				break;
+			}
+		}
+
+		return json_encode($c);
 	}
 }

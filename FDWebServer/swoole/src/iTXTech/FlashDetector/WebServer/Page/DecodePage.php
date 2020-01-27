@@ -28,17 +28,15 @@ use Swoole\Http\Server;
 
 class DecodePage extends AbstractPage{
 	public static function process(Request $request, Response $response, Server $server){
-		if(!isset($request->get["pn"])){
-			self::sendJsonData($response, [
-				"result" => false,
-				"message" => "Missing part number"
-			]);
-		}else{
-			self::sendJsonData($response, [
-				"result" => true,
-				"data" => FlashDetector::detect($request->get["pn"])
-					->toArray(!(($request->get["trans"] ?? 0) == 1))
-			]);
+		$c = [];
+
+		foreach(FlashDetector::getProcessors() as $processor){
+			if(!$processor->decode(self::getQuery($request), self::getClientIp($request),
+				($request->get["trans"] ?? 0) == 1, $request->get["pn"] ?? null, $c)){
+				break;
+			}
 		}
+
+		self::sendJsonData($response, $c);
 	}
 }

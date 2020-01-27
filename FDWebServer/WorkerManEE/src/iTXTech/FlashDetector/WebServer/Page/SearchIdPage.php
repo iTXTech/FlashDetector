@@ -22,19 +22,19 @@ namespace iTXTech\FlashDetector\WebServer\Page;
 
 use EaseCation\WorkerManEE\Page\AbstractPage;
 use iTXTech\FlashDetector\FlashDetector;
+use iTXTech\FlashDetector\WebServer\WebServer;
 
 class SearchIdPage extends AbstractPage{
 	public static function onRequest(){
-		if(!isset($_GET["id"])){
-			return json_encode([
-				"result" => false,
-				"message" => "Missing Flash Id"
-			]);
-		}else{
-			return json_encode([
-				"result" => true,
-				"data" => FlashDetector::searchFlashId($_GET["id"], true, ($_GET["trans"] ?? 0) == 1)
-			]);
+		$c = [];
+
+		foreach(FlashDetector::getProcessors() as $processor){
+			if(!$processor->searchId(WebServer::getQuery(), WebServer::getRemote(),
+				($_GET["trans"] ?? 0) == 1, $_GET["id"] ?? null, $c)){
+				break;
+			}
 		}
+
+		return json_encode($c);
 	}
 }

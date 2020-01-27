@@ -22,14 +22,12 @@ require_once "env.php";
 
 use iTXTech\FlashDetector\FlashDetector;
 
-if(!isset($_GET["pn"])){
-	echo json_encode([
-		"result" => false,
-		"message" => "Missing part number"
-	]);
-}else{
-	echo json_encode([
-		"result" => true,
-		"data" => FlashDetector::getSummary($_GET["pn"])
-	]);
+$c = [];
+
+foreach(FlashDetector::getProcessors() as $processor){
+	if(!$processor->summary(getQuery(), getRemote(), $_GET["pn"] ?? null, $c)){
+		break;
+	}
 }
+
+echo json_encode($c);

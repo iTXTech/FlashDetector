@@ -32,6 +32,18 @@ abstract class AbstractPage{
 		return $request->header[strtolower(self::IP_ADDR_HEADER)] ?? $request->server["remote_addr"];
 	}
 
+	public static function getQuery(Request $request){
+		$query = "";
+		if(isset($request->get)){
+			$query = "?";
+			foreach($request->get as $k => $v){
+				$query .= $k . "=" . $v . "&";
+			}
+			$query = substr($query, 0, strlen($query) - 1);
+		}
+		return $request->server["request_uri"] . $query;
+	}
+
 	public static function sendJsonData(Response $response, array $data){
 		$response->header("Access-Control-Allow-Origin", "*");
 		$response->header("Access-Control-Allow-Headers", "*");

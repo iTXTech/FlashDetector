@@ -28,10 +28,14 @@ use Swoole\Http\Server;
 
 class InfoPage extends AbstractPage{
 	public static function process(Request $request, Response $response, Server $server){
-		self::sendJsonData($response, [
-			"result" => true,
-			"ver" => FlashDetector::getVersion(),
-			"info" => FlashDetector::getInfo()
-		]);
+		$c = [];
+
+		foreach(FlashDetector::getProcessors() as $processor){
+			if(!$processor->info(self::getQuery($request), self::getClientIp($request), $c)){
+				break;
+			}
+		}
+
+		self::sendJsonData($response, $c);
 	}
 }

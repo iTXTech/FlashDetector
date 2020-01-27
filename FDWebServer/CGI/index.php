@@ -20,8 +20,14 @@
 
 require_once "env.php";
 
-echo json_encode([
-	"result" => true,
-	"time" => time(),
-	"server" => "FDWebServer-CGI"
-]);
+use iTXTech\FlashDetector\FlashDetector;
+
+$c = [];
+
+foreach(FlashDetector::getProcessors() as $processor){
+	if(!$processor->index(getQuery(), getRemote(), "FDWebServer-WorkerManEE", $c)){
+		break;
+	}
+}
+
+echo json_encode($c);

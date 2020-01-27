@@ -33,6 +33,7 @@ use iTXTech\FlashDetector\Decoder\SpecTek;
 use iTXTech\FlashDetector\Decoder\WesternDigital;
 use iTXTech\FlashDetector\Decoder\WesternDigitalShortCode;
 use iTXTech\FlashDetector\Fdb\Fdb;
+use iTXTech\FlashDetector\Processor\Processor;
 use iTXTech\FlashDetector\Property\Classification;
 use iTXTech\SimpleFramework\Util\StringUtil;
 
@@ -50,6 +51,13 @@ abstract class FlashDetector{
 
 	public static function registerProcessor(Processor $processor){
 		self::$processors[] = $processor;
+	}
+
+	/**
+	 * @return Processor[]
+	 */
+	public static function getProcessors() : array{
+		return self::$processors;
 	}
 
 	public static function getFdb() : Fdb{
@@ -138,7 +146,7 @@ abstract class FlashDetector{
 			$info = (new FlashInfo($partNumber))->setVendor(Constants::UNKNOWN);
 		}
 		foreach(self::$processors as $processor){
-			$processor->process($info);
+			$processor->flashInfo($info);
 		}
 		return $info;
 	}
@@ -259,7 +267,8 @@ abstract class FlashDetector{
 		if(Micron::check($pn)){
 			foreach(self::$mdb["micron"] as $c => $p){
 				if(StringUtil::startsWith($p, $pn)){
-					$result[] = Micron::getName() . " " . $c . " " . $p;
+					$result[] = ($translate ? self::translateString(Micron::getName()) : Micron::getName()) .
+						" " . $c . " " . $p;
 				}
 			}
 		}

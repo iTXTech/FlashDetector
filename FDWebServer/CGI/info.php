@@ -22,8 +22,12 @@ require_once "env.php";
 
 use iTXTech\FlashDetector\FlashDetector;
 
-echo json_encode([
-	"result" => true,
-	"ver" => FlashDetector::getVersion(),
-	"info" => FlashDetector::getInfo()
-]);
+$c = [];
+
+foreach(FlashDetector::getProcessors() as $processor){
+	if(!$processor->info(getQuery(), getRemote(), $c)){
+		break;
+	}
+}
+
+echo json_encode($c);

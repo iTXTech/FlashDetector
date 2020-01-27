@@ -22,14 +22,12 @@ require_once "env.php";
 
 use iTXTech\FlashDetector\FlashDetector;
 
-if(!isset($_GET["id"])){
-	echo json_encode([
-		"result" => false,
-		"message" => "Missing Flash Id"
-	]);
-}else{
-	echo json_encode([
-		"result" => true,
-		"data" => FlashDetector::searchFlashId($_GET["id"], true, (($_GET["trans"] ?? 0) == 1))
-	]);
+$c = [];
+
+foreach(FlashDetector::getProcessors() as $processor){
+	if(!$processor->searchId(getQuery(), getRemote(), ($_GET["trans"] ?? 0) == 1, $_GET["id"] ?? null, $c)){
+		break;
+	}
 }
+
+echo json_encode($c);

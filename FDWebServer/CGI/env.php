@@ -23,6 +23,8 @@ ob_start();
 require_once "sfloader.php";
 ob_clean();
 
+const LANG = "chs";
+
 use iTXTech\FlashDetector\FlashDetector;
 use iTXTech\SimpleFramework\Console\Logger;
 use iTXTech\SimpleFramework\Framework;
@@ -49,8 +51,16 @@ if($moduleManager->getModule("FlashDetector") === null){
 }
 
 header("X-SimpleFramework: " . Framework::PROG_VERSION);
-FlashDetector::init("chs");
+FlashDetector::init(LANG);
 
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Headers: *");
 header("Content-Type: application/json");
+
+function getQuery() : string{
+	return $_SERVER["REQUEST_URI"];
+}
+
+function getRemote() : string{
+	return $_SERVER["REMOTE_ADDR"];
+}
