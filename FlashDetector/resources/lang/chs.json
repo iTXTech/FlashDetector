@@ -26,7 +26,7 @@
   "spectek_pfpt_a": "所有片选可用",
   "spectek_pfpt_b": "片选1可用，片选2不保证",
   "spectek_pfpt_c": "片选2可用，片选1不保证",
-  "spectek_pfpt_d": "SLC在飞(?)，请联系工厂",
+  "spectek_pfpt_d": "SLC可用，请联系工厂",
   "spectek_if_e": "页面完美的NAND",
   "spectek_if_f": "仅异步/NV-DDR2 或 NV-DDR3",
   "spectek_if_g": "企业级同步",

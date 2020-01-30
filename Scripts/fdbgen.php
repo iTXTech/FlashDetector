@@ -23,6 +23,7 @@
 require_once "env.php";
 
 use iTXTech\FlashDetector\FDBGen\FDBGen;
+use iTXTech\SimpleFramework\Console\Logger;
 use iTXTech\SimpleFramework\Console\Option\Exception\ParseException;
 use iTXTech\SimpleFramework\Console\Option\HelpFormatter;
 use iTXTech\SimpleFramework\Console\Option\OptionBuilder;
@@ -34,6 +35,8 @@ global $moduleManager;
 loadModule($moduleManager, "FDBGen");
 
 FDBGen::init();
+
+Logger::$logLevel = 0;
 
 $options = new Options();
 $options->addOption((new OptionBuilder("v"))->longOpt("version")

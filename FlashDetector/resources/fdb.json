@@ -1,9 +1,9 @@
 {
     "info": {
         "name": "iTXTech FlashDetector Flash Database",
-        "version": "52",
+        "version": "53",
         "website": "https:\/\/github.com\/iTXTech\/FlashDetector",
-        "time": "Sat, 18 Jan 2020 17:57:42 +0800",
+        "time": "Thu, 30 Jan 2020 20:23:02 +0800",
         "controllers": [
             "SM321AC",
             "SM321BB",
@@ -76736,6 +76736,7 @@
             "id": [
                 "2CA46432AA04"
             ],
+            "l": "L06B",
             "t": [
                 "SM2246EN",
                 "MK8115",

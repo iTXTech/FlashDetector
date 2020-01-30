@@ -57,6 +57,7 @@ class MicronDatabase{
 		foreach(self::MICRON_HEADER as $h){
 			for($i = self::START_FROM[$h]; $i < 1000; $i++){
 				if(!isset($this->data["micron"][$code = self::getCode($h, $i)])){
+					Logger::debug("Loading data for " . $code);
 					if(is_array($res = Micron::fbgaToPartNumber($code))){
 						$pn = array_keys($res)[0];
 						Logger::info("$code => $pn");
@@ -71,6 +72,7 @@ class MicronDatabase{
 			$end = "1" . str_repeat("0", 5 - strlen($h));
 			for($i = 1; $i < (int) $end; $i++){
 				if(!isset($this->data["spectek"][$code = self::getCode($h, $i)])){
+					Logger::debug("Loading data for " . $code);
 					if(is_array($res = SpecTek::markCodeToPartNumber($code)) and isset($res[$code]["partNumber"])){
 						$pn = $res[$code]["partNumber"];
 						Logger::info("$code => " . json_encode($pn));

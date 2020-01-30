@@ -33,6 +33,7 @@ use iTXTech\FlashDetector\FDBGen\Generator\SandForce;
 use iTXTech\FlashDetector\FDBGen\Generator\SiliconMotionForceFlash;
 use iTXTech\FlashDetector\FDBGen\Generator\SiliconMotionSSD;
 use iTXTech\FlashDetector\FDBGen\Generator\SiliconMotionUFD;
+use iTXTech\SimpleFramework\Console\Logger;
 use iTXTech\SimpleFramework\Util\StringUtil;
 
 abstract class FDBGen{
@@ -47,19 +48,19 @@ abstract class FDBGen{
 	}
 
 	public static function init(){
-		//Full Flash Database
+		// Full Flash Database
 		self::registerGenerator(SiliconMotionForceFlash::class);
-		//have 6Bytes FlashId
+		// Have 6Bytes FlashId
 		self::registerGenerator(SiliconMotionUFD::class);
 		self::registerGenerator(SiliconMotionSSD::class);
-		//may not have complete id
+		// May not have complete FlashId
 		self::registerGenerator(JMicron::class);
 		self::registerGenerator(Maxiotek::class);
 		self::registerGenerator(Maxio::class);
-		//no flash id
+		// No flash id
 		self::registerGenerator(SandForce::class);
 		self::registerGenerator(AlcorMicro::class);
-		//unreliable Flash PN
+		// Unreliable Part Number
 		self::registerGenerator(ChipsBank::class);
 		self::registerGenerator(Innostor::class);
 	}
@@ -86,15 +87,19 @@ abstract class FDBGen{
 				foreach($files as $file){
 					if(!in_array($file, [".", ".."])){
 						$f = $db . $dir . DIRECTORY_SEPARATOR . $file;
+						Logger::debug("Merging " . @end(explode("\\", $generator)) . " => " .
+							@end(explode(DIRECTORY_SEPARATOR, $f)));
 						$generator::merge($fdb, file_get_contents($f), $file);
 					}
 				}
 			}
 		}
 		if($extra){
+			Logger::debug("Merging extra.json");
 			Extra::merge($fdb, file_get_contents($db . DIRECTORY_SEPARATOR . "extra.json"));
 		}
 
+		Logger::debug("Add Part Numbers to IDDB");
 		$iddb = $fdb->getIddb();
 		foreach($fdb->getVendors() as $vendor){
 			foreach($vendor->getPartNumbers() as $partNumber){
@@ -103,6 +108,8 @@ abstract class FDBGen{
 				}
 			}
 		}
+
+		Logger::debug("FDB has been generated.");
 
 		return $fdb->toArray();
 	}

@@ -34,7 +34,7 @@ use iTXTech\SimpleFramework\Util\Util;
 global $moduleManager;
 loadModule($moduleManager, "FDBGen");
 
-Logger::$logLevel = 1;
+Logger::$logLevel = 0;
 
 FDBGen::init();
 
