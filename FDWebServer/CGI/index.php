@@ -25,7 +25,7 @@ use iTXTech\FlashDetector\FlashDetector;
 $c = [];
 
 foreach(FlashDetector::getProcessors() as $processor){
-	if(!$processor->index(getQuery(), getRemote(), "FDWebServer-WorkerManEE", $c)){
+	if(!$processor->index(getQuery(), getRemote(), "FDWebServer-CGI", $c)){
 		break;
 	}
 }

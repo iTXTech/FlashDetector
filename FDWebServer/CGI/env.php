@@ -20,7 +20,16 @@
 
 //Runtime Environment Initializer
 ob_start();
-require_once "sfloader.php";
+foreach(["sf.phar", "SimpleFramework.phar", "sfloader.php", "sf/sfloader.php"] as $loader){
+	if(file_exists($loader)){
+		if(explode(".", $loader)[1] == "phar"){
+			require_once "phar://" . $loader . "/sfloader.php";
+		}else{
+			require_once "$loader";
+		}
+		break;
+	}
+}
 ob_clean();
 
 const LANG = "chs";
