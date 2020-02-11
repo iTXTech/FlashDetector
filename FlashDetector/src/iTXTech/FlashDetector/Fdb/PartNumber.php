@@ -81,29 +81,29 @@ class PartNumber extends Arrayable{
 		return $this->n ?? Classification::UNKNOWN_PROP;
 	}
 
-	public function setDie(int $die) : PartNumber{
-		if($this->d == null){
+	public function setDie(int $die, bool $force = false) : PartNumber{
+		if($force or $this->d == null){
 			$this->d = $die;
 		}
 		return $this;
 	}
 
-	public function setCe(int $ce) : PartNumber{
-		if($this->e == null){
+	public function setCe(int $ce, bool $force = false) : PartNumber{
+		if($force or $this->e == null){
 			$this->e = $ce;
 		}
 		return $this;
 	}
 
-	public function setRb(int $rb) : PartNumber{
-		if($this->r == null){
+	public function setRb(int $rb, bool $force = false) : PartNumber{
+		if($force or $this->r == null){
 			$this->r = $rb;
 		}
 		return $this;
 	}
 
-	public function setCh(int $ch) : PartNumber{
-		if($this->n == null){
+	public function setCh(int $ch, bool $force = false) : PartNumber{
+		if($force or $this->n == null){
 			$this->n = $ch;
 		}
 		return $this;
@@ -116,15 +116,15 @@ class PartNumber extends Arrayable{
 		return $this;
 	}
 
-	public function setProcessNode(string $processNode) : PartNumber{
-		if($this->l == null){
+	public function setProcessNode(string $processNode, bool $force = false) : PartNumber{
+		if($force or $this->l == null){
 			$this->l = trim(str_replace("toggle", "", $processNode));
 		}
 		return $this;
 	}
 
-	public function setCellLevel(string $cellLevel) : PartNumber{
-		if($this->c == null){
+	public function setCellLevel(string $cellLevel, bool $force = false) : PartNumber{
+		if($force or $this->c == null){
 			$this->c = $cellLevel;
 		}
 		return $this;
@@ -163,16 +163,21 @@ class PartNumber extends Arrayable{
 		return $this;
 	}
 
-	public function merge(PartNumber $partNumber) : PartNumber{
-		$this->setCe($partNumber->getCe());
-		$this->setCh($partNumber->getCh());
-		$this->setDie($partNumber->getDie());
-		$this->setRb($partNumber->getRb());
-		$this->setProcessNode($partNumber->getProcessNode());
-		$this->setCellLevel($partNumber->getCellLevel());
+	public function setFlashIds(array $ids) : PartNumber{
+		$this->id = $ids;
+		return $this;
+	}
+
+	public function merge(PartNumber $partNumber, bool $force = false) : PartNumber{
+		$this->setCe($partNumber->getCe(), $force);
+		$this->setCh($partNumber->getCh(), $force);
+		$this->setDie($partNumber->getDie(), $force);
+		$this->setRb($partNumber->getRb(), $force);
+		$this->setProcessNode($partNumber->getProcessNode(), $force);
+		$this->setCellLevel($partNumber->getCellLevel(), $force);
+		$this->setRemark($partNumber->getRemark(), $force);
 		$this->addController($partNumber->getControllers());
 		$this->addFlashId($partNumber->getFlashIds());
-		$this->setRemark($partNumber->getRemark());
 		return $this;
 	}
 

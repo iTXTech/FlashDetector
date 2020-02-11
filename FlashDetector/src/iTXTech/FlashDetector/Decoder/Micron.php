@@ -276,6 +276,9 @@ class Micron extends Decoder{
 	}
 
 	public static function removePackage(string $pn) : string{
+		if(SpecTek::check($pn)){
+			return SpecTek::removePackage($pn);
+		}
 		$bit = strstr($pn, "08");
 		if($bit !== false and strlen($bit) >= 8){
 			$pn = substr($pn, 0, strlen($pn) + 7 - strlen($bit));

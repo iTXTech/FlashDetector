@@ -26,8 +26,11 @@ use iTXTech\FlashDetector\Fdb\PartNumber;
 class Extra{
 	public static function merge(Fdb $fdb, string $data) : void{
 		foreach(json_decode($data, true) as $vendor => $pns){
-			foreach($pns as $pn => $data){
-				$fdb->getPartNumber($vendor, $pn, true)->merge(new PartNumber($pn, $data));
+			foreach($pns as $pn => $d){
+				$pn = $fdb->getPartNumber($vendor, $pn, true)->merge(new PartNumber($pn, $d), true);
+				if(isset($d["fid"])){
+					$pn->setFlashIds($d["fid"]);
+				}
 			}
 		}
 	}

@@ -1,15 +1,14 @@
 {
   "name": "FDBGen",
   "version": "1.0.0",
-  "api": 6,
+  "api": 7,
   "description": "Flash Database Generator for FlashDetector",
   "author": "iTX Technologies",
-  "main": "iTXTech\\FlashDetector\\FDBGen\\Loader",
   "website": "https://github.com/iTXTech/FlashDetector",
   "dependencies": [
     {
       "name": "iTXTech/FlashDetector",
-      "version": "32"
+      "version": "54"
     }
   ]
 }
