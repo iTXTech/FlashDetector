@@ -25,7 +25,7 @@ use iTXTech\SimpleFramework\Initializer;
 use iTXTech\SimpleFramework\Module\ModuleManager;
 
 class PeachPieHelper{
-	public static function load(){
+	public static function load() : void{
 		require_once "sf/sfloader.php";
 
 		Initializer::initTerminal(true);
@@ -44,7 +44,7 @@ class PeachPieHelper{
 		FlashDetector::init();
 	}
 
-	public static function decode(string $query, string $remote, bool $trans, string $pn){
+	public static function decode(string $query, string $remote, bool $trans, ?string $pn) : string{
 		$c = [];
 
 		foreach(FlashDetector::getProcessors() as $processor){
@@ -56,7 +56,7 @@ class PeachPieHelper{
 		return json_encode($c);
 	}
 
-	public static function index(string $query, string $remote){
+	public static function index(string $query, string $remote) : string{
 		$c = [];
 
 		foreach(FlashDetector::getProcessors() as $processor){
@@ -68,7 +68,7 @@ class PeachPieHelper{
 		return json_encode($c);
 	}
 
-	public static function info(string $query, string $remote){
+	public static function info(string $query, string $remote) : string{
 		$c = [];
 
 		foreach(FlashDetector::getProcessors() as $processor){
@@ -80,8 +80,7 @@ class PeachPieHelper{
 		return json_encode($c);
 	}
 
-
-	public static function searchId(string $query, string $remote, bool $trans, string $id){
+	public static function searchId(string $query, string $remote, bool $trans, ?string $id) : string{
 		$c = [];
 
 		foreach(FlashDetector::getProcessors() as $processor){
@@ -93,8 +92,7 @@ class PeachPieHelper{
 		return json_encode($c);
 	}
 
-
-	public static function searchPn(string $query, string $remote, bool $trans, string $pn){
+	public static function searchPn(string $query, string $remote, bool $trans, ?string $pn) : string{
 		$c = [];
 
 		foreach(FlashDetector::getProcessors() as $processor){
@@ -106,7 +104,7 @@ class PeachPieHelper{
 		return json_encode($c);
 	}
 
-	public static function summary(string $query, string $remote, string $pn){
+	public static function summary(string $query, string $remote, ?string $pn) : string{
 		$c = [];
 
 		foreach(FlashDetector::getProcessors() as $processor){
@@ -116,6 +114,5 @@ class PeachPieHelper{
 		}
 
 		return json_encode($c);
-
 	}
 }
