@@ -118,8 +118,7 @@ abstract class FlashDetector{
 		self::registerDecoder(WesternDigitalShortCode::class);
 		if(Loader::getInstance() !== null){
 			self::$lang = json_decode(Loader::getInstance()->getResourceAsText("lang/$lang.json"), true);
-			self::$fallbackLang = json_decode(Loader::getInstance()
-				->getResourceAsText("lang/$fallbackLang.json"), true);
+			self::$fallbackLang = json_decode(Loader::getInstance()->getResourceAsText("lang/$fallbackLang.json"), true);
 		}
 	}
 

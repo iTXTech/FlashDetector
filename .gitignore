@@ -6,3 +6,4 @@ Scripts/*.csv
 *.phar
 FlashDetector/composer.lock
 FlashDetector/vendor
+PeachPie/FlashDetector
