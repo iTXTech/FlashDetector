@@ -139,6 +139,7 @@ abstract class FlashDetector{
 				if($combineFdb){
 					self::combineDataFromFdb($info, $decoder);
 				}
+				break;
 			}
 		}
 		if(!isset($info)){
