@@ -1915,7 +1915,9 @@
         "NX930": "MT29F2T08EMLEEH6-RES:E",
         "NX932": "MT29F2T08ELLDEG7-MES:D",
         "NX933": "MT29F8T08ESLDEG4-MES:D",
-        "NX934": "MT29F256G08EBLCEJ4-MES:C"
+        "NX934": "MT29F256G08EBLCEJ4-MES:C",
+        "NX936": "EE29F512G08EBLDEH6-QAES:D",
+        "NX937": "EE29F256G08EBLCEJ4-QAES:C"
     },
     "spectek": {
         "PF001": [
@@ -6174,6 +6176,117 @@
         ],
         "PF697": [
             "FBMM16A256G9KDBANJ4"
+        ],
+        "PF698": [
+            "FBNB16A1T1KTLAFG7"
+        ],
+        "PF699": [
+            "FBMB16A1T1KTLAFG7"
+        ],
+        "PF700": [
+            "FBMB16A1T0KTLAFG7"
+        ],
+        "PF701": [
+            "FBNB37R1T1KLEAEH6"
+        ],
+        "PF702": [
+            "FBMB37R1T1KLEAEH6"
+        ],
+        "PF703": [
+            "FBMB37R1T0KLEAEH6"
+        ],
+        "PF704": [
+            "FBNB37R2T1KLMAEH6"
+        ],
+        "PF705": [
+            "FBMB37R2T1KLMAEH6"
+        ],
+        "PF706": [
+            "FBMB37R2T0KLMAEH6"
+        ],
+        "PF707": [
+            "FBNB47R512G1KLBAEJ4"
+        ],
+        "PF708": [
+            "FBMB47R512G1KLBAEJ4"
+        ],
+        "PF709": [
+            "FBMB47R512G0KLBAEJ4"
+        ],
+        "PF710": [
+            "FBNB47R512G9KLBAEJ4"
+        ],
+        "PF711": [
+            "FBMB47R512G9KLBAEJ4"
+        ],
+        "PF712": [
+            "FBMB16A2T0KTQAFG8"
+        ],
+        "PF713": [
+            "FBNB16A2T1KTQAFG8"
+        ],
+        "PF714": [
+            "FBMB37R4T0KLQAEG8"
+        ],
+        "PF715": [
+            "FBNB37R4T1KLQAEG8"
+        ],
+        "PF716": [
+            "FBMB37R4T1KLQAEG8"
+        ],
+        "PF717": [
+            "FBNB47R1T1KLEAEJ4"
+        ],
+        "PF718": [
+            "FBMB47R1T1KLEAEJ4"
+        ],
+        "PF719": [
+            "FBMB47R1T0KLEAEJ4"
+        ],
+        "PF720": [
+            "FBNB47R2T1KLMAEJ4"
+        ],
+        "PF721": [
+            "FBMB47R2T0KLMAEJ4"
+        ],
+        "PF722": [
+            "FBMB47R2T1KLMAEJ4"
+        ],
+        "PF723": [
+            "FBNB47R4T1KLUAEM4"
+        ],
+        "PF724": [
+            "FBMB47R4T0KLUAEM4"
+        ],
+        "PF725": [
+            "FBNB47R2T1KLLAEG7"
+        ],
+        "PF726": [
+            "FBMB47R2T0KLLAEG7"
+        ],
+        "PF727": [
+            "FBMB47R2T1KLLAEG7"
+        ],
+        "PF728": [
+            "FBNB47R4T1KLQAEG8"
+        ],
+        "PF729": [
+            "FBMB47R4T1KLQAEG8"
+        ],
+        "PF730": [
+            "FBMB47R4T0KLQAEG8"
+        ],
+        "PF731": [
+            "FBNB47R8T1KLSAEG4"
+        ],
+        "PF732": [
+            "FBMB47R8T1KLSAEG4"
+        ],
+        "PF733": [
+            "FBMB47R8T0KLSAEG4"
+        ],
+        "PF734": [
+            "FBMB47R4T1KLUAEM4"
         ]
     }
 }
