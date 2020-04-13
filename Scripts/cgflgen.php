@@ -24,7 +24,27 @@ require_once "env.php";
 
 use iTXTech\FlashDetector\FlashDetector;
 use iTXTech\FlashDetector\Property\Classification;
+use iTXTech\SimpleFramework\Console\Option\Exception\ParseException;
+use iTXTech\SimpleFramework\Console\Option\HelpFormatter;
+use iTXTech\SimpleFramework\Console\Option\OptionBuilder;
+use iTXTech\SimpleFramework\Console\Option\Options;
+use iTXTech\SimpleFramework\Console\Option\Parser;
 use iTXTech\SimpleFramework\Util\StringUtil;
+use iTXTech\SimpleFramework\Util\Util;
+
+$options = new Options();
+$options->addOption((new OptionBuilder("m"))->longOpt("merge")->desc("Merge original ChipGenius Flash List")->build());
+$options->addOption((new OptionBuilder("p"))->longOpt("page")->desc("Ignore unknown page size")->build());
+$options->addOption((new OptionBuilder("i"))->longOpt("idlen")
+	->desc("Identify Flash ID length, max = 12")->hasArg()->build());
+
+try{
+	$cmd = (new Parser())->parse($options, $argv);
+}catch(ParseException $e){
+	Util::println($e->getMessage());
+	echo((new HelpFormatter())->generateHelp("cgflgen", $options));
+	exit(1);
+}
 
 $data = "";
 
@@ -33,13 +53,15 @@ foreach(FlashDetector::getFdb()->getIddb()->getFlashIds() as $id){
 		$pn = explode(" ", $id->getPartNumbers()[0])[1];
 		$info = FlashDetector::detect($pn, true);
 		if(StringUtil::endsWith($info->getCellLevel() ?? "", "LC")){
-			$d = "";
-			if($id->getPageSize() == Classification::UNKNOWN_PROP){
+			$d = substr($id->getFlashId(), 0, $cmd->getOptionValue("i", 12)) . "," . $info->getCellLevel();
+			if($id->getPageSize() == Classification::UNKNOWN_PROP and !$cmd->hasOption("p")){
 				continue;
+			}elseif($id->getPageSize() == Classification::UNKNOWN_PROP){
+				$d .= ",";
 			}elseif($id->getPageSize() < 1){
-				$d .= substr($id->getFlashId(), 0, 8) . "," . $info->getCellLevel() . "-" . $id->getPageSize() * 1024 . ",";
+				$d .= "-" . $id->getPageSize() * 1024 . ",";
 			}else{
-				$d .= substr($id->getFlashId(), 0, 8) . "," . $info->getCellLevel() . "-" . $id->getPageSize() . "K,";
+				$d .= "-" . $id->getPageSize() . "K,";
 			}
 			$hasPn = false;
 			foreach($id->getPartNumbers() as $pn){
@@ -58,7 +80,7 @@ foreach(FlashDetector::getFdb()->getIddb()->getFlashIds() as $id){
 	}
 }
 
-if(file_exists("CGFlashList_ORIG.csv")){
+if($cmd->hasOption("m") and file_exists("CGFlashList_ORIG.csv")){
 	$index = [];
 	foreach(explode("\r\n", $data) as $flash){
 		$id = explode(",", $flash)[0];
