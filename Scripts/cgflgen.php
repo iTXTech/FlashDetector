@@ -35,7 +35,7 @@ use iTXTech\SimpleFramework\Util\Util;
 $options = new Options();
 $options->addOption((new OptionBuilder("m"))->longOpt("merge")->desc("Merge original ChipGenius Flash List")->build());
 $options->addOption((new OptionBuilder("p"))->longOpt("page")->desc("Ignore unknown page size")->build());
-$options->addOption((new OptionBuilder("i"))->longOpt("idlen")
+$options->addOption((new OptionBuilder("i"))->longOpt("idlen")->argName("length")
 	->desc("Identify Flash ID length, max = 12")->hasArg()->build());
 
 try{

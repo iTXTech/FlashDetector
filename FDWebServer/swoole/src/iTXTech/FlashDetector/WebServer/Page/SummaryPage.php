@@ -22,9 +22,9 @@ namespace iTXTech\FlashDetector\WebServer\Page;
 
 use iTXTech\FlashDetector\FlashDetector;
 use iTXTech\SimpleSwFw\Http\Page\AbstractPage;
+use Swoole\Coroutine\Http\Server;
 use Swoole\Http\Request;
 use Swoole\Http\Response;
-use Swoole\Http\Server;
 
 class SummaryPage extends AbstractPage{
 	public static function process(Request $request, Response $response, Server $server){

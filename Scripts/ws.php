@@ -31,6 +31,7 @@ use iTXTech\SimpleFramework\Console\Option\OptionBuilder;
 use iTXTech\SimpleFramework\Console\Option\OptionGroup;
 use iTXTech\SimpleFramework\Console\Option\Options;
 use iTXTech\SimpleFramework\Console\Option\Parser;
+use iTXTech\SimpleFramework\Console\SwooleLoggerHandler;
 use iTXTech\SimpleFramework\Module\WraithSpireMDR;
 use iTXTech\SimpleFramework\Util\Util;
 
@@ -65,6 +66,8 @@ try{
 	];
 	if($cmd->hasOption("s")){
 		loadModule($moduleManager, "FDWebServer" . DIRECTORY_SEPARATOR . "swoole");
+		SwooleLoggerHandler::init();
+		Logger::setLoggerHandler(SwooleLoggerHandler::class);
 	}
 	if($cmd->hasOption("w")){
 		$moduleManager->registerModuleDependencyResolver(new WraithSpireMDR($moduleManager,

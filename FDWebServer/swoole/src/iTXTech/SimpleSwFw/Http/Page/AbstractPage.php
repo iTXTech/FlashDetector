@@ -20,9 +20,9 @@
 
 namespace iTXTech\SimpleSwFw\Http\Page;
 
+use Swoole\Coroutine\Http\Server;
 use Swoole\Http\Request;
 use Swoole\Http\Response;
-use Swoole\Http\Server;
 
 abstract class AbstractPage{
 	public const IP_ADDR_HEADER = "X-Real-IP";

@@ -34,8 +34,8 @@ class WebServer{
 
 	public function __construct(array $config){
 		$this->server = new Server();
-		$this->server->setDefaultPage(IndexPage::class);
 		$this->server->registerPage("/", IndexPage::class);
+		$this->server->registerPage("/index", IndexPage::class);
 		$this->server->registerPage("/decode", DecodePage::class);
 		$this->server->registerPage("/searchId", SearchIdPage::class);
 		$this->server->registerPage("/searchPn", SearchPnPage::class);

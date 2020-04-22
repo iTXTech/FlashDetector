@@ -23,9 +23,10 @@ namespace iTXTech\SimpleSwFw\Http;
 use iTXTech\SimpleFramework\Console\Logger;
 use iTXTech\SimpleFramework\Console\TextFormat;
 use iTXTech\SimpleSwFw\Http\Page\AbstractPage;
+use Swoole\Coroutine\Http\Server as HttpServer;
 use Swoole\Http\Request;
 use Swoole\Http\Response;
-use Swoole\Http\Server as HttpServer;
+use function Co\run;
 
 class Server{
 	private $serverInfo = "iTXTech SimpleSwFw";
@@ -38,11 +39,10 @@ class Server{
 	/** @var HttpServer */
 	private $server;
 
-	public function registerPage(string $path, string $class) : Server{
+	public function registerPage(string $path, string $class){
 		if(!$this->started){
 			$this->pages[$path] = $class;
 		}
-		return $this;
 	}
 
 	public function setDefaultPage(string $class) : Server{
@@ -66,28 +66,29 @@ class Server{
 	 * "swoole" => Swoole config
 	 */
 	public function load(array $config){
-		$server = new HttpServer($config["address"], $config["port"]);
-		$server->set($config["swoole"]);
-
-		$server->on("start", function (HttpServer $server){
+		run(function() use ($config){
+			$server = new HttpServer($config["address"], $config["port"]);
+			$server->set($config["swoole"]);
 			Logger::info(TextFormat::GREEN . $this->serverInfo . " is listening on " . $server->host . ":" . $server->port);
+			$server->handle("/", function(Request $request, Response $response) use ($server){
+				$response->header("Server", $this->serverInfo);
+				$uri = $request->server["request_uri"];
+				if(isset($this->pages[$uri])){
+					$this->pages[$uri]::process($request, $response, $server);
+				}else{
+					$this->defaultPage::status(404, $response);
+				}
+				Logger::info("Request " . TextFormat::LIGHT_PURPLE . $this->defaultPage::getQuery($request) .
+					TextFormat::WHITE . " from " . TextFormat::AQUA . $this->defaultPage::getClientIp($request));
+			});
+			$this->server = $server;
 		});
-		$server->on("request", function (Request $request, Response $response) use ($server){
-			$response->header("Server", $this->serverInfo);
-			$uri = $request->server["request_uri"];
-			if(isset($this->pages[$uri])){
-				$this->pages[$uri]::process($request, $response, $server);
-			}else{
-				$this->defaultPage::status(404, $response);
-			}
-			Logger::info("Request " . TextFormat::LIGHT_PURPLE . $this->defaultPage::getQuery($request) .
-				TextFormat::WHITE . " from " . TextFormat::AQUA . $this->defaultPage::getClientIp($request));
-		});
-		$this->server = $server;
 	}
 
 	public function start(){
-		$this->started = true;
-		$this->server->start();
+		run(function(){
+			$this->started = true;
+			$this->server->start();
+		});
 	}
 }
