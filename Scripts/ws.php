@@ -22,7 +22,6 @@
 
 require_once "env.php";
 
-use iTXTech\FlashDetector\FlashDetector;
 use iTXTech\FlashDetector\WebServer\WebServer;
 use iTXTech\SimpleFramework\Console\Logger;
 use iTXTech\SimpleFramework\Console\Option\Exception\ParseException;
@@ -48,15 +47,12 @@ $options->addOptionGroup($group)
 	->addOption((new OptionBuilder("a"))->longOpt("address")->hasArg()->argName("addr")
 		->desc("Server address")->required()->build())
 	->addOption((new OptionBuilder("p"))->longOpt("port")->hasArg()->argName("port")
-		->desc("Server port")->required()->build())
-	->addOption((new OptionBuilder("l"))->longOpt("language")->hasArg()->argName("lang")
-		->desc("FlashDetector language")->build());
+		->desc("Server port")->required()->build());
 
 global $moduleManager;
 
 try{
 	$cmd = (new Parser())->parse($options, $argv);
-	FlashDetector::init($cmd->getOptionValue("l", "chs"));
 	$config = [
 		"address" => $cmd->getOptionValue("a"),
 		"port" => $cmd->getOptionValue("p"),

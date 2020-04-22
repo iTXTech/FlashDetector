@@ -1,9 +1,9 @@
 {
     "info": {
         "name": "iTXTech FlashDetector Flash Database",
-        "version": "57",
+        "version": "58",
         "website": "https:\/\/github.com\/iTXTech\/FlashDetector",
-        "time": "Tue, 31 Mar 2020 11:06:43 +0800",
+        "time": "Wed, 22 Apr 2020 21:30:46 +0800",
         "controllers": [
             "SM321AC",
             "SM321BB",
@@ -23019,7 +23019,8 @@
                 "kioxia TC58TFG8T22TA00",
                 "kioxia GEN2",
                 "kioxia TH58TFG9T22TA2D",
-                "kioxia TH58TFG8T22TA2D"
+                "kioxia TH58TFG8T22TA2D",
+                "kioxia TC58TEG8T22TA03"
             ]
         },
         "983C98B376F1": {
@@ -101767,6 +101768,11 @@
         "TH58TEG7D2HBA8C": {
             "id": [
                 "98D7943276D6"
+            ]
+        },
+        "TC58TEG8T22TA03": {
+            "id": [
+                "983C98B37671"
             ]
         }
     },

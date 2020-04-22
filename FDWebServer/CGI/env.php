@@ -32,8 +32,6 @@ foreach(["sf.phar", "SimpleFramework.phar", "sfloader.php", "sf/sfloader.php"] a
 }
 ob_clean();
 
-const LANG = "chs";
-
 use iTXTech\FlashDetector\FlashDetector;
 use iTXTech\SimpleFramework\Console\Logger;
 use iTXTech\SimpleFramework\Framework;
@@ -60,7 +58,7 @@ if($moduleManager->getModule("FlashDetector") === null){
 }
 
 header("X-SimpleFramework: " . Framework::PROG_VERSION);
-FlashDetector::init(LANG);
+FlashDetector::init();
 
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Headers: *");

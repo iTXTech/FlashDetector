@@ -23,11 +23,6 @@
 require_once "env.php";
 
 use iTXTech\FlashDetector\FlashDetector;
-use iTXTech\SimpleFramework\Console\Option\Exception\ParseException;
-use iTXTech\SimpleFramework\Console\Option\HelpFormatter;
-use iTXTech\SimpleFramework\Console\Option\OptionBuilder;
-use iTXTech\SimpleFramework\Console\Option\Options;
-use iTXTech\SimpleFramework\Console\Option\Parser;
 use iTXTech\SimpleFramework\Util\Util;
 
 const PNS = [
@@ -43,20 +38,8 @@ const PNS = [
 	"FNNL06B256G1KDBABWP"
 ];
 
-$options = new Options();
-$options->addOption((new OptionBuilder("l"))->longOpt("lang")
-	->hasArg()->argName("lang")->required(true)->build());
-
-try{
-	$cmd = (new Parser())->parse($options, $argv);
-	FlashDetector::init($cmd->getOptionValue("l"));
-
-	foreach(PNS as $pn){
-		$data = FlashDetector::detect($pn);
-		Util::println(json_encode($data->toArray(),
-			JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
-	}
-}catch(ParseException $e){
-	Util::println($e->getMessage());
-	echo((new HelpFormatter())->generateHelp("test_output", $options));
+foreach(PNS as $pn){
+	$data = FlashDetector::detect($pn);
+	Util::println(json_encode($data->toArray(),
+		JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
 }
