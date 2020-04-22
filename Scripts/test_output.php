@@ -46,7 +46,6 @@ const PNS = [
 $options = new Options();
 $options->addOption((new OptionBuilder("l"))->longOpt("lang")
 	->hasArg()->argName("lang")->required(true)->build());
-$options->addOption((new OptionBuilder("r"))->longOpt("raw")->build());
 
 try{
 	$cmd = (new Parser())->parse($options, $argv);
@@ -54,7 +53,7 @@ try{
 
 	foreach(PNS as $pn){
 		$data = FlashDetector::detect($pn);
-		Util::println(json_encode($data->toArray($cmd->hasOption("r")),
+		Util::println(json_encode($data->toArray(),
 			JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
 	}
 }catch(ParseException $e){

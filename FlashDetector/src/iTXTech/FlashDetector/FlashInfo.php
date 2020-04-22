@@ -170,7 +170,7 @@ class FlashInfo extends Arrayable{
 		return $this;
 	}
 
-	public function toArray(bool $raw = true) : array{
+	public function toArray(?string $lang = "chs", bool $raw = false) : array{
 		$info = parent::toArray();
 
 		if(!$raw){
@@ -194,7 +194,7 @@ class FlashInfo extends Arrayable{
 				}
 			}
 
-			$info = FlashDetector::translate($info);
+			$info = FlashDetector::translate($info, $lang);
 			$info["interface"] = $interface;//hack!
 		}
 		$info["rawVendor"] = $this->vendor;
@@ -202,6 +202,6 @@ class FlashInfo extends Arrayable{
 	}
 
 	public function __toString(){
-		return json_encode($this->toArray(false), JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
+		return json_encode($this->toArray(), JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
 	}
 }

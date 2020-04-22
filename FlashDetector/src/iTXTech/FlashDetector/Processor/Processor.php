@@ -35,19 +35,19 @@ abstract class Processor{
 		return true;
 	}
 
-	public function decode(string $query, string $remote, bool $trans, ?string $pn, array &$c) : bool{
+	public function decode(string $query, string $remote, ?string $lang, ?string $pn, array &$c) : bool{
 		return true;
 	}
 
-	public function searchId(string $query, string $remote, bool $trans, ?string $id, array &$c) : bool{
+	public function searchId(string $query, string $remote, ?string $lang, ?string $id, array &$c) : bool{
 		return true;
 	}
 
-	public function searchPn(string $query, string $remote, bool $trans, ?string $pn, array &$c) : bool{
+	public function searchPn(string $query, string $remote, ?string $lang, ?string $pn, array &$c) : bool{
 		return true;
 	}
 
-	public function summary(string $query, string $remote, ?string $pn, array &$c) : bool{
+	public function summary(string $query, string $remote, ?string $lang, ?string $pn, array &$c) : bool{
 		return true;
 	}
 }

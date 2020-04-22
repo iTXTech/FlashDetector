@@ -29,7 +29,8 @@ class SummaryPage extends AbstractPage{
 		$c = [];
 
 		foreach(FlashDetector::getProcessors() as $processor){
-			if(!$processor->summary(WebServer::getQuery(), WebServer::getRemote(), $_GET["pn"] ?? null, $c)){
+			if(!$processor->summary(WebServer::getQuery(), WebServer::getRemote(), $_GET["lang"] ?? null,
+				$_GET["pn"] ?? null, $c)){
 				break;
 			}
 		}

@@ -30,7 +30,7 @@ class SearchIdPage extends AbstractPage{
 
 		foreach(FlashDetector::getProcessors() as $processor){
 			if(!$processor->searchId(WebServer::getQuery(), WebServer::getRemote(),
-				($_GET["trans"] ?? 0) == 1, $_GET["id"] ?? null, $c)){
+				$_GET["lang"] ?? null, $_GET["id"] ?? null, $c)){
 				break;
 			}
 		}

@@ -38,13 +38,17 @@ use iTXTech\FlashDetector\Property\Classification;
 use iTXTech\SimpleFramework\Util\StringUtil;
 
 abstract class FlashDetector{
+	public const LANGUAGES = [
+		"chs", "eng"
+	];
+
 	/** @var Decoder[] */
 	private static $decoders = [];
 	/** @var Fdb */
 	private static $fdb;
 	private static $mdb = [];
 	private static $lang = [];
-	private static $fallbackLang = [];
+	private static $fallbackLang;
 	private static $info;
 	/** @var Processor[] */
 	private static $processors = [];
@@ -104,7 +108,7 @@ abstract class FlashDetector{
 		}
 	}
 
-	public static function init(string $lang = "eng", string $fallbackLang = "eng"){
+	public static function init(string $fallbackLang = "chs"){
 		self::registerDecoder(Micron::class);
 		self::registerDecoder(SKHynix3D::class);
 		self::registerDecoder(SKHynix::class);
@@ -117,8 +121,10 @@ abstract class FlashDetector{
 		self::registerDecoder(WesternDigital::class);
 		self::registerDecoder(WesternDigitalShortCode::class);
 		if(Loader::getInstance() !== null){
-			self::$lang = json_decode(Loader::getInstance()->getResourceAsText("lang/$lang.json"), true);
-			self::$fallbackLang = json_decode(Loader::getInstance()->getResourceAsText("lang/$fallbackLang.json"), true);
+			foreach(self::LANGUAGES as $l){
+				self::$lang[$l] = json_decode(Loader::getInstance()->getResourceAsText("lang/$l.json"), true);
+			}
+			self::$fallbackLang = $fallbackLang;
 		}
 	}
 
@@ -151,19 +157,19 @@ abstract class FlashDetector{
 		return $info;
 	}
 
-	public static function getSummary(string $partNumber) : string{
-		$info = self::detect($partNumber, true)->toArray(false);
-		$base = self::translateString("summary");
-		$unknown = self::translateString(Constants::UNKNOWN);
+	public static function getSummary(string $partNumber, ?string $lang) : string{
+		$info = self::detect($partNumber, true)->toArray($lang);
+		$base = self::translateString("summary", $lang);
+		$unknown = self::translateString(Constants::UNKNOWN, $lang);
 		if($info["interface"] == null){
 			$sync = $unknown;
 			$async = $unknown;
 		}elseif(isset($info["interface"]["toggle"])){
-			$async = self::translate(true);
-			$sync = self::translate($info["interface"]["toggle"]);
+			$async = self::translate(true, $lang);
+			$sync = self::translate($info["interface"]["toggle"], $lang);
 		}else{
-			$async = self::translate($info["interface"]["async"]);
-			$sync = self::translate($info["interface"]["sync"]);
+			$async = self::translate($info["interface"]["async"], $lang);
+			$sync = self::translate($info["interface"]["sync"], $lang);
 		}
 
 		$i = "";
@@ -227,14 +233,14 @@ abstract class FlashDetector{
 		}
 	}
 
-	public static function searchFlashId(string $id, bool $partMatch = false, bool $translate = false) : ?array{
+	public static function searchFlashId(string $id, bool $partMatch = false, ?string $lang) : ?array{
 		$id = strtoupper($id);
 		if($partMatch){
 			$result = [];
 			foreach(self::$fdb->getIddb()->getFlashIds() as $flashId){
 				if(StringUtil::startsWith($flashId->getFlashId(), $id)){
 					$pageSize = $flashId->getPageSize();
-					if($translate && $pageSize != -1){
+					if($pageSize != -1){
 						$pageSize = $pageSize < 1 ? ($pageSize * 1024) . "B" : $pageSize . "K";
 					}
 					$data = [
@@ -244,7 +250,7 @@ abstract class FlashDetector{
 						"blocks" => $flashId->getBlocks(),
 						"controllers" => $flashId->getControllers()
 					];
-					$result[$flashId->getFlashId()] = $translate ? self::translateArray($data, false) : $data;
+					$result[$flashId->getFlashId()] = self::translateArray($data, false, $lang);
 				}
 			}
 			return $result;
@@ -252,23 +258,21 @@ abstract class FlashDetector{
 		return self::$fdb->getIddb()->getFlashIds()[$id] ?? null;
 	}
 
-	public static function searchPartNumber(string $pn, bool $partMatch = false, bool $translate = false) : ?array{
+	public static function searchPartNumber(string $pn, bool $partMatch = false, ?string $lang) : ?array{
 		$pn = strtoupper($pn);
 		$result = [];
 		foreach(self::$fdb->getVendors() as $vendor){
 			foreach($vendor->getPartNumbers() as $partNumber){
 				if(($partMatch and StringUtil::contains($partNumber->getPartNumber(), $pn)) or
 					(!$partNumber and $partNumber->getPartNumber() == $pn)){
-					$result[] = ($translate ? self::translateString($vendor->getName()) : $vendor->getName()) .
-						" " . $partNumber->getPartNumber();
+					$result[] = self::translateString($vendor->getName(), $lang) . " " . $partNumber->getPartNumber();
 				}
 			}
 		}
 		if(Micron::check($pn)){
 			foreach(self::$mdb["micron"] as $c => $p){
 				if(StringUtil::startsWith($p, $pn)){
-					$result[] = ($translate ? self::translateString(Micron::getName()) : Micron::getName()) .
-						" " . $c . " " . $p;
+					$result[] = self::translateString(Micron::getName(), $lang) . " " . $c . " " . $p;
 				}
 			}
 		}
@@ -292,38 +296,39 @@ abstract class FlashDetector{
 
 	/**
 	 * @param $var
+	 * @param string $lang
 	 *
 	 * @return array|string|bool|null
 	 */
-	public static function translate($var){
+	public static function translate($var, ?string $lang = "chs"){
 		if(is_bool($var)){
-			return self::translateString($var ? "true" : "false");
+			return self::translateString($var ? "true" : "false", $lang);
 		}elseif(is_array($var)){
-			return self::translateArray($var);
+			return self::translateArray($var, true, $lang);
 		}elseif(is_string($var)){
-			return self::translateString($var);
+			return self::translateString($var, $lang);
 		}elseif($var == -1){
-			return self::translateString(Constants::UNKNOWN);
+			return self::translateString(Constants::UNKNOWN, $lang);
 		}
 		return $var;
 	}
 
-	public static function translateArray(array $arr, bool $translateKey = true) : array{
+	public static function translateArray(array $arr, bool $translateKey, ?string $lang = "chs") : array{
 		$a = [];
 		foreach($arr as $k => $v){
-			$a[$translateKey ? self::translateString($k) : $k] = self::translate($v);
+			$a[$translateKey ? self::translateString($k, $lang) : $k] = self::translate($v, $lang);
 		}
 		return $a;
 	}
 
-	public static function translateString(string $key) : string{
-		if(isset(self::$lang[$key])){
-			return self::$lang[$key];
+	public static function translateString(string $key, ?string $lang = "chs") : string{
+		if($lang == null){
+			$lang = self::$fallbackLang;
 		}
-		if(isset(self::$fallbackLang[$key])){
-			return self::$fallbackLang[$key];
+		if(isset(self::$lang[$lang][$key])){
+			return self::$lang[$lang][$key];
 		}
-		return $key;
+		return self::$lang[self::$fallbackLang][$key] ?? $key;
 	}
 
 	public static function getHumanReadableDensity(int $density, bool $useByte = false){

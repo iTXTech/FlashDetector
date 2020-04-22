@@ -45,7 +45,7 @@ class Iddb extends Arrayable{
 	}
 
 	/**
-	 * @return FlashId[]
+	 * @return FlashId[]|null
 	 */
 	public function getFlashIds() : array{
 		return $this->flashIds;

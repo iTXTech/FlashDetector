@@ -32,10 +32,10 @@ class DefaultProcessor extends Processor{
 		return true;
 	}
 
-	public function decode(string $query, string $remote, bool $trans, ?string $pn, array &$c) : bool{
+	public function decode(string $query, string $remote, ?string $lang, ?string $pn, array &$c) : bool{
 		$c = $pn != null ? [
 			"result" => true,
-			"data" => FlashDetector::detect($pn)->toArray(!$trans)
+			"data" => FlashDetector::detect($pn)->toArray($lang)
 		] : [
 			"result" => false,
 			"message" => "Missing part number"
@@ -52,10 +52,10 @@ class DefaultProcessor extends Processor{
 		return true;
 	}
 
-	public function searchId(string $query, string $remote, bool $trans, ?string $id, array &$c) : bool{
+	public function searchId(string $query, string $remote, ?string $lang, ?string $id, array &$c) : bool{
 		$c = $id != null ? [
 			"result" => true,
-			"data" => FlashDetector::searchFlashId($id, true, $trans)
+			"data" => FlashDetector::searchFlashId($id, true, $lang)
 		] : [
 			"result" => false,
 			"message" => "Missing Flash Id"
@@ -63,10 +63,10 @@ class DefaultProcessor extends Processor{
 		return true;
 	}
 
-	public function searchPn(string $query, string $remote, bool $trans, ?string $pn, array &$c) : bool{
+	public function searchPn(string $query, string $remote, ?string $lang, ?string $pn, array &$c) : bool{
 		$c = $pn != null ? [
 			"result" => true,
-			"data" => FlashDetector::searchPartNumber($pn, true, $trans)
+			"data" => FlashDetector::searchPartNumber($pn, true, $lang)
 		] : [
 			"result" => false,
 			"message" => "Missing part number"
@@ -74,10 +74,10 @@ class DefaultProcessor extends Processor{
 		return true;
 	}
 
-	public function summary(string $query, string $remote, ?string $pn, array &$c) : bool{
+	public function summary(string $query, string $remote, ?string $lang, ?string $pn, array &$c) : bool{
 		$c = $pn != null ? [
 			"result" => true,
-			"data" => FlashDetector::getSummary($pn)
+			"data" => FlashDetector::getSummary($pn, $lang)
 		] : [
 			"result" => false,
 			"message" => "Missing part number"
