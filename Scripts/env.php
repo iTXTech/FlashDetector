@@ -22,7 +22,6 @@
 
 require_once "../sfloader.php";
 
-use iTXTech\FlashDetector\FlashDetector;
 use iTXTech\SimpleFramework\Console\Logger;
 use iTXTech\SimpleFramework\Initializer;
 use iTXTech\SimpleFramework\Module\ModuleManager;
@@ -54,5 +53,3 @@ if($moduleManager->getModule("FlashDetector") === null){
 	Logger::error("Module not loaded.");
 	exit(1);
 }
-
-FlashDetector::init();

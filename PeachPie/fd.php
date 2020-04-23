@@ -39,16 +39,13 @@ class PeachPieHelper{
 		}catch(\Throwable $e){
 			Logger::logException($e);
 		}
-
-		//Chinese Simplified for default. Modify generate.php if you wish to change default language.
-		FlashDetector::init();
 	}
 
-	public static function decode(string $query, string $remote, bool $trans, ?string $pn) : string{
+	public static function decode(string $query, string $remote, ?string $lang, ?string $pn) : string{
 		$c = [];
 
 		foreach(FlashDetector::getProcessors() as $processor){
-			if(!$processor->decode($query, $remote, $trans, $pn, $c)){
+			if(!$processor->decode($query, $remote, $lang, $pn, $c)){
 				break;
 			}
 		}
@@ -80,11 +77,11 @@ class PeachPieHelper{
 		return json_encode($c);
 	}
 
-	public static function searchId(string $query, string $remote, bool $trans, ?string $id) : string{
+	public static function searchId(string $query, string $remote, ?string $lang, ?string $id) : string{
 		$c = [];
 
 		foreach(FlashDetector::getProcessors() as $processor){
-			if(!$processor->searchId($query, $remote, $trans, $id, $c)){
+			if(!$processor->searchId($query, $remote, $lang, $id, $c)){
 				break;
 			}
 		}
@@ -92,11 +89,11 @@ class PeachPieHelper{
 		return json_encode($c);
 	}
 
-	public static function searchPn(string $query, string $remote, bool $trans, ?string $pn) : string{
+	public static function searchPn(string $query, string $remote, ?string $lang, ?string $pn) : string{
 		$c = [];
 
 		foreach(FlashDetector::getProcessors() as $processor){
-			if(!$processor->searchPn($query, $remote, $trans, $pn, $c)){
+			if(!$processor->searchPn($query, $remote, $lang, $pn, $c)){
 				break;
 			}
 		}
@@ -104,11 +101,11 @@ class PeachPieHelper{
 		return json_encode($c);
 	}
 
-	public static function summary(string $query, string $remote, ?string $pn) : string{
+	public static function summary(string $query, string $remote, ?string $lang, ?string $pn) : string{
 		$c = [];
 
 		foreach(FlashDetector::getProcessors() as $processor){
-			if(!$processor->summary($query, $remote, $pn, $c)){
+			if(!$processor->summary($query, $remote, $lang, $pn, $c)){
 				break;
 			}
 		}

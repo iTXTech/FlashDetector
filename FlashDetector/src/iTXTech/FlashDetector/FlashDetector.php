@@ -38,9 +38,7 @@ use iTXTech\FlashDetector\Property\Classification;
 use iTXTech\SimpleFramework\Util\StringUtil;
 
 abstract class FlashDetector{
-	public const LANGUAGES = [
-		"chs", "eng"
-	];
+	public const LANGUAGES = ["chs", "eng"];
 
 	/** @var Decoder[] */
 	private static $decoders = [];
@@ -48,7 +46,7 @@ abstract class FlashDetector{
 	private static $fdb;
 	private static $mdb = [];
 	private static $lang = [];
-	private static $fallbackLang;
+	private static $fallbackLang = "chs";
 	private static $info;
 	/** @var Processor[] */
 	private static $processors = [];
@@ -100,15 +98,19 @@ abstract class FlashDetector{
 		return self::$lang;
 	}
 
-	public static function loadDatabase(){
+	public static function setFallbackLang(string $fallbackLang){
+		self::$fallbackLang = $fallbackLang;
+	}
+
+	public static function initialize(){
 		if(Loader::getInstance() !== null){
 			$fdb = json_decode(Loader::getInstance()->getResourceAsText("fdb.json"), true);
 			self::$fdb = new Fdb($fdb);
 			self::$mdb = json_decode(Loader::getInstance()->getResourceAsText("mdb.json"), true);
+			foreach(self::LANGUAGES as $l){
+				self::$lang[$l] = json_decode(Loader::getInstance()->getResourceAsText("lang/$l.json"), true);
+			}
 		}
-	}
-
-	public static function init(string $fallbackLang = "chs"){
 		self::registerDecoder(Micron::class);
 		self::registerDecoder(SKHynix3D::class);
 		self::registerDecoder(SKHynix::class);
@@ -120,12 +122,6 @@ abstract class FlashDetector{
 		self::registerDecoder(SpecTek::class);
 		self::registerDecoder(WesternDigital::class);
 		self::registerDecoder(WesternDigitalShortCode::class);
-		if(Loader::getInstance() !== null){
-			foreach(self::LANGUAGES as $l){
-				self::$lang[$l] = json_decode(Loader::getInstance()->getResourceAsText("lang/$l.json"), true);
-			}
-			self::$fallbackLang = $fallbackLang;
-		}
 	}
 
 	public static function registerDecoder(string $decoder) : bool{
@@ -233,7 +229,7 @@ abstract class FlashDetector{
 		}
 	}
 
-	public static function searchFlashId(string $id, bool $partMatch = false, ?string $lang) : ?array{
+	public static function searchFlashId(string $id, bool $partMatch, ?string $lang) : ?array{
 		$id = strtoupper($id);
 		if($partMatch){
 			$result = [];
@@ -258,7 +254,7 @@ abstract class FlashDetector{
 		return self::$fdb->getIddb()->getFlashIds()[$id] ?? null;
 	}
 
-	public static function searchPartNumber(string $pn, bool $partMatch = false, ?string $lang) : ?array{
+	public static function searchPartNumber(string $pn, bool $partMatch, ?string $lang) : ?array{
 		$pn = strtoupper($pn);
 		$result = [];
 		foreach(self::$fdb->getVendors() as $vendor){

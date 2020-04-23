@@ -31,7 +31,6 @@ if(isSimpleFrameworkLoaded()){
 		Util::println("Usage: \"" . PHP_BINARY . "\" \"" . $argv[0] . "\" <Part Number>");
 		exit(1);
 	}
-	FlashDetector::init();
 	$info = FlashDetector::detect($argv[1], true);
 	Util::println($info);
 }

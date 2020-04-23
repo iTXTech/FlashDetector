@@ -45,13 +45,15 @@ foreach(new \RecursiveIteratorIterator(new \RecursiveDirectoryIterator($p = "../
 		file_put_contents($path, str_replace([
 			'Loader::getInstance()->getResourceAsText("fdb.json")',
 			'Loader::getInstance()->getResourceAsText("mdb.json")',
-			'Loader::getInstance()->getResourceAsText("lang/$lang.json")',
-			'Loader::getInstance()->getResourceAsText("lang/$fallbackLang.json")'
+			'self::$lang[$l] = json_decode(Loader::getInstance()->getResourceAsText("lang/$l.json"), true);',
+			'["chs", "eng"]'
 		], [
 			getJson("../FlashDetector/resources/fdb.json"),
 			getJson("../FlashDetector/resources/mdb.json"),
-			getJson("../FlashDetector/resources/lang/chs.json"),
-			getJson("../FlashDetector/resources/lang/eng.json"),
+			'self::$lang = ["chs"=>json_decode(' . getJson("../FlashDetector/resources/lang/chs.json") .
+			',true),"eng"=>json_decode(' .
+			getJson("../FlashDetector/resources/lang/eng.json") . ',true)];',
+			'[""]'
 		], file_get_contents($path)));
 	}
 }

@@ -6,7 +6,7 @@ High performance HTTP server for FlashDetector
 
 ### swoole-powered
 
-* [swoole 4.2+](https://github.com/swoole/swoole-src)
+* [swoole 4.4+](https://github.com/swoole/swoole-src)
 * Windows 10 should use WSL
 * Windows 7/8/8.1 can use cygwin/Msys2
 
@@ -29,29 +29,38 @@ php ws.php -a 0.0.0.0 -p 8080 -s // -s for swoole, -w for WorkerManEE
 
 * Protocol: `HTTP(S)`
 * Method: `GET`
+* Supported Language: `chs for Simplified Chinese`, `eng for English`
 
-### / - *get FDWebServer information*
+### / - *Get FDWebServer information*
 
-### /info - *get FlashDetector information*
+### /info - *Get FlashDetector information*
 
-### /decode - *decode part number*
+### /decode - *Decode Part Number*
 
-|Argument|Type|Description|Comment|
-|---|---|---|---|
+|Argument|Type|Description|
+|---|---|---|
 |pn|String|Part Number|
-|trans|Integer|Automatic Translation (Optional)|0 = false, 1 = true|
+|lang|String|Language|
 
-### /searchId - *search Flash Id in Flash Database*
+### /searchId - *Search Flash Id in Flash Database*
 
-|Argument|Type|Description|Comment|
-|---|---|---|---|
+|Argument|Type|Description|
+|---|---|---|
 |id|String|Flash Id|
 
-### /searchPn - *search Part Number in Flash DB*
+### /searchPn - *Search Part Number in Flash DB*
 
-|Argument|Type|Description|Comment|
-|---|---|---|---|
+|Argument|Type|Description|
+|---|---|---|
 |pn|String|Part Number|
+|lang|String|Language|
+
+### /summary - *Generate summary for Part Number*
+
+|Argument|Type|Description|
+|---|---|---|
+|pn|String|Part Number|
+|lang|String|Language|
 
 ## License
 

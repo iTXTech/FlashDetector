@@ -29,7 +29,7 @@ class Loader extends Module{
 
 	public function load(){
 		self::$instance = $this;
-		FlashDetector::loadDatabase();
+		FlashDetector::initialize();
 		$info = new \ReflectionClass(ModuleInfo::class);
 		$prop = $info->getProperty("version");
 		$prop->setAccessible(true);
