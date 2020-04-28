@@ -133,7 +133,7 @@ class SpecTek extends Micron{
 				"N" => 0
 			], -1))
 			->setVoltage(self::getOrDefault(self::shiftChars($partNumber, 1), [
-				"1" => "Vcc: 1.8V",
+				"1" => "Vcc: 1.8V, VccQ: 1.8V",
 				"2" => "Vcc: 2.7V",
 				"3" => "Vcc: 3.3V, VccQ:3.3V",
 				"4" => "Vcc: 5.0V",
@@ -141,7 +141,7 @@ class SpecTek extends Micron{
 				"E" => "Vcc: 3.3V, VccQ: 1.8V/3.3V, VssQ: 0V",
 				"F" => "Vcc: 3.3V, VccQ: 1.2V, VssQ: 0V",
 				"J" => "Vcc: 3.3V, VccQ: 1.8V/3.3V, VssQ: 0V",
-				"L" => "Vcc: 1.8V, VccQ: 1.8V, VssQ: 0V",
+				"L" => "Vcc: 2.5V, VccQ: 1.2V, VssQ: 0V",
 				"S" => "Vcc: 3.3V, VccQ: 3.3V, VssQ: 0V",
 				"T" => "Vcc: 3.3V, VccQ: 1.8V/1.2V, VssQ: 0V"
 			]));

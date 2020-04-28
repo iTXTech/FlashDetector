@@ -1,9 +1,9 @@
 {
     "info": {
         "name": "iTXTech FlashDetector Flash Database",
-        "version": "59",
+        "version": "60",
         "website": "https:\/\/github.com\/iTXTech\/FlashDetector",
-        "time": "Sat, 25 Apr 2020 11:54:34 +0800",
+        "time": "Tue, 28 Apr 2020 10:53:55 +0800",
         "controllers": [
             "SM321AC",
             "SM321BB",
@@ -23126,6 +23126,7 @@
                 "kioxia TH58TFG9T23BA4C",
                 "kioxia TH58TFT0T23BA8C",
                 "kioxia TH58TFG9W23BAMC",
+                "kioxia TH58TFT0W23BASC",
                 "kioxia TH58TFG9V23BA4C",
                 "kioxia TH58TFT0V23BA8C"
             ]
@@ -37871,6 +37872,14 @@
                 "samsung K9PMGY8J7M"
             ]
         },
+        "EC1C94D364CB": {
+            "t": [
+                "SM2258XT"
+            ],
+            "n": [
+                "samsung K9GFGD8H0A"
+            ]
+        },
         "984899B37AF2": {
             "t": [
                 "SM2258XT",
@@ -37983,14 +37992,6 @@
             ],
             "n": [
                 "samsung K9GDGD8S0B"
-            ]
-        },
-        "EC1C94D364CB": {
-            "t": [
-                "SM2258XT"
-            ],
-            "n": [
-                "samsung K9GFGD8H0A"
             ]
         },
         "983E96937E51": {
@@ -53726,17 +53727,17 @@
                 "SM2258XT"
             ]
         },
-        "K9GDGD8S0B": {
+        "K9GFGD8H0A": {
             "id": [
-                "EC1A9443A4CA"
+                "EC1C94D364CB"
             ],
             "t": [
                 "SM2258XT"
             ]
         },
-        "K9GFGD8H0A": {
+        "K9GDGD8S0B": {
             "id": [
-                "EC1C94D364CB"
+                "EC1A9443A4CA"
             ],
             "t": [
                 "SM2258XT"
@@ -99403,15 +99404,6 @@
                 "CBM2199"
             ]
         },
-        "TH58TFT1W23BASH": {
-            "id": [
-                "983E99B37AF2"
-            ],
-            "t": [
-                "SM2258XT",
-                "IS917"
-            ]
-        },
         "TC58TFG8W23TAID": {
             "id": [
                 "983C98B37672"
@@ -99420,6 +99412,25 @@
                 "SM2258XT",
                 "CBM2099E",
                 "CBM2199",
+                "IS917"
+            ]
+        },
+        "TH58TFT0W23BASC": {
+            "id": [
+                "983C98B376F2"
+            ],
+            "t": [
+                "SM2258XT",
+                "CBM2099E",
+                "CBM2199"
+            ]
+        },
+        "TH58TFT1W23BASH": {
+            "id": [
+                "983E99B37AF2"
+            ],
+            "t": [
+                "SM2258XT",
                 "IS917"
             ]
         },

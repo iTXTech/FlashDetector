@@ -129,7 +129,7 @@ class Micron extends Decoder{
 		"2" => [64, 8, -1, 2],
 		"3" => [8, 4, -1, 2],
 		"4" => [4, 4, -1, 1],
-		"S" => [-1, -1, -1, -1]//TODO
+		"S" => [16, 4, -1, 4]
 	];
 	protected const INTERFACE = [
 		"A" => [false, true, false],//sync, async, spi
@@ -221,13 +221,13 @@ class Micron extends Decoder{
 				"A" => "Vcc: 3.3V (2.70–3.60V), VccQ: 3.3V (2.70–3.60V)",
 				"B" => "1.8V (1.70–1.95V)",
 				"C" => "Vcc: 3.3V (2.70–3.60V), VccQ: 1.8V (1.70–1.95V)",
-				"E" => "Vcc: 3.3V (2.70–3.60V), VccQ: 3.3V (2.70–3.60V)",
+				"E" => "Vcc: 3.3V (2.70–3.60V), VccQ: 3.3V (2.70–3.60V) or 1.8V (1.70–1.95V)",
 				"F" => "Vcc: 3.3V (2.50–3.60V), VccQ: 1.2V (1.14–1.26V)",
-				"G" => "Vcc: 3.3V (2.60–3.60V) , VccQ: 1.8V (1.70–1.95V)",
+				"G" => "Vcc: 3.3V (2.60–3.60V), VccQ: 1.8V (1.70–1.95V)",
 				"H" => "Vcc: 3.3V (2.50–3.60V), VccQ: 1.2V (1.14–1.26) or 1.8V (1.70–1.95V)",
 				"J" => "Vcc: 3.3V (2.50–3.60V), VccQ: 1.8V (1.70–1.95V)",
 				"K" => "Vcc: 3.3V (2.60–3.60V), VccQ: 3.3V (2.60–3.60V)",
-				"L" => "Vcc: 3.3V (2.60–3.60V), VccQ: 3.3V (2.60–3.60V)",
+				"L" => "Vcc: 2.5V (2.35–3.60V), VccQ: 1.2V (1.14–1.26V)",
 			]))
 			->setGeneration(self::getOrDefault(self::shiftChars($partNumber, 1), [
 				"A" => 1,
