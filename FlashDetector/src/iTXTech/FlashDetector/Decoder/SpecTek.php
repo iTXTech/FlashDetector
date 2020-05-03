@@ -95,9 +95,9 @@ class SpecTek extends Micron{
 		if($density === 0){//legacy numbering
 			$density = self::getOrDefault($d = self::shiftChars($partNumber, 2), self::LEGACY_DENSITY, 0);
 			if($density === 0){//"newer" numbering
-				$density = self::getOrDefault($d{0}, self::NEWER_DENSITY, 0);
+				$density = self::getOrDefault($d[0], self::NEWER_DENSITY, 0);
 				if($density > 0){
-					$grade = $d{1};
+					$grade = $d[1];
 				}
 			}
 		}else{

@@ -6,8 +6,8 @@ Universal NAND Flash Part Number Decoder and Flash Id Search Engine.
 
 ## Requirements
 
-* [PHP 7.2+](https://secure.php.net)
-* [SimpleFramework 2.1+](https://github.com/iTXTech/SimpleFramework)
+* [PHP 7.2 ~ 7.4](https://secure.php.net)
+* [SimpleFramework 2.2](https://github.com/iTXTech/SimpleFramework)
 * [Composer](https://github.com/composer/composer)
 
 ## Setup

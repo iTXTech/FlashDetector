@@ -237,19 +237,19 @@ class Samsung extends Decoder{
 			if($c[1] > 1){//die
 				foreach(self::CLASSIFICATION as $code => $cf){
 					if($cf[0] === $c[0] and $cf[1] === 1){
-						$partNumber{2} = $code;
+						$partNumber[2] = $code;
 						$density = self::DENSITY[substr($partNumber, 3, 2)] ?? -1;
 						foreach(self::DENSITY as $cd => $d){
 							if($d * $c[1] === $density){
-								$partNumber{3} = $cd{0};
-								$partNumber{4} = $cd{1};
+								$partNumber[3] = $cd[0];
+								$partNumber[4] = $cd[1];
 							}
 						}
 						break;
 					}
 				}
 			}
-			$partNumber{8} = "0";
+			$partNumber[8] = "0";
 			$info = FlashDetector::getFdb()->getPartNumber(self::getName(), $partNumber) ?? null;
 			if($info !== null){
 				$info->setRemark($info->getRemark() . " (" . $c[1] . " x " . $partNumber . ")");

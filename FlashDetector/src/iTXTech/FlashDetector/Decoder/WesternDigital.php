@@ -88,7 +88,7 @@ class WesternDigital extends Decoder{
 		if(strlen($partNumber) == 0){
 			return $flashInfo;
 		}
-		if($partNumber{0} == "N"){
+		if($partNumber[0] == "N"){
 			$partNumber = substr($partNumber, 1);//remove N for NAND
 		}
 		$flashInfo->setProcessNode(self::getOrDefault(self::shiftChars($partNumber, 1), [
@@ -148,7 +148,7 @@ class WesternDigital extends Decoder{
 					continue;
 				}elseif($part == "CODE"){
 					$extraInfo[Constants::SANDISK_CODE] = true;
-				}elseif($part{0} == "T"){
+				}elseif($part[0] == "T"){
 					$extraInfo[Constants::VENDOR_KIOXIA] = substr($part, 1);
 				}else{
 					$remark .= $part . "/";
