@@ -42,8 +42,8 @@ $ composer install
 
 #### Controllers with combined support
 
-1. `SM3271AC`, `SM3271AD` -> `SM3271AB` (Dyna Mass Production Tool)
-1. `SM3281BA`, `SM3281BB` -> `SM3281AB` (Dyan Mass Production Tool)
+1. `SM3271AC` -> `SM3271AB`
+1. `SM3281BA` -> `SM3281AB`
 
 ## Web Server
 

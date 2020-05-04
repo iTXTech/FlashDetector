@@ -20,7 +20,7 @@
 
 ### embedIO-powered (`.NET Core`) - `Ultra High Performance`
 
-* See [SharpFlashDetector]()
+* See [SharpFlashDetector](https://github.com/iTXTech/SharpFlashDetector)
 
 ## Startup
 
