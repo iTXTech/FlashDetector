@@ -145,9 +145,9 @@ class Kioxia extends Decoder{
 			"F" => "32 nm",
 			"G" => "24 nm A-type",
 			"H" => "24 nm B-type",
-			"J" => "19 nm",
-			"K" => "A19 nm",
-			"L" => "15 nm",
+			"J" => "19 nm/1x",
+			"K" => "A19 nm/1y",
+			"L" => "15 nm/1z",
 			"2" => "BiCS2",
 			"3" => "BiCS3",
 			"4" => "BiCS4"

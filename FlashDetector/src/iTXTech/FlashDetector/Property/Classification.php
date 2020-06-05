@@ -24,7 +24,7 @@ use iTXTech\FlashDetector\Arrayable;
 
 class Classification extends Arrayable{
 	public const UNKNOWN_PROP = -1;
-	public const CHANNEL_SINGLE_OR_DUAL = -2;
+	public const CHANNEL_SINGLE_OR_DUAL = 2;
 
 	protected $ce;
 	protected $ch;
