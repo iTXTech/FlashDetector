@@ -93,7 +93,7 @@ class Intel extends Decoder{
 				"2A" => 8,
 				"A8" => 8
 			], -1));
-		if(isset($density{2}) and ((int) $density{2}) > 0){//same as Micron
+		if(isset($density[2]) and ((int) $density[2]) > 0){//same as Micron
 			return Micron::decode($flashInfo->getPartNumber());
 		}
 		$classification = self::getOrDefault(self::shiftChars($partNumber, 1), [

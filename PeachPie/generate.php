@@ -20,10 +20,14 @@
 
 require_once "../sfloader.php";
 
+use iTXTech\SimpleFramework\Console\Logger;
+use iTXTech\SimpleFramework\Console\TextFormat;
+use iTXTech\SimpleFramework\Framework;
 use iTXTech\SimpleFramework\Initializer;
 use iTXTech\SimpleFramework\Util\StringUtil;
 
 Initializer::initTerminal();
+Framework::registerExceptionHandler();
 
 $exclude = ["Online", "vendor", "composer", "resource", "json", "stub.php", "Packer"];
 
@@ -41,7 +45,9 @@ foreach(new \RecursiveIteratorIterator(new \RecursiveDirectoryIterator($p = "../
 	unset($a[count($a) - 1]);
 	@mkdir(implode("/", $a), 666, true);
 	copy($file, $path);
+	Logger::info("Processing $file");
 	if(StringUtil::endsWith($path, "FlashDetector.php")){
+		Logger::info("Generating FlashDetector.php with JSON data.");
 		file_put_contents($path, str_replace([
 			'Loader::getInstance()->getResourceAsText("fdb.json")',
 			'Loader::getInstance()->getResourceAsText("mdb.json")',
@@ -57,6 +63,8 @@ foreach(new \RecursiveIteratorIterator(new \RecursiveDirectoryIterator($p = "../
 		], file_get_contents($path)));
 	}
 }
+
+Logger::info(TextFormat::GREEN . "All files have been processed successfully.");
 
 function getJson(string $f) : string{
 	return "'" . json_encode(json_decode(file_get_contents($f), true)) . "'";

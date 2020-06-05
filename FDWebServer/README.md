@@ -1,23 +1,26 @@
 # FDWebServer
 
-High performance HTTP server for FlashDetector
+(High performance) HTTP Server of `iTXTech FlashDetector`.
 
 ## Requirements
 
-### swoole-powered
+### Swoole-powered (`Coroutine`) - `Ultra High Performance`
 
 * [swoole 4.4+](https://github.com/swoole/swoole-src)
-* Windows 10 should use WSL
-* Windows 7/8/8.1 can use cygwin/Msys2
+* Windows users need to use `WSL`, `Msys2`, `cygwin` or `Virtual Machines`.
 
-### WorkerManEE-powered
+### WorkerManEE-powered - `Low Performance`
 
 * [WorkerManEE 17.10.1](https://github.com/EaseCation/WorkerManEE)
 * Compatible with all Operating System
 
-### CGI
+### CGI - `High Performance`
 
 * Any WebServer which supports CGI (apache, nginx and etc.)
+
+### embedIO-powered (`.NET Core`) - `Ultra High Performance`
+
+* See [SharpFlashDetector](https://github.com/iTXTech/SharpFlashDetector)
 
 ## Startup
 

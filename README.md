@@ -6,8 +6,8 @@ Universal NAND Flash Part Number Decoder and Flash Id Search Engine.
 
 ## Requirements
 
-* [PHP 7.2+](https://secure.php.net)
-* [SimpleFramework 2.1+](https://github.com/iTXTech/SimpleFramework)
+* [PHP 7.2 ~ 7.4](https://secure.php.net)
+* [SimpleFramework 2.2](https://github.com/iTXTech/SimpleFramework)
 * [Composer](https://github.com/composer/composer)
 
 ## Setup
@@ -42,8 +42,8 @@ $ composer install
 
 #### Controllers with combined support
 
-1. `SM3271AC`, `SM3271AD` -> `SM3271AB` (Dyna Mass Production Tool)
-1. `SM3281BA`, `SM3281BB` -> `SM3281AB` (Dyan Mass Production Tool)
+1. `SM3271AC` -> `SM3271AB`
+1. `SM3281BA` -> `SM3281AB`
 
 ## Web Server
 

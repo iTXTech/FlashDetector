@@ -1,4 +1,6 @@
 {
+  "true": "Yes",
+  "false": "No",
   "Unknown": "Unknown",
   "intel": "Intel",
   "micron": "Micron",
