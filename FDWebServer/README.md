@@ -16,7 +16,7 @@
 
 ### CGI - `High Performance`
 
-* Any WebServer which supports CGI (apache, nginx and etc.)
+* Any WebServer which supports CGI (apache, nginx, etc.)
 
 ### embedIO-powered (`.NET Core`) - `Ultra High Performance`
 
@@ -57,6 +57,7 @@ php ws.php -a 0.0.0.0 -p 8080 -s // -s for swoole, -w for WorkerManEE
 |---|---|---|
 |pn|String|Part Number|
 |lang|String|Language|
+|limit|Integer|Limit result count, default is 0|
 
 ### /summary - *Generate summary for Part Number*
 
