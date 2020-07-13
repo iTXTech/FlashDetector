@@ -254,12 +254,14 @@ abstract class FlashDetector{
 		return self::$fdb->getIddb()->getFlashIds()[$id] ?? null;
 	}
 
-	public static function searchPartNumber(string $pn, bool $partMatch, ?string $lang) : ?array{
+	public static function searchPartNumber(string $pn, bool $partMatch, ?string $lang, int $limit = 0) : ?array{
 		$pn = strtoupper($pn);
 		$result = [];
 		foreach(self::$fdb->getVendors() as $vendor){
 			foreach($vendor->getPartNumbers() as $partNumber){
-				if(($partMatch and StringUtil::contains($partNumber->getPartNumber(), $pn)) or
+				if($limit > 0 and count($result) >= $limit){
+					break 2;
+				}elseif(($partMatch and StringUtil::contains($partNumber->getPartNumber(), $pn)) or
 					(!$partNumber and $partNumber->getPartNumber() == $pn)){
 					$result[] = self::translateString($vendor->getName(), $lang) . " " . $partNumber->getPartNumber();
 				}
@@ -267,7 +269,9 @@ abstract class FlashDetector{
 		}
 		if(Micron::check($pn)){
 			foreach(self::$mdb["micron"] as $c => $p){
-				if(StringUtil::startsWith($p, $pn)){
+				if($limit > 0 and count($result) >= $limit){
+					break;
+				}elseif(StringUtil::startsWith($p, $pn)){
 					$result[] = self::translateString(Micron::getName(), $lang) . " " . $c . " " . $p;
 				}
 			}
@@ -291,7 +295,7 @@ abstract class FlashDetector{
 	}
 
 	/**
-	 * @param $var
+	 * @param        $var
 	 * @param string $lang
 	 *
 	 * @return array|string|bool|null

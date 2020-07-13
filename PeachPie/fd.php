@@ -89,11 +89,11 @@ class PeachPieHelper{
 		return json_encode($c);
 	}
 
-	public static function searchPn(string $query, string $remote, ?string $lang, ?string $pn) : string{
+	public static function searchPn(string $query, string $remote, ?string $lang, ?string $pn, int $limit = 0) : string{
 		$c = [];
 
 		foreach(FlashDetector::getProcessors() as $processor){
-			if(!$processor->searchPn($query, $remote, $lang, $pn, $c)){
+			if(!$processor->searchPn($query, $remote, $lang, $pn, $limit, $c)){
 				break;
 			}
 		}

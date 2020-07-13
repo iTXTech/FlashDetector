@@ -43,7 +43,7 @@ abstract class Processor{
 		return true;
 	}
 
-	public function searchPn(string $query, string $remote, ?string $lang, ?string $pn, array &$c) : bool{
+	public function searchPn(string $query, string $remote, ?string $lang, ?string $pn, int $limit, array &$c) : bool{
 		return true;
 	}
 

@@ -63,10 +63,10 @@ class DefaultProcessor extends Processor{
 		return true;
 	}
 
-	public function searchPn(string $query, string $remote, ?string $lang, ?string $pn, array &$c) : bool{
+	public function searchPn(string $query, string $remote, ?string $lang, ?string $pn, int $limit, array &$c) : bool{
 		$c = $pn != null ? [
 			"result" => true,
-			"data" => FlashDetector::searchPartNumber($pn, true, $lang)
+			"data" => FlashDetector::searchPartNumber($pn, true, $lang, $limit)
 		] : [
 			"result" => false,
 			"message" => "Missing part number"

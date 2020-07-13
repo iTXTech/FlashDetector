@@ -30,7 +30,7 @@ class SearchPnPage extends AbstractPage{
 
 		foreach(FlashDetector::getProcessors() as $processor){
 			if(!$processor->searchPn(WebServer::getQuery(), WebServer::getRemote(),
-				$_GET["lang"] ?? null, $_GET["pn"] ?? null, $c)){
+				$_GET["lang"] ?? null, $_GET["pn"] ?? null, $_GET["limit"] ?? 0, $c)){
 				break;
 			}
 		}
