@@ -137,7 +137,8 @@ class Intel extends Decoder{
 				"E" => "25 nm",
 				"F" => "20 nm",
 				"G" => "3D1",
-				"H" => "3D2"
+				"H" => "3D2",
+				"J" => "3D3"
 			]));
 		$gen = self::shiftChars($partNumber, 1);
 		if(is_numeric($gen)){
