@@ -42,7 +42,7 @@ global $classLoader;
 try{
 	$moduleManager = new ModuleManager($classLoader,
 		__DIR__ . DIRECTORY_SEPARATOR . DIRECTORY_SEPARATOR, "");
-	loadModule($moduleManager, file_exists("FlashDetector") ? "FlashDetector" : "FlashDetector.phar");
+	loadModule($moduleManager, "FlashDetector");
 }catch(Throwable $e){
 	Logger::logException($e);
 }
