@@ -48,6 +48,7 @@ try{
 }
 
 function loadModule(ModuleManager $manager, string $name){
+	$name = file_exists($name . ".phar") ? ($name . ".phar") : $name;
 	$manager->tryLoadModule($manager->getModulePath() . $name);
 }
 

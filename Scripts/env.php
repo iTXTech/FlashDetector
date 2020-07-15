@@ -33,19 +33,23 @@ Logger::$logLevel = 2;//disable logger
 
 Logger::info("Loading iTXTech FlashDetector");
 
+$modules = ["FlashDetector"];
+
 global $classLoader;
 try{
 	$moduleManager = new ModuleManager($classLoader,
 		__DIR__ . DIRECTORY_SEPARATOR . ".." . DIRECTORY_SEPARATOR, __DIR__ . DIRECTORY_SEPARATOR);
 	$moduleManager->registerModuleDependencyResolver(new WraithSpireMDR($moduleManager,
 		"https://raw.githubusercontent.com/iTXTech/WraithSpireDatabase/master/", []));
-	loadModule($moduleManager, "SimpleHtmlDom_v1.1.0.phar");
-	loadModule($moduleManager, "FlashDetector");
+	foreach($modules as $m){
+		loadModule($moduleManager, $m);
+	}
 }catch(Throwable $e){
 	Logger::logException($e);
 }
 
 function loadModule(ModuleManager $manager, string $name){
+	$name = file_exists($name . ".phar") ? ($name . ".phar") : $name;
 	$manager->tryLoadModule($manager->getModulePath() . $name);
 }
 
