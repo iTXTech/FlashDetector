@@ -48,8 +48,8 @@ try{
 }
 
 function loadModule(ModuleManager $manager, string $name){
-	$name = file_exists($name . ".phar") ? ($name . ".phar") : $name;
-	$manager->tryLoadModule($manager->getModulePath() . $name);
+	$name = $manager->getModulePath() . $name;
+	$manager->tryLoadModule(file_exists($phar = $name . ".phar") ? $phar : $name);
 }
 
 if($moduleManager->getModule("FlashDetector") === null){
