@@ -267,15 +267,27 @@ abstract class FlashDetector{
 				}
 			}
 		}
-		if(Micron::check($pn)){
-			foreach(self::$mdb["micron"] as $c => $p){
-				if($limit > 0 and count($result) >= $limit){
-					break;
-				}elseif(StringUtil::startsWith($p, $pn)){
-					$result[] = self::translateString(Micron::getName(), $lang) . " " . $c . " " . $p;
+
+		foreach(self::$mdb["micron"] as $c => $p){
+			if($limit > 0 and count($result) >= $limit){
+				break;
+			}elseif(StringUtil::contains($p, $pn)){
+				$result[] = self::translateString(Micron::getName(), $lang) . " " . $c . " " . $p;
+			}
+		}
+
+		foreach(self::$mdb["spectek"] as $c => $p){
+			if($limit > 0 and count($result) >= $limit){
+				break;
+			}else{
+				foreach($p as $specPn){
+					if(StringUtil::contains($specPn, $pn)){
+						$result[] = self::translateString(SpecTek::getName(), $lang) . " " . $c . " " . $specPn;
+					}
 				}
 			}
 		}
+
 		return $result;
 	}
 

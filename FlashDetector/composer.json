@@ -9,6 +9,7 @@
     }
   ],
   "require": {
-    "simplehtmldom/simplehtmldom": "dev-master"
+    "simplehtmldom/simplehtmldom": "dev-master",
+    "ext-json": "*"
   }
 }
