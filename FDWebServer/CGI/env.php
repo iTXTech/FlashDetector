@@ -69,3 +69,7 @@ function getQuery() : string{
 function getRemote() : string{
 	return $_SERVER["REMOTE_ADDR"];
 }
+
+function getUserAgent() : string{
+	return $_SERVER["HTTP_USER_AGENT"] ?? "Undefined";
+}

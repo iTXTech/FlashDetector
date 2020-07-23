@@ -27,27 +27,27 @@ abstract class Processor{
 		return $flashInfo;
 	}
 
-	public function index(string $query, string $remote, string $name, array &$c) : bool{
+	public function index(string $query, string $remote, string $ua, string $name, array &$c) : bool{
 		return true;
 	}
 
-	public function info(string $query, string $remote, array &$c) : bool{
+	public function info(string $query, string $remote, string $ua, array &$c) : bool{
 		return true;
 	}
 
-	public function decode(string $query, string $remote, ?string $lang, ?string $pn, array &$c) : bool{
+	public function decode(string $query, string $remote, string $ua, ?string $lang, ?string $pn, array &$c) : bool{
 		return true;
 	}
 
-	public function searchId(string $query, string $remote, ?string $lang, ?string $id, array &$c) : bool{
+	public function searchId(string $query, string $remote, string $ua, ?string $lang, ?string $id, array &$c) : bool{
 		return true;
 	}
 
-	public function searchPn(string $query, string $remote, ?string $lang, ?string $pn, int $limit, array &$c) : bool{
+	public function searchPn(string $query, string $remote, string $ua, ?string $lang, ?string $pn, int $limit, array &$c) : bool{
 		return true;
 	}
 
-	public function summary(string $query, string $remote, ?string $lang, ?string $pn, array &$c) : bool{
+	public function summary(string $query, string $remote, string $ua, ?string $lang, ?string $pn, array &$c) : bool{
 		return true;
 	}
 }

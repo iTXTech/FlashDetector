@@ -31,7 +31,7 @@ class DecodePage extends AbstractPage{
 		$c = [];
 
 		foreach(FlashDetector::getProcessors() as $processor){
-			if(!$processor->decode(self::getQuery($request), self::getClientIp($request),
+			if(!$processor->decode(self::getQuery($request), self::getClientIp($request), self::getUserAgent($request),
 				$request->get["lang"] ?? null, $request->get["pn"] ?? null, $c)){
 				break;
 			}

@@ -29,7 +29,8 @@ class IndexPage extends AbstractPage{
 		$c = [];
 
 		foreach(FlashDetector::getProcessors() as $processor){
-			if(!$processor->index(WebServer::getQuery(), WebServer::getRemote(), "FDWebServer-WorkerManEE", $c)){
+			if(!$processor->index(WebServer::getQuery(), WebServer::getRemote(), WebServer::getUserAgent(),
+				"FDWebServer-WorkerManEE", $c)){
 				break;
 			}
 		}

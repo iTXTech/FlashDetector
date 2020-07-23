@@ -28,11 +28,15 @@ abstract class AbstractPage{
 	public const IP_ADDR_HEADER = "X-Real-IP";
 	public static $STATUS_PAGE_HEADER = "iTXTech SimpleSwFw<br>";
 
-	public static function getClientIp(Request $request){
+	public static function getClientIp(Request $request) : string{
 		return $request->header[strtolower(self::IP_ADDR_HEADER)] ?? $request->server["remote_addr"];
 	}
 
-	public static function getQuery(Request $request){
+	public static function getUserAgent(Request $request) : string{
+		return $request->server["user-agent"] ?? "Undefined";
+	}
+
+	public static function getQuery(Request $request) : string{
 		$query = "";
 		if(isset($request->get)){
 			$query = "?";

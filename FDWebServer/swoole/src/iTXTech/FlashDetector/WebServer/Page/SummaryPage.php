@@ -31,8 +31,8 @@ class SummaryPage extends AbstractPage{
 		$c = [];
 
 		foreach(FlashDetector::getProcessors() as $processor){
-			if(!$processor->summary(self::getQuery($request), self::getClientIp($request), $request->get["lang"] ?? null,
-				$request->get["pn"] ?? null, $c)){
+			if(!$processor->summary(self::getQuery($request), self::getClientIp($request), self::getUserAgent($request),
+				$request->get["lang"] ?? null, $request->get["pn"] ?? null, $c)){
 				break;
 			}
 		}

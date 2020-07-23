@@ -25,7 +25,7 @@ use iTXTech\FlashDetector\FlashDetector;
 $c = [];
 
 foreach(FlashDetector::getProcessors() as $processor){
-	if(!$processor->info(getQuery(), getRemote(), $c)){
+	if(!$processor->info(getQuery(), getRemote(), getUserAgent(), $c)){
 		break;
 	}
 }

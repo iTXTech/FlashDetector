@@ -29,7 +29,7 @@ class InfoPage extends AbstractPage{
 		$c = [];
 
 		foreach(FlashDetector::getProcessors() as $processor){
-			if(!$processor->info(WebServer::getQuery(), WebServer::getRemote(), $c)){
+			if(!$processor->info(WebServer::getQuery(), WebServer::getRemote(), WebServer::getUserAgent(), $c)){
 				break;
 			}
 		}

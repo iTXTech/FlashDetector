@@ -29,7 +29,7 @@ class DecodePage extends AbstractPage{
 		$c = [];
 
 		foreach(FlashDetector::getProcessors() as $processor){
-			if(!$processor->decode(WebServer::getQuery(), WebServer::getRemote(),
+			if(!$processor->decode(WebServer::getQuery(), WebServer::getRemote(), WebServer::getUserAgent(),
 				$_GET["lang"] ?? null, $_GET["pn"] ?? null, $c)){
 				break;
 			}
