@@ -33,7 +33,7 @@ abstract class AbstractPage{
 	}
 
 	public static function getUserAgent(Request $request) : string{
-		return $request->server["user-agent"] ?? "Undefined";
+		return $request->header["user-agent"] ?? "Undefined";
 	}
 
 	public static function getQuery(Request $request) : string{
