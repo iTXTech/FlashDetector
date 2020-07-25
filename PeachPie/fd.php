@@ -35,7 +35,7 @@ class PeachPieHelper{
 			$moduleManager = new ModuleManager(Initializer::getClassLoader(), __DIR__ . DIRECTORY_SEPARATOR, "");
 			//ModuleManager::loadModuleDirectly loads the specified module directly from the folder without check
 			//No JSON file should be provided in PeachPie Env
-			$moduleManager->loadModuleDirectly('{"name":"FlashDetector","version":"0","api":6,"description":"Universal NAND Flash Part Number Decoder","author":"iTX Technologies","main":"iTXTech\\\\FlashDetector\\\\Loader","website":"https://github.com/iTXTech/FlashDetector"}', $moduleManager->getModulePath() . "FlashDetector");
+			$moduleManager->readModule("FlashDetector");
 		}catch(\Throwable $e){
 			Logger::logException($e);
 		}

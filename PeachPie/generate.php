@@ -24,48 +24,11 @@ use iTXTech\SimpleFramework\Console\Logger;
 use iTXTech\SimpleFramework\Console\TextFormat;
 use iTXTech\SimpleFramework\Framework;
 use iTXTech\SimpleFramework\Initializer;
-use iTXTech\SimpleFramework\Util\StringUtil;
+use iTXTech\SimpleFramework\Util\Util;
 
 Initializer::initTerminal();
 Framework::registerExceptionHandler();
 
-$exclude = ["Online", "vendor", "composer", "resource", "json", "stub.php", "Packer"];
-
-foreach(new \RecursiveIteratorIterator(new \RecursiveDirectoryIterator($p = "../FlashDetector")) as $file){
-	$path = ltrim(str_replace(["\\", $p], ["/", ""], $file), "/");
-	if($path{0} === "." or strpos($path, "/.") !== false){
-		continue;
-	}
-	foreach($exclude as $e){
-		if(StringUtil::contains($file, $e)){
-			continue 2;
-		}
-	}
-	$a = explode("/", $path = "FlashDetector/$path");
-	unset($a[count($a) - 1]);
-	@mkdir(implode("/", $a), 666, true);
-	copy($file, $path);
-	Logger::info("Processing $file");
-	if(StringUtil::endsWith($path, "FlashDetector.php")){
-		Logger::info("Generating FlashDetector.php with JSON data.");
-		file_put_contents($path, str_replace([
-			'Loader::getInstance()->getResourceAsText("fdb.json")',
-			'Loader::getInstance()->getResourceAsText("mdb.json")',
-			'self::$lang[$l] = json_decode(Loader::getInstance()->getResourceAsText("lang/$l.json"), true);',
-			'["chs", "eng"]'
-		], [
-			getJson("../FlashDetector/resources/fdb.json"),
-			getJson("../FlashDetector/resources/mdb.json"),
-			'self::$lang = ["chs"=>json_decode(' . getJson("../FlashDetector/resources/lang/chs.json") .
-			',true),"eng"=>json_decode(' .
-			getJson("../FlashDetector/resources/lang/eng.json") . ',true)];',
-			'[""]'
-		], file_get_contents($path)));
-	}
-}
+Util::moduleToPeachPieModule("../FlashDetector", "FlashDetector", ["Online", "vendor", "composer", "stub.php", "Packer"]);
 
 Logger::info(TextFormat::GREEN . "All files have been processed successfully.");
-
-function getJson(string $f) : string{
-	return "'" . json_encode(json_decode(file_get_contents($f), true)) . "'";
-}
