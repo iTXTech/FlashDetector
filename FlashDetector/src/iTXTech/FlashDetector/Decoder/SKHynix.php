@@ -88,7 +88,8 @@ class SKHynix extends Decoder{
 		"4" => [2, 2, self::LARGE_BLOCK],
 		"3" => [2, 4, self::LARGE_BLOCK],
 		"5" => [2, 8, self::LARGE_BLOCK],
-		"D" => [2, 1, self::LARGE_BLOCK]
+		"D" => [2, 1, self::LARGE_BLOCK],
+		"L" => [3, 16, self::LARGE_BLOCK]
 		//TODO: more
 	];
 	protected const MODE = [
