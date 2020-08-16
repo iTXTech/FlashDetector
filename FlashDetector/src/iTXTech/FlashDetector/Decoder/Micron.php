@@ -26,6 +26,7 @@ use iTXTech\FlashDetector\FlashDetector;
 use iTXTech\FlashDetector\FlashInfo;
 use iTXTech\FlashDetector\Property\Classification;
 use iTXTech\FlashDetector\Property\FlashInterface;
+use iTXTech\FlashDetector\Property\Url;
 use iTXTech\SimpleFramework\Util\StringUtil;
 
 class Micron extends Decoder{
@@ -193,7 +194,11 @@ class Micron extends Decoder{
 
 	public static function decode(string $partNumber) : FlashInfo{
 		$flashInfo = (new FlashInfo($partNumber))->setVendor(self::getName());
-		$flashInfo->addUrl(Constants::MICRON_WEBSITE, "https://www.micron.com/support/tools-and-utilities/fbga?matpart=$partNumber");
+		$flashInfo->addUrl(new Url(
+			Constants::MICRON_WEBSITE,
+			"https://www.micron.com/support/tools-and-utilities/fbga?matpart=$partNumber",
+			Url::IMAGE_LOGO
+		));
 		if(!StringUtil::startsWith($partNumber, "29")){
 			$partNumber = substr($partNumber, 2);//remove MT
 		}

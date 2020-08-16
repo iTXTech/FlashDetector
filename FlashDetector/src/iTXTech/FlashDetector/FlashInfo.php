@@ -23,6 +23,7 @@ namespace iTXTech\FlashDetector;
 use iTXTech\FlashDetector\Decoder\Decoder;
 use iTXTech\FlashDetector\Property\Classification;
 use iTXTech\FlashDetector\Property\FlashInterface;
+use iTXTech\FlashDetector\Property\Url;
 
 class FlashInfo extends Arrayable{
 	protected $partNumber;
@@ -44,6 +45,8 @@ class FlashInfo extends Arrayable{
 	protected $controller = [];
 	protected $remark;
 	protected $url = [];
+	/** @var Url[] */
+	protected $urls = [];
 
 	public function __construct(string $partNumber = ""){
 		$this->partNumber = strtoupper($partNumber);
@@ -165,12 +168,21 @@ class FlashInfo extends Arrayable{
 		return $this;
 	}
 
-	public function addUrl(string $description, string $url) : FlashInfo{
-		$this->url[$description] = $url;
+	public function addUrl(Url $url) : FlashInfo{
+		if(isset($this->url[$url->desc])){
+			for($i = 0; $i < count($this->urls); $i++){
+				if($this->urls[$i]->desc == $url->desc){
+					unset($this->urls[$i]);
+				}
+			}
+		}
+		$this->url[$url->desc] = $url->url;
+		$this->urls[] = $url;
 		return $this;
 	}
 
 	public function toArray(?string $lang = "chs", bool $raw = false) : array{
+		$this->urls = array_values($this->urls);
 		$info = parent::toArray();
 
 		if(!$raw){

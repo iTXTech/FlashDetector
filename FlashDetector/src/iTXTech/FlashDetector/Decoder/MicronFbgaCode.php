@@ -24,6 +24,7 @@ use iTXTech\FlashDetector\Constants;
 use iTXTech\FlashDetector\Fdb\PartNumber;
 use iTXTech\FlashDetector\FlashDetector;
 use iTXTech\FlashDetector\FlashInfo;
+use iTXTech\FlashDetector\Property\Url;
 use iTXTech\SimpleFramework\Util\StringUtil;
 
 class MicronFbgaCode extends Decoder{
@@ -65,7 +66,11 @@ class MicronFbgaCode extends Decoder{
 			$pn = $pn[0];
 			$info = FlashDetector::detect($pn)->setPartNumber($partNumber);
 			if($info->getVendor() == Micron::getName()){
-				$info->addUrl(Constants::MICRON_WEBSITE, "https://www.micron.com/support/tools-and-utilities/fbga?fbga=$partNumber");
+				$info->addUrl(new Url(
+					Constants::MICRON_WEBSITE,
+					"https://www.micron.com/support/tools-and-utilities/fbga?fbga=$partNumber",
+					Url::IMAGE_LOGO
+				));
 			}
 			$extra = $info->getExtraInfo();
 			$extra[Constants::MICRON_PN] = $pn;

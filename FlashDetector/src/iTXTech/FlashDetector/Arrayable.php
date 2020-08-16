@@ -35,14 +35,26 @@ abstract class Arrayable{
 		$properties = $reflectionClass->getProperties();
 		$info = [];
 		foreach($properties as $property){
-			if(is_object($this->{$property->getName()})){
-				/** @var Arrayable $prop */
-				$prop = $this->{$property->getName()};
-				$info[$property->getName()] = $prop->toArray();
-			}else{
-				$info[$property->getName()] = $this->{$property->getName()};
-			}
+			self::process($info, $name = $property->getName(), $this->{$name});
 		}
 		return $info;
+	}
+
+	private static function process(array &$a, string $k, $v){
+		if(is_object($v)){
+			/** @var Arrayable $v */
+			$a[$k] = $v->toArray();
+		}elseif(is_array($v)){
+			$a[$k] = self::transformArray($v);
+		}else{
+			$a[$k] = $v;
+		}
+	}
+
+	private static function transformArray(array $a) : array{
+		foreach($a as $k => $v){
+			self::process($a, $k, $v);
+		}
+		return $a;
 	}
 }
