@@ -66,10 +66,10 @@ class Kioxia extends Decoder{
 				"A" => "Vcc: 3.3V, VccQ: 1.8V",
 				"B" => "Vcc: 3.3V, VccQ: 1.65V-3.6V",
 				"D" => "Vcc: 3.3V/1.8V, VccQ: 3.3V/1.8V",
-				"E" => "Vcc: 3.3V, VccQ: 3.3V/1.8V",
-				"F" => "Vcc: 3.3V, VccQ: 3.3V/1.8V (UNOFFICIAL)",
-				"J" => "Vcc: 3.3V, VccQ: 1.8V/1.2V (UNOFFICIAL)"
-				//TODO: F, J
+				"E" => "Vcc: 2.7V-3.6V, VccQ: 2.7V-3.6V/1.7V-1.95V",
+				"F" => "Vcc: 2.7V-3.6V, VccQ: 3.3V/1.8V (UNOFFICIAL)",
+				"J" => "Vcc: 2.7V-3.6V, VccQ: 1.14V-1.26V"
+				//TODO: J
 			]))
 			->setDensity(self::getOrDefault(self::shiftChars($partNumber, 2), [
 				"M8" => 256,
@@ -128,7 +128,7 @@ class Kioxia extends Decoder{
 			"7" => [">4KB", ">512KB"],
 			"8" => ["2KB", "128KB"],
 			"9" => ["2KB", "256KB"],
-			"A" => ["8KB", "2MB"],
+			"A" => ["8KB/4KB", "2MB"],
 			"B" => ["16KB", "8MB"],
 			"C" => ["16KB 1pl", "4MB"],
 			"D" => ["16KB 2pl", "4MB"],

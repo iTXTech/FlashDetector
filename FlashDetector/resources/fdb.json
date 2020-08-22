@@ -1,9 +1,9 @@
 {
     "info": {
         "name": "iTXTech FlashDetector Flash Database",
-        "version": "64",
+        "version": "65",
         "website": "https:\/\/github.com\/iTXTech\/FlashDetector",
-        "time": "Sun, 16 Aug 2020 14:18:58 +0800",
+        "time": "Sat, 22 Aug 2020 14:54:59 +0800",
         "controllers": [
             "SM321AC",
             "SM321BB",
@@ -8695,8 +8695,8 @@
             "p": 2304,
             "b": 1008,
             "t": [
-                "SM2258",
                 "SM2258XT",
+                "SM2258",
                 "SM2262EN",
                 "SM2263XT",
                 "MAS0902"
@@ -12054,12 +12054,14 @@
             "b": 2016,
             "t": [
                 "SM3280BB",
+                "SM2258XT",
                 "SM2258",
                 "SM2262EN",
                 "SM2263XT",
                 "MAS0902"
             ],
             "n": [
+                "micron MT29F256G08EBHAF",
                 "micron MT29F512G08EBHAF",
                 "micron FBMB17A4T1KDUAN",
                 "micron MT29F4T08EUHAF"
@@ -13066,6 +13068,7 @@
                 "SM3271AB",
                 "SM3281AB",
                 "SM3281BB",
+                "SM2258XT",
                 "CBM2199",
                 "CBM2199E",
                 "IS917"
@@ -16628,6 +16631,7 @@
                 "westerndigital SDTNSGAMA-016G",
                 "westerndigital SDTNSGAMA-016G_SI2",
                 "westerndigital SDYNSHERM-0256G",
+                "westerndigital SANDISK-64GB-1ZNM-4DIE",
                 "westerndigital -SDYNSHEPM11"
             ]
         },
@@ -16690,11 +16694,13 @@
             "b": 3944,
             "t": [
                 "SM3281AB",
-                "SM3281BB"
+                "SM3281BB",
+                "SM2258XT"
             ],
             "n": [
                 "westerndigital SDTNAIAMA-064G",
-                "westerndigital SDZNBIAMA-256G_S1_8DIE"
+                "westerndigital SDZNBIAMA-256G_S1_8DIE",
+                "westerndigital SNDK-32GB"
             ]
         },
         "45499BB37E71": {
@@ -17154,8 +17160,12 @@
             "s": 16,
             "p": 1152,
             "b": 3960,
+            "t": [
+                "SM2258XT"
+            ],
             "n": [
-                "westerndigital SDTNAIAMA"
+                "westerndigital SDTNAIAMA",
+                "westerndigital SDUNCIAMA-064GB"
             ]
         },
         "45409BB37E6B": {
@@ -17168,7 +17178,8 @@
             ],
             "n": [
                 "westerndigital SDTNAIAMA-512GB",
-                "westerndigital SDUNCIAMA-0512GB"
+                "westerndigital SDUNCIAMA-0512GB",
+                "westerndigital SDUNCIAMA-0512GB-4CH2WAY"
             ]
         },
         "45499BB37E6B": {
@@ -17184,7 +17195,8 @@
             "n": [
                 "westerndigital SDTNAIAMA",
                 "westerndigital SDTNAIAMA_H45-256GB",
-                "westerndigital SDUNCIAMA-0256GB"
+                "westerndigital SDUNCIAMA-0256GB",
+                "westerndigital SDUNCIAMA-0064GB"
             ]
         },
         "453C3E489899": {
@@ -17208,10 +17220,12 @@
             "t": [
                 "SM3259AA",
                 "SM3268AB",
-                "SM3271AB"
+                "SM3271AB",
+                "SM2258XT"
             ],
             "n": [
                 "westerndigital SDTNAIAMA-120G-0-FPL9",
+                "westerndigital SNDK-32GB",
                 "kioxia GEN2"
             ]
         },
@@ -18370,6 +18384,7 @@
             "b": 4212,
             "t": [
                 "SM3281AB",
+                "SM2258XT",
                 "CBM2099E",
                 "CBM2199",
                 "CBM2199E",
@@ -18378,7 +18393,9 @@
             ],
             "n": [
                 "westerndigital SDTNSHAMA-064G",
-                "westerndigital SDTNSHAMA-064G_4DIE"
+                "westerndigital SDTNSHAMA-064G_4DIE",
+                "westerndigital SDYNSGERM-0256G",
+                "westerndigital SDYNSGERM-016G-UBD"
             ]
         },
         "453EA6937ED1": {
@@ -39344,6 +39361,33 @@
                 "samsung K9PMGY8J7M"
             ]
         },
+        "EC519A3F8CCB": {
+            "t": [
+                "SM2258XT",
+                "SM2258"
+            ],
+            "n": [
+                "samsung K9OUGB8J1M",
+                "samsung K90UGB8J1M"
+            ]
+        },
+        "EC3AD543A8CA": {
+            "t": [
+                "SM2258XT"
+            ],
+            "n": [
+                "samsung K9UKGB8S7E",
+                "samsung K9UKGB8S7F"
+            ]
+        },
+        "EC1FD9BF88CC": {
+            "t": [
+                "SM2258XT"
+            ],
+            "n": [
+                "samsung KLUGGAR1FA"
+            ]
+        },
         "984899B37AF2": {
             "t": [
                 "SM2258XT",
@@ -39366,6 +39410,30 @@
             ]
         },
         "AD5E29221090": {
+            "t": [
+                "SM2258XT"
+            ],
+            "n": [
+                "skhynix H25QFTMF4A"
+            ]
+        },
+        "AD5E2A3300A0": {
+            "t": [
+                "SM2258XT"
+            ],
+            "n": [
+                "skhynix H25BFT4M9R"
+            ]
+        },
+        "AD5E293300A0": {
+            "t": [
+                "SM2258XT"
+            ],
+            "n": [
+                "skhynix H25BFT4M9R"
+            ]
+        },
+        "AD5E2A221090": {
             "t": [
                 "SM2258XT"
             ],
@@ -39422,6 +39490,30 @@
                 "westerndigital SDTNSIBMB-064G-A"
             ]
         },
+        "453A96937E51": {
+            "t": [
+                "SM2258XT"
+            ],
+            "n": [
+                "westerndigital SDYNSGERM-016G-X"
+            ]
+        },
+        "453C9BB37E72": {
+            "t": [
+                "SM2258XT"
+            ],
+            "n": [
+                "westerndigital SDYNBIAMA-032G"
+            ]
+        },
+        "453E99B37A79": {
+            "t": [
+                "SM2258XT"
+            ],
+            "n": [
+                "westerndigital SNDK-32GB"
+            ]
+        },
         "89D4E632AA01": {
             "t": [
                 "SM2258XT",
@@ -39432,22 +39524,22 @@
                 "intel PF29F04T2ASCMG2"
             ]
         },
+        "89E48A32A600": {
+            "t": [
+                "SM2258XT",
+                "MAS0902"
+            ],
+            "n": [
+                "intel PF29F08T2AWCTH1",
+                "intel MT29F512G08EBHAF2"
+            ]
+        },
         "EC1A9443A4CA": {
             "t": [
                 "SM2258XT"
             ],
             "n": [
                 "samsung K9GDGD8S0B"
-            ]
-        },
-        "EC519A3F8CCB": {
-            "t": [
-                "SM2258XT",
-                "SM2258"
-            ],
-            "n": [
-                "samsung K9OUGB8J1M",
-                "samsung K90UGB8J1M"
             ]
         },
         "EC529B3F8ECB": {
@@ -39521,22 +39613,6 @@
                 "SM2258XT"
             ]
         },
-        "AD5E2A3300A0": {
-            "t": [
-                "SM2258XT"
-            ],
-            "n": [
-                "skhynix H25BFT4M9R"
-            ]
-        },
-        "AD5E293300A0": {
-            "t": [
-                "SM2258XT"
-            ],
-            "n": [
-                "skhynix H25BFT4M9R"
-            ]
-        },
         "AD892A5300B0": {
             "t": [
                 "SM2259XT"
@@ -39603,16 +39679,6 @@
             ],
             "n": [
                 "intel PF29F16T2AWCQH1"
-            ]
-        },
-        "89E48A32A600": {
-            "t": [
-                "SM2258XT",
-                "MAS0902"
-            ],
-            "n": [
-                "intel PF29F08T2AWCTH1",
-                "intel MT29F512G08EBHAF2"
             ]
         },
         "9B4901000000": {
@@ -47281,14 +47347,20 @@
                 "samsung K9PKGY8S4B"
             ]
         },
-        "EC3AD543A8CA": {
-            "n": [
-                "samsung K9UKGB8S7F"
-            ]
-        },
         "ECA7A06A68C4": {
             "n": [
                 "samsung K9QFGY8S7M"
+            ]
+        },
+        "983AA0B17EE3": {
+            "n": [
+                "kioxia TH58LJG8SA4BA4C",
+                "kioxia TH58LJG9SA4BA8C"
+            ]
+        },
+        "983CA1B17EE3": {
+            "n": [
+                "kioxia TH58LJT0SA4BA8H"
             ]
         }
     },
@@ -56559,6 +56631,30 @@
                 "SM2258XT"
             ]
         },
+        "K9OUGB8J1M": {
+            "id": [
+                "EC519A3F8CCB"
+            ],
+            "t": [
+                "SM2258XT"
+            ]
+        },
+        "K9UKGB8S7E": {
+            "id": [
+                "EC3AD543A8CA"
+            ],
+            "t": [
+                "SM2258XT"
+            ]
+        },
+        "KLUGGAR1FA": {
+            "id": [
+                "EC1FD9BF88CC"
+            ],
+            "t": [
+                "SM2258XT"
+            ]
+        },
         "K9GDGD8S0B": {
             "id": [
                 "EC1A9443A4CA"
@@ -56570,14 +56666,6 @@
         "K9AFGD8H": {
             "id": [
                 "EC1ED93F88CB"
-            ],
-            "t": [
-                "SM2258XT"
-            ]
-        },
-        "K9OUGB8J1M": {
-            "id": [
-                "EC519A3F8CCB"
             ],
             "t": [
                 "SM2258XT"
@@ -63338,7 +63426,8 @@
         },
         "H25QFTMF4A": {
             "id": [
-                "AD5E29221090"
+                "AD5E29221090",
+                "AD5E2A221090"
             ],
             "t": [
                 "SM2258XT"
@@ -70362,6 +70451,29 @@
                 "MAS0902"
             ]
         },
+        "PF29F04T2AWCTH2": {
+            "id": [
+                "89C48932A100"
+            ],
+            "t": [
+                "SM2258XT",
+                "SM2258",
+                "SM2262EN",
+                "SM2263XT",
+                "MAS0902"
+            ]
+        },
+        "PF29F04T4AWCTH2": {
+            "id": [
+                "89C48932A100"
+            ],
+            "t": [
+                "SM2258XT",
+                "SM2258",
+                "SM2263XT",
+                "MAS0902"
+            ]
+        },
         "PF29F02T2APCMG2": {
             "id": [
                 "89C4E532AA01",
@@ -70371,6 +70483,14 @@
                 "SM2258XT",
                 "SM2258",
                 "IS917"
+            ]
+        },
+        "MT29F512G08EBHAF2": {
+            "id": [
+                "89E48A32A600"
+            ],
+            "t": [
+                "SM2258XT"
             ]
         },
         "PF29F64B2AMCMG2": {
@@ -70445,18 +70565,6 @@
                 "IS917"
             ]
         },
-        "PF29F04T2AWCTH2": {
-            "id": [
-                "89C48932A100"
-            ],
-            "t": [
-                "SM2258",
-                "SM2258XT",
-                "SM2262EN",
-                "SM2263XT",
-                "MAS0902"
-            ]
-        },
         "PF29F02T4AOCTH2": {
             "id": [
                 "89A40832A100"
@@ -70469,17 +70577,6 @@
                 "CBM2199",
                 "CBM2199E",
                 "IS917"
-            ]
-        },
-        "PF29F04T4AWCTH2": {
-            "id": [
-                "89C48932A100"
-            ],
-            "t": [
-                "SM2258",
-                "SM2258XT",
-                "SM2263XT",
-                "MAS0902"
             ]
         },
         "PF29F64B2ALCTH1": {
@@ -70619,14 +70716,6 @@
             ],
             "t": [
                 "SM2259XT"
-            ]
-        },
-        "MT29F512G08EBHAF2": {
-            "id": [
-                "89E48A32A600"
-            ],
-            "t": [
-                "SM2258XT"
             ]
         },
         "PF29F04T2ANCQJ1": {
@@ -73570,6 +73659,7 @@
                 "2C84643CA904",
                 "2CC48932A100",
                 "2CD48932A600",
+                "2CD48932A601",
                 "B5A40832A1"
             ],
             "l": "3D B16A",
@@ -86288,7 +86378,8 @@
                 "453C98B37672",
                 "453C98B376F2",
                 "453C98B37663",
-                "453E99B37A72"
+                "453E99B37A72",
+                "453C9BB37E72"
             ],
             "l": "3D 8T23",
             "c": "TLC",
@@ -89714,7 +89805,8 @@
             "id": [
                 "453E98B3766B",
                 "453E98B37663",
-                "453E99B37A6B"
+                "453E99B37A6B",
+                "45499AB37E6B"
             ],
             "l": "3DV4",
             "t": [
@@ -91133,7 +91225,8 @@
         },
         "SDYNSGERM-0256G": {
             "id": [
-                "453E96937E51"
+                "453E96937E51",
+                "453E96937ED1"
             ],
             "t": [
                 "SM2258XT",
@@ -91273,6 +91366,14 @@
                 "SM2258XT"
             ]
         },
+        "SDYNSGERM-016G-X": {
+            "id": [
+                "453A96937E51"
+            ],
+            "t": [
+                "SM2258XT"
+            ]
+        },
         "SDYNSGERMNOTOGGLE-0160G": {
             "id": [
                 "455897937E51"
@@ -91293,6 +91394,54 @@
         "SDUNCIAMA-0512GB": {
             "id": [
                 "45409BB37E6B"
+            ],
+            "t": [
+                "SM2258XT"
+            ]
+        },
+        "SDYNSGERM-016G-UBD": {
+            "id": [
+                "453E96937ED1"
+            ],
+            "t": [
+                "SM2258XT",
+                "CBM2099E",
+                "CBM2199",
+                "CBM2199E",
+                "CBM2199ES",
+                "IS917"
+            ]
+        },
+        "SNDK-32GB": {
+            "id": [
+                "453E99B37A79",
+                "453E99B37A71",
+                "45489AB37E71"
+            ],
+            "t": [
+                "SM2258XT"
+            ]
+        },
+        "SDUNCIAMA-0512GB-4CH2WAY": {
+            "id": [
+                "45409BB37E6B"
+            ],
+            "t": [
+                "SM2258XT"
+            ]
+        },
+        "SANDISK-64GB-1ZNM-4DIE": {
+            "id": [
+                "453EA6937E51"
+            ],
+            "t": [
+                "SM2258XT",
+                "IS917"
+            ]
+        },
+        "SDUNCIAMA-0064GB": {
+            "id": [
+                "45499BB37E6B"
             ],
             "t": [
                 "SM2258XT"
@@ -107772,6 +107921,27 @@
             "id": [
                 "983C98B37671"
             ]
+        },
+        "TH58LJG8SA4BA4C": {
+            "id": [
+                "983AA0B17EE3"
+            ],
+            "m": "4KP\/16plane",
+            "d": 2
+        },
+        "TH58LJG9SA4BA8C": {
+            "id": [
+                "983AA0B17EE3"
+            ],
+            "m": "4KP\/16plane",
+            "d": 4
+        },
+        "TH58LJT0SA4BA8H": {
+            "id": [
+                "983CA1B17EE3"
+            ],
+            "m": "4KP\/16plane",
+            "d": 8
         }
     },
     "powerchip": {
@@ -108847,8 +109017,8 @@
                 "2CA40832A100"
             ],
             "t": [
-                "SM2258",
-                "SM2258XT"
+                "SM2258XT",
+                "SM2258"
             ]
         },
         "FNNB17A512G1KTBAF": {
@@ -108856,8 +109026,8 @@
                 "2CC40832A600"
             ],
             "t": [
-                "SM2258",
-                "SM2258XT"
+                "SM2258XT",
+                "SM2258"
             ]
         },
         "FXXM16A256G1KDBXXXX": {
