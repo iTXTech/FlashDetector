@@ -69,7 +69,6 @@ class Kioxia extends Decoder{
 				"E" => "Vcc: 2.7V-3.6V, VccQ: 2.7V-3.6V/1.7V-1.95V",
 				"F" => "Vcc: 2.7V-3.6V, VccQ: 3.3V/1.8V (UNOFFICIAL)",
 				"J" => "Vcc: 2.7V-3.6V, VccQ: 1.14V-1.26V"
-				//TODO: J
 			]))
 			->setDensity(self::getOrDefault(self::shiftChars($partNumber, 2), [
 				"M8" => 256,
@@ -140,18 +139,19 @@ class Kioxia extends Decoder{
 			"A" => "130 nm",
 			"B" => "90 nm",
 			"C" => "70 nm",
-			"D" => "56 nm",
-			"E" => "43 nm",
-			"F" => "32 nm",
-			"G" => "24 nm A-type",
-			"H" => "24 nm B-type",
-			"J" => "19 nm/1x",
-			"K" => "A19 nm/1y",
-			"L" => "15 nm/1z",
-			"2" => "BiCS2",
-			"3" => "BiCS3",
-			"4" => "BiCS4"
-		]));
+            "D" => "56 nm",
+            "E" => "43 nm",
+            "F" => "32 nm",
+            "G" => "24 nm A-type",
+            "H" => "24 nm B-type",
+            "J" => "19 nm/1x",
+            "K" => "A19 nm/1y",
+            "L" => "15 nm/1z",
+            "2" => "BiCS2",
+            "3" => "BiCS3",
+            "4" => "BiCS4",
+            "5" => "BiCS5"
+        ]));
 		$package = self::shiftChars($partNumber, 2);
 		if(in_array($package, ["FT", "TG", "TA"])){
 			$package = "TSOP48";

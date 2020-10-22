@@ -75,18 +75,19 @@ class Intel extends Decoder{
 				"16G" => 16 * Constants::DENSITY_GBITS,
 				"32G" => 32 * Constants::DENSITY_GBITS,
 				"64G" => 64 * Constants::DENSITY_GBITS,
-				"16B" => 128 * Constants::DENSITY_GBITS,
-				"32B" => 256 * Constants::DENSITY_GBITS,
-				"48B" => 384 * Constants::DENSITY_GBITS,
-				"64B" => 512 * Constants::DENSITY_GBITS,
-				"96B" => 768 * Constants::DENSITY_GBITS,
-				"01T" => 1 * Constants::DENSITY_TBITS,
-				"02T" => 2 * Constants::DENSITY_TBITS,
-				"03T" => 3 * Constants::DENSITY_TBITS,
-				"04T" => 4 * Constants::DENSITY_TBITS,
-				"06T" => 6 * Constants::DENSITY_TBITS,
-				"08T" => 8 * Constants::DENSITY_TBITS
-			], 0))
+                "16B" => 128 * Constants::DENSITY_GBITS,
+                "32B" => 256 * Constants::DENSITY_GBITS,
+                "48B" => 384 * Constants::DENSITY_GBITS,
+                "64B" => 512 * Constants::DENSITY_GBITS,
+                "96B" => 768 * Constants::DENSITY_GBITS,
+                "01T" => 1 * Constants::DENSITY_TBITS,
+                "02T" => 2 * Constants::DENSITY_TBITS,
+                "03T" => 3 * Constants::DENSITY_TBITS,
+                "04T" => 4 * Constants::DENSITY_TBITS,
+                "06T" => 6 * Constants::DENSITY_TBITS,
+                "08T" => 8 * Constants::DENSITY_TBITS,
+                "16T" => 16 * Constants::DENSITY_TBITS
+            ], 0))
 			->setDeviceWidth(self::getOrDefault($width = self::shiftChars($partNumber, 2), [
 				"08" => 8,
 				"16" => 16,
@@ -130,16 +131,17 @@ class Intel extends Decoder{
 				"Q" => 4,
 			]))
 			->setProcessNode($lithography = self::getOrDefault(self::shiftChars($partNumber, 1), [
-				"A" => "90 nm",
-				"B" => "72 nm",
-				"C" => "50 nm",
-				"D" => "34 nm",
-				"E" => "25 nm",
-				"F" => "20 nm",
-				"G" => "3D1",
-				"H" => "3D2",
-				"J" => "3D3"
-			]));
+                "A" => "90 nm",
+                "B" => "72 nm",
+                "C" => "50 nm",
+                "D" => "34 nm",
+                "E" => "25 nm",
+                "F" => "20 nm",
+                "G" => "3D1",
+                "H" => "3D2",
+                "J" => "3D3",
+                "K" => "3D4"
+            ]));
 		$gen = self::shiftChars($partNumber, 1);
 		if(is_numeric($gen)){
 			$flashInfo->setGeneration($gen);
