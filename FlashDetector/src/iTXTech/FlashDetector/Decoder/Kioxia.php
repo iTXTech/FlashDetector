@@ -61,15 +61,16 @@ class Kioxia extends Decoder{
 		$flashInfo->setType($level)
 			->setInterface((new FlashInterface(true))->setToggle(in_array($if, ["T", "L"])))
 			->setVoltage(self::getOrDefault(self::shiftChars($partNumber, 1), [
-				"V" => "3.3V",
-				"Y" => "1.8V",
-				"A" => "Vcc: 3.3V, VccQ: 1.8V",
-				"B" => "Vcc: 3.3V, VccQ: 1.65V-3.6V",
-				"D" => "Vcc: 3.3V/1.8V, VccQ: 3.3V/1.8V",
-				"E" => "Vcc: 2.7V-3.6V, VccQ: 2.7V-3.6V/1.7V-1.95V",
-				"F" => "Vcc: 2.7V-3.6V, VccQ: 3.3V/1.8V (UNOFFICIAL)",
-				"J" => "Vcc: 2.7V-3.6V, VccQ: 1.14V-1.26V"
-			]))
+                "V" => "3.3V",
+                "Y" => "1.8V",
+                "A" => "Vcc: 3.3V, VccQ: 1.8V",
+                "B" => "Vcc: 3.3V, VccQ: 1.65V-3.6V",
+                "D" => "Vcc: 3.3V/1.8V, VccQ: 3.3V/1.8V",
+                "E" => "Vcc: 2.7V-3.6V, VccQ: 2.7V-3.6V/1.7V-1.95V",
+                "F" => "Vcc: 2.7V-3.6V, VccQ: 3.3V/1.8V (UNOFFICIAL)",
+                "G" => "Vcc: 2.7V~3.6V, VccQ: 1.8V  (UNOFFICIAL)",
+                "J" => "Vcc: 2.7V-3.6V, VccQ: 1.14V-1.26V/1.7V-1.95V"
+            ]))
 			->setDensity(self::getOrDefault(self::shiftChars($partNumber, 2), [
 				"M8" => 256,
 				"M9" => 512,
