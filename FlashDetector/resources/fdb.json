@@ -1,9 +1,9 @@
 {
     "info": {
         "name": "iTXTech FlashDetector Flash Database",
-        "version": "66",
+        "version": "67",
         "website": "https:\/\/github.com\/iTXTech\/FlashDetector",
-        "time": "Thu, 22 Oct 2020 01:56:05 +0000",
+        "time": "Thu, 03 Dec 2020 06:02:12 +0000",
         "controllers": [
             "SM321AC",
             "SM321BB",
@@ -6101,6 +6101,7 @@
             "p": 1536,
             "b": 5752,
             "t": [
+                "SM3282BB",
                 "SM2259XT"
             ],
             "n": [
@@ -8817,6 +8818,7 @@
                 "SM3271AB",
                 "SM3281AB",
                 "SM3281BB",
+                "SM3282BB",
                 "SM2259XT",
                 "SM2263XT"
             ],
@@ -12211,11 +12213,13 @@
             "b": 1352,
             "t": [
                 "SM3281BB",
+                "SM3282BB",
                 "SM2259XT",
                 "SM2262EN"
             ],
             "n": [
                 "micron MT29F1T08EBLCE",
+                "micron MT29F4T08EBLCE",
                 "micron 9LC2DNW965",
                 "micron MT29F4T08EULCE"
             ]
@@ -12286,7 +12290,11 @@
             "s": 16,
             "p": 4608,
             "b": 1968,
+            "t": [
+                "SM3282BB"
+            ],
             "n": [
+                "micron MT29F1T08GBLBE",
                 "micron MT29F2T08GBLBE"
             ]
         },
@@ -59875,6 +59883,7 @@
                 "SM3281AB",
                 "SM3281BA",
                 "SM3281BB",
+                "SM3282BB",
                 "SM2259XT"
             ]
         },
@@ -65644,7 +65653,8 @@
             "t": [
                 "SM3271AB",
                 "SM3281AB",
-                "SM3281BB"
+                "SM3281BB",
+                "SM3282BB"
             ]
         },
         "29F2T08EULCE": {
@@ -73913,7 +73923,8 @@
         "MT29F1T08GBLBE": {
             "id": [
                 "2CD39C32C600",
-                "2CD31C32C600"
+                "2CD31C32C600",
+                "2CE39D32C600"
             ],
             "l": "N28A",
             "t": [
@@ -77496,6 +77507,15 @@
                 "SM2262EN",
                 "SM2263XT",
                 "MAS0902"
+            ]
+        },
+        "MT29F4T08EBLCE": {
+            "id": [
+                "2CD38932E600"
+            ],
+            "l": "3D B27B",
+            "t": [
+                "SM3282BB"
             ]
         },
         "MT29F2G16AAB": {
