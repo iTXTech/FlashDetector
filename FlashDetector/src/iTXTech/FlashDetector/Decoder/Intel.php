@@ -114,7 +114,8 @@ class Intel extends Decoder{
 			"O" => [8, 8, 4, true],
 			"P" => [8, 8, 4, true],//L74
 			"S" => [16, 4, 4, true],
-			"W" => [16, 8, 4, true]
+			"W" => [16, 8, 4, true],
+            "Y" => [16, 4, 4, true]
 		], [-1, -1, -1, false]);
 		$flashInfo->setClassification(new Classification(
 			$classification[1], $width == "2A" ? 2 : 1, $classification[2], $classification[0]))
