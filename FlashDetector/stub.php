@@ -8,11 +8,11 @@ use iTXTech\SimpleFramework\Util\Util;
 
 $m = (new Phar(__FILE__))->getMetadata();
 echo "iTXTech FlashDetector version " . $m["version"] .
-	(file_exists("phar://" . __FILE__ . DIRECTORY_SEPARATOR . "vendor") ?
-		" [with simplehtmldom]" : " [without simplehtmldom]") . PHP_EOL .
-	"Revision: " . $m["revision"] . PHP_EOL .
-	"Created on " . date("r", $m["creationDate"]) . PHP_EOL .
-	"Copyright (C) 2018-2020 iTX Technologies
+    (file_exists("phar://" . __FILE__ . DIRECTORY_SEPARATOR . "vendor") ?
+        " [with simplehtmldom]" : " [without simplehtmldom]") . PHP_EOL .
+    "Revision: " . $m["revision"] . PHP_EOL .
+    "Created on " . date("r", $m["creationDate"]) . PHP_EOL .
+    "Copyright (C) 2018-2021 iTX Technologies
 Licensed under Apache License 2.0
 https://github.com/iTXTech/FlashDetector
 
