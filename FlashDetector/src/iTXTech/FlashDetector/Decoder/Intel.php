@@ -113,6 +113,7 @@ class Intel extends Decoder{
 			"N" => [4, 4, 4, true],
 			"O" => [8, 8, 4, true],
 			"P" => [8, 8, 4, true],//L74
+            "Q" => [8, 2, -1, true],
 			"S" => [16, 4, 4, true],
 			"W" => [16, 8, 4, true],
             "Y" => [16, 4, 4, true]
