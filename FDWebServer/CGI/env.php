@@ -69,7 +69,10 @@ function getQuery() : string{
 }
 
 function getRemote() : string{
-	return $_SERVER["REMOTE_ADDR"];
+    if (isset($_SERVER["HTTP_X_FORWARDED_FOR"])) {
+        return str_replace(" ", "", explode(",", $_SERVER["HTTP_X_FORWARDED_FOR"])[0]);
+    }
+    return $_SERVER["HTTP_X_REAL_IP"] ?? $_SERVER["REMOTE_ADDR"];
 }
 
 function getUserAgent() : string{

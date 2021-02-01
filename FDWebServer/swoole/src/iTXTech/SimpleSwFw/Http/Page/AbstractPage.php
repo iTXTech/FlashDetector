@@ -25,12 +25,14 @@ use Swoole\Http\Request;
 use Swoole\Http\Response;
 
 abstract class AbstractPage{
-	public const IP_ADDR_HEADER = "X-Real-IP";
 	public static $STATUS_PAGE_HEADER = "iTXTech SimpleSwFw<br>";
 
 	public static function getClientIp(Request $request) : string{
-		return $request->header[strtolower(self::IP_ADDR_HEADER)] ?? $request->server["remote_addr"];
-	}
+        if (isset($request->header["x-forwarded-for"])) {
+            return str_replace(" ", "", explode(",", $request->header["x-forwarded-for"])[0]);
+        }
+        return $request->header["x-real-ip"] ?? $request->server["remote_addr"];
+    }
 
 	public static function getUserAgent(Request $request) : string{
 		return $request->header["user-agent"] ?? "Undefined";

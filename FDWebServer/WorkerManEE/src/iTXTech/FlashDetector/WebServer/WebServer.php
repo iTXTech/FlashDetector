@@ -72,8 +72,11 @@ class WebServer{
 	}
 
 	public static function getRemote() : string{
-		return $_SERVER["REMOTE_ADDR"];
-	}
+        if (isset($_SERVER["HTTP_X_FORWARDED_FOR"])) {
+            return str_replace(" ", "", explode(",", $_SERVER["HTTP_X_FORWARDED_FOR"])[0]);
+        }
+        return $_SERVER["HTTP_X_REAL_IP"] ?? $_SERVER["REMOTE_ADDR"];
+    }
 
 	public static function getUserAgent() : string{
 		return $_SERVER["HTTP_USER_AGENT"] ?? "Undefined";
