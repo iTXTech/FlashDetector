@@ -34,6 +34,7 @@ use iTXTech\FlashDetector\Decoder\SKHynixLegacy;
 use iTXTech\FlashDetector\Decoder\SpecTek;
 use iTXTech\FlashDetector\Decoder\WesternDigital;
 use iTXTech\FlashDetector\Decoder\WesternDigitalShortCode;
+use iTXTech\FlashDetector\Decoder\Yangtze;
 use iTXTech\FlashDetector\Fdb\Fdb;
 use iTXTech\FlashDetector\Processor\Processor;
 use iTXTech\FlashDetector\Property\Classification;
@@ -124,6 +125,7 @@ abstract class FlashDetector{
 		self::registerDecoder(SpecTek::class);
 		self::registerDecoder(WesternDigital::class);
 		self::registerDecoder(WesternDigitalShortCode::class);
+		self::registerDecoder(Yangtze::class);
 	}
 
 	public static function registerDecoder(string $decoder) : bool{

@@ -224,7 +224,7 @@ class Micron extends Decoder{
 			]));
 
 		$classification = self::getOrDefault(self::shiftChars($partNumber, 1),
-			self::CLASSIFICATION, [0, 0, 0, 0]);
+			self::CLASSIFICATION, [-1, -1, -1, -1]);
 
 		$flashInfo->setClassification(new Classification(
 			$classification[1], $classification[3], $classification[2], $classification[0]))

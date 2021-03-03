@@ -44,6 +44,7 @@ interface Constants{
 	public const VENDOR_KIOXIA = "kioxia";
 	public const VENDOR_TOSHIBA = "toshiba";
 	public const VENDOR_SANDISK = "sandisk";
+	public const VENDOR_YANGTZE = "ymtc";
 
 	public const NAND_TYPE_NAND = "nand";
 	public const NAND_TYPE_INAND = "inand";
