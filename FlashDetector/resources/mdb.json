@@ -1971,7 +1971,18 @@
         "NX984": "MT29F2T08ELLEEG7-QDES:E",
         "NX985": "MT29F4T08EQLEEG8-QDES:E",
         "NX986": "MT29F8T08ESLEEG4-QDES:E",
-        "NQ473": "MT29F8T08EWHAFJ6-3ITF:A"
+        "NQ473": "MT29F8T08EWHAFJ6-3ITF:A",
+        "NX987": "MT29F512G08EBLFED4-RES:F",
+        "NX988": "MT29F4T08GLLCEG7-QBES:C",
+        "NX989": "MT29F8T08GQLCEG8-QBES:C",
+        "NX990": "MT29F16T08GSLCEG4-QBES:C",
+        "NX991": "MT29F16T08GWLCEJ9-ES:C",
+        "NX992": "MT29F2T08EMLEEJ4-QD:E",
+        "NX993": "MT29F1T08EELEEJ4-QD:E",
+        "NX994": "MTFDKCF256TFZ-ABC1AABYYES",
+        "NX995": "MTFDKCF512TFZ-ABC1AABYYES",
+        "NX996": "MTFDKCG1T0TFZ-ABC1AABYYES",
+        "NX997": "MT29F512G08EBLEEJ4-QPES:E"
     },
     "spectek": {
         "PF001": [
@@ -2653,7 +2664,8 @@
             "FBNM79MNAK3BAAWP"
         ],
         "PF200": [
-            "FBMM60ANAL1BAAWP. FBNM60ANAL1BAAWP"
+            "FBMM60ANAL1BAAWP",
+            "FBNM60ANAL1BAAWP"
         ],
         "PF201": [
             "FBMM60ANAL3BAAWP",
@@ -6593,6 +6605,9 @@
         ],
         "PF819": [
             "FBMB16C1T0KTLAFG7"
+        ],
+        "PF820": [
+            "FBSB47R512G1KLBAEJ4"
         ]
     }
 }

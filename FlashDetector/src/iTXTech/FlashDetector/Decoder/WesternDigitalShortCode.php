@@ -37,9 +37,8 @@ class WesternDigitalShortCode extends WesternDigital{
 	}
 
 	public static function decode(string $partNumber) : FlashInfo{
-		$flashInfo = (new FlashInfo($partNumber))->setVendor(self::getName())
-			->setDensity(self::matchFromStart(explode("-", $partNumber, 2)[1],
-				WesternDigital::DENSITY, 0));
-		return $flashInfo;
+        return (new FlashInfo($partNumber))->setVendor(self::getName())
+            ->setDensity(self::matchFromStart(explode("-", $partNumber, 2)[1],
+                WesternDigital::DENSITY, 0));
 	}
 }
