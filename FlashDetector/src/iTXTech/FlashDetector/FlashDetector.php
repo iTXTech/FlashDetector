@@ -341,10 +341,11 @@ abstract class FlashDetector{
 		if($lang == null){
 			$lang = self::$fallbackLang;
 		}
+		$result = self::$lang[self::$fallbackLang][$key] ?? $key;
 		if(isset(self::$lang[$lang][$key])){
-			return self::$lang[$lang][$key];
+			$result = self::$lang[$lang][$key];
 		}
-		return self::$lang[self::$fallbackLang][$key] ?? $key;
+		return str_replace(["<br>"], ["\n"], $result);
 	}
 
 	public static function getHumanReadableDensity(int $density, bool $useByte = false){
