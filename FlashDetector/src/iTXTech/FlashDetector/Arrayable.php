@@ -59,4 +59,8 @@ abstract class Arrayable{
 		}
 		return $a;
 	}
+
+	public function __toString(){
+		return json_encode($this->toArray(), JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
+	}
 }

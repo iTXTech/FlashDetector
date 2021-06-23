@@ -36,6 +36,9 @@ use iTXTech\FlashDetector\Decoder\WesternDigital;
 use iTXTech\FlashDetector\Decoder\WesternDigitalShortCode;
 use iTXTech\FlashDetector\Decoder\Yangtze;
 use iTXTech\FlashDetector\Fdb\Fdb;
+use iTXTech\FlashDetector\FlashId\Decoder as FlashIdDecoder;
+use iTXTech\FlashDetector\FlashId\Kioxia as KioxiaIdDecoder;
+use iTXTech\FlashDetector\FlashId\WesternDigital as WesternDigitalIdDecoder;
 use iTXTech\FlashDetector\Processor\Processor;
 use iTXTech\FlashDetector\Property\Classification;
 use iTXTech\SimpleFramework\Util\StringUtil;
@@ -45,6 +48,10 @@ abstract class FlashDetector{
 
 	/** @var Decoder[] */
 	private static $decoders = [];
+
+	/** @var FlashIdDecoder[] */
+	private static $flashIdDecoders = [];
+
 	/** @var Fdb */
 	private static $fdb;
 	private static $mdb = [];
@@ -126,6 +133,9 @@ abstract class FlashDetector{
 		self::registerDecoder(WesternDigital::class);
 		self::registerDecoder(WesternDigitalShortCode::class);
 		self::registerDecoder(Yangtze::class);
+
+		self::registerFlashIdDecoder(new KioxiaIdDecoder());
+		self::registerFlashIdDecoder(new WesternDigitalIdDecoder());
 	}
 
 	public static function registerDecoder(string $decoder) : bool{
@@ -135,6 +145,25 @@ abstract class FlashDetector{
 			return true;
 		}
 		return false;
+	}
+
+	public static function registerFlashIdDecoder(KioxiaIdDecoder $decoder) : bool{
+		if(is_a($decoder, FlashIdDecoder::class, true)){
+			/** @var $decoder FlashIdDecoder */
+			self::$flashIdDecoders[] = $decoder;
+			return true;
+		}
+		return false;
+	}
+
+	public static function decodeFlashId(string $id) : ?FlashIdInfo {
+		$id = hexdec($id);
+		foreach(self::$flashIdDecoders as $decoder){
+			if($decoder->check($id)){
+				return $decoder->decode($id);
+			}
+		}
+		return null;
 	}
 
 	public static function detect(string $partNumber, bool $combineFdb = true) : FlashInfo{

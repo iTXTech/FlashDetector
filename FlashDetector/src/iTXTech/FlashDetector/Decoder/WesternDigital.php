@@ -54,7 +54,8 @@ class WesternDigital extends Decoder{
 		"064G" => 512 * Constants::DENSITY_GBITS,
 		"128G" => Constants::DENSITY_TBITS,
 		"256G" => 2 * Constants::DENSITY_TBITS,
-		"512G" => 4 * Constants::DENSITY_TBITS
+		"512G" => 4 * Constants::DENSITY_TBITS,
+		"1T00" => 8 * Constants::DENSITY_TBITS
 	];
 
 	public static function getName() : string{

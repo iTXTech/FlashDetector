@@ -13,7 +13,8 @@ echo "iTXTech FlashDetector version " . $m["version"] .
     "Revision: " . $m["revision"] . PHP_EOL .
     "Created on " . date("r", $m["creationDate"]) . PHP_EOL .
     "Copyright (C) 2018-2021 iTX Technologies
-Licensed under Apache License 2.0
+by PeratX@iTXTech.org
+Licensed under GNU AGPL v3
 https://github.com/iTXTech/FlashDetector
 
 Powered by iTXTech SimpleFramework
