@@ -33,6 +33,7 @@ class FlashIdInfo extends Arrayable{
 	protected $processNode;
 	protected $cellLevel;
 	protected $toggle;
+	protected $voltage;
 
 	public function __construct(int $id = 0x0){
 		$this->id = strtoupper(dechex($id));
@@ -44,6 +45,11 @@ class FlashIdInfo extends Arrayable{
 
 	public function getDie() : ?int{
 		return $this->die;
+	}
+
+	public function setVoltage(string $v) : FlashIdInfo{
+		$this->voltage = $v;
+		return $this;
 	}
 
 	public function setToggle(bool $toggle) : FlashIdInfo{
