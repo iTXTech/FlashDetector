@@ -22,12 +22,15 @@
 
 namespace iTXTech\FlashDetector\WebServer;
 
+use iTXTech\FlashDetector\WebServer\Page\DecodeIdPage;
 use iTXTech\FlashDetector\WebServer\Page\DecodePage;
 use iTXTech\FlashDetector\WebServer\Page\IndexPage;
 use iTXTech\FlashDetector\WebServer\Page\InfoPage;
 use iTXTech\FlashDetector\WebServer\Page\SearchIdPage;
 use iTXTech\FlashDetector\WebServer\Page\SearchPnPage;
 use iTXTech\FlashDetector\WebServer\Page\SummaryPage;
+use iTXTech\SimpleFramework\Console\Logger;
+use iTXTech\SimpleFramework\Console\SwooleLoggerHandler;
 use iTXTech\SimpleSwFw\Http\Server;
 
 class WebServer{
@@ -43,7 +46,10 @@ class WebServer{
 		$this->server->registerPage("/searchPn", SearchPnPage::class);
 		$this->server->registerPage("/summary", SummaryPage::class);
 		$this->server->registerPage("/info", InfoPage::class);
+		$this->server->registerPage("/decodeId", DecodeIdPage::class);
 		$this->server->load($config);
+
+		Logger::setLoggerHandler(SwooleLoggerHandler::class);
 	}
 
 	public function start(){

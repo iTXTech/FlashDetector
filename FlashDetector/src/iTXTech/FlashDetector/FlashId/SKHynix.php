@@ -113,7 +113,8 @@ class SKHynix extends Decoder{
 					0x2 => "32nm",
 					0x3 => "26nm",
 					0x4 => "20nm",
-					0x5 => "16nm"
+					0x5 => "16nm",
+					0xA => "16nm"
 				]
 			],
 			"ext:edo" => [

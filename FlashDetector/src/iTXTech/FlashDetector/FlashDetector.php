@@ -163,14 +163,23 @@ abstract class FlashDetector{
 		self::$flashIdDecoders[] = $decoder;
 	}
 
-	public static function decodeFlashId(string $id) : ?FlashIdInfo{
+	public static function decodeFlashId(string $id) : FlashIdInfo{
 		$id = hexdec($id . str_repeat("0", max(0, 12 - strlen($id))));
 		foreach(self::$flashIdDecoders as $decoder){
 			if($decoder->check($id)){
-				return $decoder->decode($id);
+				$info = $decoder->decode($id);
+				$iddb = self::$fdb->getIddb()->getFlashId(dechex($id));
+				$info = $iddb == null ? $info : $info->setControllers($iddb->getControllers())
+					->setPartNumbers($iddb->getPartNumbers());
 			}
 		}
-		return null;
+		if(!isset($info)){
+			$info = (new FlashIdInfo($id))->setVendor(Constants::UNKNOWN);
+		}
+		foreach(self::$processors as $processor){
+			$processor->flashIdInfo($info);
+		}
+		return $info;
 	}
 
 	public static function detect(string $partNumber, bool $combineFdb = true) : FlashInfo{
@@ -347,8 +356,8 @@ abstract class FlashDetector{
 	}
 
 	/**
-	 * @param        $var
-	 * @param string $lang
+	 * @param             $var
+	 * @param string|null $lang
 	 *
 	 * @return array|string|bool|null
 	 */
@@ -384,7 +393,7 @@ abstract class FlashDetector{
 		return str_replace(["<br>"], ["\n"], $result);
 	}
 
-	public static function getHumanReadableDensity(int $density, bool $useByte = false){
+	public static function getHumanReadableDensity(int $density, bool $useByte = false) : string{
 		if($useByte){
 			$density /= 8;
 			$unit = ["MB", "GB", "TB"];

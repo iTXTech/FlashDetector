@@ -34,6 +34,17 @@ class DefaultProcessor extends Processor{
 		return true;
 	}
 
+	public function decodeId(string $query, string $remote, string $ua, ?string $lang, ?string $id, array &$c) : bool{
+		$c = $id != null ? [
+			"result" => true,
+			"data" => FlashDetector::decodeFlashId($id)->toArray($lang)
+		] : [
+			"result" => false,
+			"message" => "Missing Flash Id"
+		];
+		return true;
+	}
+
 	public function decode(string $query, string $remote, string $ua, ?string $lang, ?string $pn, array &$c) : bool{
 		$c = $pn != null ? [
 			"result" => true,

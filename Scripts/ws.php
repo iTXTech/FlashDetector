@@ -64,8 +64,6 @@ try{
 	];
 	if($cmd->hasOption("s")){
 		loadModule($moduleManager, "FDWebServer" . DIRECTORY_SEPARATOR . "swoole");
-		SwooleLoggerHandler::init();
-		Logger::setLoggerHandler(SwooleLoggerHandler::class);
 	}
 	if($cmd->hasOption("w")){
 		$moduleManager->registerModuleDependencyResolver(new WraithSpireMDR($moduleManager,

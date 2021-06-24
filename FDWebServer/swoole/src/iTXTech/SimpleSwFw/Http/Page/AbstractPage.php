@@ -40,7 +40,9 @@ abstract class AbstractPage{
 
 	public static function getQuery(Request $request) : string{
 		$host = $request->header["host"] ?? "fdserver";
-		return "http://$host{$request->server["request_uri"]}?{$request->server["query_string"]}";
+		return strlen(trim($request->server["query_string"])) > 0 ?
+			"http://$host{$request->server["request_uri"]}?{$request->server["query_string"]}" :
+			"http://$host{$request->server["request_uri"]}";
 	}
 
 	public static function sendJsonData(Response $response, array $data){

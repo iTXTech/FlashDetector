@@ -34,6 +34,10 @@ abstract class Processor{
 		return $idInfo;
 	}
 
+	public function decodeId(string $query, string $remote, string $ua, ?string $lang, ?string $id, array &$c) : bool{
+		return true;
+	}
+
 	public function index(string $query, string $remote, string $ua, string $name, array &$c) : bool{
 		return true;
 	}

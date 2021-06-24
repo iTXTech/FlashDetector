@@ -34,9 +34,21 @@ class FlashIdInfo extends Arrayable{
 	public $cellLevel;
 	public $voltage;
 	public $ext = [];
+	public $controllers = [];
+	public $partNumbers = [];
 
 	public function __construct(int $id = 0x0){
 		$this->id = strtoupper(dechex($id));
+	}
+
+	public function setPartNumbers(array $partNumbers) : FlashIdInfo{
+		$this->partNumbers = $partNumbers;
+		return $this;
+	}
+
+	public function setControllers(array $controllers) : FlashIdInfo{
+		$this->controllers = $controllers;
+		return $this;
 	}
 
 	public function setExt(array $ext) : FlashIdInfo{
@@ -92,5 +104,22 @@ class FlashIdInfo extends Arrayable{
 	public function setProcessNode(string $processNode) : FlashIdInfo{
 		$this->processNode = $processNode;
 		return $this;
+	}
+
+	public function toArray(?string $lang = "chs", bool $raw = false) : array{
+		$info = parent::toArray();
+		if($raw){
+			return $info;
+		}
+		$info = FlashDetector::translateArray($info, false, $lang);
+		if(isset($info["partNumbers"])){
+			$pns = $info["partNumbers"];
+			$info["partNumbers"] = [];
+			foreach($pns as $pn){
+				$p = explode(" ", $pn);
+				$info["partNumbers"][] = FlashDetector::translateString($p[0]) . " " . $p[1];
+			}
+		}
+		return $info;
 	}
 }

@@ -23,6 +23,7 @@
 namespace iTXTech\FlashDetector\WebServer;
 
 use EaseCation\WorkerManEE\RequestHandler;
+use iTXTech\FlashDetector\WebServer\Page\DecodeIdPage;
 use iTXTech\FlashDetector\WebServer\Page\DecodePage;
 use iTXTech\FlashDetector\WebServer\Page\IndexPage;
 use iTXTech\FlashDetector\WebServer\Page\InfoPage;
@@ -47,8 +48,9 @@ class WebServer{
 		RequestHandler::registerPage("/searchPn", SearchPnPage::class);
 		RequestHandler::registerPage("/summary", SummaryPage::class);
 		RequestHandler::registerPage("/info", InfoPage::class);
+		RequestHandler::registerPage("/decodeId", DecodeIdPage::class);
 		$this->webServer = new WNWS("http://" . $config["address"] . ":" . $config["port"]);
-		$this->webServer->onReceive = function(TcpConnection $connection){
+		$this->webServer->onReceive = function (TcpConnection $connection){
 			Http::header("Access-Control-Allow-Origin: *");
 			Http::header("Access-Control-Allow-Headers: *");
 			Http::header("Content-Type: application/json");
