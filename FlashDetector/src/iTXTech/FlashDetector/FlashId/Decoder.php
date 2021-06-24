@@ -26,6 +26,8 @@ use iTXTech\FlashDetector\FlashIdInfo;
 use iTXTech\SimpleFramework\Util\StringUtil;
 
 abstract class Decoder{
+	public const ID_DEFINITION = [];
+
 	public $def;
 	public $vendorName;
 	public $vendorId;
@@ -43,8 +45,12 @@ abstract class Decoder{
 		return false;
 	}
 
-	public function decode(string $id) : FlashIdInfo{
+	public function decode(int $id) : FlashIdInfo{
 		return $this->decodeIdDef($id, $this->def, (new FlashIdInfo($id))->setVendor($this->vendorName));
+	}
+
+	public static function getByte(int $id, int $offset) : int {
+		return ($id >> (8 * (6 - $offset))) & 0xff;
 	}
 
 	public function decodeIdDef(int $id, array $def, FlashIdInfo $info) : FlashIdInfo{

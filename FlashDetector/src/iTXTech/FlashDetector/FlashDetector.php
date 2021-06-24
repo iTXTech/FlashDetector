@@ -39,9 +39,10 @@ use iTXTech\FlashDetector\Fdb\Fdb;
 use iTXTech\FlashDetector\FlashId\Decoder as FlashIdDecoder;
 use iTXTech\FlashDetector\FlashId\Kioxia as KioxiaIdDecoder;
 use iTXTech\FlashDetector\FlashId\WesternDigital as WesternDigitalIdDecoder;
-use iTXTech\FlashDetector\FlashId\Micron as MicronFlashIdDecoder;
-use iTXTech\FlashDetector\FlashId\Intel as IntelFlashIdDecoder;
+use iTXTech\FlashDetector\FlashId\Micron as MicronIdDecoder;
+use iTXTech\FlashDetector\FlashId\Intel as IntelIdDecoder;
 use iTXTech\FlashDetector\FlashId\SpecTek as SpecTekIdDecoder;
+use iTXTech\FlashDetector\FlashId\Samsung as SamsungIdDecoder;
 use iTXTech\FlashDetector\FlashId\YMTC;
 use iTXTech\FlashDetector\Processor\Processor;
 use iTXTech\FlashDetector\Property\Classification;
@@ -141,9 +142,10 @@ abstract class FlashDetector{
 		self::registerFlashIdDecoder(new KioxiaIdDecoder());
 		self::registerFlashIdDecoder(new WesternDigitalIdDecoder());
 		self::registerFlashIdDecoder(new YMTC());
-		self::registerFlashIdDecoder(new IntelFlashIdDecoder());
-		self::registerFlashIdDecoder(new MicronFlashIdDecoder());
+		self::registerFlashIdDecoder(new IntelIdDecoder());
+		self::registerFlashIdDecoder(new MicronIdDecoder());
 		self::registerFlashIdDecoder(new SpecTekIdDecoder());
+		self::registerFlashIdDecoder(new SamsungIdDecoder());
 	}
 
 	public static function registerDecoder(string $decoder) : bool{
@@ -155,17 +157,12 @@ abstract class FlashDetector{
 		return false;
 	}
 
-	public static function registerFlashIdDecoder(FlashIdDecoder $decoder) : bool{
-		if(is_a($decoder, FlashIdDecoder::class, true)){
-			/** @var $decoder FlashIdDecoder */
-			self::$flashIdDecoders[] = $decoder;
-			return true;
-		}
-		return false;
+	public static function registerFlashIdDecoder(FlashIdDecoder $decoder){
+		self::$flashIdDecoders[] = $decoder;
 	}
 
-	public static function decodeFlashId(string $id) : ?FlashIdInfo {
-		$id = hexdec($id);
+	public static function decodeFlashId(string $id) : ?FlashIdInfo{
+		$id = hexdec($id . str_repeat("0", max(0, 12 - strlen($id))));
 		foreach(self::$flashIdDecoders as $decoder){
 			if($decoder->check($id)){
 				return $decoder->decode($id);

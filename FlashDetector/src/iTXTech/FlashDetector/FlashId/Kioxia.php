@@ -121,7 +121,6 @@ class Kioxia extends Decoder{
 					0b11010 => "BiCS3",
 					0b11011 => "BiCS4"
 				]
-
 			]
 		]
 	];
@@ -130,7 +129,7 @@ class Kioxia extends Decoder{
 		parent::__construct(Constants::VENDOR_KIOXIA, 0x98, self::ID_DEFINITION);
 	}
 
-	public function decode(string $id) : FlashIdInfo{
+	public function decode(int $id) : FlashIdInfo{
 		$info = parent::decode($id);
 		if(self::checkProperties($info->plane, $info->die)){
 			return $info->setPlane($info->plane / $info->die);
