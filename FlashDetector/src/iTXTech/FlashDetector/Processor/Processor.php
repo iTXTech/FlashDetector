@@ -22,11 +22,16 @@
 
 namespace iTXTech\FlashDetector\Processor;
 
+use iTXTech\FlashDetector\FlashIdInfo;
 use iTXTech\FlashDetector\FlashInfo;
 
 abstract class Processor{
 	public function flashInfo(FlashInfo $flashInfo) : FlashInfo{
 		return $flashInfo;
+	}
+
+	public function flashIdInfo(FlashIdInfo $idInfo) : FlashIdInfo{
+		return $idInfo;
 	}
 
 	public function index(string $query, string $remote, string $ua, string $name, array &$c) : bool{
@@ -45,7 +50,8 @@ abstract class Processor{
 		return true;
 	}
 
-	public function searchPn(string $query, string $remote, string $ua, ?string $lang, ?string $pn, int $limit, array &$c) : bool{
+	public function searchPn(string $query, string $remote, string $ua, ?string $lang, ?string $pn, int $limit,
+							 array &$c) : bool{
 		return true;
 	}
 

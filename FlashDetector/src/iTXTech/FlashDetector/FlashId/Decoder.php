@@ -23,6 +23,7 @@
 namespace iTXTech\FlashDetector\FlashId;
 
 use iTXTech\FlashDetector\FlashIdInfo;
+use iTXTech\SimpleFramework\Util\StringUtil;
 
 abstract class Decoder{
 	public $def;
@@ -43,10 +44,11 @@ abstract class Decoder{
 	}
 
 	public function decode(string $id) : FlashIdInfo{
-		return self::decodeIdDef($id, $this->def, (new FlashIdInfo($id))->setVendor($this->vendorName));
+		return $this->decodeIdDef($id, $this->def, (new FlashIdInfo($id))->setVendor($this->vendorName));
 	}
 
 	public function decodeIdDef(int $id, array $def, FlashIdInfo $info) : FlashIdInfo{
+		$ext = [];
 		foreach($def as $offset => $rules){
 			$byte = ($id >> (8 * (6 - $offset))) & 0xff;
 			foreach($rules as $name => $rule){
@@ -55,10 +57,29 @@ abstract class Decoder{
 					$data = ($data << 1) + (($byte >> $dq) & 0b1);
 				}
 				if(isset($rule["def"][$data])){
-					$info->{"set" . ucfirst($name)}($rule["def"][$data]);
+					if(StringUtil::startsWith($name, "ext:")){
+						$ext[explode(":", $name)[1]] = $rule["def"][$data];
+					}else{
+						$info->{"set" . ucfirst($name)}($rule["def"][$data]);
+					}
 				}
 			}
 		}
-		return $info;
+		return $info->setExt($ext);
+	}
+
+	public static function checkProperties(...$props) : bool{
+		foreach($props as $prop){
+			if(is_null($prop)){
+				return false;
+			}
+			if(is_numeric($prop) && $prop <= 0){
+				return false;
+			}
+			if(is_string($prop) && strlen(trim($prop)) == 0){
+				return false;
+			}
+		}
+		return true;
 	}
 }

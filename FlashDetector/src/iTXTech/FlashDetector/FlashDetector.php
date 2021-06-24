@@ -39,6 +39,9 @@ use iTXTech\FlashDetector\Fdb\Fdb;
 use iTXTech\FlashDetector\FlashId\Decoder as FlashIdDecoder;
 use iTXTech\FlashDetector\FlashId\Kioxia as KioxiaIdDecoder;
 use iTXTech\FlashDetector\FlashId\WesternDigital as WesternDigitalIdDecoder;
+use iTXTech\FlashDetector\FlashId\Micron as MicronFlashIdDecoder;
+use iTXTech\FlashDetector\FlashId\Intel as IntelFlashIdDecoder;
+use iTXTech\FlashDetector\FlashId\SpecTek as SpecTekIdDecoder;
 use iTXTech\FlashDetector\FlashId\YMTC;
 use iTXTech\FlashDetector\Processor\Processor;
 use iTXTech\FlashDetector\Property\Classification;
@@ -138,6 +141,9 @@ abstract class FlashDetector{
 		self::registerFlashIdDecoder(new KioxiaIdDecoder());
 		self::registerFlashIdDecoder(new WesternDigitalIdDecoder());
 		self::registerFlashIdDecoder(new YMTC());
+		self::registerFlashIdDecoder(new IntelFlashIdDecoder());
+		self::registerFlashIdDecoder(new MicronFlashIdDecoder());
+		self::registerFlashIdDecoder(new SpecTekIdDecoder());
 	}
 
 	public static function registerDecoder(string $decoder) : bool{

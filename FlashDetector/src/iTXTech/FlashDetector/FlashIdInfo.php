@@ -23,37 +23,29 @@
 namespace iTXTech\FlashDetector;
 
 class FlashIdInfo extends Arrayable{
-	protected $id;
-	protected $vendor;
-	protected $density;
-	protected $die;
-	protected $plane;
-	protected $pageSize;
-	protected $blockSize;
-	protected $processNode;
-	protected $cellLevel;
-	protected $toggle;
-	protected $voltage;
+	public $id;
+	public $vendor;
+	public $density;
+	public $die;
+	public $plane;
+	public $pageSize;
+	public $blockSize;
+	public $processNode;
+	public $cellLevel;
+	public $voltage;
+	public $ext;
 
 	public function __construct(int $id = 0x0){
 		$this->id = strtoupper(dechex($id));
 	}
 
-	public function getPlane() : ?int{
-		return $this->plane;
-	}
-
-	public function getDie() : ?int{
-		return $this->die;
+	public function setExt(array $ext) : FlashIdInfo{
+		$this->ext = $ext;
+		return $this;
 	}
 
 	public function setVoltage(string $v) : FlashIdInfo{
 		$this->voltage = $v;
-		return $this;
-	}
-
-	public function setToggle(bool $toggle) : FlashIdInfo{
-		$this->toggle = $toggle;
 		return $this;
 	}
 

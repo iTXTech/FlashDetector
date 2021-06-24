@@ -101,11 +101,11 @@ class Kioxia extends Decoder{
 			]
 		],
 		6 => [
-			"toggle" => [
+			"ext:interface" => [
 				"dq" => [7],
 				"def" => [
-					0b0 => false,
-					0b1 => true
+					0b0 => "Conventional",
+					0b1 => "ToggleDDR"
 				]
 			],
 			"processNode" => [
@@ -132,8 +132,8 @@ class Kioxia extends Decoder{
 
 	public function decode(string $id) : FlashIdInfo{
 		$info = parent::decode($id);
-		if($info->getDie() > 0 and $info->getPlane() > 0){
-			return $info->setPlane($info->getPlane() / $info->getDie());
+		if(self::checkProperties($info->plane, $info->die)){
+			return $info->setPlane($info->plane / $info->die);
 		}
 		return $info;
 	}
