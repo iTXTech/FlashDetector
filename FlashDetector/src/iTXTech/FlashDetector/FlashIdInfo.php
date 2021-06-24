@@ -33,7 +33,7 @@ class FlashIdInfo extends Arrayable{
 	public $processNode;
 	public $cellLevel;
 	public $voltage;
-	public $ext;
+	public $ext = [];
 
 	public function __construct(int $id = 0x0){
 		$this->id = strtoupper(dechex($id));
@@ -69,7 +69,7 @@ class FlashIdInfo extends Arrayable{
 		return $this;
 	}
 
-	public function setBlockSize(int $blockSize) : FlashIdInfo{
+	public function setBlockSize(?int $blockSize) : FlashIdInfo{
 		$this->blockSize = $blockSize;
 		return $this;
 	}
