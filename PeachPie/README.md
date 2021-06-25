@@ -2,7 +2,7 @@
 
 **Use `iTXTech FlashDetector` in `.NET Core / .NET Framework` projects.**
 
-See [SharpFlashDetector](https://github.com/iTXTech/SharpFlashDetector)
+See [SharpFlashDetector](https://github.com/iTXTech/SharpFlashDetector) for more information.
 
 ## How to
 
@@ -12,9 +12,10 @@ See [SharpFlashDetector](https://github.com/iTXTech/SharpFlashDetector)
 1. Configure PeachPie to compile these files
 1. Import FlashDetector in your `.NET` project
 
-## Load FlashDetector
+## Initialize `iTXTech FlashDetector`
 
 ```csharp
 var context = Context.CreateEmpty();
-PeachPieHelper.load(context);
+PeachPieHelper.load(context); // This will intialize SimpleFramework and FlashDetector
+PeachPieHelper.index(context,....); // Call other methods
 ```

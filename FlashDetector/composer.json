@@ -1,7 +1,7 @@
 {
   "name": "itxtech/flashdetector",
   "description": "Universal NAND Flash Part Number Decoder",
-  "license": "Apache License 2.0",
+  "license": "AGPL-3.0-or-later",
   "authors": [
     {
       "name": "PeratX",

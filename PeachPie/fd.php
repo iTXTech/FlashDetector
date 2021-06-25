@@ -35,12 +35,22 @@ class PeachPieHelper{
 
 		try{
 			$moduleManager = new ModuleManager(Initializer::getClassLoader(), __DIR__ . DIRECTORY_SEPARATOR, "");
-			//ModuleManager::loadModuleDirectly loads the specified module directly from the folder without check
-			//No JSON file should be provided in PeachPie Env
 			$moduleManager->readModule("FlashDetector");
 		}catch(\Throwable $e){
 			Logger::logException($e);
 		}
+	}
+
+	public static function decodeId(string $query, string $remote, string $ua, ?string $lang, ?string $id) : string{
+		$c = [];
+
+		foreach(FlashDetector::getProcessors() as $processor){
+			if(!$processor->decodeId($query, $remote, $ua, $lang, $id, $c)){
+				break;
+			}
+		}
+
+		return json_encode($c);
 	}
 
 	public static function decode(string $query, string $remote, string $ua, ?string $lang, ?string $pn) : string{
