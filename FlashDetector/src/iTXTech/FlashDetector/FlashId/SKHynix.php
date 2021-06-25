@@ -25,7 +25,7 @@ namespace iTXTech\FlashDetector\FlashId;
 use iTXTech\FlashDetector\Constants;
 use iTXTech\FlashDetector\FlashIdInfo;
 
-class SKHynix extends Decoder{
+class SKHynix extends Decoder {
 	public const ID_DEFINITION = [
 		2 => [
 			"density" => [
@@ -114,6 +114,7 @@ class SKHynix extends Decoder{
 					0x3 => "26nm",
 					0x4 => "20nm",
 					0x5 => "16nm",
+					0x9 => "16nm",
 					0xA => "16nm"
 				]
 			],
@@ -150,17 +151,17 @@ class SKHynix extends Decoder{
 		]
 	];
 
-	public function __construct(){
+	public function __construct() {
 		parent::__construct(Constants::VENDOR_SKHYNIX, 0xAD, self::ID_DEFINITION);
 	}
 
-	public function decode(int $id) : FlashIdInfo{
+	public function decode(int $id): FlashIdInfo {
 		$info = parent::decode($id);
 		$info->setPlane($info->ext["simultaneouslyProgrammedPages"]);
-		if(self::getByte($id, 2) == 0xDE){ //0xDE patch
+		if (self::getByte($id, 2) == 0xDE) { //0xDE patch
 			$info->setDensity(64 * Constants::DENSITY_GBITS);
 		}
-		if(self::getByte($id, 6) >= 0x50){ //14nm and after
+		if (self::getByte($id, 6) >= 0x50) { //14nm and after
 			$info->setExt([])->setBlockSize(null);
 			$info = $this->decodeIdDef($id, self::NEW_ID_DEFINITION, $info);
 		}

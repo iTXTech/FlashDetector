@@ -24,7 +24,7 @@ namespace iTXTech\FlashDetector\FlashId;
 
 use iTXTech\FlashDetector\Constants;
 
-class Intel extends Decoder{
+class Intel extends Decoder {
 	public const ID_DEFINITION = [
 		2 => [
 			"voltage" => [
@@ -72,7 +72,8 @@ class Intel extends Decoder{
 			"ext:pagesPerBlock" => [
 				"dq" => [6, 5, 4],
 				"def" => [
-					0b010 => 9216
+					0b110 => "512/1024/1536",
+					0b010 => "9216"
 				]
 			]
 		],
@@ -87,12 +88,13 @@ class Intel extends Decoder{
 					0b100 => 16,
 				]
 			],
-			"ext:spareAreaSizePer512B" => [
-				"dq" => [6, 5, 4, 3],
-				"def" => [
-					"0b0110" => "61-70B",
-				]
-			]
+//			"ext:spareAreaSizePer512B" => [
+//				"dq" => [6, 5, 4, 3],
+//				"def" => [
+//					0b0110 => "61-70B",
+//                    0b0111 => "37-45B"
+//				]
+//			]
 		],
 		5 => [
 			"plane" => [
@@ -106,7 +108,9 @@ class Intel extends Decoder{
 			"ext:blocksPerLun" => [
 				"dq" => [4, 3, 2],
 				"def" => [
-					0b001 => "1025~2048"
+					0b000 => "1024",
+					0b001 => "1025~2048",
+					0b010 => "2049~4096"
 				]
 			],
 			"ext:timingModeAsync" => [
@@ -135,7 +139,7 @@ class Intel extends Decoder{
 		]
 	];
 
-	public function __construct(){
+	public function __construct() {
 		parent::__construct(Constants::VENDOR_INTEL, 0x89, self::ID_DEFINITION);
 	}
 }
