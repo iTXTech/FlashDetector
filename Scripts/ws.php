@@ -32,7 +32,6 @@ use iTXTech\SimpleFramework\Console\Option\OptionBuilder;
 use iTXTech\SimpleFramework\Console\Option\OptionGroup;
 use iTXTech\SimpleFramework\Console\Option\Options;
 use iTXTech\SimpleFramework\Console\Option\Parser;
-use iTXTech\SimpleFramework\Console\SwooleLoggerHandler;
 use iTXTech\SimpleFramework\Module\WraithSpireMDR;
 use iTXTech\SimpleFramework\Util\Util;
 

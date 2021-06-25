@@ -49,13 +49,13 @@ class SiliconMotionForceFlash extends Generator{
 					$index = explode("=", $data[$line + 1])[1];
 					if(StringUtil::contains($index, "Page")){
 						$end = $start = strpos($index, "Page");
-						while($index{--$start} == "0" or ((int) $index{$start} > 0)) ;
+						while($index[--$start] == "0" or ((int)$index[$start] > 0)) ;
 						$start++;
-						$fid->setPagesPerBlock((int) substr($index, $start, $end - $start));
+						$fid->setPagesPerBlock((int)substr($index, $start, $end - $start));
 					}
 					foreach(["12", "16", "4", "8", "2"] as $p){
 						if(StringUtil::contains($index, $p . "K")){
-							$fid->setPageSize((int) $p);
+							$fid->setPageSize((int)$p);
 							break;
 						}
 					}
@@ -64,7 +64,7 @@ class SiliconMotionForceFlash extends Generator{
 					$vendor = str_replace("skhynixnix", "skhynix",
 						str_replace([" ", "tsb", "ss", "hy", "hynix"], ["", "toshiba", "samsung", "hynix", "skhynix"],
 							strtolower(explode("_", $info[0])[0])));
-					if(is_numeric($vendor{strlen($vendor) - 1})){
+					if(is_numeric($vendor[strlen($vendor) - 1])){
 						$vendor = substr($vendor, 0, strlen($vendor) - 1);
 					}
 

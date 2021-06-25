@@ -95,7 +95,7 @@ class ChipsBank extends Generator{
 						break;
 				}
 				if($pn !== ""){
-					if(in_array($pn{strlen($pn) - 2}, ["_", "*"])){
+					if(in_array($pn[strlen($pn) - 2], ["_", "*"])){
 						$pn = substr($pn, 0, strlen($pn) - 2);
 					}
 
