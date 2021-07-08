@@ -113,6 +113,11 @@ class FlashIdInfo extends Arrayable{
 		if($raw){
 			return $info;
 		}
+		foreach($info as $k => $v){
+			if($v === null){
+				$info[$k] = Constants::UNKNOWN;
+			}
+		}
 		$info = FlashDetector::translateArray($info, false, $lang);
 		if(isset($info["partNumbers"])){
 			$pns = $info["partNumbers"];
@@ -124,11 +129,6 @@ class FlashIdInfo extends Arrayable{
 		}
 		if(isset($info["cellLevel"])){
 			$info["cellLevel"] = Decoder::CELL_LEVEL[$info["cellLevel"]] ?? $info["cellLevel"];
-		}
-		foreach($info as $k => $v){
-			if($v === null){
-				$info[$k] = Constants::UNKNOWN;
-			}
 		}
 //		$info["pageSize"] .= " KB";
 //		$info["blockSize"] .= " KB";
