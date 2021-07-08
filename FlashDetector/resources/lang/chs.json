@@ -101,5 +101,17 @@
   "cty_ie": "爱尔兰",
   "cty_my": "马来西亚",
   "cty_ph": "菲律宾",
-  "summary": "料号：{0}，厂商：{1}，类型：{2}，容量：{3}<br>位宽：{4}，单元：{5}，制程：{6}，代：{7}<br>同步：{8}，异步：{9}，片选：{10}，通道：{11}，Die：{12}，R/B：{13}<br>电压：{14}<br>封装：{15}<br>控制器：{16}<br>注释：{17}<br>更多信息：{18}<br>闪存ID：{19}"
+  "summary": "料号：{0}，厂商：{1}，类型：{2}，容量：{3}<br>位宽：{4}，单元：{5}，制程：{6}，代：{7}<br>同步：{8}，异步：{9}，片选：{10}，通道：{11}，Die：{12}，R/B：{13}<br>电压：{14}<br>封装：{15}<br>控制器：{16}<br>注释：{17}<br>更多信息：{18}<br>闪存ID：{19}",
+  "pagesPerBlock": "页/块",
+  "spareAreaSizePer512B": "每 512B 备用空间",
+  "blocksPerLun": "块/Lun",
+  "timingModeAsync": "异步定时模式",
+  "revision": "版本",
+  "interface": "接口",
+  "simultaneouslyProgrammedPages": "可同时编程页面数",
+  "interleave": "交错",
+  "cache": "缓存",
+  "redundantAreaSize": "冗余区域大小",
+  "eccLevel": "ECC 要求",
+  "edo": "EDO"
 }

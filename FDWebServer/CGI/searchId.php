@@ -28,7 +28,7 @@ $c = [];
 
 foreach(FlashDetector::getProcessors() as $processor){
 	if(!$processor->searchId(getQuery(), getRemote(), getUserAgent(),
-		$_GET["lang"] ?? null, $_GET["id"] ?? null, $c)){
+		$_GET["lang"] ?? null, $_GET["id"] ?? null, $_GET["limit"] ?? 0, $c)){
 		break;
 	}
 }

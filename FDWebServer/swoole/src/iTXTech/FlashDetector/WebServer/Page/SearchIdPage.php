@@ -34,7 +34,7 @@ class SearchIdPage extends AbstractPage{
 
 		foreach(FlashDetector::getProcessors() as $processor){
 			if(!$processor->searchId(self::getQuery($request), self::getClientIp($request), self::getUserAgent($request),
-				$request->get["lang"] ?? null, $request->get["id"] ?? null, $c)){
+				$request->get["lang"] ?? null, $request->get["id"] ?? null, $request->get["limit"] ?? 0, $c)){
 				break;
 			}
 		}

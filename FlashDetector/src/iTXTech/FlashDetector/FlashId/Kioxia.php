@@ -75,7 +75,7 @@ class Kioxia extends Decoder{
 					0b11 => 16, //16KB
 				]
 			],
-			"blockSize" => [
+			"blockSize" => [ //KB
 				"dq" => [7, 5, 4],
 				"def" => [
 					0b000 => 128,

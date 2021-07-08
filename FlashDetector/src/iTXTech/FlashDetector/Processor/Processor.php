@@ -50,7 +50,8 @@ abstract class Processor{
 		return true;
 	}
 
-	public function searchId(string $query, string $remote, string $ua, ?string $lang, ?string $id, array &$c) : bool{
+	public function searchId(string $query, string $remote, string $ua, ?string $lang, ?string $id, int $limit,
+							 array &$c) : bool{
 		return true;
 	}
 

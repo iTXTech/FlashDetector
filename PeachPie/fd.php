@@ -89,11 +89,12 @@ class PeachPieHelper{
 		return json_encode($c);
 	}
 
-	public static function searchId(string $query, string $remote, string $ua, ?string $lang, ?string $id) : string{
+	public static function searchId(string $query, string $remote, string $ua, ?string $lang, ?string $id,
+									int $limit = 0) : string{
 		$c = [];
 
 		foreach(FlashDetector::getProcessors() as $processor){
-			if(!$processor->searchId($query, $remote, $ua, $lang, $id, $c)){
+			if(!$processor->searchId($query, $remote, $ua, $lang, $id, $limit, $c)){
 				break;
 			}
 		}
@@ -101,7 +102,8 @@ class PeachPieHelper{
 		return json_encode($c);
 	}
 
-	public static function searchPn(string $query, string $remote, string $ua, ?string $lang, ?string $pn, int $limit = 0) : string{
+	public static function searchPn(string $query, string $remote, string $ua, ?string $lang, ?string $pn,
+									int $limit = 0) : string{
 		$c = [];
 
 		foreach(FlashDetector::getProcessors() as $processor){

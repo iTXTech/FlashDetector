@@ -22,6 +22,8 @@
 
 namespace iTXTech\FlashDetector;
 
+use iTXTech\FlashDetector\Decoder\Decoder;
+
 class FlashIdInfo extends Arrayable{
 	public $id;
 	public $vendor;
@@ -117,9 +119,20 @@ class FlashIdInfo extends Arrayable{
 			$info["partNumbers"] = [];
 			foreach($pns as $pn){
 				$p = explode(" ", $pn);
-				$info["partNumbers"][] = FlashDetector::translateString($p[0]) . " " . $p[1];
+				$info["partNumbers"][] = FlashDetector::translateString($p[0], $lang) . " " . $p[1];
 			}
 		}
+		if(isset($info["cellLevel"])){
+			$info["cellLevel"] = Decoder::CELL_LEVEL[$info["cellLevel"]] ?? $info["cellLevel"];
+		}
+		foreach($info as $k => $v){
+			if($v === null){
+				$info[$k] = Constants::UNKNOWN;
+			}
+		}
+//		$info["pageSize"] .= " KB";
+//		$info["blockSize"] .= " KB";
+		$info["rawVendor"] = $this->vendor;
 		return $info;
 	}
 }

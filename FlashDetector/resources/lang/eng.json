@@ -103,5 +103,17 @@
   "cty_ie": "Ireland",
   "cty_my": "Malaysia",
   "cty_ph": "Philippines",
-  "summary": "Part Number: {0}, Vendor: {1}, Type: {2}, Density: {3}<br>Device Width: {4}, Cell Level: {5}, Process Node: {6}, Generation: {7}<br>Sync: {8}, Async: {9}, CE: {10}, Ch: {11}, Die: {12}, R/B: {13}<br>Voltage: {14}<br>Package: {15}<br>Controller: {16}<br>Remark: {17}<br>Extra Info: {18}<br>Flash ID: {19}"
+  "summary": "Part Number: {0}, Vendor: {1}, Type: {2}, Density: {3}<br>Device Width: {4}, Cell Level: {5}, Process Node: {6}, Generation: {7}<br>Sync: {8}, Async: {9}, CE: {10}, Ch: {11}, Die: {12}, R/B: {13}<br>Voltage: {14}<br>Package: {15}<br>Controller: {16}<br>Remark: {17}<br>Extra Info: {18}<br>Flash ID: {19}",
+  "pagesPerBlock": "Pages Per Block",
+  "spareAreaSizePer512B": "Spare Area Size Per 512B",
+  "blocksPerLun": "Blocks Per Lun",
+  "timingModeAsync": "Timing Mode Async",
+  "revision": "Revision",
+  "interface": "Interface",
+  "simultaneouslyProgrammedPages": "Simultaneously Programmed Pages",
+  "interleave": "Interleave",
+  "cache": "Cache",
+  "redundantAreaSize": "Redundant Area Size",
+  "eccLevel": "ECC Level",
+  "edo": "EDO"
 }

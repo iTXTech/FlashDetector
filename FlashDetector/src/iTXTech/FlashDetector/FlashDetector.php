@@ -278,12 +278,15 @@ abstract class FlashDetector{
 		}
 	}
 
-	public static function searchFlashId(string $id, bool $partMatch, ?string $lang) : ?array{
+	public static function searchFlashId(string $id, bool $partMatch, ?string $lang, int $limit = 0) : ?array{
 		$id = strtoupper($id);
 		if($partMatch){
 			$result = [];
 			foreach(self::$fdb->getIddb()->getFlashIds() as $flashId){
-				if(StringUtil::startsWith($flashId->getFlashId(), $id)){
+				if($limit > 0 and count($result) >= $limit){
+					break;
+				}
+				if(StringUtil::contains($flashId->getFlashId(), $id)){
 					$pageSize = $flashId->getPageSize();
 					if($pageSize != -1){
 						$pageSize = $pageSize < 1 ? ($pageSize * 1024) . "B" : $pageSize . "K";
