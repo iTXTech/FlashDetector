@@ -191,6 +191,7 @@ class FlashInfo extends Arrayable{
 			$interface = $info["interface"];
 			$density = $info["density"];
 			if($density !== null and $density > 0){
+				$info["rawDensity"] = $info["density"];
 				$info["density"] = FlashDetector::getHumanReadableDensity($info["density"]);
 			}else{
 				$info["density"] = Constants::UNKNOWN;
