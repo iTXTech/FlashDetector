@@ -278,7 +278,7 @@ abstract class FlashDetector{
 		}
 	}
 
-	public static function searchFlashId(string $id, bool $partMatch, ?string $lang, int $limit = 0) : ?array{
+	public static function searchFlashId(string $id, bool $partMatch, ?string $lang, int $limit = 0) : array{
 		$id = strtoupper($id);
 		if($partMatch){
 			$result = [];
@@ -303,10 +303,10 @@ abstract class FlashDetector{
 			}
 			return $result;
 		}
-		return self::$fdb->getIddb()->getFlashIds()[$id] ?? null;
+		return self::$fdb->getIddb()->getFlashIds()[$id] ?? [];
 	}
 
-	public static function searchPartNumber(string $pn, bool $partMatch, ?string $lang, int $limit = 0) : ?array{
+	public static function searchPartNumber(string $pn, bool $partMatch, ?string $lang, int $limit = 0) : array{
 		$pn = strtoupper($pn);
 		$result = [];
 		foreach(self::$fdb->getVendors() as $vendor){
