@@ -56,11 +56,15 @@ abstract class Processor{
 	}
 
 	public function searchPn(string $query, string $remote, string $ua, ?string $lang, ?string $pn, int $limit,
-							 array &$c) : bool{
+							 array  &$c): bool {
 		return true;
 	}
 
-	public function summary(string $query, string $remote, string $ua, ?string $lang, ?string $pn, array &$c) : bool{
+	public function summary(string $query, string $remote, string $ua, ?string $lang, ?string $pn, array &$c): bool {
+		return true;
+	}
+
+	public function summaryId(string $query, string $remote, string $ua, ?string $lang, ?string $id, array &$c): bool {
 		return true;
 	}
 }

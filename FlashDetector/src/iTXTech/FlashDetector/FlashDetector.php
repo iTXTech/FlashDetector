@@ -37,19 +37,19 @@ use iTXTech\FlashDetector\Decoder\WesternDigitalShortCode;
 use iTXTech\FlashDetector\Decoder\Yangtze;
 use iTXTech\FlashDetector\Fdb\Fdb;
 use iTXTech\FlashDetector\FlashId\Decoder as FlashIdDecoder;
-use iTXTech\FlashDetector\FlashId\Kioxia as KioxiaIdDecoder;
-use iTXTech\FlashDetector\FlashId\WesternDigital as WesternDigitalIdDecoder;
-use iTXTech\FlashDetector\FlashId\Micron as MicronIdDecoder;
 use iTXTech\FlashDetector\FlashId\Intel as IntelIdDecoder;
-use iTXTech\FlashDetector\FlashId\SpecTek as SpecTekIdDecoder;
+use iTXTech\FlashDetector\FlashId\Kioxia as KioxiaIdDecoder;
+use iTXTech\FlashDetector\FlashId\Micron as MicronIdDecoder;
 use iTXTech\FlashDetector\FlashId\Samsung as SamsungIdDecoder;
 use iTXTech\FlashDetector\FlashId\SKHynix as SKHynixIdDecoder;
+use iTXTech\FlashDetector\FlashId\SpecTek as SpecTekIdDecoder;
+use iTXTech\FlashDetector\FlashId\WesternDigital as WesternDigitalIdDecoder;
 use iTXTech\FlashDetector\FlashId\YMTC;
 use iTXTech\FlashDetector\Processor\Processor;
 use iTXTech\FlashDetector\Property\Classification;
 use iTXTech\SimpleFramework\Util\StringUtil;
 
-abstract class FlashDetector{
+abstract class FlashDetector {
 	public const LANGUAGES = ["chs", "eng"];
 
 	/** @var Decoder[] */
@@ -67,33 +67,33 @@ abstract class FlashDetector{
 	/** @var Processor[] */
 	private static $processors = [];
 
-	public static function registerProcessor(Processor $processor){
+	public static function registerProcessor(Processor $processor) {
 		self::$processors[] = $processor;
 	}
 
 	/**
 	 * @return Processor[]
 	 */
-	public static function getProcessors() : array{
+	public static function getProcessors(): array {
 		return self::$processors;
 	}
 
-	public static function getFdb() : Fdb{
+	public static function getFdb(): Fdb {
 		return self::$fdb;
 	}
 
-	public static function getVersion() : int{
+	public static function getVersion(): int {
 		return self::$fdb->getInfo()->getVersion();
 	}
 
-	public static function getInfo() : array{
-		if(self::$info == null){
+	public static function getInfo(): array {
+		if (self::$info == null) {
 			$cnt = 0;
-			foreach(self::$fdb->getVendors() as $vendor){
+			foreach (self::$fdb->getVendors() as $vendor) {
 				$cnt += count($vendor->getPartNumbers());
 			}
 			$c = 0;
-			foreach(self::$mdb as $v){
+			foreach (self::$mdb as $v) {
 				$c += count($v);
 			}
 			self::$info = [
@@ -106,24 +106,24 @@ abstract class FlashDetector{
 		return self::$info;
 	}
 
-	public static function getMdb() : array{
+	public static function getMdb(): array {
 		return self::$mdb;
 	}
 
-	public static function getLang() : array{
+	public static function getLang(): array {
 		return self::$lang;
 	}
 
-	public static function setFallbackLang(string $fallbackLang){
+	public static function setFallbackLang(string $fallbackLang) {
 		self::$fallbackLang = $fallbackLang;
 	}
 
-	public static function initialize(){
-		if(Loader::getInstance() !== null){
+	public static function initialize() {
+		if (Loader::getInstance() !== null) {
 			$fdb = json_decode(Loader::getInstance()->getResourceAsText("fdb.json"), true);
 			self::$fdb = new Fdb($fdb);
 			self::$mdb = json_decode(Loader::getInstance()->getResourceAsText("mdb.json"), true);
-			foreach(self::LANGUAGES as $l){
+			foreach (self::LANGUAGES as $l) {
 				self::$lang[$l] = json_decode(Loader::getInstance()->getResourceAsText("lang/$l.json"), true);
 			}
 		}
@@ -150,8 +150,8 @@ abstract class FlashDetector{
 		self::registerFlashIdDecoder(new SKHynixIdDecoder());
 	}
 
-	public static function registerDecoder(string $decoder) : bool{
-		if(is_a($decoder, Decoder::class, true)){
+	public static function registerDecoder(string $decoder): bool {
+		if (is_a($decoder, Decoder::class, true)) {
 			/** @var $decoder Decoder */
 			self::$decoders[] = $decoder;
 			return true;
@@ -159,67 +159,67 @@ abstract class FlashDetector{
 		return false;
 	}
 
-	public static function registerFlashIdDecoder(FlashIdDecoder $decoder){
+	public static function registerFlashIdDecoder(FlashIdDecoder $decoder) {
 		self::$flashIdDecoders[] = $decoder;
 	}
 
-	public static function decodeFlashId(string $id) : FlashIdInfo{
+	public static function decodeFlashId(string $id): FlashIdInfo {
 		$id = hexdec($id . str_repeat("0", max(0, 12 - strlen($id))));
-		foreach(self::$flashIdDecoders as $decoder){
-			if($decoder->check($id)){
+		foreach (self::$flashIdDecoders as $decoder) {
+			if ($decoder->check($id)) {
 				$info = $decoder->decode($id);
 				$iddb = self::$fdb->getIddb()->getFlashId(dechex($id));
 				$info = $iddb == null ? $info : $info->setControllers($iddb->getControllers())
 					->setPartNumbers($iddb->getPartNumbers());
 			}
 		}
-		if(!isset($info)){
+		if (!isset($info)) {
 			$info = (new FlashIdInfo($id))->setVendor(Constants::UNKNOWN);
 		}
-		foreach(self::$processors as $processor){
+		foreach (self::$processors as $processor) {
 			$processor->flashIdInfo($info);
 		}
 		return $info;
 	}
 
-	public static function detect(string $partNumber, bool $combineFdb = true) : FlashInfo{
+	public static function detect(string $partNumber, bool $combineFdb = true): FlashInfo {
 		$partNumber = str_replace([" ", ",", "&", ".", "|"], "", strtoupper($partNumber));
-		foreach(self::$decoders as $decoder){
-			if($decoder::check($partNumber)){
+		foreach (self::$decoders as $decoder) {
+			if ($decoder::check($partNumber)) {
 				$info = $decoder::decode($partNumber);
-				if($combineFdb){
+				if ($combineFdb) {
 					self::combineDataFromFdb($info, $decoder);
 				}
 				break;
 			}
 		}
-		if(!isset($info)){
+		if (!isset($info)) {
 			$info = (new FlashInfo($partNumber))->setVendor(Constants::UNKNOWN);
 		}
-		foreach(self::$processors as $processor){
+		foreach (self::$processors as $processor) {
 			$processor->flashInfo($info);
 		}
 		return $info;
 	}
 
-	public static function getSummary(string $partNumber, ?string $lang) : string{
+	public static function getSummary(string $partNumber, ?string $lang): string {
 		$info = self::detect($partNumber, true)->toArray($lang);
 		$base = self::translateString("summary", $lang);
 		$unknown = self::translateString(Constants::UNKNOWN, $lang);
-		if($info["interface"] == null){
+		if ($info["interface"] == null) {
 			$sync = $unknown;
 			$async = $unknown;
-		}elseif(isset($info["interface"]["toggle"])){
+		} elseif (isset($info["interface"]["toggle"])) {
 			$async = self::translate(true, $lang);
 			$sync = self::translate($info["interface"]["toggle"], $lang);
-		}else{
+		} else {
 			$async = self::translate($info["interface"]["async"], $lang);
 			$sync = self::translate($info["interface"]["sync"], $lang);
 		}
 
 		$i = "";
-		if(is_array($info["extraInfo"])){
-			foreach($info["extraInfo"] as $k => $v){
+		if (is_array($info["extraInfo"])) {
+			foreach ($info["extraInfo"] as $k => $v) {
 				$i .= $k . ": " . $v . ", ";
 			}
 			$i = substr($i, 0, strlen($i) - 2);
@@ -231,64 +231,85 @@ abstract class FlashDetector{
 			$info["classification"]["die"] ?? $unknown, $info["classification"]["rb"] ?? $unknown,
 			$info["voltage"], $info["package"], @implode(", ", $info["controller"]), $info["remark"],
 			$i, @implode(", ", $info["flashId"])];
-		for($i = 0; $i < count($trans); $i++){
+		for ($i = 0; $i < count($trans); $i++) {
 			$base = str_replace("{" . $i . "}", $trans[$i], $base);
 		}
 		return $base;
 	}
 
-	public static function getVendor(string $pn) : string{
+	public static function getIdSummary(string $id, ?string $lang): string {
+		$info = self::decodeFlashId($id)->toArray($lang);
+		$base = self::translateString("idSummary", $lang);
+		$i = "";
+		if (is_array($info["ext"])) {
+			foreach ($info["ext"] as $k => $v) {
+				$i .= $k . ": " . $v . ", ";
+			}
+			$i = substr($i, 0, strlen($i) - 2);
+		}
+
+		$trans = [$info["id"], $info["vendor"], $info["cellLevel"], FlashDetector::getHumanReadableDensity($info["density"]),
+			$info["processNode"], $info["die"], $info["plane"], $info["voltage"],
+			$info["pageSize"], $info["blockSize"], @implode(", ", $info["controllers"]),
+			$i, @implode(", ", $info["partNumbers"])];
+		for ($i = 0; $i < count($trans); $i++) {
+			$base = str_replace("{" . $i . "}", $trans[$i], $base);
+		}
+		return $base;
+	}
+
+	public static function getVendor(string $pn): string {
 		$pn = str_replace([" ", ",", "&", ".", "|"], "", strtoupper($pn));
-		foreach(self::$decoders as $decoder){
-			if($decoder::check($pn)){
+		foreach (self::$decoders as $decoder) {
+			if ($decoder::check($pn)) {
 				return $decoder::getName();
 			}
 		}
 		return Constants::UNKNOWN;
 	}
 
-	public static function combineDataFromFdb(FlashInfo $info, string $decoder){
+	public static function combineDataFromFdb(FlashInfo $info, string $decoder) {
 		/** @var Decoder $decoder */
-		if(($data = $decoder::getFlashInfoFromFdb($info)) !== null){
+		if (($data = $decoder::getFlashInfoFromFdb($info)) !== null) {
 			$info->setFlashId($data->getFlashIds());
 			$info->setController($data->getControllers());
-			if($data->getProcessNode() !== "" and ($info->getProcessNode() == Constants::UNKNOWN or
-					$info->getProcessNode() == null)){
+			if ($data->getProcessNode() !== "" and ($info->getProcessNode() == Constants::UNKNOWN or
+					$info->getProcessNode() == null)) {
 				$info->setProcessNode($data->getProcessNode());
 			}
 			$info->setRemark($data->getRemark());
-			if($info->getCellLevel() === null and $data->getCellLevel() !== ""){
+			if ($info->getCellLevel() === null and $data->getCellLevel() !== "") {
 				$info->setCellLevel($data->getCellLevel());
 			}
 
 			$c = $info->getClassification() ?? new Classification();
-			if($data->getDie() != Classification::UNKNOWN_PROP){
+			if ($data->getDie() != Classification::UNKNOWN_PROP) {
 				$c->setDie($data->getDie());
 			}
-			if($data->getCe() != Classification::UNKNOWN_PROP){
+			if ($data->getCe() != Classification::UNKNOWN_PROP) {
 				$c->setCe($data->getCe());
 			}
-			if($data->getRb() != Classification::UNKNOWN_PROP){
+			if ($data->getRb() != Classification::UNKNOWN_PROP) {
 				$c->setRb($data->getRb());
 			}
-			if($data->getCh() != Classification::UNKNOWN_PROP){
+			if ($data->getCh() != Classification::UNKNOWN_PROP) {
 				$c->setCh($data->getCh());
 			}
 			$info->setClassification($c);
 		}
 	}
 
-	public static function searchFlashId(string $id, bool $partMatch, ?string $lang, int $limit = 0) : array{
+	public static function searchFlashId(string $id, bool $partMatch, ?string $lang, int $limit = 0): array {
 		$id = strtoupper($id);
-		if($partMatch){
+		if ($partMatch) {
 			$result = [];
-			foreach(self::$fdb->getIddb()->getFlashIds() as $flashId){
-				if($limit > 0 and count($result) >= $limit){
+			foreach (self::$fdb->getIddb()->getFlashIds() as $flashId) {
+				if ($limit > 0 and count($result) >= $limit) {
 					break;
 				}
-				if(StringUtil::contains($flashId->getFlashId(), $id)){
+				if (StringUtil::contains($flashId->getFlashId(), $id)) {
 					$pageSize = $flashId->getPageSize();
-					if($pageSize != -1){
+					if ($pageSize != -1) {
 						$pageSize = $pageSize < 1 ? ($pageSize * 1024) . "B" : $pageSize . "K";
 					}
 					$data = [
@@ -306,34 +327,34 @@ abstract class FlashDetector{
 		return self::$fdb->getIddb()->getFlashIds()[$id] ?? [];
 	}
 
-	public static function searchPartNumber(string $pn, bool $partMatch, ?string $lang, int $limit = 0) : array{
+	public static function searchPartNumber(string $pn, bool $partMatch, ?string $lang, int $limit = 0): array {
 		$pn = strtoupper($pn);
 		$result = [];
-		foreach(self::$fdb->getVendors() as $vendor){
-			foreach($vendor->getPartNumbers() as $partNumber){
-				if($limit > 0 and count($result) >= $limit){
+		foreach (self::$fdb->getVendors() as $vendor) {
+			foreach ($vendor->getPartNumbers() as $partNumber) {
+				if ($limit > 0 and count($result) >= $limit) {
 					break 2;
-				}elseif(($partMatch and StringUtil::contains($partNumber->getPartNumber(), $pn)) or
-					(!$partNumber and $partNumber->getPartNumber() == $pn)){
+				} elseif (($partMatch and StringUtil::contains($partNumber->getPartNumber(), $pn)) or
+					(!$partNumber and $partNumber->getPartNumber() == $pn)) {
 					$result[] = self::translateString($vendor->getName(), $lang) . " " . $partNumber->getPartNumber();
 				}
 			}
 		}
 
-		foreach(self::$mdb["micron"] as $c => $p){
-			if($limit > 0 and count($result) >= $limit){
+		foreach (self::$mdb["micron"] as $c => $p) {
+			if ($limit > 0 and count($result) >= $limit) {
 				break;
-			}elseif(StringUtil::contains($p, $pn)){
+			} elseif (StringUtil::contains($p, $pn)) {
 				$result[] = self::translateString(Micron::getName(), $lang) . " " . $c . " " . $p;
 			}
 		}
 
-		foreach(self::$mdb["spectek"] as $c => $p){
-			if($limit > 0 and count($result) >= $limit){
+		foreach (self::$mdb["spectek"] as $c => $p) {
+			if ($limit > 0 and count($result) >= $limit) {
 				break;
-			}else{
-				foreach($p as $specPn){
-					if(StringUtil::contains($specPn, $pn)){
+			} else {
+				foreach ($p as $specPn) {
+					if (StringUtil::contains($specPn, $pn)) {
 						$result[] = self::translateString(SpecTek::getName(), $lang) . " " . $c . " " . $specPn;
 					}
 				}
@@ -343,15 +364,15 @@ abstract class FlashDetector{
 		return $result;
 	}
 
-	public static function searchMicronFbgaCode(string $code) : array{
+	public static function searchMicronFbgaCode(string $code): array {
 		$code = strtoupper($code);
-		foreach(self::$mdb["micron"] as $c => $pn){
-			if($code == $c){
+		foreach (self::$mdb["micron"] as $c => $pn) {
+			if ($code == $c) {
 				return [$pn];
 			}
 		}
-		foreach(self::$mdb["spectek"] as $c => $pn){
-			if($code == $c){
+		foreach (self::$mdb["spectek"] as $c => $pn) {
+			if ($code == $c) {
 				return $pn;
 			}
 		}
@@ -364,47 +385,47 @@ abstract class FlashDetector{
 	 *
 	 * @return array|string|bool|null
 	 */
-	public static function translate($var, ?string $lang = "chs"){
-		if(is_bool($var)){
+	public static function translate($var, ?string $lang = "chs") {
+		if (is_bool($var)) {
 			return self::translateString($var ? "true" : "false", $lang);
-		}elseif(is_array($var)){
+		} elseif (is_array($var)) {
 			return self::translateArray($var, true, $lang);
-		}elseif(is_string($var)){
+		} elseif (is_string($var)) {
 			return self::translateString($var, $lang);
-		}elseif($var == -1){
+		} elseif ($var == -1) {
 			return self::translateString(Constants::UNKNOWN, $lang);
 		}
 		return $var;
 	}
 
-	public static function translateArray(array $arr, bool $translateKey, ?string $lang = "chs") : array{
+	public static function translateArray(array $arr, bool $translateKey, ?string $lang = "chs"): array {
 		$a = [];
-		foreach($arr as $k => $v){
+		foreach ($arr as $k => $v) {
 			$a[$translateKey ? self::translateString($k, $lang) : $k] = self::translate($v, $lang);
 		}
 		return $a;
 	}
 
-	public static function translateString(string $key, ?string $lang = "chs") : string{
-		if($lang == null){
+	public static function translateString(string $key, ?string $lang = "chs"): string {
+		if ($lang == null) {
 			$lang = self::$fallbackLang;
 		}
 		$result = self::$lang[self::$fallbackLang][$key] ?? $key;
-		if(isset(self::$lang[$lang][$key])){
+		if (isset(self::$lang[$lang][$key])) {
 			$result = self::$lang[$lang][$key];
 		}
 		return str_replace(["<br>"], ["\n"], $result);
 	}
 
-	public static function getHumanReadableDensity(int $density, bool $useByte = false) : string{
-		if($useByte){
+	public static function getHumanReadableDensity(int $density, bool $useByte = false): string {
+		if ($useByte) {
 			$density /= 8;
 			$unit = ["MB", "GB", "TB"];
-		}else{
+		} else {
 			$unit = ["Mb", "Gb", "Tb"];
 		}
 		$i = 0;
-		while($density >= 1024 and isset($unit[$i + 1])){
+		while ($density >= 1024 and isset($unit[$i + 1])) {
 			$density /= 1024;
 			$i++;
 		}

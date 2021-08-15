@@ -113,5 +113,6 @@
   "cache": "缓存",
   "redundantAreaSize": "冗余区域大小",
   "eccLevel": "ECC 要求",
-  "edo": "EDO"
+  "edo": "EDO",
+  "idSummary": "闪存ID：{0}，厂商：{1}，单元：{2}，容量：{3}<br>制程：{4}，Die：{5}，Plane：{6}，电压：{7}<br>页大小：{8}，块大小：{9}<br>控制器：{10}<br>更多信息：{11}<br>料号：{12}"
 }

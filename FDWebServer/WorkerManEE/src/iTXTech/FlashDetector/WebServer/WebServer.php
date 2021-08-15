@@ -29,6 +29,7 @@ use iTXTech\FlashDetector\WebServer\Page\IndexPage;
 use iTXTech\FlashDetector\WebServer\Page\InfoPage;
 use iTXTech\FlashDetector\WebServer\Page\SearchIdPage;
 use iTXTech\FlashDetector\WebServer\Page\SearchPnPage;
+use iTXTech\FlashDetector\WebServer\Page\SummaryIdPage;
 use iTXTech\FlashDetector\WebServer\Page\SummaryPage;
 use iTXTech\SimpleFramework\Console\Logger;
 use iTXTech\SimpleFramework\Framework;
@@ -47,6 +48,7 @@ class WebServer{
 		RequestHandler::registerPage("/searchId", SearchIdPage::class);
 		RequestHandler::registerPage("/searchPn", SearchPnPage::class);
 		RequestHandler::registerPage("/summary", SummaryPage::class);
+		RequestHandler::registerPage("/summaryId", SummaryIdPage::class);
 		RequestHandler::registerPage("/info", InfoPage::class);
 		RequestHandler::registerPage("/decodeId", DecodeIdPage::class);
 		$this->webServer = new WNWS("http://" . $config["address"] . ":" . $config["port"]);

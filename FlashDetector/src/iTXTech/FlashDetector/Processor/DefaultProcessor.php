@@ -89,13 +89,24 @@ class DefaultProcessor extends Processor{
 		return true;
 	}
 
-	public function summary(string $query, string $remote, string $ua, ?string $lang, ?string $pn, array &$c) : bool{
+	public function summary(string $query, string $remote, string $ua, ?string $lang, ?string $pn, array &$c): bool {
 		$c = $pn != null ? [
 			"result" => true,
 			"data" => FlashDetector::getSummary($pn, $lang)
 		] : [
 			"result" => false,
 			"message" => "Missing part number"
+		];
+		return true;
+	}
+
+	public function summaryId(string $query, string $remote, string $ua, ?string $lang, ?string $id, array &$c): bool {
+		$c = $id != null ? [
+			"result" => true,
+			"data" => FlashDetector::getIdSummary($id, $lang)
+		] : [
+			"result" => false,
+			"message" => "Missing flash Id"
 		];
 		return true;
 	}

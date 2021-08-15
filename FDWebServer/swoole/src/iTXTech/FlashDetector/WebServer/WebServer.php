@@ -28,6 +28,7 @@ use iTXTech\FlashDetector\WebServer\Page\IndexPage;
 use iTXTech\FlashDetector\WebServer\Page\InfoPage;
 use iTXTech\FlashDetector\WebServer\Page\SearchIdPage;
 use iTXTech\FlashDetector\WebServer\Page\SearchPnPage;
+use iTXTech\FlashDetector\WebServer\Page\SummaryIdPage;
 use iTXTech\FlashDetector\WebServer\Page\SummaryPage;
 use iTXTech\SimpleSwFw\Http\Server;
 
@@ -43,6 +44,7 @@ class WebServer{
 		$this->server->registerPage("/searchId", SearchIdPage::class);
 		$this->server->registerPage("/searchPn", SearchPnPage::class);
 		$this->server->registerPage("/summary", SummaryPage::class);
+		$this->server->registerPage("/summaryId", SummaryIdPage::class);
 		$this->server->registerPage("/info", InfoPage::class);
 		$this->server->registerPage("/decodeId", DecodeIdPage::class);
 		$this->server->load($config);
