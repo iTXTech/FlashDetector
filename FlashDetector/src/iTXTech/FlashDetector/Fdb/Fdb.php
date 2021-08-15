@@ -24,7 +24,7 @@ namespace iTXTech\FlashDetector\Fdb;
 
 use iTXTech\FlashDetector\Arrayable;
 
-class Fdb extends Arrayable{
+class Fdb extends Arrayable {
 	/** @var Info */
 	protected $info;
 	/** @var Vendor[] */
@@ -32,12 +32,12 @@ class Fdb extends Arrayable{
 	/** @var Iddb */
 	protected $iddb;
 
-	public function __construct(array $arr = null){
-		if($arr != null){
+	public function __construct(array $arr = null) {
+		if ($arr != null) {
 			$this->info = new Info($arr["info"]);
 			$this->iddb = new Iddb($arr["iddb"]);
 			unset($arr["info"], $arr["iddb"]);
-			foreach($arr as $vendor => $pns){
+			foreach ($arr as $vendor => $pns) {
 				$this->vendors[$vendor] = new Vendor($vendor, $pns);
 			}
 		}
@@ -46,34 +46,34 @@ class Fdb extends Arrayable{
 	/**
 	 * @return Vendor[]
 	 */
-	public function getVendors() : array{
+	public function getVendors(): array {
 		return $this->vendors;
 	}
 
-	public function getVendor(string $vendor) : ?Vendor{
-		return $this->vendors[strtolower($vendor)] ?? null;
+	public function getVendor(string $vendor): ?Vendor {
+		return $this->vendors[trim(strtolower($vendor))] ?? null;
 	}
 
-	public function setVendors(array $vendors){
+	public function setVendors(array $vendors) {
 		$this->vendors = $vendors;
 	}
 
-	public function getPartNumber(string $vendor, string $partNumber, bool $real = false) : ?PartNumber{
-		$vendor = strtolower($vendor);
-		$partNumber = strtoupper($partNumber);
-		if(isset($this->vendors[$vendor])){
+	public function getPartNumber(string $vendor, string $partNumber, bool $real = false): ?PartNumber {
+		$vendor = trim(strtolower($vendor));
+		$partNumber = trim(strtoupper($partNumber));
+		if (isset($this->vendors[$vendor])) {
 			$pn = $this->vendors[$vendor]->getPartNumber($partNumber);
-			if($pn != null){
+			if ($pn != null) {
 				return $real ? $pn : clone $pn;
-			}elseif($real){
+			} elseif ($real) {
 				return $this->addPartNumber($vendor, $partNumber);
 			}
 		}
 		return $real ? $this->addPartNumber($vendor, $partNumber) : null;
 	}
 
-	private function addPartNumber(string $vendor, string $partNumber) : PartNumber{
-		if(!isset($this->vendors[$vendor])){
+	private function addPartNumber(string $vendor, string $partNumber): PartNumber {
+		if (!isset($this->vendors[$vendor])) {
 			$this->vendors[$vendor] = new Vendor($vendor);
 		}
 		$pn = new PartNumber($partNumber);
@@ -81,28 +81,28 @@ class Fdb extends Arrayable{
 		return $pn;
 	}
 
-	public function hasPartNumber(string $vendor, string $partNumber) : bool{
+	public function hasPartNumber(string $vendor, string $partNumber): bool {
 		return $this->getPartNumber($vendor, $partNumber) != null;
 	}
 
-	public function getInfo() : Info{
+	public function getInfo(): Info {
 		return $this->info;
 	}
 
-	public function setIddb(Iddb $iddb){
+	public function setIddb(Iddb $iddb) {
 		$this->iddb = $iddb;
 	}
 
-	public function getIddb() : Iddb{
+	public function getIddb(): Iddb {
 		return $this->iddb;
 	}
 
-	public function toArray() : array{
+	public function toArray(): array {
 		$arr = [
 			"info" => $this->info->toArray(),
 			"iddb" => $this->iddb->toArray()
 		];
-		foreach($this->vendors as $vendor){
+		foreach ($this->vendors as $vendor) {
 			$arr[$vendor->getName()] = $vendor->toArray();
 		}
 		return $arr;
