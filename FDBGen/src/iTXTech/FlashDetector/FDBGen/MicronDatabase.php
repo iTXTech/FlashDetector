@@ -28,11 +28,12 @@ use iTXTech\SimpleFramework\Console\Logger;
 use iTXTech\SimpleFramework\Util\Config;
 
 class MicronDatabase{
-	public const MICRON_HEADER = ["NW", "NX", "NQ"];
+	public const MICRON_HEADER = ["NW", "NY", "NX", "NQ"];
 	public const SPECTEK_HEADER = ["PF", "PFA", "PFB", "PFC", "PFD", "PFE", "PFF", "PFG", "PFH"];
 
 	public const START_FROM = [
 		"NW" => 101,
+		"NY" => 101,
 		"NQ" => 101,
 		"NX" => 101,
 	];
