@@ -126,4 +126,16 @@ class PeachPieHelper{
 
 		return json_encode($c);
 	}
+
+	public static function summaryId(string $query, string $remote, string $ua, ?string $lang, ?string $id, array &$c) : string{
+		$c = [];
+
+		foreach(FlashDetector::getProcessors() as $processor){
+			if(!$processor->summaryId($query, $remote, $ua, $lang, $id, $c)){
+				break;
+			}
+		}
+
+		return json_encode($c);
+	}
 }
