@@ -31,6 +31,7 @@ use iTXTech\FlashDetector\FDBGen\Generator\Innostor;
 use iTXTech\FlashDetector\FDBGen\Generator\JMicron;
 use iTXTech\FlashDetector\FDBGen\Generator\Maxio;
 use iTXTech\FlashDetector\FDBGen\Generator\Maxiotek;
+use iTXTech\FlashDetector\FDBGen\Generator\PhisonSSD;
 use iTXTech\FlashDetector\FDBGen\Generator\SandForce;
 use iTXTech\FlashDetector\FDBGen\Generator\SiliconMotionForceFlash;
 use iTXTech\FlashDetector\FDBGen\Generator\SiliconMotionSSD;
@@ -65,6 +66,7 @@ abstract class FDBGen{
 		// Unreliable Part Number
 		self::registerGenerator(ChipsBank::class);
 		self::registerGenerator(Innostor::class);
+		self::registerGenerator(PhisonSSD::class);
 	}
 
 	public static function generate(string $version, string $db, bool $extra = false) : array{

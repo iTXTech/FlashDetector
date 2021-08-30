@@ -59,10 +59,10 @@ abstract class FlashDetector {
 	private static $flashIdDecoders = [];
 
 	/** @var Fdb */
-	private static $fdb;
-	private static $mdb = [];
+	private static $fdb; // Flash Database
+	private static $mdb = []; // Micron FBGA Code 2 Part Number Database
 	private static $lang = [];
-	private static $fallbackLang = "chs";
+	private static $fallbackLang = self::LANGUAGES[0];
 	private static $info;
 	/** @var Processor[] */
 	private static $processors = [];
