@@ -32,6 +32,10 @@ class Fdb extends Arrayable {
 	/** @var Iddb */
 	protected $iddb;
 
+	public static function fromJson(string $json): Fdb {
+		return new Fdb(json_decode($json, true));
+	}
+
 	public function __construct(array $arr = null) {
 		if ($arr != null) {
 			$this->info = new Info($arr["info"]);
@@ -51,18 +55,18 @@ class Fdb extends Arrayable {
 	}
 
 	public function getVendor(string $vendor): ?Vendor {
-		return $this->vendors[trim(strtolower($vendor))] ?? null;
+		return $this->vendors[Vendor::getInternalName($vendor)] ?? null;
 	}
 
-	public function setVendors(array $vendors) {
-		$this->vendors = $vendors;
+	public function setVendor(Vendor $vendor) {
+		$this->vendors[$vendor->getName()] = $vendor;
 	}
 
 	public function getPartNumber(string $vendor, string $partNumber, bool $real = false): ?PartNumber {
 		$vendor = trim(strtolower($vendor));
 		$partNumber = trim(strtoupper($partNumber));
-		if (isset($this->vendors[$vendor])) {
-			$pn = $this->vendors[$vendor]->getPartNumber($partNumber);
+		if ($this->getVendor($vendor)) {
+			$pn = $this->getVendor($vendor)->getPartNumber($partNumber);
 			if ($pn != null) {
 				return $real ? $pn : clone $pn;
 			} elseif ($real) {
@@ -73,11 +77,11 @@ class Fdb extends Arrayable {
 	}
 
 	private function addPartNumber(string $vendor, string $partNumber): PartNumber {
-		if (!isset($this->vendors[$vendor])) {
-			$this->vendors[$vendor] = new Vendor($vendor);
+		if (!$this->getVendor($vendor)) {
+			$this->setVendor(new Vendor($vendor));
 		}
 		$pn = new PartNumber($partNumber);
-		$this->vendors[$vendor]->addPartNumber($pn);
+		$this->getVendor($vendor)->addPartNumber($pn);
 		return $pn;
 	}
 

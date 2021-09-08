@@ -28,11 +28,19 @@ use iTXTech\FlashDetector\Constants;
 class Vendor extends Arrayable{
 	public const VENDOR_PATCH = [
 		"sandisk" => Constants::VENDOR_WESTERN_DIGITAL,
-		"toshiba" => Constants::VENDOR_KIOXIA
+		"toshiba" => Constants::VENDOR_KIOXIA,
+		"toshiba-iver" => Constants::VENDOR_KIOXIA,
+		"sndk" => Constants::VENDOR_WESTERN_DIGITAL,
+		"hynix" => Constants::VENDOR_SKHYNIX
 	];
 	protected $name;
 	/** @var PartNumber[] */
 	protected $pns;
+
+	public static function getInternalName(string $name) : string{
+		$name = trim(strtolower($name));
+		return self::VENDOR_PATCH[$name] ?? $name;
+	}
 
 	public function __construct(string $name, array $pns = []){
 		$this->name = strtolower($name);
@@ -42,7 +50,7 @@ class Vendor extends Arrayable{
 	}
 
 	public function getName() : string{
-		return self::VENDOR_PATCH[$this->name] ?? $this->name;
+		return self::getInternalName($this->name);
 	}
 
 	/**

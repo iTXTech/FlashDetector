@@ -120,8 +120,7 @@ abstract class FlashDetector {
 
 	public static function initialize() {
 		if (Loader::getInstance() !== null) {
-			$fdb = json_decode(Loader::getInstance()->getResourceAsText("fdb.json"), true);
-			self::$fdb = new Fdb($fdb);
+			self::$fdb = Fdb::fromJson(Loader::getInstance()->getResourceAsText("fdb.json"));
 			self::$mdb = json_decode(Loader::getInstance()->getResourceAsText("mdb.json"), true);
 			foreach (self::LANGUAGES as $l) {
 				self::$lang[$l] = json_decode(Loader::getInstance()->getResourceAsText("lang/$l.json"), true);
