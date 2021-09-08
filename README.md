@@ -27,16 +27,16 @@ Public [FlashMaster](https://github.com/iTXTech/FlashMaster) Frontend: [https://
 
 ## Requirements
 
-* [PHP 7.2 ~ 7.4](https://secure.php.net)
+* [PHP >= 7.2](https://www.php.net)
 * [SimpleFramework 2.2](https://github.com/iTXTech/SimpleFramework)
 * [Composer](https://github.com/composer/composer)
 
 ## Setup
 
-```
-git clone https://github.com/iTXTech/FlashDetector.git
-cd FlashDetector/FlashDetector
-composer install
+```bash
+$ git clone https://github.com/iTXTech/FlashDetector.git
+$ cd FlashDetector/FlashDetector
+$ composer install
 ```
 
 ## Supported
@@ -54,12 +54,13 @@ composer install
 ### Controller Vendors
 
 1. [Silicon Motion](https://www.siliconmotion.com/)
-1. [ASolid](https://www.asolid-tek.com/)
-1. [JMicron](https://www.jmicron.com/)
-1. [Maxio](http://www.maxio-tech.com/)
-1. [SandForce](https://www.seagate.com/) - *Now Seagate*
-1. [Chipsbank](http://www.chipsbank.com/)
-1. [Alcor Micro](https://www.alcormicro.com/)
+2. [ASolid](https://www.asolid-tek.com/)
+3. [JMicron](https://www.jmicron.com/)
+4. [Maxio](http://www.maxio-tech.com/)
+5. [SandForce](https://www.seagate.com/) - *Now Seagate*
+6. [Chipsbank](http://www.chipsbank.com/)
+7. [Alcor Micro](https://www.alcormicro.com/)
+8. [Phison](https://www.phison.com/)
 
 ## Web Server
 
@@ -73,7 +74,7 @@ There are 4 implementations of `FDWebServer`:
 
 ## Usage
 
-See files in [Scripts](https://github.com/iTXTech/FlashDetector/tree/master/Scripts).
+See files in [Scripts](Scripts).
 
 ## Flash Database
 
