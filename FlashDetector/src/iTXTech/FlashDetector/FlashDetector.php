@@ -247,7 +247,9 @@ abstract class FlashDetector {
 			$i = substr($i, 0, strlen($i) - 2);
 		}
 
-		$trans = [$info["id"], $info["vendor"], $info["cellLevel"], FlashDetector::getHumanReadableDensity($info["density"]),
+		$density = is_numeric($info["density"]) ? FlashDetector::getHumanReadableDensity($info["density"]) : $info["density"];
+
+		$trans = [$info["id"], $info["vendor"], $info["cellLevel"], $density,
 			$info["processNode"], $info["die"], $info["plane"], $info["voltage"],
 			$info["pageSize"], $info["blockSize"], @implode(", ", $info["controllers"]),
 			$i, @implode(", ", $info["partNumbers"])];
