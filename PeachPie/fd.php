@@ -3,7 +3,7 @@
 /*
  * iTXTech FlashDetector
  *
- * Copyright (C) 2018-2021 iTX Technologies
+ * Copyright (C) 2018-2022 iTX Technologies
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as
@@ -127,7 +127,7 @@ class PeachPieHelper{
 		return json_encode($c);
 	}
 
-	public static function summaryId(string $query, string $remote, string $ua, ?string $lang, ?string $id, array &$c) : string{
+	public static function summaryId(string $query, string $remote, string $ua, ?string $lang, ?string $id) : string{
 		$c = [];
 
 		foreach(FlashDetector::getProcessors() as $processor){
