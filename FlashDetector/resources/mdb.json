@@ -2049,7 +2049,57 @@
         "NY164": "MT29F8T08GULCEM4-QB:C",
         "NY165": "MT29F8T08GULCEM4-QM:C",
         "NY166": "MT29F8T08GULCEM4-QA:C",
-        "NY167": "MT29F4T08EULEEM4-M:E"
+        "NY167": "MT29F4T08EULEEM4-M:E",
+        "NW792": "MT29F2G01ABAGD12-AUTES:G",
+        "NY168": "MT29F512G08EBLKEJ4-M:K",
+        "NY169": "MT29F1T08EELKEJ4-M:K",
+        "NY170": "MT29F2T08EMLKEJ4-M:K",
+        "NY171": "MT29F4T08EULKEM4-M:K",
+        "NY172": "MT29F8T08EWLKEM5-M:K",
+        "NY173": "MT29F512G08EBLKEJ4-ITF:K",
+        "NY174": "MT29F1T08EELKEJ4-ITF:K",
+        "NY175": "MT29F2T08EMLKEJ4-ITF:K",
+        "NY176": "MT29F4T08EULKEM4-ITF:K",
+        "NY177": "MT29F16T08GSLCEM9-QB:C",
+        "NY178": "MT29F16T08ESLCHL6-QA:C",
+        "NY179": "MT29F16T08ESLCHL8-QA:C",
+        "NY180": "MT29F4T08EMLCHD4-QJ:C",
+        "NY181": "MT29F4T08EMLCHD4-QA:C",
+        "NY182": "MT29F8T08EULCHD5-QA:C",
+        "NY183": "MT29F8T08EULCHD5-T:C",
+        "NY184": "MT29F2T08EELCHD4-R:C",
+        "NY185": "MT29F2T08EELCHD4-QJ:C",
+        "NY186": "MT29F8T08EULCHD5-QJ:C",
+        "NY187": "MT29F4T08EMLCHD4-QC:C",
+        "NY188": "MT29F8T08EULCHD5-M:C",
+        "NY189": "MT29F8T08EULCHD5-R:C",
+        "NY190": "MT29F2T08EELCHD4-QC:C",
+        "NY191": "MT29F1T08EBLCHD4-T:C",
+        "NY192": "MT29F1T08EBLCHD4-R:C",
+        "NY193": "MT29F2T08EELCHD4-T:C",
+        "NY194": "MT29F4T08EMLCHD4-M:C",
+        "NY195": "MT29F2T08EELCHD4-QA:C",
+        "NY196": "MT29F4T08EMLCHD4-T:C",
+        "NY197": "MT29F4T08EMLCHD4-R:C",
+        "NY198": "MT29F2T08EELCHD4-M:C",
+        "NY199": "MT29F1T08EBLCHD4-QJ:C",
+        "NY200": "MT29F1T08EBLCHD4-QA:C",
+        "NY201": "MT29F1T08EBLCHD4-M:C",
+        "NY202": "MT29F1T08EBLCHD4-QC:C",
+        "NY203": "MT29F2T08EELCHL4-QA:C",
+        "NY204": "MT29F8T08EQLCHL5-QA:C",
+        "NY205": "MT29F4T08ELLCHL4-QA:C",
+        "NY206": "MT29F16T08EWLCHD6-QA:C",
+        "NY207": "MT29F16T08EWLCHD6-QJ:C",
+        "NY208": "MT29F16T08EWLCHD6-T:C",
+        "NY209": "MT29F16T08EWLCHD6-R:C",
+        "NY210": "MT29F16T08EWLCHD8-R:C",
+        "NY211": "MT29F16T08EWLCHD8-QA:C",
+        "NY212": "MT29F16T08EWLCHD8-QJ:C",
+        "NY213": "MT29F16T08EWLCHD8-T:C",
+        "NY214": "MT29F8T08EWLKEJ9-M:K",
+        "NY215": "MT29F2T08EMLKEM4-M:K",
+        "NY216": "MT29F2T08EMLKEM4-ITF:K"
     },
     "spectek": {
         "PF001": [
@@ -6726,6 +6776,66 @@
         ],
         "PF837": [
             "FBMB58R16T1KLWAHD7"
+        ],
+        "PF838": [
+            "FBMB47T512G0KLBAEJ4"
+        ],
+        "PF839": [
+            "FBNB47T512G9KLBAEJ4"
+        ],
+        "PF840": [
+            "FBMB47T512G9KLBAEJ4"
+        ],
+        "PF841": [
+            "FBNB47T512G1KLBAEJ4"
+        ],
+        "PF842": [
+            "FBMB47T512G1KLBAEJ4"
+        ],
+        "PF843": [
+            "FBMB47T1T0KLEAEJ4"
+        ],
+        "PF844": [
+            "FBNB47T1T1KLEAEJ4"
+        ],
+        "PF845": [
+            "FBMB47T1T1KLEAEJ4"
+        ],
+        "PF846": [
+            "FBMB47T2T0KLMAEJ4"
+        ],
+        "PF847": [
+            "FBNB47T2T1KLMAEJ4"
+        ],
+        "PF848": [
+            "FBMB47T2T1KLMAEJ4"
+        ],
+        "PF849": [
+            "FBMB47T4T0KLUAEM4"
+        ],
+        "PF850": [
+            "FBNB47T4T1KLUAEM4"
+        ],
+        "PF851": [
+            "FBMB47T4T1KLUAEM4"
+        ],
+        "PF852": [
+            "FBMB47T8T0KLWAEM5"
+        ],
+        "PF853": [
+            "FBNB47T8T1KLWAEM5"
+        ],
+        "PF854": [
+            "FBMB47T8T1KLWAEM5"
+        ],
+        "PF855": [
+            "FBMB47T8T0KLWAEJ9"
+        ],
+        "PF856": [
+            "FBNB47T8T1KLWAEJ9"
+        ],
+        "PF857": [
+            "FBMB47T8T1KLWAEJ9"
         ]
     }
 }

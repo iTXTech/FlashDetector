@@ -1,9 +1,9 @@
 {
     "info": {
         "name": "iTXTech FlashDetector Flash Database",
-        "version": "72",
+        "version": "73",
         "website": "https:\/\/github.com\/iTXTech\/FlashDetector",
-        "time": "Wed, 08 Sep 2021 05:00:41 +0000",
+        "time": "Fri, 21 Jan 2022 14:53:37 +0800",
         "controllers": [
             "SM321AC",
             "SM321BB",
@@ -8781,6 +8781,7 @@
                 "SM2258XT",
                 "SM2258",
                 "SM2259",
+                "SM2262EN",
                 "SM2263XT",
                 "MAS0902",
                 "CBM2099E",
@@ -8812,6 +8813,7 @@
                 "SM2258XT",
                 "SM2258",
                 "SM2259",
+                "SM2262EN",
                 "SM2263XT",
                 "MAS0902",
                 "PS3111",
@@ -8841,6 +8843,7 @@
                 "SM2258XT",
                 "SM2258",
                 "SM2259",
+                "SM2262EN",
                 "SM2263XT",
                 "MAS0902",
                 "CBM2199",
@@ -8870,6 +8873,7 @@
                 "SM2258XT",
                 "SM2258",
                 "SM2259",
+                "SM2262EN",
                 "SM2263XT",
                 "MAS0902"
             ],
@@ -8901,6 +8905,7 @@
                 "SM3281BB",
                 "SM3282BB",
                 "SM2259XT",
+                "SM2262EN",
                 "SM2263XT",
                 "MAS0902",
                 "PS3111",
@@ -12071,6 +12076,7 @@
                 "SM2258XT",
                 "SM2258",
                 "SM2259",
+                "SM2262EN",
                 "SM2263XT",
                 "MAS0902",
                 "CBM2099E",
@@ -12107,12 +12113,18 @@
                 "SM3271AB",
                 "SM3281AB",
                 "SM3281BB",
-                "SM2258XT"
+                "SM2258XT",
+                "SM2262EN",
+                "CBM2099E",
+                "CBM2199",
+                "CBM2199E",
+                "IS917"
             ],
             "n": [
                 "micron MT29F256G08EBHAF",
                 "micron MT29F512G08EEHAF",
-                "micron MT29F1T08EMHBF"
+                "micron MT29F1T08EMHBF",
+                "micron MT29F256G08EBHBF"
             ]
         },
         "2CA40832A108": {
@@ -12142,6 +12154,7 @@
                 "SM2258XT",
                 "SM2258",
                 "SM2259",
+                "SM2262EN",
                 "SM2263XT",
                 "MAS0902",
                 "CBM2199",
@@ -12181,6 +12194,7 @@
             "b": 2016,
             "t": [
                 "SM2258XT",
+                "SM2262EN",
                 "SM2263XT"
             ],
             "n": [
@@ -12202,6 +12216,7 @@
                 "SM3281BB",
                 "SM3282BB",
                 "SM2258XT",
+                "SM2262EN",
                 "SM2263XT",
                 "MAS0902",
                 "CBM2199",
@@ -12209,6 +12224,7 @@
             ],
             "n": [
                 "micron MT29F512G08EBHAF",
+                "micron MT29F2T08EMHAF",
                 "micron EMT29F512G08EBHAF",
                 "micron EMT29F1T08EEHAF",
                 "micron EMT29F2T08EMHAF"
@@ -12222,6 +12238,7 @@
                 "SM3280BB",
                 "SM2258XT",
                 "SM2258",
+                "SM2262EN",
                 "SM2263XT",
                 "MAS0902"
             ],
@@ -12250,12 +12267,14 @@
                 "SM2258",
                 "SM2259XT",
                 "SM2259",
+                "SM2262EN",
                 "SM2263XT",
                 "CBM2199",
                 "CBM2199E"
             ],
             "n": [
                 "micron MT29F512G08EBHBF",
+                "micron MT29F512G08EBLCE",
                 "micron MT29F1T08EEHBF",
                 "micron MT29F2T08EMHBF"
             ]
@@ -12276,6 +12295,7 @@
                 "SM3282BB",
                 "SM2259XT",
                 "SM2259",
+                "SM2262EN",
                 "SM2263XT",
                 "MAS0902",
                 "CBM2199E",
@@ -12315,6 +12335,7 @@
                 "SM3282BB",
                 "SM2259XT",
                 "SM2259",
+                "SM2262EN",
                 "SM2263XT",
                 "MAS0902",
                 "PS3111",
@@ -12354,6 +12375,7 @@
                 "SM3281BB",
                 "SM3282BB",
                 "SM2259XT",
+                "SM2262EN",
                 "SM2263XT",
                 "MAS0902",
                 "CBM2199E",
@@ -12373,6 +12395,7 @@
             "t": [
                 "SM3271AB",
                 "SM3281BB",
+                "SM2262EN",
                 "SM2263XT"
             ],
             "n": [
@@ -12401,13 +12424,15 @@
                 "SM3281BB",
                 "SM3282BB",
                 "SM2259XT",
+                "SM2262EN",
                 "PS3111",
                 "INIC6081"
             ],
             "n": [
                 "micron MT29F1T08EBLCE",
                 "micron MT29F4T08EBLCE",
-                "micron 9LC2DNW965"
+                "micron 9LC2DNW965",
+                "micron MT29F4T08EULCE"
             ]
         },
         "2CA37832E510": {
@@ -12600,6 +12625,7 @@
                 "SM3281BB",
                 "SM2258",
                 "SM2259",
+                "SM2262EN",
                 "SM2263XT",
                 "MAS0902",
                 "PS3111",
@@ -26160,6 +26186,7 @@
                 "SM2258XT",
                 "SM2258",
                 "SM2259",
+                "SM2262EN",
                 "SM2263XT",
                 "MAS0902",
                 "PS3111",
@@ -40559,11 +40586,13 @@
         "89D49932A200": {
             "t": [
                 "SM2259XT",
+                "SM2262EN",
                 "PS3111",
                 "INIC6081"
             ],
             "n": [
-                "intel MT29F4T08EUHBFINTEL"
+                "intel MT29F4T08EUHBFINTEL",
+                "intel PF29F08T2AWCTJ1"
             ]
         },
         "89C41832A201": {
@@ -40572,6 +40601,22 @@
             ],
             "n": [
                 "intel PF29H01T2AMCTJ1"
+            ]
+        },
+        "2CD38932E601": {
+            "t": [
+                "SM2262EN"
+            ],
+            "n": [
+                "micron MT29F4T08EULCE"
+            ]
+        },
+        "2CC48932A104": {
+            "t": [
+                "SM2262EN"
+            ],
+            "n": [
+                "micron MT29F1T08EMHBF"
             ]
         },
         "EC5E98AF84CD": {
@@ -71575,6 +71620,7 @@
                 "SM2258XT",
                 "SM2258",
                 "SM2259",
+                "SM2262EN",
                 "SM2263XT",
                 "MAS0902",
                 "AU6989SN-GTC",
@@ -71654,6 +71700,7 @@
                 "SM2258XT",
                 "SM2258",
                 "SM2259",
+                "SM2262EN",
                 "SM2263XT",
                 "MAS0902"
             ]
@@ -71666,6 +71713,7 @@
                 "SM2258XT",
                 "SM2258",
                 "SM2259",
+                "SM2262EN",
                 "SM2263XT",
                 "MAS0902"
             ]
@@ -71799,6 +71847,7 @@
             "t": [
                 "SM2258",
                 "SM2259",
+                "SM2262EN",
                 "SM2263XT",
                 "MAS0902",
                 "AU6989SN-GTC",
@@ -71817,6 +71866,7 @@
             "t": [
                 "SM2258",
                 "SM2259",
+                "SM2262EN",
                 "MAS0902",
                 "AU6989SN-GTC",
                 "AU6989SN-GTD",
@@ -71980,6 +72030,54 @@
                 "SM2259XT"
             ]
         },
+        "PF29F64B2ALCTJ1": {
+            "id": [
+                "89C41832A200"
+            ],
+            "t": [
+                "SM2262EN",
+                "SM2263XT",
+                "MAS0902"
+            ]
+        },
+        "PF29F01T2AMCTJ1": {
+            "id": [
+                "89C41832A200"
+            ],
+            "t": [
+                "SM2262EN",
+                "SM2263XT",
+                "MAS0902"
+            ]
+        },
+        "PF29F02T2ANCTJ1": {
+            "id": [
+                "89C41832A200"
+            ],
+            "t": [
+                "SM2262EN",
+                "SM2263XT",
+                "MAS0902"
+            ]
+        },
+        "PF29F04T2AOCTJ1": {
+            "id": [
+                "89C41832A200"
+            ],
+            "t": [
+                "SM2262EN",
+                "SM2263XT",
+                "MAS0902"
+            ]
+        },
+        "PF29F08T2AWCTJ1": {
+            "id": [
+                "89D49932A200"
+            ],
+            "t": [
+                "SM2262EN"
+            ]
+        },
         "MT29F512G08EBLCEINTEL": {
             "id": [
                 "89C30832E600"
@@ -72002,42 +72100,6 @@
             ],
             "t": [
                 "SM2263XT"
-            ]
-        },
-        "PF29F64B2ALCTJ1": {
-            "id": [
-                "89C41832A200"
-            ],
-            "t": [
-                "SM2263XT",
-                "MAS0902"
-            ]
-        },
-        "PF29F01T2AMCTJ1": {
-            "id": [
-                "89C41832A200"
-            ],
-            "t": [
-                "SM2263XT",
-                "MAS0902"
-            ]
-        },
-        "PF29F02T2ANCTJ1": {
-            "id": [
-                "89C41832A200"
-            ],
-            "t": [
-                "SM2263XT",
-                "MAS0902"
-            ]
-        },
-        "PF29F04T2AOCTJ1": {
-            "id": [
-                "89C41832A200"
-            ],
-            "t": [
-                "SM2263XT",
-                "MAS0902"
             ]
         },
         "JS29F16B08CCMF2": {
@@ -74971,6 +75033,7 @@
                 "SM2258XT",
                 "SM2258",
                 "SM2259",
+                "SM2262EN",
                 "MAS0902",
                 "AU6989SN-GTC",
                 "AU6989SN-GTD",
@@ -75015,6 +75078,7 @@
                 "SM2258XT",
                 "SM2258",
                 "SM2259",
+                "SM2262EN",
                 "SM2263XT",
                 "MAS0902",
                 "AU6989SN-GTC",
@@ -75061,6 +75125,7 @@
                 "SM2258",
                 "SM2259XT",
                 "SM2259",
+                "SM2262EN",
                 "SM2263XT",
                 "MAS0902",
                 "AU6989SN-GTC",
@@ -75085,7 +75150,8 @@
                 "2CC30832E600",
                 "2CC30832E601",
                 "2CC30832E604",
-                "2CC30832EA30"
+                "2CC30832EA30",
+                "2CC40832A200"
             ],
             "l": "3D B27B",
             "t": [
@@ -75098,8 +75164,10 @@
                 "SM3281BB",
                 "SM3282BB",
                 "SM2259XT",
+                "SM2262EN",
                 "SM2263XT",
                 "MAS0902",
+                "CBM2199",
                 "CBM2199E",
                 "PS3111",
                 "INIC6081"
@@ -75206,6 +75274,7 @@
             "t": [
                 "SM2258",
                 "SM2259",
+                "SM2262EN",
                 "SM2263XT",
                 "MAS0902"
             ]
@@ -78744,6 +78813,7 @@
                 "SM3282BB",
                 "SM2259XT",
                 "SM2259",
+                "SM2262EN",
                 "SM2263XT",
                 "MAS0902"
             ]
@@ -83517,13 +83587,15 @@
         },
         "MT29F2T08EMHAF": {
             "id": [
-                "2CC40832A600"
+                "2CC40832A600",
+                "2CC40832A601"
             ],
             "l": "B17A 3D",
             "c": "TLC",
             "t": [
                 "SM2258",
                 "SM2259",
+                "SM2262EN",
                 "MAS0902",
                 "AU6989SN-GTC",
                 "AU6989SN-GTD",
@@ -83541,6 +83613,7 @@
                 "SM2258",
                 "SM2258XT",
                 "SM2259",
+                "SM2262EN",
                 "SM2263XT",
                 "MAS0902"
             ]
@@ -83552,6 +83625,7 @@
             ],
             "t": [
                 "SM2258",
+                "SM2262EN",
                 "SM2263XT"
             ]
         },
@@ -83610,6 +83684,7 @@
             ],
             "t": [
                 "SM2259XT",
+                "SM2262EN",
                 "SM2263XT",
                 "CBM2199E"
             ]
@@ -83654,8 +83729,44 @@
                 "2CC30832E601"
             ],
             "t": [
+                "SM2262EN",
                 "SM2263XT",
                 "CBM2199E"
+            ]
+        },
+        "MT29F4T08EULCE": {
+            "id": [
+                "2CD38932E600",
+                "2CD38932E601"
+            ],
+            "t": [
+                "SM2262EN"
+            ]
+        },
+        "MT29F1T08EMHBF": {
+            "id": [
+                "2CA40832A104",
+                "2CC48932A104"
+            ],
+            "l": "B16C",
+            "t": [
+                "SM2262EN",
+                "CBM2099E",
+                "CBM2199",
+                "CBM2199E",
+                "IS917"
+            ]
+        },
+        "MT29F256G08EBHBF": {
+            "id": [
+                "2CA40832A104"
+            ],
+            "t": [
+                "SM2262EN",
+                "CBM2099E",
+                "CBM2199",
+                "CBM2199E",
+                "IS917"
             ]
         },
         "MT29F2T08GELBE": {
@@ -85452,12 +85563,6 @@
                 "CBM2199E",
                 "CBM2199ES"
             ]
-        },
-        "MT29F1T08EMHBF": {
-            "id": [
-                "2CA40832A104"
-            ],
-            "l": "B16C"
         }
     },
     "westerndigital": {
