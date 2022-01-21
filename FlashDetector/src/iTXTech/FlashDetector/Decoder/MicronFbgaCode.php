@@ -50,7 +50,7 @@ class MicronFbgaCode extends Decoder{
 	}
 
 	public static function check(string $partNumber) : bool{
-		foreach(["NW", "NX", "NQ", "PF"] as $h){
+		foreach(["NW", "NX", "NQ", "PF", "NY"] as $h){
 			if(StringUtil::startsWith($partNumber, $h) or
 				(strlen($partNumber) == 10 and substr($partNumber, 5, 2) == $h)){
 				return true;
