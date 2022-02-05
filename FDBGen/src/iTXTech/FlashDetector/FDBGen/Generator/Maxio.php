@@ -23,13 +23,18 @@
 namespace iTXTech\FlashDetector\FDBGen\Generator;
 
 use iTXTech\FlashDetector\Fdb\Fdb;
+use iTXTech\SimpleFramework\Util\StringUtil;
 
-class Maxio extends JMicron{
-	public static function getDirName() : string{
-		return "mas";
+class Maxio extends JMicron {
+	public static function getDirName(): string {
+		return "ma";
 	}
 
-	public static function merge(Fdb $fdb, string $data, string $filename) : void{
-		self::mergeInternal($fdb, $data, $filename, "MAS");
+	public static function merge(Fdb $fdb, string $data, string $filename): void {
+		if (StringUtil::startsWith($filename, "map")) {
+			self::mergeInternal($fdb, $data, $filename, "", false, true);
+		} else {
+			self::mergeInternal($fdb, $data, $filename, "", true, true);
+		}
 	}
 }

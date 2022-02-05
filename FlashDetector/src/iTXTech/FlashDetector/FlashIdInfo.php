@@ -23,8 +23,9 @@
 namespace iTXTech\FlashDetector;
 
 use iTXTech\FlashDetector\Decoder\Decoder;
+use iTXTech\FlashDetector\Property\Url;
 
-class FlashIdInfo extends Arrayable{
+class FlashIdInfo extends Arrayable {
 	public $id;
 	public $vendor;
 	public $density;
@@ -38,96 +39,113 @@ class FlashIdInfo extends Arrayable{
 	public $ext = [];
 	public $controllers = [];
 	public $partNumbers = [];
+	protected $url = [];
+	/** @var Url[] */
+	protected $urls = [];
 
-	public function __construct(int $id = 0x0){
+	public function __construct(int $id = 0x0) {
 		$this->id = strtoupper(dechex($id));
 	}
 
-	public function setPartNumbers(array $partNumbers) : FlashIdInfo{
+	public function setPartNumbers(array $partNumbers): FlashIdInfo {
 		$this->partNumbers = $partNumbers;
 		return $this;
 	}
 
-	public function setControllers(array $controllers) : FlashIdInfo{
+	public function setControllers(array $controllers): FlashIdInfo {
 		$this->controllers = $controllers;
 		return $this;
 	}
 
-	public function setExt(array $ext) : FlashIdInfo{
+	public function setExt(array $ext): FlashIdInfo {
 		$this->ext = $ext;
 		return $this;
 	}
 
-	public function setVoltage(string $v) : FlashIdInfo{
+	public function setVoltage(string $v): FlashIdInfo {
 		$this->voltage = $v;
 		return $this;
 	}
 
-	public function setId(string $id) : FlashIdInfo{
+	public function setId(string $id): FlashIdInfo {
 		$this->id = $id;
 		return $this;
 	}
 
-	public function setCellLevel(int $cellLevel) : FlashIdInfo{
+	public function setCellLevel(int $cellLevel): FlashIdInfo {
 		$this->cellLevel = $cellLevel;
 		return $this;
 	}
 
-	public function setPlane(int $plane) : FlashIdInfo{
+	public function setPlane(int $plane): FlashIdInfo {
 		$this->plane = $plane;
 		return $this;
 	}
 
-	public function setPageSize(int $pageSize) : FlashIdInfo{
+	public function setPageSize(int $pageSize): FlashIdInfo {
 		$this->pageSize = $pageSize;
 		return $this;
 	}
 
-	public function setBlockSize(?int $blockSize) : FlashIdInfo{
+	public function setBlockSize(?int $blockSize): FlashIdInfo {
 		$this->blockSize = $blockSize;
 		return $this;
 	}
 
-	public function setVendor(string $vendor) : FlashIdInfo{
+	public function setVendor(string $vendor): FlashIdInfo {
 		$this->vendor = $vendor;
 		return $this;
 	}
 
-	public function setDensity(int $density) : FlashIdInfo{
+	public function setDensity(int $density): FlashIdInfo {
 		$this->density = $density;
 		return $this;
 	}
 
-	public function setDie(int $die) : FlashIdInfo{
+	public function setDie(int $die): FlashIdInfo {
 		$this->die = $die;
 		return $this;
 	}
 
-	public function setProcessNode(string $processNode) : FlashIdInfo{
+	public function setProcessNode(string $processNode): FlashIdInfo {
 		$this->processNode = $processNode;
 		return $this;
 	}
 
-	public function toArray(?string $lang = "chs", bool $raw = false) : array{
+	public function addUrl(Url $url): FlashIdInfo {
+		if(isset($this->url[$url->desc])) {
+			for($i = 0; $i < count($this->urls); $i++) {
+				if($this->urls[$i]->desc == $url->desc) {
+					unset($this->urls[$i]);
+				}
+			}
+		}
+		$this->url[$url->desc] = $url->url;
+		$this->urls[] = $url;
+		return $this;
+	}
+
+	public function toArray(?string $lang = "chs", bool $raw = false): array {
+		$this->urls = array_values($this->urls);
 		$info = parent::toArray();
-		if($raw){
+		if($raw) {
 			return $info;
 		}
-		foreach($info as $k => $v){
-			if($v === null){
+		foreach($info as $k => $v) {
+			if($v === null) {
 				$info[$k] = Constants::UNKNOWN;
 			}
 		}
 		$info = FlashDetector::translateArray($info, false, $lang);
-		if(isset($info["partNumbers"])){
+		if(isset($info["partNumbers"])) {
 			$pns = $info["partNumbers"];
 			$info["partNumbers"] = [];
-			foreach($pns as $pn){
+			foreach($pns as $pn) {
 				$p = explode(" ", $pn);
 				$info["partNumbers"][] = FlashDetector::translateString($p[0], $lang) . " " . $p[1];
 			}
 		}
-		if(isset($info["cellLevel"])){
+		if(isset($info["cellLevel"])) {
 			$info["cellLevel"] = Decoder::CELL_LEVEL[$info["cellLevel"]] ?? $info["cellLevel"];
 		}
 //		$info["pageSize"] .= " KB";
