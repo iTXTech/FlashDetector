@@ -101,7 +101,7 @@
   "cty_ie": "爱尔兰",
   "cty_my": "马来西亚",
   "cty_ph": "菲律宾",
-  "summary": "料号：{0}，厂商：{1}，类型：{2}，容量：{3}<br>位宽：{4}，单元：{5}，制程：{6}，代：{7}<br>同步：{8}，异步：{9}，片选：{10}，通道：{11}，Die：{12}，R/B：{13}<br>电压：{14}<br>封装：{15}<br>控制器：{16}<br>注释：{17}<br>更多信息：{18}<br>闪存ID：{19}<br>由 FlashMaster 强力驱动 https://flashm.cf",
+  "summary": "料号：{0}，厂商：{1}，类型：{2}，容量：{3}<br>位宽：{4}，单元：{5}，制程：{6}，代：{7}<br>同步：{8}，异步：{9}，片选：{10}，通道：{11}，Die：{12}，R/B：{13}<br>电压：{14}<br>封装：{15}<br>控制器：{16}<br>注释：{17}<br>更多信息：{18}<br>闪存ID：{19}<br>由 FlashMaster 强力驱动 https://nand.gq",
   "pagesPerBlock": "页/块",
   "spareAreaSizePer512B": "每 512B 备用空间",
   "blocksPerLun": "块/Lun",
@@ -114,5 +114,5 @@
   "redundantAreaSize": "冗余区域大小",
   "eccLevel": "ECC 要求",
   "edo": "EDO",
-  "idSummary": "闪存ID：{0}，厂商：{1}，单元：{2}，容量：{3}<br>制程：{4}，Die：{5}，Plane：{6}，电压：{7}<br>页大小：{8}，块大小：{9}<br>控制器：{10}<br>更多信息：{11}<br>料号：{12}<br>由 FlashMaster 强力驱动 https://flashm.cf"
+  "idSummary": "闪存ID：{0}，厂商：{1}，单元：{2}，容量：{3}<br>制程：{4}，Die：{5}，Plane：{6}，电压：{7}<br>页大小：{8}，块大小：{9}<br>控制器：{10}<br>更多信息：{11}<br>料号：{12}<br>由 FlashMaster 强力驱动 https://nand.gq"
 }

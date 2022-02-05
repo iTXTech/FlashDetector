@@ -103,7 +103,7 @@
   "cty_ie": "Ireland",
   "cty_my": "Malaysia",
   "cty_ph": "Philippines",
-  "summary": "Part Number: {0}, Vendor: {1}, Type: {2}, Density: {3}<br>Device Width: {4}, Cell Level: {5}, Process Node: {6}, Generation: {7}<br>Sync: {8}, Async: {9}, CE: {10}, Ch: {11}, Die: {12}, R/B: {13}<br>Voltage: {14}<br>Package: {15}<br>Controller: {16}<br>Remark: {17}<br>Additional Info: {18}<br>Flash ID: {19}<br>Powered by FlashMaster https://flashm.cf",
+  "summary": "Part Number: {0}, Vendor: {1}, Type: {2}, Density: {3}<br>Device Width: {4}, Cell Level: {5}, Process Node: {6}, Generation: {7}<br>Sync: {8}, Async: {9}, CE: {10}, Ch: {11}, Die: {12}, R/B: {13}<br>Voltage: {14}<br>Package: {15}<br>Controller: {16}<br>Remark: {17}<br>Additional Info: {18}<br>Flash ID: {19}<br>Powered by FlashMaster https://nand.gq",
   "pagesPerBlock": "Pages Per Block",
   "spareAreaSizePer512B": "Spare Area Size Per 512B",
   "blocksPerLun": "Blocks Per Lun",
@@ -116,5 +116,5 @@
   "redundantAreaSize": "Redundant Area Size",
   "eccLevel": "ECC Level",
   "edo": "EDO",
-  "idSummary": "FlashId: {0}, Vendor: {1}, Cell Level: {2}, Density: {3}<br>Process Node: {4}, Die: {5}, Plane: {6}, Voltage: {7}<br>Page Size: {8}, Block Size: {9}<br>Controllers: {10}<br>Additional Info: {11}<br>Part Numbers: {12}<br>Powered by FlashMaster https://flashm.cf"
+  "idSummary": "FlashId: {0}, Vendor: {1}, Cell Level: {2}, Density: {3}<br>Process Node: {4}, Die: {5}, Plane: {6}, Voltage: {7}<br>Page Size: {8}, Block Size: {9}<br>Controllers: {10}<br>Additional Info: {11}<br>Part Numbers: {12}<br>Powered by FlashMaster https://nand.gq"
 }
