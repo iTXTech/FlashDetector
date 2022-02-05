@@ -10,7 +10,7 @@ Universal NAND Flash ID Decoder and Search Engine.
 
 Public `FlashDetector` Web Server (with `iTXTech ChipXpert™ Insight`): [https://fd.sakuracg.com](https://fd.sakuracg.com)
 
-Public [FlashMaster](https://github.com/iTXTech/FlashMaster) Frontend: [https://flashm.cf](https://flashm.cf)
+Public [FlashMaster](https://github.com/iTXTech/FlashMaster) Frontend: [https://nand.gq](https://nand.gq)
 
 ## 声明
 
