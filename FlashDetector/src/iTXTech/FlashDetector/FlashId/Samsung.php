@@ -25,7 +25,7 @@ namespace iTXTech\FlashDetector\FlashId;
 use iTXTech\FlashDetector\Constants;
 use iTXTech\FlashDetector\FlashIdInfo;
 
-class Samsung extends Decoder{
+class Samsung extends Decoder {
 	public const ID_DEFINITION = [
 		2 => [
 			"density" => [
@@ -173,13 +173,13 @@ class Samsung extends Decoder{
 		]
 	];
 
-	public function __construct(){
+	public function __construct() {
 		parent::__construct(Constants::VENDOR_SAMSUNG, 0xEC, self::ID_DEFINITION);
 	}
 
-	public function decode(int $id) : FlashIdInfo{
+	public function decode(int $id): FlashIdInfo {
 		$info = parent::decode($id);
-		if(self::getByte($id, 2) == 0xDE){
+		if(self::getByte($id, 2) == 0xDE) {
 			return $info->setDensity(64 * Constants::DENSITY_GBITS);
 		}
 		return $info;

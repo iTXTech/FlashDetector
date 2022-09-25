@@ -25,47 +25,47 @@ namespace iTXTech\FlashDetector\FlashId;
 use iTXTech\FlashDetector\FlashIdInfo;
 use iTXTech\SimpleFramework\Util\StringUtil;
 
-abstract class Decoder{
+abstract class Decoder {
 	public const ID_DEFINITION = [];
 
 	public $def;
 	public $vendorName;
 	public $vendorId;
 
-	public function __construct(string $vendorName, int $vendorId, array $def){
+	public function __construct(string $vendorName, int $vendorId, array $def) {
 		$this->vendorName = $vendorName;
 		$this->vendorId = $vendorId;
 		$this->def = $def;
 	}
 
-	public function check(int $id) : bool{
-		if(($id > 0x100000000000 and $id < 0x1000000000000) and $id >> 40 == $this->vendorId){
+	public function check(int $id): bool {
+		if(($id > 0x100000000000 and $id < 0x1000000000000) and $id >> 40 == $this->vendorId) {
 			return true;
 		}
 		return false;
 	}
 
-	public function decode(int $id) : FlashIdInfo{
+	public function decode(int $id): FlashIdInfo {
 		return $this->decodeIdDef($id, $this->def, (new FlashIdInfo($id))->setVendor($this->vendorName));
 	}
 
-	public static function getByte(int $id, int $offset) : int {
+	public static function getByte(int $id, int $offset): int {
 		return ($id >> (8 * (6 - $offset))) & 0xff;
 	}
 
-	public function decodeIdDef(int $id, array $def, FlashIdInfo $info) : FlashIdInfo{
+	public function decodeIdDef(int $id, array $def, FlashIdInfo $info): FlashIdInfo {
 		$ext = [];
-		foreach($def as $offset => $rules){
+		foreach($def as $offset => $rules) {
 			$byte = ($id >> (8 * (6 - $offset))) & 0xff;
-			foreach($rules as $name => $rule){
+			foreach($rules as $name => $rule) {
 				$data = 0;
-				foreach($rule["dq"] as $dq){
+				foreach($rule["dq"] as $dq) {
 					$data = ($data << 1) + (($byte >> $dq) & 0b1);
 				}
-				if(isset($rule["def"][$data])){
-					if(StringUtil::startsWith($name, "ext:")){
+				if(isset($rule["def"][$data])) {
+					if(StringUtil::startsWith($name, "ext:")) {
 						$ext[explode(":", $name)[1]] = $rule["def"][$data];
-					}else{
+					} else {
 						$info->{"set" . ucfirst($name)}($rule["def"][$data]);
 					}
 				}
@@ -74,15 +74,15 @@ abstract class Decoder{
 		return $info->setExt($ext);
 	}
 
-	public static function checkProperties(...$props) : bool{
-		foreach($props as $prop){
-			if(is_null($prop)){
+	public static function checkProperties(...$props): bool {
+		foreach($props as $prop) {
+			if(is_null($prop)) {
 				return false;
 			}
-			if(is_numeric($prop) && $prop <= 0){
+			if(is_numeric($prop) && $prop <= 0) {
 				return false;
 			}
-			if(is_string($prop) && strlen(trim($prop)) == 0){
+			if(is_string($prop) && strlen(trim($prop)) == 0) {
 				return false;
 			}
 		}

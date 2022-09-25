@@ -34,6 +34,7 @@ class YMTC extends Decoder{
 					0b11000100 => 512 * Constants::DENSITY_GBITS,
 					0b11000101 => 1 * Constants::DENSITY_TBITS,
 					0b11000110 => 2 * Constants::DENSITY_TBITS,
+					0b11000111 => 4 * Constants::DENSITY_TBITS,
 					0x49 => 64 * Constants::DENSITY_GBITS
 				]
 			]
@@ -79,8 +80,9 @@ class YMTC extends Decoder{
 			"blockSize" => [
 				"dq" => [4, 3, 2],
 				"def" => [
-					0b000 => 6144,
-					0b001 => 18 * 1024
+					0b000 => 6 * 1024,
+					0b001 => 18 * 1024,
+					0b010 => 36 * 1024
 				]
 			],
 			"plane" => [
@@ -97,9 +99,11 @@ class YMTC extends Decoder{
 			"processNode" => [
 				"dq" => [6, 5, 4],
 				"def" => [
-					0b000 => "32L DBS 大别山",
-					0b001 => "64L Xtacking JGS 井冈山",
-					0b010 => "128L Xtacking 2.0"
+					0b000 => "32L DBS X0",
+					0b001 => "64L JGS X1",
+					0b010 => "128L TAS X2",
+					0b011 => "X3",
+					0b100 => "X4"
 				]
 			]
 		]

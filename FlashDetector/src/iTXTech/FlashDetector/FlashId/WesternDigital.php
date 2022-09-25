@@ -24,8 +24,8 @@ namespace iTXTech\FlashDetector\FlashId;
 
 use iTXTech\FlashDetector\Constants;
 
-class WesternDigital extends Kioxia{
-	public function __construct(){
+class WesternDigital extends Kioxia {
+	public function __construct() {
 		Decoder::__construct(Constants::VENDOR_WESTERN_DIGITAL, 0x45, self::ID_DEFINITION);
 	}
 }

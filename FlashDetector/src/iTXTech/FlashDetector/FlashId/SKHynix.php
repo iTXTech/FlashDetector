@@ -158,10 +158,10 @@ class SKHynix extends Decoder {
 	public function decode(int $id): FlashIdInfo {
 		$info = parent::decode($id);
 		$info->setPlane($info->ext["simultaneouslyProgrammedPages"]);
-		if (self::getByte($id, 2) == 0xDE) { //0xDE patch
+		if(self::getByte($id, 2) == 0xDE) { //0xDE patch
 			$info->setDensity(64 * Constants::DENSITY_GBITS);
 		}
-		if (self::getByte($id, 6) >= 0x50) { //14nm and after
+		if(self::getByte($id, 6) >= 0x50) { //14nm and after
 			$info->setExt([])->setBlockSize(null);
 			$info = $this->decodeIdDef($id, self::NEW_ID_DEFINITION, $info);
 		}

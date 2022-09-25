@@ -24,8 +24,8 @@ namespace iTXTech\FlashDetector\FlashId;
 
 use iTXTech\FlashDetector\Constants;
 
-class Micron extends Intel{
-	public function __construct(string $name = Constants::VENDOR_MICRON, int $id = 0x2C){
+class Micron extends Intel {
+	public function __construct(string $name = Constants::VENDOR_MICRON, int $id = 0x2C) {
 		$def = self::ID_DEFINITION;
 		$def[6]["ext:enterprise"] = [
 			"dq" => [1, 0],

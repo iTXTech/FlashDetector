@@ -25,7 +25,7 @@ namespace iTXTech\FlashDetector\FlashId;
 use iTXTech\FlashDetector\Constants;
 use iTXTech\FlashDetector\FlashIdInfo;
 
-class Kioxia extends Decoder{
+class Kioxia extends Decoder {
 	public const ID_DEFINITION = [
 		2 => [
 			"density" => [
@@ -125,13 +125,13 @@ class Kioxia extends Decoder{
 		]
 	];
 
-	public function __construct(){
+	public function __construct() {
 		parent::__construct(Constants::VENDOR_KIOXIA, 0x98, self::ID_DEFINITION);
 	}
 
-	public function decode(int $id) : FlashIdInfo{
+	public function decode(int $id): FlashIdInfo {
 		$info = parent::decode($id);
-		if(self::checkProperties($info->plane, $info->die)){
+		if(self::checkProperties($info->plane, $info->die)) {
 			return $info->setPlane($info->plane / $info->die);
 		}
 		return $info;

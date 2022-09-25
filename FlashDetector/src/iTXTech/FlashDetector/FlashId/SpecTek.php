@@ -24,8 +24,8 @@ namespace iTXTech\FlashDetector\FlashId;
 
 use iTXTech\FlashDetector\Constants;
 
-class SpecTek extends Micron{
-	public function __construct(){
+class SpecTek extends Micron {
+	public function __construct() {
 		parent::__construct(Constants::VENDOR_SPECTEK, 0xB5);
 	}
 }
