@@ -27,7 +27,7 @@ use iTXTech\FlashDetector\FlashInfo;
 use iTXTech\FlashDetector\Property\Classification;
 use iTXTech\SimpleFramework\Util\StringUtil;
 
-class SpecTek extends Micron{
+class SpecTek extends Micron {
 	public const LEGACY_DENSITY = [
 		"1G" => 1 * Constants::DENSITY_GBITS,
 		"18" => 1.8 * Constants::DENSITY_GBITS,
@@ -60,22 +60,22 @@ class SpecTek extends Micron{
 		"B" => 2 * Constants::DENSITY_TBITS
 	];
 
-	public static function getName() : string{
+	public static function getName(): string {
 		return Constants::VENDOR_SPECTEK;
 	}
 
-	public static function check(string $partNumber) : bool{
+	public static function check(string $partNumber): bool {
 		$code = substr($partNumber, 0, 2);
-		if(in_array($code, ["FN", "FT", "FB", "FX", "CB"])){
+		if(in_array($code, ["FN", "FT", "FB", "FX", "CB"])) {
 			return true;
 		}
 		return false;
 	}
 
-	public static function decode(string $partNumber) : FlashInfo{
+	public static function decode(string $partNumber): FlashInfo {
 		$flashInfo = (new FlashInfo($partNumber))
 			->setVendor(self::getName())->setType(Constants::NAND_TYPE_NAND);
-		if(strlen($partNumber) == 13){
+		if(strlen($partNumber) == 13) {
 			return $flashInfo->setExtraInfo([Constants::UNSUPPORTED_REASON => Constants::SPECTEK_OLD_NUMBERING]);
 		}
 		$partNumber = substr($partNumber, 3);//remove Fxx
@@ -90,23 +90,24 @@ class SpecTek extends Micron{
 				"4" => 2,
 				"L" => 2,
 				"B" => 3,
+				"N" => 4,
 				"Q" => 4,
 			], -1))
 			->setProcessNode($cellLevel . self::shiftChars($partNumber, 3));
 		$density = self::matchFromStart($partNumber, self::DENSITY, 0);
-		if($density === 0){//legacy numbering
+		if($density === 0) {//legacy numbering
 			$density = self::getOrDefault($d = self::shiftChars($partNumber, 2), self::LEGACY_DENSITY, 0);
-			if($density === 0){//"newer" numbering
+			if($density === 0) {//"newer" numbering
 				$density = self::getOrDefault($d[0], self::NEWER_DENSITY, 0);
-				if($density > 0){
+				if($density > 0) {
 					$grade = $d[1];
 				}
 			}
-		}else{
+		} else {
 			$grade = self::shiftChars($partNumber, 1);
 		}
 		$flashInfo->setDensity($density);
-		if(isset($grade)){
+		if(isset($grade)) {
 			$extra["densityGrade"] = self::getOrDefault($grade, [
 				"1" => "94-100%",
 				"9" => "90-100%",
@@ -117,10 +118,10 @@ class SpecTek extends Micron{
 			]);
 		}
 		$configuration = self::shiftChars($partNumber, 1);
-		if(in_array($configuration, ["G", "P"])){
+		if(in_array($configuration, ["G", "P"])) {
 			$extra["eccEnabled"] = true;
 		}
-		if($configuration == "M"){
+		if($configuration == "M") {
 			$extra["halfPageAndSize"] = true;
 		}
 		$flashInfo
@@ -170,13 +171,13 @@ class SpecTek extends Micron{
 			"M" => Constants::SPECTEK_IF_M,
 			"N" => Constants::SPECTEK_IF_N
 		], "");
-		if($ifInfo !== ""){
+		if($ifInfo !== "") {
 			$extra["interfaceInfo"] = $ifInfo;
 		}
 
-		if(self::shiftChars($partNumber, 1) == "-"){
+		if(self::shiftChars($partNumber, 1) == "-") {
 			$speed = self::matchFromStart($partNumber, self::SPEED_GRADE);
-			if($speed != Constants::UNKNOWN){
+			if($speed != Constants::UNKNOWN) {
 				$extra[Constants::SPEED_GRADE] = $speed;
 			}
 		}
@@ -184,10 +185,10 @@ class SpecTek extends Micron{
 		return $flashInfo->setExtraInfo($extra);
 	}
 
-	public static function removePackage(string $pn) : string{
+	public static function removePackage(string $pn): string {
 		$pn = explode("-", $pn)[0];
-		foreach(array_keys(self::PACKAGE) as $package){
-			if(StringUtil::endsWith($pn, $package)){
+		foreach(array_keys(self::PACKAGE) as $package) {
+			if(StringUtil::endsWith($pn, $package)) {
 				return substr($pn, 0, strlen($pn) - 2);
 			}
 		}

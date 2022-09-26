@@ -31,7 +31,7 @@ use iTXTech\FlashDetector\Property\FlashInterface;
 use iTXTech\FlashDetector\Property\Url;
 use iTXTech\SimpleFramework\Util\StringUtil;
 
-class Micron extends Decoder{
+class Micron extends Decoder {
 	protected const PACKAGE = [
 		"WP" => "48-pin TSOP I Center Package Leads (CPL) PB free",
 		"WC" => "48-pin TSOP I Off-center Package Leads (OCPL) PB free",
@@ -63,6 +63,10 @@ class Micron extends Decoder{
 		"C7" => "48-pad LLGA, 12 x 20 x 1.47",
 		"C8" => "52-pad WLGA, 14 x 18 x 0.75",
 		"D1" => "52-pad VLGA, 11 x 14 x 0.9",
+		"D4" => "154/195 ball VFBGA, 13.5 x 11.5 x 1.0",
+		"D5" => "154/195 ball LFBGA, 13.5 x 11.5 x 1.3",
+		"D6" => "154/195 ball LFBGA, 13.5 x 11.5 x 1.5",
+		"D7" => "154/195 ball LFBGA, 13.5 x 11.5 x 1.6",
 		"G4" => "252/308 ball LFBGA, 12 x 18 x 1.5",
 		"G5" => "272/352 ball LFBGA, 14 x 18 x 1.4",
 		"G7" => "252/308 ball LFBGA, 12 x 18 x 1.0",
@@ -71,33 +75,36 @@ class Micron extends Decoder{
 		"H5" => "56/256 ball VFBGA, 12.8 x 9.5 x 1.0",
 		"K3" => "100/170 ball VLGA 12 x 18 x 0.9",
 		"K4" => "100/170 ball TLGA, 12 x 18 x 1.1",
+		"K6" => "152/221 ball LBGA, 14 x 18 x 1.3",
 		"K7" => "152/221 ball VLGA 14 x 18 x 0.9",
 		"K8" => "152/221 ball TLGA 14 x 18 x 1.1",
 		"K9" => "132/187 ball VLGA, 12 x 18 x 1.0",
+		"L4" => "308/368 ball VFBGA, 11.5x15.5x1.0",
 		"MD" => "130-ball VFBGA, 8 x 9 x 1.0",
 		"M4" => "132/187 ball TBGA, 12 x 18 x 1.3",
 		"M5" => "132/187 ball LBGA, 12 x 18 x 1.5",
 		"M8" => "55-ball VFBGA, 8 x 10 x 1.2",//should be M8Z
+		"M9" => "252/308 ball LFBGA 12 x 18 x 1.45"
 	];
 	protected const DENSITY = [
-        "1G" => 1 * Constants::DENSITY_GBITS,
-        "2G" => 2 * Constants::DENSITY_GBITS,
-        "4G" => 4 * Constants::DENSITY_GBITS,
-        "8G" => 8 * Constants::DENSITY_GBITS,
-        "16G" => 16 * Constants::DENSITY_GBITS,
-        "21G" => 21 * Constants::DENSITY_GBITS,
-        "32G" => 32 * Constants::DENSITY_GBITS,
-        "42G" => 42 * Constants::DENSITY_GBITS,
-        "64G" => 64 * Constants::DENSITY_GBITS,
-        "84G" => 84 * Constants::DENSITY_GBITS,
-        "128G" => 128 * Constants::DENSITY_GBITS,
-        "168G" => 168 * Constants::DENSITY_GBITS,
-        "192G" => 192 * Constants::DENSITY_GBITS,
-        "256G" => 256 * Constants::DENSITY_GBITS,
-        "336G" => 336 * Constants::DENSITY_GBITS,
-        "384G" => 384 * Constants::DENSITY_GBITS,
-        "512G" => 512 * Constants::DENSITY_GBITS,
-        "768G" => 768 * Constants::DENSITY_GBITS,
+		"1G" => 1 * Constants::DENSITY_GBITS,
+		"2G" => 2 * Constants::DENSITY_GBITS,
+		"4G" => 4 * Constants::DENSITY_GBITS,
+		"8G" => 8 * Constants::DENSITY_GBITS,
+		"16G" => 16 * Constants::DENSITY_GBITS,
+		"21G" => 21 * Constants::DENSITY_GBITS,
+		"32G" => 32 * Constants::DENSITY_GBITS,
+		"42G" => 42 * Constants::DENSITY_GBITS,
+		"64G" => 64 * Constants::DENSITY_GBITS,
+		"84G" => 84 * Constants::DENSITY_GBITS,
+		"128G" => 128 * Constants::DENSITY_GBITS,
+		"168G" => 168 * Constants::DENSITY_GBITS,
+		"192G" => 192 * Constants::DENSITY_GBITS,
+		"256G" => 256 * Constants::DENSITY_GBITS,
+		"336G" => 336 * Constants::DENSITY_GBITS,
+		"384G" => 384 * Constants::DENSITY_GBITS,
+		"512G" => 512 * Constants::DENSITY_GBITS,
+		"768G" => 768 * Constants::DENSITY_GBITS,
 		"1T" => Constants::DENSITY_TBITS,
 		"1T2" => 1.125 * Constants::DENSITY_TBITS,
 		"1HT" => 1.5 * Constants::DENSITY_TBITS,
@@ -144,11 +151,12 @@ class Micron extends Decoder{
 		"C" => [true, false, false],
 		"D" => [false, false, true],
 		//SpecTek
-		"E" => [true, true, false],//TODO: confirm
+		"E" => [true, true, false],
 		"F" => [true, true, false],
-		"G" => [true, true, false],//TODO: confirm
-		"M" => [false, false, false],//TODO: confirm
-		"N" => [true, true, false]
+		"G" => [true, true, false],
+		"M" => [false, false, false],
+		"N" => [true, true, false],
+		"H" => [true, true, false]
 	];
 	protected const SPEED_GRADE = [
 		"15" => "NV-DDR TM3 133MT/s",
@@ -185,25 +193,25 @@ class Micron extends Decoder{
 		"MS" => Constants::MICRON_P_MS
 	];
 
-	public static function getName() : string{
+	public static function getName(): string {
 		return Constants::VENDOR_MICRON;
 	}
 
-	public static function check(string $partNumber) : bool{
-		if(StringUtil::startsWith($partNumber, "MT")){
+	public static function check(string $partNumber): bool {
+		if(StringUtil::startsWith($partNumber, "MT")) {
 			return true;
 		}
 		return false;
 	}
 
-	public static function decode(string $partNumber) : FlashInfo{
+	public static function decode(string $partNumber): FlashInfo {
 		$flashInfo = (new FlashInfo($partNumber))->setVendor(self::getName());
 		$flashInfo->addUrl(new Url(
 			Constants::MICRON_WEBSITE,
 			"https://www.micron.com/support/tools-and-utilities/fbga?matpart=$partNumber",
 			Url::IMAGE_LOGO
 		));
-		if(!StringUtil::startsWith($partNumber, "29")){
+		if(!StringUtil::startsWith($partNumber, "29")) {
 			$partNumber = substr($partNumber, 2);//remove MT
 		}
 		$partNumber = substr($partNumber, 2);//remove 29
@@ -249,25 +257,25 @@ class Micron extends Decoder{
 		self::setInterface(self::shiftChars($partNumber, 1), $flashInfo)
 			->setPackage(self::getOrDefault(self::shiftChars($partNumber, 2), self::PACKAGE));
 
-		if(self::shiftChars($partNumber, 1) == "-"){
+		if(self::shiftChars($partNumber, 1) == "-") {
 			$extra[Constants::PROD_STATUS] = Constants::MICRON_P;
-			foreach(self::PROD_STATUS as $k => $stat){
-				if(StringUtil::contains($partNumber, $k)){
+			foreach(self::PROD_STATUS as $k => $stat) {
+				if(StringUtil::contains($partNumber, $k)) {
 					$extra[Constants::PROD_STATUS] = $stat;
 					$partNumber = str_replace($k, "", $partNumber);
 					break;
 				}
 			}
 			$speed = self::matchFromStart($partNumber, self::SPEED_GRADE);
-			if($speed != Constants::UNKNOWN){
+			if($speed != Constants::UNKNOWN) {
 				$extra[Constants::SPEED_GRADE] = $speed;
 			}
 			$extra[Constants::OPERATION_TEMPERATURE] = self::matchFromStart($partNumber, self::OPERATING_TEMP_RANGE, Constants::MICRON_OTR_C);
 			$features = self::getOrDefault(self::shiftChars($partNumber, 1), self::FEATURES);
-			if($features != Constants::UNKNOWN){
+			if($features != Constants::UNKNOWN) {
 				$extra[Constants::FEATURES] = $features;
 			}
-			if(self::shiftChars($partNumber, 1) == ":" and ($rev = self::shiftChars($partNumber, 1)) != ""){
+			if(self::shiftChars($partNumber, 1) == ":" and ($rev = self::shiftChars($partNumber, 1)) != "") {
 				$extra[Constants::DESIGN_REV] = $rev;
 			}
 		}
@@ -276,22 +284,22 @@ class Micron extends Decoder{
 		return $flashInfo->setExtraInfo($extra);
 	}
 
-	protected static function setInterface(string $interface, FlashInfo $info) : FlashInfo{
+	protected static function setInterface(string $interface, FlashInfo $info): FlashInfo {
 		$i = self::getOrDefault($interface, self::INTERFACE, [false, false, false]);
 		return $info->setInterface((new FlashInterface(false))
 			->setSync($i[0])->setAsync($i[1])->setSpi($i[2]));
 	}
 
-	public static function getFlashInfoFromFdb(FlashInfo $info) : ?PartNumber{
+	public static function getFlashInfoFromFdb(FlashInfo $info): ?PartNumber {
 		return FlashDetector::getFdb()->getPartNumber(self::getName(), self::removePackage($info->getPartNumber()));
 	}
 
-	public static function removePackage(string $pn) : string{
-		if(SpecTek::check($pn)){
+	public static function removePackage(string $pn): string {
+		if(SpecTek::check($pn)) {
 			return SpecTek::removePackage($pn);
 		}
 		$bit = strstr($pn, "08");
-		if($bit !== false and strlen($bit) >= 8){
+		if($bit !== false and strlen($bit) >= 8) {
 			$pn = substr($pn, 0, strlen($pn) + 7 - strlen($bit));
 		}
 		return $pn;
