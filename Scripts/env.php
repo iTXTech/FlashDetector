@@ -31,31 +31,33 @@ use iTXTech\SimpleFramework\Module\WraithSpireMDR;
 
 Initializer::initTerminal();
 
-Logger::$logLevel = 2;//disable logger
+Logger::$logLevel = 0;//disable logger
 
 Logger::info("Loading iTXTech FlashDetector");
 
-$modules = ["FlashDetector"];
+$modules = ["FlashDetector", "Insight"];
 
 global $classLoader;
-try{
+try {
 	$moduleManager = new ModuleManager($classLoader,
 		__DIR__ . DIRECTORY_SEPARATOR . ".." . DIRECTORY_SEPARATOR, __DIR__ . DIRECTORY_SEPARATOR);
 	$moduleManager->registerModuleDependencyResolver(new WraithSpireMDR($moduleManager,
 		"https://raw.githubusercontent.com/iTXTech/WraithSpireDatabase/master/", []));
-	foreach($modules as $m){
+	foreach($modules as $m) {
 		loadModule($moduleManager, $m);
 	}
-}catch(Throwable $e){
+} catch(Throwable $e) {
 	Logger::logException($e);
 }
 
-function loadModule(ModuleManager $manager, string $name){
+function loadModule(ModuleManager $manager, string $name) {
 	$name = $manager->getModulePath() . $name;
-	$manager->tryLoadModule(file_exists($phar = $name . ".phar") ? $phar : $name);
+	if(file_exists($name . ".phar") || file_exists($name)) {
+		$manager->tryLoadModule(file_exists($phar = $name . ".phar") ? $phar : $name);
+	}
 }
 
-if($moduleManager->getModule("FlashDetector") === null){
+if($moduleManager->getModule("FlashDetector") === null) {
 	Logger::error("Module not loaded.");
 	exit(1);
 }
