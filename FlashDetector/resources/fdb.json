@@ -3,7 +3,7 @@
         "name": "iTXTech FlashDetector Flash Database",
         "version": "76",
         "website": "https:\/\/github.com\/iTXTech\/FlashDetector",
-        "time": "Tue, 27 Sep 2022 13:56:51 +0800",
+        "time": "Tue, 27 Sep 2022 21:37:13 +0800",
         "controllers": [
             "SM321AC",
             "SM321BB",
@@ -23925,7 +23925,8 @@
                 "kioxia TH58TEG8CDJBA8C",
                 "kioxia TH58TEG7DDJBA4C",
                 "kioxia TH58TEG7DDJBAMC",
-                "kioxia TH58TEG8DDJBASC"
+                "kioxia TH58TEG8DDJBASC",
+                "kioxia TH58TEG8EDJBA8C"
             ]
         },
         "983A95937AD7": {
@@ -109327,6 +109328,9 @@
             ]
         },
         "TH58TEG8EDJBA8C": {
+            "id": [
+                "98DE949376D7"
+            ],
             "t": [
                 "SF2281",
                 "SF2582",
