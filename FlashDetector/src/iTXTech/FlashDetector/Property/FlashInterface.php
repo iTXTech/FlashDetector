@@ -24,7 +24,11 @@ namespace iTXTech\FlashDetector\Property;
 
 use iTXTech\FlashDetector\Arrayable;
 
-class FlashInterface extends Arrayable{
+class FlashInterface extends Arrayable {
+	public static function getDefaultInterface(): FlashInterface {
+		return (new FlashInterface(false))->setSync(true)->setAsync(true);
+	}
+
 	//is ToggleDDR or ONFi?
 	protected $isToggle;
 	//For ONFi
@@ -35,31 +39,31 @@ class FlashInterface extends Arrayable{
 	//SPI (Seems only Micron has this)
 	protected $spi = false;
 
-	public function __construct(bool $isToggle){
+	public function __construct(bool $isToggle) {
 		$this->isToggle = $isToggle;
 	}
 
-	public function setAsync(bool $async) : FlashInterface{
+	public function setAsync(bool $async): FlashInterface {
 		$this->async = $async;
 		return $this;
 	}
 
-	public function setSync(bool $sync) : FlashInterface{
+	public function setSync(bool $sync): FlashInterface {
 		$this->sync = $sync;
 		return $this;
 	}
 
-	public function setSpi(bool $spi) : FlashInterface{
+	public function setSpi(bool $spi): FlashInterface {
 		$this->spi = $spi;
 		return $this;
 	}
 
-	public function setToggle(bool $toggle) : FlashInterface{
+	public function setToggle(bool $toggle): FlashInterface {
 		$this->toggle = $toggle;
 		return $this;
 	}
 
-	public function toArray() : array{
+	public function toArray(): array {
 		return $this->isToggle ? [
 			"toggle" => $this->toggle
 		] : ($this->spi ? [

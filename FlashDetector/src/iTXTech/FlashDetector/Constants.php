@@ -22,7 +22,7 @@
 
 namespace iTXTech\FlashDetector;
 
-interface Constants{
+interface Constants {
 	public const LEAD_FREE = "leadFree";
 	public const HALOGEN_FREE = "halogenFree";
 	public const WAFER = "wafer";
@@ -35,6 +35,9 @@ interface Constants{
 	public const DENSITY_GBITS = 1024;
 	public const DENSITY_TBITS = 1024 * 1024;
 
+	public const DENSITY_GBYTES = Constants::DENSITY_GBITS * 8;
+	public const DESNITY_TBYTES = Constants::DENSITY_TBITS * 8;
+
 	public const VENDOR_INTEL = "intel";
 	public const VENDOR_MICRON = "micron";
 	public const VENDOR_SAMSUNG = "samsung";
@@ -45,6 +48,9 @@ interface Constants{
 	public const VENDOR_TOSHIBA = "toshiba";
 	public const VENDOR_SANDISK = "sandisk";
 	public const VENDOR_YANGTZE = "ymtc";
+	public const VENDOR_PHISON = "phison";
+
+	public const ORIGINAL_VENDOR = "original_vendor";
 
 	public const NAND_TYPE_NAND = "nand";
 	public const NAND_TYPE_INAND = "inand";

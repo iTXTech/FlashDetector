@@ -30,26 +30,26 @@ use iTXTech\FlashDetector\Property\Classification;
 use iTXTech\FlashDetector\Property\FlashInterface;
 use iTXTech\SimpleFramework\Util\StringUtil;
 
-class Kioxia extends Decoder{
-	public static function getName() : string{
+class Kioxia extends Decoder {
+	public static function getName(): string {
 		return Constants::VENDOR_KIOXIA;
 	}
 
-	public static function check(string $partNumber) : bool{
-		if(StringUtil::startsWith($partNumber, "T")){
+	public static function check(string $partNumber): bool {
+		if(StringUtil::startsWith($partNumber, "TH") || StringUtil::startsWith($partNumber, "TC")) {
 			return true;
 		}
 		return false;
 	}
 
-	public static function decode(string $partNumber) : FlashInfo{
+	public static function decode(string $partNumber): FlashInfo {
 		//Info with asterisk(*) means "Unique character for product variety control."
 		$flashInfo = (new FlashInfo($partNumber))->setVendor(self::getName());
 		$extra = [
 			"multiChip" => self::shiftChars($partNumber, 2) === "TH"
 		];
 		$level = self::shiftChars($partNumber, 2);
-		if(in_array($level, ["GV", "GB"])){
+		if(in_array($level, ["GV", "GB"])) {
 			//TODO: Toshiba NAND with Controller
 			return $flashInfo->setType(Constants::NAND_TYPE_CON)
 				->setExtraInfo([Constants::UNSUPPORTED_REASON => Constants::TOSHIBA_UNSUPPORTED]);
@@ -63,17 +63,17 @@ class Kioxia extends Decoder{
 		$flashInfo->setType($level)
 			->setInterface((new FlashInterface(true))->setToggle(in_array($if, ["T", "L"])))
 			->setVoltage(self::getOrDefault(self::shiftChars($partNumber, 1), [
-                "V" => "3.3V",
-                "Y" => "1.8V",
-                "A" => "Vcc: 3.3V, VccQ: 1.8V",
-                "B" => "Vcc: 3.3V, VccQ: 1.65V-3.6V",
-                "D" => "Vcc: 3.3V/1.8V, VccQ: 3.3V/1.8V",
-                "E" => "Vcc: 2.7V-3.6V, VccQ: 2.7V-3.6V/1.7V-1.95V",
-                "F" => "Vcc: 2.7V-3.6V, VccQ: 3.3V/1.8V (UNOFFICIAL)",
-                "G" => "Vcc: 2.7V~3.6V, VccQ: 1.8V  (UNOFFICIAL)",
-                "J" => "Vcc: 2.7V-3.6V, VccQ: 1.14V-1.26V/1.7V-1.95V",
+				"V" => "3.3V",
+				"Y" => "1.8V",
+				"A" => "Vcc: 3.3V, VccQ: 1.8V",
+				"B" => "Vcc: 3.3V, VccQ: 1.65V-3.6V",
+				"D" => "Vcc: 3.3V/1.8V, VccQ: 3.3V/1.8V",
+				"E" => "Vcc: 2.7V-3.6V, VccQ: 2.7V-3.6V/1.7V-1.95V",
+				"F" => "Vcc: 2.7V-3.6V, VccQ: 3.3V/1.8V (UNOFFICIAL)",
+				"G" => "Vcc: 2.7V~3.6V, VccQ: 1.8V  (UNOFFICIAL)",
+				"J" => "Vcc: 2.7V-3.6V, VccQ: 1.14V-1.26V/1.7V-1.95V",
 				"K" => "Vcc: 2.7V-3.6V, VccQ: 1.14V-1.26V/1.7V-1.95V"
-            ]))
+			]))
 			->setDensity(self::getOrDefault(self::shiftChars($partNumber, 2), [
 				"M8" => 256,
 				"M9" => 512,
@@ -115,9 +115,9 @@ class Kioxia extends Decoder{
 			]));
 		$extra[Constants::ENTERPRISE] = in_array($ep, ["H", "E", "U", "V"]);
 		$width = self::shiftChars($partNumber, 1);
-		if(in_array($width, ["0", "1", "2", "3", "4", "A", "B", "C", "D", "F"])){
+		if(in_array($width, ["0", "1", "2", "3", "4", "A", "B", "C", "D", "F"])) {
 			$flashInfo->setDeviceWidth(8);
-		}elseif(in_array($width, ["5", "6", "7", "8", "9"])){
+		} elseif(in_array($width, ["5", "6", "7", "8", "9"])) {
 			$flashInfo->setDeviceWidth(16);
 		}
 		$size = self::getOrDefault($width, [
@@ -143,27 +143,27 @@ class Kioxia extends Decoder{
 			"A" => "130 nm",
 			"B" => "90 nm",
 			"C" => "70 nm",
-            "D" => "56 nm",
-            "E" => "43 nm",
-            "F" => "32 nm",
-            "G" => "24 nm A-type",
-            "H" => "24 nm B-type",
-            "J" => "19 nm/1x",
-            "K" => "A19 nm/1y",
-            "L" => "15 nm/1z",
-            "2" => "BiCS2",
-            "3" => "BiCS3",
-            "4" => "BiCS4",
-            "5" => "BiCS5"
-        ]));
+			"D" => "56 nm",
+			"E" => "43 nm",
+			"F" => "32 nm",
+			"G" => "24 nm A-type",
+			"H" => "24 nm B-type",
+			"J" => "19 nm/1x",
+			"K" => "A19 nm/1y",
+			"L" => "15 nm/1z",
+			"2" => "BiCS2",
+			"3" => "BiCS3",
+			"4" => "BiCS4",
+			"5" => "BiCS5"
+		]));
 		$package = self::shiftChars($partNumber, 2);
-		if(in_array($package, ["FT", "TG", "TA"])){
+		if(in_array($package, ["FT", "TG", "TA"])) {
 			$package = "TSOP48";
-		}elseif(in_array($package, ["XB", "XG", "BA", "BB"])){
+		} elseif(in_array($package, ["XB", "XG", "BA", "BB"])) {
 			$package = "BGA";
-		}elseif(in_array($package, ["XL", "LA"])){
+		} elseif(in_array($package, ["XL", "LA"])) {
 			$package = "LGA";
-		}else{
+		} else {
 			$package = Constants::UNKNOWN;
 		}
 
@@ -236,7 +236,7 @@ class Kioxia extends Decoder{
 		return $flashInfo;
 	}
 
-	public static function getFlashInfoFromFdb(FlashInfo $info) : ?PartNumber{
+	public static function getFlashInfoFromFdb(FlashInfo $info): ?PartNumber {
 		return FlashDetector::getFdb()->getPartNumber($info->getVendor(), $info->getPartNumber()) ??
 			FlashDetector::getFdb()->getPartNumber(Constants::VENDOR_TOSHIBA, $info->getPartNumber());
 	}
