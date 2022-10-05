@@ -50,6 +50,7 @@ interface Constants{
 	public const NAND_TYPE_INAND = "inand";
 	public const NAND_TYPE_ISSD = "issd";
 	public const NAND_TYPE_CON = "nandcon";
+	public const NAND_TYPE_3D_XPOINT = "3dxpoint";
 
 	public const UNKNOWN = "Unknown";
 
@@ -106,6 +107,7 @@ interface Constants{
 
 	//Intel
 	public const INTEL_SKU_S = "intel_sku_s";
+	public const INTEL_UNSUPPORTED_3D_XPOINT = "intel_unsupported_3d_xpoint";
 
 	//Micron
 	public const MICRON_PN = "micronPartNumber";

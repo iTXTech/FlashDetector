@@ -28,33 +28,33 @@ use iTXTech\FlashDetector\Property\Classification;
 use iTXTech\FlashDetector\Property\FlashInterface;
 use iTXTech\SimpleFramework\Util\StringUtil;
 
-class Intel extends Decoder{
-	public static function getName() : string{
+class Intel extends Decoder {
+	public static function getName(): string {
 		return Constants::VENDOR_INTEL;
 	}
 
-	public static function check(string $partNumber) : bool{
+	public static function check(string $partNumber): bool {
 		$code = substr($partNumber, 0, 2);
 		if(in_array($code, ["JS", "29", "X2", "BK", "CU"]) or
 			StringUtil::startsWith($partNumber, "PF29F") or
-			StringUtil::startsWith($partNumber, "PF29R")){
+			StringUtil::startsWith($partNumber, "PF29R")) {
 			return true;
 		}
 		return false;
 	}
 
-	public static function decode(string $partNumber) : FlashInfo{
+	public static function decode(string $partNumber): FlashInfo {
 		$flashInfo = (new FlashInfo($partNumber))->setVendor(self::getName());
 		$extra = [
 			Constants::WAFER => false
 		];
-		if(StringUtil::startsWith($partNumber, "X")){
+		if(StringUtil::startsWith($partNumber, "X")) {
 			$extra[Constants::WAFER] = true;
 			$partNumber = substr($partNumber, 1);
-		}else{
+		} else {
 			$package = substr($partNumber, 0, 2);
-			if(in_array($package, ["JS", "PF", "BK", "CU"])){
-				if(in_array($package, ["JS", "PF", "BK"])){
+			if(in_array($package, ["JS", "PF", "BK", "CU"])) {
+				if(in_array($package, ["JS", "PF", "BK"])) {
 					$extra[Constants::LEAD_FREE] = true;
 				}
 				$flashInfo->setPackage(self::getOrDefault($package, [
@@ -67,9 +67,15 @@ class Intel extends Decoder{
 			}
 		}
 
-		$partNumber = substr($partNumber, 3);//29F
-		$flashInfo->setType(Constants::NAND_TYPE_NAND)
-			->setDensity(self::getOrDefault($density = self::shiftChars($partNumber, 3), [
+		$partNumber = substr($partNumber, 2);//29F
+		$flashInfo->setType(self::getOrDefault($type = self::shiftChars($partNumber, 1), [
+			"F" => Constants::NAND_TYPE_NAND,
+			"P" => Constants::NAND_TYPE_3D_XPOINT
+		]));
+		if($type == "P") {
+			return $flashInfo->setExtraInfo([Constants::UNSUPPORTED_REASON => Constants::TOSHIBA_UNSUPPORTED]);
+		}
+		$flashInfo->setDensity(self::getOrDefault($density = self::shiftChars($partNumber, 3), [
 				"01G" => 1 * Constants::DENSITY_GBITS,
 				"02G" => 2 * Constants::DENSITY_GBITS,
 				"04G" => 4 * Constants::DENSITY_GBITS,
@@ -77,26 +83,27 @@ class Intel extends Decoder{
 				"16G" => 16 * Constants::DENSITY_GBITS,
 				"32G" => 32 * Constants::DENSITY_GBITS,
 				"64G" => 64 * Constants::DENSITY_GBITS,
-                "16B" => 128 * Constants::DENSITY_GBITS,
-                "32B" => 256 * Constants::DENSITY_GBITS,
-                "48B" => 384 * Constants::DENSITY_GBITS,
-                "64B" => 512 * Constants::DENSITY_GBITS,
-                "96B" => 768 * Constants::DENSITY_GBITS,
-                "01T" => 1 * Constants::DENSITY_TBITS,
-                "02T" => 2 * Constants::DENSITY_TBITS,
-                "03T" => 3 * Constants::DENSITY_TBITS,
-                "04T" => 4 * Constants::DENSITY_TBITS,
-                "06T" => 6 * Constants::DENSITY_TBITS,
-                "08T" => 8 * Constants::DENSITY_TBITS,
-                "16T" => 16 * Constants::DENSITY_TBITS
-            ], 0))
+				"16B" => 128 * Constants::DENSITY_GBITS,
+				"32B" => 256 * Constants::DENSITY_GBITS,
+				"48B" => 384 * Constants::DENSITY_GBITS,
+				"64B" => 512 * Constants::DENSITY_GBITS,
+				"96B" => 768 * Constants::DENSITY_GBITS,
+				"01T" => 1 * Constants::DENSITY_TBITS,
+				"02T" => 2 * Constants::DENSITY_TBITS,
+				"03T" => 3 * Constants::DENSITY_TBITS,
+				"04T" => 4 * Constants::DENSITY_TBITS,
+				"06T" => 6 * Constants::DENSITY_TBITS,
+				"08T" => 8 * Constants::DENSITY_TBITS,
+				"16T" => 16 * Constants::DENSITY_TBITS
+			], 0))
 			->setDeviceWidth(self::getOrDefault($width = self::shiftChars($partNumber, 2), [
 				"08" => 8,
 				"16" => 16,
 				"2A" => 8,
+				"4A" => 8,
 				"A8" => 8
 			], -1));
-		if(isset($density[2]) and ((int) $density[2]) > 0){//same as Micron
+		if(isset($density[2]) and ((int)$density[2]) > 0) {//same as Micron
 			return Micron::decode($flashInfo->getPartNumber());
 		}
 		$classification = self::getOrDefault(self::shiftChars($partNumber, 1), [
@@ -115,13 +122,13 @@ class Intel extends Decoder{
 			"N" => [4, 4, 4, true],
 			"O" => [8, 8, 4, true],
 			"P" => [8, 8, 4, true],//L74
-            "Q" => [8, 2, -1, true],
+			"Q" => [8, 2, -1, true],
 			"S" => [16, 4, 4, true],
 			"W" => [16, 8, 4, true],
-            "Y" => [16, 4, 4, true]
+			"Y" => [16, 4, 4, true]
 		], [-1, -1, -1, false]);
 		$flashInfo->setClassification(new Classification(
-			$classification[1], $width == "2A" ? 2 : 1, $classification[2], $classification[0]))
+			$classification[1], $width == "4A" ? 4 : ($width == "2A" ? 2 : 1), $classification[2], $classification[0]))
 			->setInterface((new FlashInterface(false))->setAsync(true)->setSync($classification[3]))
 			->setVoltage(self::getOrDefault(self::shiftChars($partNumber, 1), [
 				"A" => "3.3V (2.70V-3.60V)",
@@ -135,28 +142,28 @@ class Intel extends Decoder{
 				"Q" => 4,
 			]))
 			->setProcessNode($lithography = self::getOrDefault(self::shiftChars($partNumber, 1), [
-                "A" => "90 nm",
-                "B" => "72 nm",
-                "C" => "50 nm",
-                "D" => "34 nm",
-                "E" => "25 nm",
-                "F" => "20 nm",
-                "G" => "3D1",
-                "H" => "3D2",
-                "J" => "3D3",
-                "K" => "3D4"
-            ]));
+				"A" => "90 nm",
+				"B" => "72 nm",
+				"C" => "50 nm",
+				"D" => "34 nm",
+				"E" => "25 nm",
+				"F" => "20 nm",
+				"G" => "3D1 32L",
+				"H" => "3D2 64L",
+				"J" => "3D3 96L",
+				"K" => "3D4 144L"
+			]));
 		$gen = self::shiftChars($partNumber, 1);
-		if(is_numeric($gen)){
+		if(is_numeric($gen)) {
 			$flashInfo->setGeneration($gen);
-		}else{
+		} else {
 			$extra[Constants::SKU] = self::getOrDefault($gen, [
 				"S" => Constants::INTEL_SKU_S
 			]);
 		}
 
 		//Patch for L06B/B0KB TLC
-		if($flashInfo->getCellLevel() == 3 and $lithography == "G" and $density == "01T"){
+		if($flashInfo->getCellLevel() == 3 and $lithography == "G" and $density == "01T") {
 			$flashInfo->setDensity(1.5 * Constants::DENSITY_TBITS);
 		}
 
