@@ -154,6 +154,7 @@ class Kioxia extends Decoder {
 			"2" => "BiCS2",
 			"3" => "BiCS3",
 			"4" => "BiCS4",
+			"M" => "BiCS4.5",
 			"5" => "BiCS5"
 		]));
 		$package = self::shiftChars($partNumber, 2);
