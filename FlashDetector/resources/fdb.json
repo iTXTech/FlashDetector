@@ -1,9 +1,9 @@
 {
     "info": {
         "name": "iTXTech FlashDetector Flash Database",
-        "version": "76",
+        "version": "77",
         "website": "https:\/\/github.com\/iTXTech\/FlashDetector",
-        "time": "Tue, 27 Sep 2022 21:37:13 +0800",
+        "time": "Wed, 05 Oct 2022 17:18:32 +0800",
         "controllers": [
             "SM321AC",
             "SM321BB",
@@ -19062,7 +19062,7 @@
                 "westerndigital SANDISK-05461-064G-480GB",
                 "westerndigital SDYNSGBPG-032GIRT2",
                 "westerndigital SDYNSGCPM-064GIRT2",
-                "westerndigital 05446-032G"
+                "westerndigital 05446-064G"
             ]
         },
         "453A94937651": {
@@ -19116,6 +19116,7 @@
                 "westerndigital SDWFR-128G1ZED2D",
                 "westerndigital SDYNSGCPM-064G",
                 "westerndigital SDYNSGERM-016G",
+                "westerndigital SDYNSGERM-016G4DIE",
                 "westerndigital SDTNSGAMA-016GIR",
                 "westerndigital SDTNSGAMA-016GPIR",
                 "westerndigital SDYNSGBPG-032GIRT1",
@@ -41147,6 +41148,16 @@
                 "micron MT29F4T08EULEE"
             ]
         },
+        "2CD3F932EA10": {
+            "t": [
+                "SM2259XT2",
+                "SM2263XT"
+            ],
+            "n": [
+                "micron MT29F2T08EMLDE",
+                "micron MICRON"
+            ]
+        },
         "453E98037664": {
             "t": [
                 "SM2259XT2",
@@ -41172,6 +41183,16 @@
             ],
             "n": [
                 "westerndigital SDUNEIOMA-128GCE"
+            ]
+        },
+        "9BC529492000": {
+            "t": [
+                "SM2259XT2",
+                "SM2263XT"
+            ],
+            "n": [
+                "ymtc YMN09TC1B1JC6C",
+                "ymtc YMTC"
             ]
         },
         "2CD38932E601": {
@@ -41238,28 +41259,12 @@
                 "micron MT29F2T08EUHAF"
             ]
         },
-        "2CD3F932EA10": {
-            "t": [
-                "SM2263XT"
-            ],
-            "n": [
-                "micron MICRON"
-            ]
-        },
         "45489AB37E63": {
             "t": [
                 "SM2263XT"
             ],
             "n": [
                 "westerndigital SNDK-128GB"
-            ]
-        },
-        "9BC529492000": {
-            "t": [
-                "SM2263XT"
-            ],
-            "n": [
-                "ymtc YMTC"
             ]
         },
         "98D7A0327606": {
@@ -84730,6 +84735,14 @@
                 "SM2263XT"
             ]
         },
+        "MT29F2T08EMLDE": {
+            "id": [
+                "2CD3F932EA10"
+            ],
+            "t": [
+                "SM2259XT2"
+            ]
+        },
         "MT29F1T08EMHBF": {
             "id": [
                 "2CA40832A104",
@@ -94632,6 +94645,23 @@
                 "IS917"
             ]
         },
+        "SDYNSGERM-016G4DIE": {
+            "id": [
+                "453A94937651"
+            ],
+            "t": [
+                "SM2259XT2",
+                "CBM2098P",
+                "CBM2098E",
+                "CBM2099",
+                "CBM2099E",
+                "CBM2199",
+                "CBM2199E",
+                "CBM2199ES",
+                "IS903",
+                "IS917"
+            ]
+        },
         "SDUNEIOMA-128GCE": {
             "id": [
                 "454898037664"
@@ -97813,7 +97843,7 @@
             "d": 8,
             "e": 2
         },
-        "05446-032G": {
+        "05446-064G": {
             "id": [
                 "453A949376D1"
             ],
@@ -112442,6 +112472,14 @@
             ],
             "t": [
                 "SM2259XT"
+            ]
+        },
+        "YMN09TC1B1JC6C": {
+            "id": [
+                "9BC529492000"
+            ],
+            "t": [
+                "SM2259XT2"
             ]
         },
         "YMN08TE1B1AC3B": {
