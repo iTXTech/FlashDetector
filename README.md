@@ -8,7 +8,8 @@ Universal NAND Flash ID Decoder and Search Engine.
 
 ## Launch Now
 
-Public `FlashDetector` Web Server (with `iTXTech ChipXpert™ Insight`): [https://fd.sakuracg.com](https://fd.sakuracg.com)
+Public `FlashDetector` Web Server (
+with `iTXTech ChipXpert™ Insight`): [https://fd.sakuracg.com](https://fd.sakuracg.com)
 
 Public [FlashMaster](https://github.com/iTXTech/FlashMaster) Frontend: [https://nand.gq](https://nand.gq)
 
@@ -33,17 +34,23 @@ Public [FlashMaster](https://github.com/iTXTech/FlashMaster) Frontend: [https://
 
 ## Setup
 
+You must have SimpleFramework installed in your environment.
+
 ```bash
-$ git clone https://github.com/iTXTech/FlashDetector.git
-$ cd FlashDetector/FlashDetector
-$ composer install
+git clone https://github.com/iTXTech/FlashDetector.git
+cd FlashDetector
+git clone https://github.com/iTXTech/SimpleFramework.git sf
+cd FlashDetector
+composer install
+cd ../Scripts
+php ./xxx.php # Start any script
 ```
 
 ## Supported
 
 ### Flash Vendors
 
-1. [Intel](https://www.intel.com/)
+1. [Solidigm](https://www.solidigm.com/) - *Formerly Intel, now SK hynix*
 1. [Micron](https://www.micron.com/)
 1. [Western Digital](https://www.westerndigital.com/) - *Formerly SanDisk*
 1. [KIOXIA](https://www.kioxia.com/) - *Formerly Toshiba Memory*
@@ -66,8 +73,10 @@ $ composer install
 
 There are 4 implementations of `FDWebServer`:
 
-1. [FDWebServer-CGI](https://github.com/iTXTech/FlashDetector/tree/master/FDWebServer/CGI) - Compatible with Apache and PHP-FPM
-1. [FDWebServer-Swoole](https://github.com/iTXTech/FlashDetector/tree/master/FDWebServer/swoole) - Extreme High Performance, using [swoole](https://github.com/swoole/swoole-src)
+1. [FDWebServer-CGI](https://github.com/iTXTech/FlashDetector/tree/master/FDWebServer/CGI) - Compatible with Apache and
+   PHP-FPM
+1. [FDWebServer-Swoole](https://github.com/iTXTech/FlashDetector/tree/master/FDWebServer/swoole) - Extreme High
+   Performance, using [swoole](https://github.com/swoole/swoole-src)
 1. [FDWebServer-WorkerManEE](https://github.com/iTXTech/FlashDetector/tree/master/FDWebServer/WorkerManEE) - Single
    Thread Server for Any OS
 1. [SharpFlashDetector](https://github.com/iTXTech/SharpFlashDetector) - `C#` implementation of `FlashDetector`
