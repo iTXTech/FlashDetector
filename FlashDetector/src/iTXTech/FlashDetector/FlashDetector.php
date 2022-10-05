@@ -131,7 +131,6 @@ abstract class FlashDetector {
 		self::registerDecoder(SKHynix3D::class);
 		self::registerDecoder(SKHynix::class);
 		self::registerDecoder(SKHynixLegacy::class);
-		self::registerDecoder(Kioxia::class);
 		self::registerDecoder(Samsung::class);
 		self::registerDecoder(Intel::class);
 		self::registerDecoder(MicronFbgaCode::class);
@@ -140,6 +139,7 @@ abstract class FlashDetector {
 		self::registerDecoder(WesternDigitalShortCode::class);
 		self::registerDecoder(Yangtze::class);
 		self::registerDecoder(Phison::class);
+		self::registerDecoder(Kioxia::class);
 
 		self::registerFlashIdDecoder(new KioxiaIdDecoder());
 		self::registerFlashIdDecoder(new WesternDigitalIdDecoder());
