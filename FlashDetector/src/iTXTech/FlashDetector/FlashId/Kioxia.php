@@ -117,9 +117,10 @@ class Kioxia extends Decoder {
 					0b10111 => "19nm",
 					0b10000 => "A19nm",
 					0b10001 => "15nm",
-					0b11001 => "BiCS2",
-					0b11010 => "BiCS3",
-					0b11011 => "BiCS4"
+					0b11001 => "BiCS2 48L",
+					0b11010 => "BiCS3 64L",
+					0b11011 => "BiCS4 96L",
+					0b11100 => "BiCS5 112L"
 				]
 			]
 		]

@@ -71,7 +71,8 @@ class Kioxia extends Decoder{
                 "E" => "Vcc: 2.7V-3.6V, VccQ: 2.7V-3.6V/1.7V-1.95V",
                 "F" => "Vcc: 2.7V-3.6V, VccQ: 3.3V/1.8V (UNOFFICIAL)",
                 "G" => "Vcc: 2.7V~3.6V, VccQ: 1.8V  (UNOFFICIAL)",
-                "J" => "Vcc: 2.7V-3.6V, VccQ: 1.14V-1.26V/1.7V-1.95V"
+                "J" => "Vcc: 2.7V-3.6V, VccQ: 1.14V-1.26V/1.7V-1.95V",
+				"K" => "Vcc: 2.7V-3.6V, VccQ: 1.14V-1.26V/1.7V-1.95V"
             ]))
 			->setDensity(self::getOrDefault(self::shiftChars($partNumber, 2), [
 				"M8" => 256,
