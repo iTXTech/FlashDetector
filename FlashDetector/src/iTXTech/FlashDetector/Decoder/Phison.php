@@ -97,7 +97,8 @@ class Phison extends Decoder {
 			"Y" => ["B47R", 3]
 		],
 		Constants::VENDOR_SKHYNIX => [
-			"P" => ["16nm", 3]
+			"P" => ["16nm", 3],
+			"O" => ["3DV4", 3]
 		],
 		Constants::VENDOR_YANGTZE => [
 			"O" => ["JGS", 3]
@@ -118,7 +119,7 @@ class Phison extends Decoder {
 	}
 
 	public static function decode(string $partNumber): FlashInfo {
-		$flashInfo = (new FlashInfo($partNumber))->setVendor(self::getName())
+		$flashInfo = (new FlashInfo($partNumber))->setVendor(self::getName())->setType(Constants::NAND_TYPE_NAND)
 			->setExtraInfo([Constants::ORIGINAL_VENDOR => ($vendor = self::getOrDefault(self::shiftChars($partNumber, 1), self::REBRAND_VENDOR))])
 			->setPackage(self::getOrDefault(self::shiftChars($partNumber, 1), self::PACKAGE));
 		$clz = self::getOrDefault(self::shiftChars($partNumber, 1), self::CLASSIFICATION, [-1, -1]);
