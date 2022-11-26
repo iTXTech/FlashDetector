@@ -28,14 +28,15 @@ use iTXTech\SimpleFramework\Console\Logger;
 use iTXTech\SimpleFramework\Util\Config;
 
 class MicronDatabase {
-	public const MICRON_HEADER = [];
+	public const MICRON_HEADER = ["NC", "NW", "NY", "NX", "NQ"];
 	public const SPECTEK_HEADER = ["PF", "PFA", "PFB", "PFC", "PFD", "PFE", "PFF", "PFG", "PFH"];
 
 	public const START_FROM = [
-		"NW" => 101,
-		"NY" => 101,
-		"NQ" => 101,
-		"NX" => 101,
+        "NC" => 101, // New Micron ES PN
+		"NW" => 101, // Micron MP PN
+		"NY" => 101, // New Micron MP PN
+		"NQ" => 101, // Legacy Micron MP PN, mostly BGA100
+		"NX" => 101, // Micron ES PN
 	];
 
 	/** @var Config */
