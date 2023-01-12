@@ -29,7 +29,7 @@ use iTXTech\FlashDetector\FlashInfo;
 use iTXTech\FlashDetector\Property\Url;
 use iTXTech\SimpleFramework\Util\StringUtil;
 
-class MicronFbgaCode extends Decoder{
+class MicronFbgaCode extends Decoder {
 	protected const COUNTRY_CODE = [
 		"1" => Constants::USA,
 		"2" => Constants::SINGAPORE,
@@ -45,29 +45,29 @@ class MicronFbgaCode extends Decoder{
 		"F" => Constants::PHILIPPINES
 	];
 
-	public static function getName() : string{
+	public static function getName(): string {
 		return "MicronFBGACode";
 	}
 
-	public static function check(string $partNumber) : bool{
-		foreach(["NW", "NX", "NQ", "PF", "NY"] as $h){
-			if(StringUtil::startsWith($partNumber, $h) or
-				(strlen($partNumber) == 10 and substr($partNumber, 5, 2) == $h)){
+	public static function check(string $partNumber): bool {
+		foreach (["NW", "NX", "NQ", "PF", "NY", "NC"] as $h) {
+			if (StringUtil::startsWith($partNumber, $h) or
+				(strlen($partNumber) == 10 and substr($partNumber, 5, 2) == $h)) {
 				return true;
 			}
 		}
 		return false;
 	}
 
-	public static function decode(string $partNumber) : FlashInfo{
-		if(strlen($partNumber) == 10){
+	public static function decode(string $partNumber): FlashInfo {
+		if (strlen($partNumber) == 10) {
 			$i = self::shiftChars($partNumber, 5);
 		}
 		$pn = FlashDetector::searchMicronFbgaCode($partNumber);
-		if(count($pn) > 0){
+		if (count($pn) > 0) {
 			$pn = $pn[0];
 			$info = FlashDetector::detect($pn)->setPartNumber($partNumber);
-			if($info->getVendor() == Micron::getName()){
+			if ($info->getVendor() == Micron::getName()) {
 				$info->addUrl(new Url(
 					Constants::MICRON_WEBSITE,
 					"https://www.micron.com/support/tools-and-utilities/fbga?fbga=$partNumber",
@@ -76,7 +76,7 @@ class MicronFbgaCode extends Decoder{
 			}
 			$extra = $info->getExtraInfo();
 			$extra[Constants::MICRON_PN] = $pn;
-			if(isset($i)){
+			if (isset($i)) {
 				$extra[Constants::PROD_DATE] = self::shiftChars($i, 1);
 				$week = ((ord(self::shiftChars($i, 1)) - 64) * 2);
 				$extra[Constants::PROD_DATE] .= strlen($week) == 1 ? "0" . $week : $week;
@@ -85,12 +85,12 @@ class MicronFbgaCode extends Decoder{
 				$extra[Constants::ENCAPSULATION] = self::getOrDefault(self::shiftChars($i, 1), self::COUNTRY_CODE);
 			}
 			return $info->setExtraInfo($extra);
-		}else{
+		} else {
 			return (new FlashInfo($partNumber))->setVendor(Constants::UNKNOWN);
 		}
 	}
 
-	public static function getFlashInfoFromFdb(FlashInfo $info) : ?PartNumber{
+	public static function getFlashInfoFromFdb(FlashInfo $info): ?PartNumber {
 		return null;
 	}
 }

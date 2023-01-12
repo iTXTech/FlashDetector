@@ -252,7 +252,9 @@ class Micron extends Decoder {
 				"A" => 1,
 				"B" => 2,
 				"C" => 3,
-				"D" => 4
+				"D" => 4,
+				"E" => 5,
+				"F" => 6
 			]));
 		self::setInterface(self::shiftChars($partNumber, 1), $flashInfo)
 			->setPackage(self::getOrDefault(self::shiftChars($partNumber, 2), self::PACKAGE));
