@@ -29,8 +29,8 @@ Public [FlashMaster](https://github.com/iTXTech/FlashMaster) Frontend: [https://
 ## Requirements
 
 * [PHP >= 7.2](https://www.php.net)
-* [SimpleFramework 2.2](https://github.com/iTXTech/SimpleFramework)
-* [Composer](https://github.com/composer/composer)
+* [SimpleFramework 2.3](https://github.com/iTXTech/SimpleFramework)
+* [Composer](https://github.com/composer/composer) - *Optional*
 
 ## Setup
 
@@ -93,7 +93,7 @@ See files in [Scripts](Scripts).
 
 ## License
 
-    Copyright (C) 2018-2022 iTX Technologies
+    Copyright (C) 2018-2023 iTX Technologies
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU Affero General Public License as
