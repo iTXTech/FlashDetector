@@ -19,6 +19,10 @@ Public [FlashMaster](https://github.com/iTXTech/FlashMaster) Frontend: [https://
 
 如果您需要完整的商业授权，可以[联系作者](mailto:peratx@itxtech.org)。
 
+[本人 (PeratX)](mailto:peratx@itxtech.org)为`FlashDetector`, `FlashMaster`（包括但不限于JS版本、Windows客户端、移动端客户端）, `SharpFlashDetector`等一系列软件的创建者、维护者和唯一作者。
+
+故不必怀疑毕业设计课题的原创性。
+
 ## Frontend
 
 * [FlashMaster (Vue)](https://github.com/iTXTech/FlashMaster) - *Modern JavaScript Client*
@@ -93,7 +97,8 @@ See files in [Scripts](Scripts).
 
 ## License
 
-    Copyright (C) 2018-2023 iTX Technologies
+    Copyright © 2018-2023 PeratX <peratx@itxtech.org>
+    Copyright © 2018-2023 iTX Technologies
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU Affero General Public License as
