@@ -3,7 +3,7 @@
         "name": "iTXTech FlashDetector Flash Database",
         "version": "79",
         "website": "https:\/\/github.com\/iTXTech\/FlashDetector",
-        "time": "Wed, 03 May 2023 06:12:00 +0000",
+        "time": "Wed, 03 May 2023 06:23:02 +0000",
         "controllers": [
             "SM321AC",
             "SM321BB",
@@ -84,9 +84,9 @@
             "JMF670H",
             "MK8115",
             "MAP1002",
-            "MAP1102",
             "MAP1202",
             "MAS0902",
+            "MAS1102",
             "SF2141",
             "SF2181",
             "SF2281",
@@ -312,9 +312,9 @@
                 "SM2263EN",
                 "SM2263XT",
                 "MAP1002",
-                "MAP1102",
                 "MAP1202",
                 "MAS0902",
+                "MAS1102",
                 "CBM2199",
                 "CBM2199E"
             ],
@@ -354,9 +354,9 @@
                 "SM2262EN",
                 "SM2263XT",
                 "MAP1002",
-                "MAP1102",
                 "MAP1202",
-                "MAS0902"
+                "MAS0902",
+                "MAS1102"
             ],
             "n": [
                 "samsung K9AHGD8H0M"
@@ -419,9 +419,9 @@
                 "SM2262EN",
                 "SM2263XT",
                 "MAP1002",
-                "MAP1102",
                 "MAP1202",
-                "MAS0902"
+                "MAS0902",
+                "MAS1102"
             ],
             "n": [
                 "samsung K9AHGD8J0A",
@@ -458,7 +458,7 @@
                 "SM2259XT2",
                 "SM2262EN",
                 "SM2263XT",
-                "MAP1102"
+                "MAS1102"
             ],
             "n": [
                 "samsung K9AFGD8J0B"
@@ -473,8 +473,8 @@
                 "SM3281BB",
                 "SM2258XT",
                 "SM2259XT2",
-                "MAP1102",
-                "MAS0902"
+                "MAS0902",
+                "MAS1102"
             ],
             "n": [
                 "samsung K9OMGD8H2B"
@@ -510,8 +510,8 @@
                 "SM2259XT2",
                 "SM2262EN",
                 "SM2263XT",
-                "MAP1102",
-                "MAP1202"
+                "MAP1202",
+                "MAS1102"
             ],
             "n": [
                 "samsung K9AHGD8J0B",
@@ -6070,8 +6070,8 @@
                 "SM2262EN",
                 "SM2263EN",
                 "SM2263XT",
-                "MAP1102",
                 "MAS0902",
+                "MAS1102",
                 "PS3111",
                 "INIC6081"
             ],
@@ -6103,8 +6103,8 @@
                 "SM2262EN",
                 "SM2263EN",
                 "SM2263XT",
-                "MAP1102",
                 "MAS0902",
+                "MAS1102",
                 "CBM2199",
                 "CBM2199E",
                 "PS3111",
@@ -6149,8 +6149,8 @@
                 "SM2258XT",
                 "SM2258",
                 "SM2259XT2",
-                "MAP1102",
                 "MAS0902",
+                "MAS1102",
                 "CBM2199",
                 "CBM2199E",
                 "PS3111",
@@ -6329,9 +6329,9 @@
                 "SM2262EN",
                 "SM2263XT",
                 "MAP1002",
-                "MAP1102",
                 "MAP1202",
                 "MAS0902",
+                "MAS1102",
                 "PS3111",
                 "INIC6081"
             ],
@@ -6348,9 +6348,9 @@
                 "SM2259XT",
                 "SM2259XT2",
                 "MAP1002",
-                "MAP1102",
                 "MAP1202",
                 "MAS0902",
+                "MAS1102",
                 "PS3111",
                 "INIC6081"
             ],
@@ -6369,9 +6369,9 @@
                 "SM2259XT",
                 "SM2259XT2",
                 "MAP1002",
-                "MAP1102",
                 "MAP1202",
                 "MAS0902",
+                "MAS1102",
                 "PS3111",
                 "INIC6081"
             ],
@@ -6395,8 +6395,8 @@
                 "SM2259XT2",
                 "SM2262EN",
                 "SM2263XT",
-                "MAP1102",
                 "MAP1202",
+                "MAS1102",
                 "PS3111",
                 "INIC6081"
             ],
@@ -6414,7 +6414,7 @@
             "t": [
                 "SM2259XT",
                 "SM2259XT2",
-                "MAP1102",
+                "MAS1102",
                 "PS3111",
                 "INIC6081"
             ],
@@ -6479,8 +6479,8 @@
                 "SM3281BB",
                 "SM2259XT",
                 "SM2259XT2",
-                "MAP1102",
-                "MAP1202"
+                "MAP1202",
+                "MAS1102"
             ],
             "n": [
                 "skhynix H25QFT8A1A",
@@ -8936,9 +8936,9 @@
                 "SM2258",
                 "SM2259XT2",
                 "MK8115",
-                "MAP1102",
                 "MAP1202",
                 "MAS0902",
+                "MAS1102",
                 "CBM2199",
                 "CBM2199E",
                 "IS917",
@@ -8990,8 +8990,8 @@
                 "SM2258",
                 "SM2259XT2",
                 "MK8115",
-                "MAP1102",
                 "MAS0902",
+                "MAS1102",
                 "CBM2099E",
                 "CBM2199",
                 "CBM2199E",
@@ -9036,9 +9036,9 @@
                 "SM2262EN",
                 "SM2263XT",
                 "MAP1002",
-                "MAP1102",
                 "MAP1202",
                 "MAS0902",
+                "MAS1102",
                 "CBM2099E",
                 "CBM2199",
                 "CBM2199E",
@@ -9071,9 +9071,9 @@
                 "SM2262EN",
                 "SM2263XT",
                 "MAP1002",
-                "MAP1102",
                 "MAP1202",
                 "MAS0902",
+                "MAS1102",
                 "PS3111",
                 "INIC6081"
             ],
@@ -9106,9 +9106,9 @@
                 "SM2262EN",
                 "SM2263XT",
                 "MAP1002",
-                "MAP1102",
                 "MAP1202",
                 "MAS0902",
+                "MAS1102",
                 "CBM2199",
                 "CBM2199E",
                 "PS3111",
@@ -9140,9 +9140,9 @@
                 "SM2262EN",
                 "SM2263XT",
                 "MAP1002",
-                "MAP1102",
                 "MAP1202",
-                "MAS0902"
+                "MAS0902",
+                "MAS1102"
             ],
             "n": [
                 "intel 29F64B0P3ATH1SLMF5",
@@ -9176,8 +9176,8 @@
                 "SM2259XT2",
                 "SM2262EN",
                 "SM2263XT",
-                "MAP1102",
                 "MAS0902",
+                "MAS1102",
                 "PS3111",
                 "INIC6081"
             ],
@@ -9235,9 +9235,9 @@
                 "SM2259XT2",
                 "SM2263XT",
                 "MAP1002",
-                "MAP1102",
                 "MAP1202",
                 "MAS0902",
+                "MAS1102",
                 "PS3111",
                 "INIC6081"
             ],
@@ -9306,8 +9306,8 @@
                 "SM2258XT",
                 "SM2258",
                 "SM2259XT2",
-                "MAP1102",
                 "MAS0902",
+                "MAS1102",
                 "IS917",
                 "PS3111",
                 "INIC6081"
@@ -9357,9 +9357,9 @@
                 "SM2259XT",
                 "SM2259XT2",
                 "MAP1002",
-                "MAP1102",
                 "MAP1202",
                 "MAS0902",
+                "MAS1102",
                 "CBM2199E",
                 "PS3111",
                 "INIC6081"
@@ -9384,9 +9384,9 @@
                 "SM2259XT",
                 "SM2259XT2",
                 "MAP1002",
-                "MAP1102",
                 "MAP1202",
-                "MAS0902"
+                "MAS0902",
+                "MAS1102"
             ],
             "n": [
                 "intel 29F1T08GBLBE",
@@ -9407,8 +9407,8 @@
                 "SM2259XT",
                 "SM2259XT2",
                 "SM2263XT",
-                "MAP1102",
-                "MAP1202"
+                "MAP1202",
+                "MAS1102"
             ],
             "n": [
                 "intel PF29F01T2ALCQ",
@@ -12426,9 +12426,9 @@
                 "SM2262EN",
                 "SM2263XT",
                 "MAP1002",
-                "MAP1102",
                 "MAP1202",
                 "MAS0902",
+                "MAS1102",
                 "CBM2099E",
                 "CBM2199",
                 "CBM2199E",
@@ -12525,9 +12525,9 @@
                 "SM2262EN",
                 "SM2263XT",
                 "MAP1002",
-                "MAP1102",
                 "MAP1202",
                 "MAS0902",
+                "MAS1102",
                 "CBM2199",
                 "CBM2199E",
                 "PS3111",
@@ -12601,9 +12601,9 @@
                 "SM2262EN",
                 "SM2263XT",
                 "MAP1002",
-                "MAP1102",
                 "MAP1202",
                 "MAS0902",
+                "MAS1102",
                 "CBM2199",
                 "CBM2199E",
                 "PS3111",
@@ -12629,9 +12629,9 @@
                 "SM2262EN",
                 "SM2263XT",
                 "MAP1002",
-                "MAP1102",
                 "MAP1202",
                 "MAS0902",
+                "MAS1102",
                 "PS3111",
                 "INIC6081"
             ],
@@ -12695,9 +12695,9 @@
                 "SM2262EN",
                 "SM2263XT",
                 "MAP1002",
-                "MAP1102",
                 "MAP1202",
                 "MAS0902",
+                "MAS1102",
                 "CBM2199E",
                 "PS3111",
                 "INIC6081"
@@ -12745,9 +12745,9 @@
                 "SM2262EN",
                 "SM2263XT",
                 "MAP1002",
-                "MAP1102",
                 "MAP1202",
                 "MAS0902",
+                "MAS1102",
                 "PS3111",
                 "INIC6081"
             ],
@@ -12792,9 +12792,9 @@
                 "SM2262EN",
                 "SM2263XT",
                 "MAP1002",
-                "MAP1102",
                 "MAP1202",
                 "MAS0902",
+                "MAS1102",
                 "CBM2199E",
                 "PS3111",
                 "INIC6081"
@@ -12857,8 +12857,8 @@
                 "SM2259XT2",
                 "SM2262EN",
                 "MAP1002",
-                "MAP1102",
                 "MAP1202",
+                "MAS1102",
                 "PS3111",
                 "INIC6081"
             ],
@@ -12881,7 +12881,7 @@
                 "SM2259XT",
                 "SM2259XT2",
                 "SM2263XT",
-                "MAP1102",
+                "MAS1102",
                 "PS3111",
                 "INIC6081"
             ],
@@ -12902,14 +12902,16 @@
                 "SM2259XT",
                 "SM2259XT2",
                 "SM2263XT",
-                "MAP1102",
                 "MAP1202",
+                "MAS1102",
                 "PS3111",
                 "INIC6081"
             ],
             "n": [
                 "micron MT29F512G08EBHBF",
-                "micron MT29F512G08EBLDE"
+                "micron MT29F512G08EBLDE",
+                "micron MT29F2T08EMLDE",
+                "micron MT29F1T08EELDE"
             ]
         },
         "2CC30832EA30": {
@@ -12926,8 +12928,8 @@
                 "SM2261XT",
                 "SM2263XT",
                 "SM2269XT",
-                "MAP1102",
                 "MAP1202",
+                "MAS1102",
                 "PS3111",
                 "INIC6081"
             ],
@@ -13005,9 +13007,9 @@
                 "SM2259XT2",
                 "SM2263XT",
                 "MAP1002",
-                "MAP1102",
                 "MAP1202",
                 "MAS0902",
+                "MAS1102",
                 "CBM2199",
                 "CBM2199E"
             ],
@@ -13030,9 +13032,9 @@
                 "SM2259XT",
                 "SM2259XT2",
                 "MAP1002",
-                "MAP1102",
                 "MAP1202",
-                "MAS0902"
+                "MAS0902",
+                "MAS1102"
             ],
             "n": [
                 "micron MT29F1T08GBLBE",
@@ -13075,8 +13077,8 @@
                 "SM3282BB",
                 "SM2259XT",
                 "SM2259XT2",
-                "MAP1102",
                 "MAS0902",
+                "MAS1102",
                 "CBM2199",
                 "CBM2199E",
                 "PS3111",
@@ -13133,9 +13135,9 @@
                 "SM2262EN",
                 "SM2263XT",
                 "MAP1002",
-                "MAP1102",
                 "MAP1202",
                 "MAS0902",
+                "MAS1102",
                 "PS3111",
                 "INIC6081"
             ],
@@ -13248,9 +13250,9 @@
                 "SM2258",
                 "SM2259XT2",
                 "SM2259",
-                "MAP1102",
                 "MAP1202",
                 "MAS0902",
+                "MAS1102",
                 "CBM2199",
                 "CBM2199E",
                 "IS917",
@@ -13275,9 +13277,9 @@
                 "SM2258XT",
                 "SM2258",
                 "SM2259XT2",
-                "MAP1102",
                 "MAP1202",
                 "MAS0902",
+                "MAS1102",
                 "PS3111",
                 "INIC6081"
             ],
@@ -13311,9 +13313,9 @@
                 "SM2258",
                 "SM2259XT2",
                 "MK8115",
-                "MAP1102",
                 "MAP1202",
                 "MAS0902",
+                "MAS1102",
                 "CBM2199",
                 "CBM2199E",
                 "IS917",
@@ -13340,9 +13342,9 @@
                 "SM2258XT",
                 "SM2258",
                 "SM2259XT2",
-                "MAP1102",
                 "MAP1202",
                 "MAS0902",
+                "MAS1102",
                 "PS3111",
                 "INIC6081"
             ],
@@ -13782,8 +13784,8 @@
                 "SM2258XT",
                 "SM2258",
                 "MK8115",
-                "MAP1102",
                 "MAS0902",
+                "MAS1102",
                 "CBM2099E",
                 "CBM2199",
                 "CBM2199E",
@@ -13821,8 +13823,8 @@
                 "SM2258",
                 "SM2259XT2",
                 "MK8115",
-                "MAP1102",
                 "MAS0902",
+                "MAS1102",
                 "CBM2199",
                 "CBM2199E",
                 "IS917",
@@ -17632,8 +17634,8 @@
                 "SM2258",
                 "SM2259XT2",
                 "SM2263XT",
-                "MAP1102",
                 "MAS0902",
+                "MAS1102",
                 "CBM2199",
                 "CBM2199E",
                 "IS917",
@@ -17642,6 +17644,7 @@
             ],
             "n": [
                 "intel PF29F04T2ANCQJ1",
+                "intel PF29F08T2AOCQK1",
                 "westerndigital SDTNBIAMA-016G",
                 "westerndigital SDTNBIAMA-016G_S1",
                 "westerndigital BICS3_32G",
@@ -17691,8 +17694,8 @@
                 "SM2262EN",
                 "SM2263EN",
                 "SM2263XT",
-                "MAP1102",
                 "MAS0902",
+                "MAS1102",
                 "CBM2099E",
                 "CBM2199",
                 "CBM2199E",
@@ -17702,6 +17705,7 @@
             ],
             "n": [
                 "intel PF29F04T2ANCQJ1",
+                "intel PF29F08T2AOCQK1",
                 "westerndigital SDYNBIAMA-032G",
                 "westerndigital SDTNAIAMA",
                 "westerndigital SDYNBIAMA-032G_SI2",
@@ -17722,8 +17726,8 @@
             "t": [
                 "SM3281AB",
                 "SM2258",
-                "MAP1102",
                 "MAS0902",
+                "MAS1102",
                 "CBM2099E",
                 "CBM2199",
                 "CBM2199E",
@@ -17733,6 +17737,7 @@
             ],
             "n": [
                 "intel PF29F04T2ANCQJ1",
+                "intel PF29F08T2AOCQK1",
                 "westerndigital SDYNBIAMA-032G",
                 "westerndigital SDYNBIAMA-032G_S1",
                 "westerndigital SDYNBIBMG-064G"
@@ -17766,9 +17771,9 @@
                 "SM2259XT2",
                 "SM2262EN",
                 "MAP1002",
-                "MAP1102",
                 "MAP1202",
                 "MAS0902",
+                "MAS1102",
                 "CBM2099E",
                 "CBM2199",
                 "CBM2199E",
@@ -17777,6 +17782,7 @@
             ],
             "n": [
                 "intel PF29F04T2ANCQJ1",
+                "intel PF29F08T2AOCQK1",
                 "westerndigital SDUNCIAMA-032GB",
                 "westerndigital SDUNCIAMA-032G",
                 "westerndigital SDUNCIAMA-032G_SI2",
@@ -17834,15 +17840,16 @@
                 "SM2263EN",
                 "SM2263XT",
                 "MAP1002",
-                "MAP1102",
                 "MAP1202",
                 "MAS0902",
+                "MAS1102",
                 "CBM2199E",
                 "PS3111",
                 "INIC6081"
             ],
             "n": [
                 "intel PF29F04T2ANCQJ1",
+                "intel PF29F08T2AOCQK1",
                 "westerndigital SDUNCIAMA-064GCE",
                 "westerndigital SDUNCIAMA-064G",
                 "westerndigital SDUNCIAMA-064GB",
@@ -17867,15 +17874,16 @@
                 "SM2263EN",
                 "SM2263XT",
                 "MAP1002",
-                "MAP1102",
                 "MAP1202",
                 "MAS0902",
+                "MAS1102",
                 "CBM2199E",
                 "PS3111",
                 "INIC6081"
             ],
             "n": [
                 "intel PF29F04T2ANCQJ1",
+                "intel PF29F08T2AOCQK1",
                 "westerndigital SDUNCIAMA-064GCE",
                 "westerndigital SDUNCIAMA-064G",
                 "westerndigital SDUNCIAMA-064GB",
@@ -17898,9 +17906,9 @@
                 "SM2263EN",
                 "SM2263XT",
                 "MAP1002",
-                "MAP1102",
                 "MAP1202",
                 "MAS0902",
+                "MAS1102",
                 "CBM2099E",
                 "CBM2199",
                 "CBM2199E",
@@ -17909,6 +17917,7 @@
             ],
             "n": [
                 "intel PF29F04T2ANCQJ1",
+                "intel PF29F08T2AOCQK1",
                 "westerndigital SDYNBIAMA-032G",
                 "westerndigital SDUNCIAMA-032GB",
                 "westerndigital SDUNCIAMA-032G",
@@ -18176,8 +18185,8 @@
                 "SM2259XT2",
                 "SM2262EN",
                 "SM2263XT",
-                "MAP1102",
                 "MAS0902",
+                "MAS1102",
                 "CBM2199",
                 "CBM2199E",
                 "IS917",
@@ -18186,6 +18195,7 @@
             ],
             "n": [
                 "intel PF29F04T2ANCQJ1",
+                "intel PF29F08T2AOCQK1",
                 "westerndigital SDZNBIAMA-064G",
                 "westerndigital SDYNBIAMA-064G",
                 "westerndigital SDZNBIAMA-064G_S1",
@@ -18220,14 +18230,15 @@
             "t": [
                 "SM3281AB",
                 "SM3281BB",
-                "MAP1102",
                 "MAS0902",
+                "MAS1102",
                 "IS917",
                 "PS3111",
                 "INIC6081"
             ],
             "n": [
                 "intel PF29F04T2ANCQJ1",
+                "intel PF29F08T2AOCQK1",
                 "westerndigital SDZNBIAMA-064G",
                 "westerndigital SDZNBIAMA-064G_S1_2DIE"
             ]
@@ -18252,8 +18263,8 @@
                 "SM2258",
                 "SM2259XT2",
                 "SM2263XT",
-                "MAP1102",
                 "MAS0902",
+                "MAS1102",
                 "CBM2199",
                 "CBM2199E",
                 "IS917",
@@ -18262,6 +18273,7 @@
             ],
             "n": [
                 "intel PF29F04T2ANCQJ1",
+                "intel PF29F08T2AOCQK1",
                 "westerndigital SDYNBIAMA-032G",
                 "westerndigital SDYNBIAMA-032G*4",
                 "westerndigital SDZNBIAMA-064G_S1",
@@ -18387,13 +18399,14 @@
                 "SM2258XT",
                 "SM2258",
                 "SM2259XT2",
-                "MAP1102",
                 "MAS0902",
+                "MAS1102",
                 "PS3111",
                 "INIC6081"
             ],
             "n": [
                 "intel PF29F04T2ANCQJ1",
+                "intel PF29F08T2AOCQK1",
                 "westerndigital SDUNCIAMA-032GB",
                 "westerndigital SDTNAIAMA",
                 "westerndigital SDUNCIAMA-064GB",
@@ -18435,14 +18448,15 @@
                 "SM2259XT2",
                 "SM2263XT",
                 "MAP1002",
-                "MAP1102",
                 "MAP1202",
                 "MAS0902",
+                "MAS1102",
                 "PS3111",
                 "INIC6081"
             ],
             "n": [
                 "intel PF29F04T2ANCQJ1",
+                "intel PF29F08T2AOCQK1",
                 "westerndigital SDTNAIAMA",
                 "westerndigital SDTNAIAMA_H45-128GB",
                 "westerndigital SDUNCIAMA-0064GB",
@@ -18470,13 +18484,14 @@
                 "SM3281BB",
                 "SM2258XT",
                 "SM2259XT2",
-                "MAP1102",
                 "MAS0902",
+                "MAS1102",
                 "PS3111",
                 "INIC6081"
             ],
             "n": [
                 "intel PF29F04T2ANCQJ1",
+                "intel PF29F08T2AOCQK1",
                 "westerndigital SDTNAIAMA",
                 "westerndigital SDTNAIAMA_H45-128GB",
                 "westerndigital SDUNCIAMA-0128GB",
@@ -18514,13 +18529,14 @@
                 "SM2258",
                 "SM2259XT2",
                 "SM2263XT",
-                "MAP1102",
                 "MAS0902",
+                "MAS1102",
                 "PS3111",
                 "INIC6081"
             ],
             "n": [
                 "intel PF29F04T2ANCQJ1",
+                "intel PF29F08T2AOCQK1",
                 "westerndigital SDTNAIAMA",
                 "westerndigital SDUNCIAMA-064GB",
                 "westerndigital SDTNAIAMA_H45-256GB",
@@ -25514,9 +25530,9 @@
                 "SM2258XT",
                 "SM2259XT2",
                 "MAP1002",
-                "MAP1102",
                 "MAP1202",
                 "MAS0902",
+                "MAS1102",
                 "CBM2099E",
                 "CBM2199",
                 "CBM2199E",
@@ -25585,9 +25601,9 @@
                 "SM2262EN",
                 "SM2263XT",
                 "MAP1002",
-                "MAP1102",
                 "MAP1202",
                 "MAS0902",
+                "MAS1102",
                 "CBM2099E",
                 "CBM2199",
                 "CBM2199E",
@@ -25697,9 +25713,9 @@
                 "SM2263EN",
                 "SM2263XT",
                 "MAP1002",
-                "MAP1102",
                 "MAP1202",
                 "MAS0902",
+                "MAS1102",
                 "CBM2199E",
                 "PS3111",
                 "INIC6081"
@@ -25786,8 +25802,8 @@
                 "SM3281AB",
                 "SM3281BB",
                 "SM3282BB",
-                "MAP1102",
-                "MAS0902"
+                "MAS0902",
+                "MAS1102"
             ],
             "n": [
                 "westerndigital SDUNCIAMA-032GB",
@@ -25904,9 +25920,9 @@
                 "SM2258",
                 "SM2263XT",
                 "MAP1002",
-                "MAP1102",
                 "MAP1202",
                 "MAS0902",
+                "MAS1102",
                 "CBM2199",
                 "CBM2199E",
                 "IS917",
@@ -25942,9 +25958,9 @@
                 "SM2258",
                 "SM2259XT2",
                 "SM2262EN",
-                "MAP1102",
                 "MAP1202",
                 "MAS0902",
+                "MAS1102",
                 "PS3111",
                 "INIC6081"
             ],
@@ -25970,8 +25986,8 @@
                 "SM2258XT",
                 "SM2258",
                 "SM2259XT2",
-                "MAP1102",
                 "MAS0902",
+                "MAS1102",
                 "CBM2199",
                 "CBM2199E",
                 "IS917",
@@ -25994,8 +26010,8 @@
             "t": [
                 "SM3269AA",
                 "SM2258",
-                "MAP1102",
                 "MAS0902",
+                "MAS1102",
                 "IS917",
                 "PS3111",
                 "INIC6081"
@@ -26023,9 +26039,9 @@
                 "SM2263EN",
                 "SM2263XT",
                 "MAP1002",
-                "MAP1102",
                 "MAP1202",
                 "MAS0902",
+                "MAS1102",
                 "IS917",
                 "PS3111",
                 "INIC6081"
@@ -26056,9 +26072,9 @@
                 "SM2263EN",
                 "SM2263XT",
                 "MAP1002",
-                "MAP1102",
                 "MAP1202",
                 "MAS0902",
+                "MAS1102",
                 "CBM2099E",
                 "CBM2199",
                 "CBM2199E",
@@ -26783,8 +26799,8 @@
                 "SM3271AB",
                 "SM2258XT",
                 "MK8115",
-                "MAP1102",
                 "MAS0902",
+                "MAS1102",
                 "IS917",
                 "PS3111",
                 "INIC6081"
@@ -27331,9 +27347,9 @@
                 "SM2262EN",
                 "SM2263XT",
                 "MAP1002",
-                "MAP1102",
                 "MAP1202",
                 "MAS0902",
+                "MAS1102",
                 "PS3111",
                 "INIC6081"
             ],
@@ -27444,9 +27460,9 @@
                 "SM2263EN",
                 "SM2263XT",
                 "MAP1002",
-                "MAP1102",
                 "MAP1202",
                 "MAS0902",
+                "MAS1102",
                 "PS3111",
                 "INIC6081"
             ],
@@ -27475,14 +27491,15 @@
                 "SM2259XT2",
                 "SM2261XT",
                 "SM2263XT",
-                "MAP1102",
                 "MAP1202",
+                "MAS1102",
                 "PS3111",
                 "INIC6081"
             ],
             "n": [
                 "ymtc YMN09TC1B1AC6C",
-                "ymtc YMN09TC1B1DC6C"
+                "ymtc YMN09TC1B1DC6C",
+                "ymtc YMN09TC1B1FC6C"
             ]
         },
         "9BD5588D2000": {
@@ -37153,8 +37170,8 @@
                 "SM3265AB",
                 "SM3265AC",
                 "SM2262EN",
-                "MAP1102",
                 "MAS0902",
+                "MAS1102",
                 "PS3111",
                 "INIC6081"
             ],
@@ -37177,13 +37194,14 @@
                 "SM3265AB",
                 "SM3265AC",
                 "SM2263XT",
-                "MAP1102",
                 "MAS0902",
+                "MAS1102",
                 "PS3111",
                 "INIC6081"
             ],
             "n": [
                 "intel PF29F04T2ANCQJ1",
+                "intel PF29F08T2AOCQK1",
                 "westerndigital SDTNAIAMA_H45-64GB",
                 "westerndigital SNDK-256GB"
             ]
@@ -41369,8 +41387,8 @@
             "t": [
                 "SM2258XT",
                 "SM2259XT2",
-                "MAP1102",
-                "MAS0902"
+                "MAS0902",
+                "MAS1102"
             ],
             "n": [
                 "samsung KLUGGAR1FA",
@@ -41527,9 +41545,9 @@
                 "SM2259XT2",
                 "SM2263XT",
                 "MAP1002",
-                "MAP1102",
                 "MAP1202",
-                "MAS0902"
+                "MAS0902",
+                "MAS1102"
             ],
             "n": [
                 "intel PF29F08T2AWCTH1",
@@ -41542,15 +41560,16 @@
                 "SM2259XT2",
                 "SM2263EN",
                 "SM2263XT",
-                "MAP1102",
                 "MAP1202",
+                "MAS1102",
                 "PS3111",
                 "INIC6081"
             ],
             "n": [
                 "ymtc YMN08TE1B1HC3B1",
                 "ymtc YMN08TE1B1BC3B",
-                "ymtc YMN08TB1B1JU1B"
+                "ymtc YMN08TB1B1JU1B",
+                "ymtc YMN08TE1B1JC3B"
             ]
         },
         "EC1A9443A4CA": {
@@ -41646,8 +41665,8 @@
                 "SM2259XT2",
                 "SM2262EN",
                 "SM2263XT",
-                "MAP1102",
-                "MAP1202"
+                "MAP1202",
+                "MAS1102"
             ],
             "n": [
                 "samsung K9AFGD8J0C"
@@ -41658,12 +41677,13 @@
                 "SM2259XT",
                 "SM2259XT2",
                 "SM2263XT",
-                "MAP1102",
-                "MAP1202"
+                "MAP1202",
+                "MAS1102"
             ],
             "n": [
                 "samsung K9OUGD8J2B",
-                "samsung SS"
+                "samsung SS",
+                "samsung K9AFGD8J0D"
             ]
         },
         "EC1C98AF84CD": {
@@ -41700,9 +41720,9 @@
                 "SM2262EN",
                 "SM2263EN",
                 "MAP1002",
-                "MAP1102",
                 "MAP1202",
                 "MAS0902",
+                "MAS1102",
                 "PS3111",
                 "INIC6081"
             ],
@@ -41715,8 +41735,8 @@
         "AD892B5300B0": {
             "t": [
                 "SM2259XT",
-                "MAP1102",
-                "MAS0902"
+                "MAS0902",
+                "MAS1102"
             ],
             "n": [
                 "skhynix H25JGT8F1M",
@@ -41755,8 +41775,8 @@
             "t": [
                 "SM2259XT",
                 "SM2259XT2",
-                "MAP1102",
                 "MAS0902",
+                "MAS1102",
                 "PS3111",
                 "INIC6081"
             ],
@@ -41819,8 +41839,8 @@
                 "SM2259XT",
                 "SM2259XT2",
                 "SM2263XT",
-                "MAP1102",
                 "MAP1202",
+                "MAS1102",
                 "PS3111",
                 "INIC6081"
             ],
@@ -41921,9 +41941,9 @@
             "t": [
                 "SM2258",
                 "SM2258XT",
-                "MAP1102",
                 "MAP1202",
                 "MAS0902",
+                "MAS1102",
                 "PS3111",
                 "INIC6081"
             ],
@@ -42214,12 +42234,13 @@
             "t": [
                 "SM2259XT2",
                 "SM2263XT",
-                "MAP1102",
-                "MAP1202"
+                "MAP1202",
+                "MAS1102"
             ],
             "n": [
                 "ymtc YMN09TC1B1JC6C",
-                "ymtc YMTC"
+                "ymtc YMTC",
+                "ymtc YMN09TC1B1OC6C"
             ]
         },
         "9BC428493000": {
@@ -42273,14 +42294,15 @@
                 "SM2262EN",
                 "SM2263XT",
                 "MAP1002",
-                "MAP1102",
                 "MAP1202",
                 "MAS0902",
+                "MAS1102",
                 "PS3111",
                 "INIC6081"
             ],
             "n": [
                 "intel PF29F04T2ANCQJ1",
+                "intel PF29F08T2AOCQK1",
                 "westerndigital SDQCIDMB-512G",
                 "westerndigital SNDK-256GB"
             ]
@@ -42435,10 +42457,15 @@
                 "MAP1202"
             ]
         },
+        "98489AB37EF1": {
+            "t": [
+                "MAP1202"
+            ]
+        },
         "89E40832A600": {
             "t": [
-                "MAP1102",
-                "MAS0902"
+                "MAS0902",
+                "MAS1102"
             ],
             "n": [
                 "intel PF29F08T2AYCTH1"
@@ -42446,8 +42473,8 @@
         },
         "89F48B32A600": {
             "t": [
-                "MAP1102",
-                "MAS0902"
+                "MAS0902",
+                "MAS1102"
             ],
             "n": [
                 "intel PF29F08T2AYCTH1"
@@ -42455,8 +42482,8 @@
         },
         "AD7E293300A0": {
             "t": [
-                "MAP1102",
                 "MAS0902",
+                "MAS1102",
                 "PS3111",
                 "INIC6081"
             ],
@@ -42466,8 +42493,8 @@
         },
         "AD7E2A3300A0": {
             "t": [
-                "MAP1102",
                 "MAS0902",
+                "MAS1102",
                 "PS3111",
                 "INIC6081"
             ],
@@ -42477,17 +42504,18 @@
         },
         "AD892D5330A0": {
             "t": [
-                "MAP1102"
+                "MAS1102"
+            ],
+            "n": [
+                "skhynix H25JGQ8B3M"
             ]
         },
         "AD892E5330A0": {
             "t": [
-                "MAP1102"
-            ]
-        },
-        "98489AB37EF1": {
-            "t": [
-                "MAP1202"
+                "MAS1102"
+            ],
+            "n": [
+                "skhynix H25JGQ8D4M"
             ]
         },
         "EC000000": {
@@ -50089,6 +50117,7 @@
                 "SM2263EN",
                 "SM2263XT",
                 "MAS0902",
+                "MAS1102",
                 "CBM2199",
                 "CBM2199E"
             ]
@@ -50124,7 +50153,8 @@
                 "SM2259XT2",
                 "SM2262EN",
                 "SM2263XT",
-                "MAS0902"
+                "MAS0902",
+                "MAS1102"
             ]
         },
         "K9CMGY8J5M": {
@@ -50191,7 +50221,8 @@
                 "SM2259XT",
                 "SM2259XT2",
                 "SM2262EN",
-                "SM2263XT"
+                "SM2263XT",
+                "MAS1102"
             ]
         },
         "K9OMGD8H2B": {
@@ -50204,7 +50235,8 @@
                 "SM3281BB",
                 "SM2258XT",
                 "SM2259XT2",
-                "MAS0902"
+                "MAS0902",
+                "MAS1102"
             ]
         },
         "K9AHGD8J0B": {
@@ -50218,7 +50250,8 @@
                 "SM2259XT",
                 "SM2259XT2",
                 "SM2262EN",
-                "SM2263XT"
+                "SM2263XT",
+                "MAS1102"
             ]
         },
         "K9HCG08U1M": {
@@ -59351,7 +59384,8 @@
             ],
             "t": [
                 "SM2258XT",
-                "SM2259XT2"
+                "SM2259XT2",
+                "MAS1102"
             ]
         },
         "BW9C1TD8H5B": {
@@ -59468,7 +59502,8 @@
                 "SM2259XT",
                 "SM2259XT2",
                 "SM2263XT",
-                "MAS0902"
+                "MAS0902",
+                "MAS1102"
             ]
         },
         "K9AHGD8H0A": {
@@ -59496,7 +59531,8 @@
                 "SM2259XT",
                 "SM2259XT2",
                 "SM2262EN",
-                "SM2263XT"
+                "SM2263XT",
+                "MAS1102"
             ]
         },
         "K9OUGD8J2B": {
@@ -59653,6 +59689,14 @@
             ],
             "t": [
                 "MAS0902"
+            ]
+        },
+        "K9AFGD8J0D": {
+            "id": [
+                "EC5FD9AF88CD"
+            ],
+            "t": [
+                "MAS1102"
             ]
         },
         "K9F1G08R0M": {
@@ -62556,6 +62600,7 @@
                 "SM2259XT2",
                 "SM2263XT",
                 "MAS0902",
+                "MAS1102",
                 "AU6989SN-GTC",
                 "AU6989SN-GTD",
                 "AU6989SN-GTE",
@@ -62696,6 +62741,7 @@
                 "SM2262EN",
                 "SM2263EN",
                 "MAS0902",
+                "MAS1102",
                 "AU6989SN-GTC",
                 "AU6989SN-GTD",
                 "AU6989SN-GTE",
@@ -62724,6 +62770,7 @@
                 "SM2262EN",
                 "SM2263XT",
                 "MAS0902",
+                "MAS1102",
                 "PS3111",
                 "INIC6081"
             ]
@@ -62752,6 +62799,7 @@
                 "SM3281BB",
                 "SM2259XT",
                 "SM2259XT2",
+                "MAS1102",
                 "PS3111",
                 "INIC6081"
             ]
@@ -62774,7 +62822,8 @@
             "t": [
                 "SM3265AB",
                 "SM3265AC",
-                "SM3281BB"
+                "SM3281BB",
+                "MAS1102"
             ]
         },
         "H2DTDG8UD1MYR": {
@@ -66373,7 +66422,8 @@
                 "SM2262EN",
                 "SM2263EN",
                 "SM2263XT",
-                "MAS0902"
+                "MAS0902",
+                "MAS1102"
             ]
         },
         "H27Q4T8LEA": {
@@ -66469,7 +66519,8 @@
             "t": [
                 "SM2259XT",
                 "SM2259XT2",
-                "MAS0902"
+                "MAS0902",
+                "MAS1102"
             ]
         },
         "H25JGQ8F4M": {
@@ -66701,6 +66752,7 @@
             "c": "TLC",
             "t": [
                 "MAS0902",
+                "MAS1102",
                 "AU6989SN-GTC",
                 "AU6989SN-GTD",
                 "AU6989SN-GTE",
@@ -66716,6 +66768,7 @@
             "c": "TLC",
             "t": [
                 "MAS0902",
+                "MAS1102",
                 "AU6989SN-GTC",
                 "AU6989SN-GTD",
                 "AU6989SN-GTE",
@@ -66729,6 +66782,7 @@
             ],
             "t": [
                 "MAS0902",
+                "MAS1102",
                 "PS3111",
                 "INIC6081"
             ]
@@ -66739,6 +66793,7 @@
             ],
             "t": [
                 "MAS0902",
+                "MAS1102",
                 "PS3111",
                 "INIC6081"
             ]
@@ -66748,7 +66803,8 @@
                 "AD892A5300B0"
             ],
             "t": [
-                "MAS0902"
+                "MAS0902",
+                "MAS1102"
             ]
         },
         "H25JGT8F4M": {
@@ -66756,7 +66812,24 @@
                 "AD892B5300B0"
             ],
             "t": [
-                "MAS0902"
+                "MAS0902",
+                "MAS1102"
+            ]
+        },
+        "H25JGQ8B3M": {
+            "id": [
+                "AD892D5330A0"
+            ],
+            "t": [
+                "MAS1102"
+            ]
+        },
+        "H25JGQ8D4M": {
+            "id": [
+                "AD892E5330A0"
+            ],
+            "t": [
+                "MAS1102"
             ]
         },
         "H27QCG8UDB": {
@@ -73565,6 +73638,7 @@
                 "SM2262EN",
                 "SM2263XT",
                 "MAS0902",
+                "MAS1102",
                 "AU6989SN-GTC",
                 "AU6989SN-GTD",
                 "AU6989SN-GTE",
@@ -73586,6 +73660,7 @@
                 "SM2259",
                 "SM2263XT",
                 "MAS0902",
+                "MAS1102",
                 "AU6989SN-GTC",
                 "AU6989SN-GTD",
                 "AU6989SN-GTE",
@@ -73610,6 +73685,7 @@
                 "SM2259",
                 "SM2263XT",
                 "MAS0902",
+                "MAS1102",
                 "AU6989SN-GTC",
                 "AU6989SN-GTD",
                 "AU6989SN-GTE",
@@ -73630,6 +73706,7 @@
                 "SM2259",
                 "SM2263XT",
                 "MAS0902",
+                "MAS1102",
                 "CBM2099E",
                 "CBM2199",
                 "CBM2199E",
@@ -73648,7 +73725,8 @@
                 "SM2259",
                 "SM2262EN",
                 "SM2263XT",
-                "MAS0902"
+                "MAS0902",
+                "MAS1102"
             ]
         },
         "PF29F04T2AWCTH2": {
@@ -73662,7 +73740,8 @@
                 "SM2259",
                 "SM2262EN",
                 "SM2263XT",
-                "MAS0902"
+                "MAS0902",
+                "MAS1102"
             ]
         },
         "PF29F04T4AWCTH2": {
@@ -73675,7 +73754,8 @@
                 "SM2259XT2",
                 "SM2259",
                 "SM2263XT",
-                "MAS0902"
+                "MAS0902",
+                "MAS1102"
             ]
         },
         "PF29F02T2APCMG2": {
@@ -73724,6 +73804,7 @@
                 "SM2258",
                 "MK8115",
                 "MAS0902",
+                "MAS1102",
                 "CBM2099E",
                 "CBM2199",
                 "CBM2199E",
@@ -73739,6 +73820,7 @@
                 "SM2258",
                 "MK8115",
                 "MAS0902",
+                "MAS1102",
                 "CBM2099E",
                 "CBM2199",
                 "CBM2199E",
@@ -73754,6 +73836,7 @@
                 "SM2258",
                 "MK8115",
                 "MAS0902",
+                "MAS1102",
                 "CBM2099E",
                 "CBM2199",
                 "CBM2199E",
@@ -73769,6 +73852,7 @@
                 "SM2259",
                 "SM2263XT",
                 "MAS0902",
+                "MAS1102",
                 "CBM2099E",
                 "CBM2199",
                 "CBM2199E",
@@ -73784,6 +73868,7 @@
                 "SM2259",
                 "SM2263XT",
                 "MAS0902",
+                "MAS1102",
                 "CBM2099E",
                 "CBM2199",
                 "CBM2199E",
@@ -73802,6 +73887,7 @@
                 "SM2262EN",
                 "SM2263XT",
                 "MAS0902",
+                "MAS1102",
                 "AU6989SN-GTC",
                 "AU6989SN-GTD",
                 "AU6989SN-GTE",
@@ -73820,6 +73906,7 @@
                 "SM2259",
                 "SM2262EN",
                 "MAS0902",
+                "MAS1102",
                 "AU6989SN-GTC",
                 "AU6989SN-GTD",
                 "AU6989SN-GTE",
@@ -73837,6 +73924,7 @@
                 "SM2258",
                 "SM2259",
                 "MAS0902",
+                "MAS1102",
                 "AU6989SN-GTC",
                 "AU6989SN-GTD",
                 "AU6989SN-GTE",
@@ -73851,6 +73939,7 @@
             "t": [
                 "SM2258",
                 "MAS0902",
+                "MAS1102",
                 "CBM2199",
                 "CBM2199E"
             ]
@@ -73865,6 +73954,7 @@
                 "SM2259XT",
                 "SM2259XT2",
                 "MAS0902",
+                "MAS1102",
                 "AU6989SN-GTC",
                 "AU6989SN-GTD",
                 "AU6989SN-GTE",
@@ -73878,6 +73968,7 @@
             "t": [
                 "SM2259XT",
                 "MAS0902",
+                "MAS1102",
                 "CBM2199E"
             ]
         },
@@ -73888,6 +73979,7 @@
             "t": [
                 "SM2259XT",
                 "MAS0902",
+                "MAS1102",
                 "CBM2199E"
             ]
         },
@@ -73898,6 +73990,7 @@
             "t": [
                 "SM2259XT",
                 "MAS0902",
+                "MAS1102",
                 "CBM2199E"
             ]
         },
@@ -73973,7 +74066,8 @@
             "t": [
                 "SM2259XT",
                 "SM2259XT2",
-                "MAS0902"
+                "MAS0902",
+                "MAS1102"
             ]
         },
         "MT29F4T08EUHBFINTEL": {
@@ -74004,7 +74098,8 @@
             ],
             "t": [
                 "SM2259XT",
-                "SM2259XT2"
+                "SM2259XT2",
+                "MAS1102"
             ]
         },
         "PF29F02T2AMCQK1": {
@@ -74012,7 +74107,8 @@
                 "89D3AC32C600"
             ],
             "t": [
-                "SM2259XT"
+                "SM2259XT",
+                "MAS1102"
             ]
         },
         "PF29F04T2ANCQK1": {
@@ -74021,15 +74117,33 @@
             ],
             "t": [
                 "SM2259XT",
-                "SM2263XT"
+                "SM2263XT",
+                "MAS1102"
             ]
         },
         "PF29F08T2AOCQK1": {
             "id": [
-                "89D3AC32C600"
+                "89D3AC32C600",
+                "453C98B37672",
+                "453E99B37A72",
+                "453C98B376F2",
+                "453E99B37AF2",
+                "453E98B37672",
+                "453A98B37672",
+                "453C98B3766B",
+                "453E98B37663",
+                "453C98B37663",
+                "453E98B3766B",
+                "453E99B37A6B",
+                "453E99B37A63",
+                "45489AB37E6B",
+                "45499AB37E6B",
+                "454899B37A63",
+                "454899B37A6B"
             ],
             "t": [
-                "SM2259XT"
+                "SM2259XT",
+                "MAS1102"
             ]
         },
         "PF29F01T4ALCQK1": {
@@ -74117,7 +74231,8 @@
             "t": [
                 "SM2262EN",
                 "SM2263XT",
-                "MAS0902"
+                "MAS0902",
+                "MAS1102"
             ]
         },
         "PF29F01T2AMCTJ1": {
@@ -74127,7 +74242,8 @@
             "t": [
                 "SM2262EN",
                 "SM2263XT",
-                "MAS0902"
+                "MAS0902",
+                "MAS1102"
             ]
         },
         "PF29F02T2ANCTJ1": {
@@ -74137,7 +74253,8 @@
             "t": [
                 "SM2262EN",
                 "SM2263XT",
-                "MAS0902"
+                "MAS0902",
+                "MAS1102"
             ]
         },
         "PF29F04T2AOCTJ1": {
@@ -74147,7 +74264,8 @@
             "t": [
                 "SM2262EN",
                 "SM2263XT",
-                "MAS0902"
+                "MAS0902",
+                "MAS1102"
             ]
         },
         "PF29F08T2AWCTJ1": {
@@ -74468,6 +74586,7 @@
             "t": [
                 "MK8115",
                 "MAS0902",
+                "MAS1102",
                 "CBM2199",
                 "CBM2199E",
                 "IS917"
@@ -74480,6 +74599,7 @@
             "t": [
                 "MK8115",
                 "MAS0902",
+                "MAS1102",
                 "CBM2199",
                 "CBM2199E",
                 "IS917"
@@ -74492,6 +74612,7 @@
             "t": [
                 "MK8115",
                 "MAS0902",
+                "MAS1102",
                 "CBM2199",
                 "CBM2199E",
                 "IS917"
@@ -74504,6 +74625,7 @@
             "t": [
                 "MK8115",
                 "MAS0902",
+                "MAS1102",
                 "CBM2199",
                 "CBM2199E",
                 "IS917"
@@ -74525,7 +74647,8 @@
                 "89CCF932AA01"
             ],
             "t": [
-                "MAS0902"
+                "MAS0902",
+                "MAS1102"
             ]
         },
         "PF29F08T2AYCTH1": {
@@ -74534,7 +74657,8 @@
                 "89F48B32A600"
             ],
             "t": [
-                "MAS0902"
+                "MAS0902",
+                "MAS1102"
             ]
         },
         "PF29F2T08CUCBBM4": {
@@ -74543,6 +74667,7 @@
             ],
             "t": [
                 "MAS0902",
+                "MAS1102",
                 "IS917"
             ]
         },
@@ -74551,7 +74676,8 @@
                 "89C30832E600"
             ],
             "t": [
-                "MAS0902"
+                "MAS0902",
+                "MAS1102"
             ]
         },
         "PF29F01T2ALCQJ1": {
@@ -74559,7 +74685,8 @@
                 "89D31C32C600"
             ],
             "t": [
-                "MAS0902"
+                "MAS0902",
+                "MAS1102"
             ]
         },
         "X29F64G083AME1": {
@@ -77117,6 +77244,7 @@
                 "SM2259",
                 "SM2262EN",
                 "MAS0902",
+                "MAS1102",
                 "AU6989SN-GTC",
                 "AU6989SN-GTD",
                 "AU6989SN-GTE",
@@ -77173,6 +77301,7 @@
                 "SM2262EN",
                 "SM2263XT",
                 "MAS0902",
+                "MAS1102",
                 "AU6989SN-GTC",
                 "AU6989SN-GTD",
                 "AU6989SN-GTE",
@@ -77230,6 +77359,7 @@
                 "SM2262EN",
                 "SM2263XT",
                 "MAS0902",
+                "MAS1102",
                 "AU6989SN-GTC",
                 "AU6989SN-GTD",
                 "AU6989SN-GTE",
@@ -77272,6 +77402,7 @@
                 "SM2262EN",
                 "SM2263XT",
                 "MAS0902",
+                "MAS1102",
                 "CBM2199",
                 "CBM2199E",
                 "PS3111",
@@ -77296,7 +77427,8 @@
             "t": [
                 "SM2259XT",
                 "SM2259XT2",
-                "SM2263XT"
+                "SM2263XT",
+                "MAS1102"
             ]
         },
         "MT29F512G08EBLDE": {
@@ -77306,7 +77438,8 @@
             "t": [
                 "SM2259XT",
                 "SM2259XT2",
-                "SM2263XT"
+                "SM2263XT",
+                "MAS1102"
             ]
         },
         "MT29F512G08EBLEE": {
@@ -77323,7 +77456,8 @@
                 "SM2259XT2",
                 "SM2261XT",
                 "SM2263XT",
-                "SM2269XT"
+                "SM2269XT",
+                "MAS1102"
             ]
         },
         "MT29F1T08GBLCE": {
@@ -77415,7 +77549,8 @@
                 "SM2259",
                 "SM2262EN",
                 "SM2263XT",
-                "MAS0902"
+                "MAS0902",
+                "MAS1102"
             ]
         },
         "MT29F128G08EBCDB": {
@@ -77823,6 +77958,7 @@
                 "SM2258",
                 "MK8115",
                 "MAS0902",
+                "MAS1102",
                 "CBM2199",
                 "CBM2199E",
                 "IS917",
@@ -80970,7 +81106,8 @@
                 "SM2259XT2",
                 "SM2262EN",
                 "SM2263XT",
-                "MAS0902"
+                "MAS0902",
+                "MAS1102"
             ]
         },
         "MT29F4T08EBLCE": {
@@ -85573,6 +85710,7 @@
                 "SM2259",
                 "SM2263XT",
                 "MAS0902",
+                "MAS1102",
                 "AU6989SN-GTC",
                 "AU6989SN-GTD",
                 "AU6989SN-GTE",
@@ -85642,6 +85780,7 @@
                 "SM2258XT",
                 "MK8115",
                 "MAS0902",
+                "MAS1102",
                 "AU6989SN-GTA",
                 "AU6989SN-GTB",
                 "AU6989SN-GTC",
@@ -85726,6 +85865,7 @@
                 "SM2258XT",
                 "SM2259",
                 "MAS0902",
+                "MAS1102",
                 "AU6989SN-GTC",
                 "AU6989SN-GTD",
                 "AU6989SN-GTE",
@@ -85745,6 +85885,7 @@
                 "SM2258",
                 "SM2259",
                 "MAS0902",
+                "MAS1102",
                 "AU6989SN-GTC",
                 "AU6989SN-GTD",
                 "AU6989SN-GTE",
@@ -85764,6 +85905,7 @@
                 "SM2259",
                 "SM2262EN",
                 "MAS0902",
+                "MAS1102",
                 "AU6989SN-GTC",
                 "AU6989SN-GTD",
                 "AU6989SN-GTE",
@@ -85782,7 +85924,8 @@
                 "SM2259",
                 "SM2262EN",
                 "SM2263XT",
-                "MAS0902"
+                "MAS0902",
+                "MAS1102"
             ]
         },
         "MT29F1T08EEHBF": {
@@ -85799,6 +85942,7 @@
                 "SM2259",
                 "SM2263XT",
                 "MAS0902",
+                "MAS1102",
                 "AU6989SN-GTC",
                 "AU6989SN-GTD",
                 "AU6989SN-GTE",
@@ -85819,6 +85963,7 @@
                 "SM2259",
                 "SM2263XT",
                 "MAS0902",
+                "MAS1102",
                 "AU6989SN-GTC",
                 "AU6989SN-GTD",
                 "AU6989SN-GTE",
@@ -85860,6 +86005,7 @@
                 "SM2259XT2",
                 "SM2262EN",
                 "SM2263XT",
+                "MAS1102",
                 "CBM2199E"
             ]
         },
@@ -85882,7 +86028,8 @@
             ],
             "t": [
                 "SM2259",
-                "SM2262EN"
+                "SM2262EN",
+                "MAS1102"
             ]
         },
         "MT29F4T08GMLBE": {
@@ -85913,7 +86060,8 @@
             ],
             "t": [
                 "SM2259XT",
-                "MAS0902"
+                "MAS0902",
+                "MAS1102"
             ]
         },
         "MT29F2T08GELCE": {
@@ -85978,6 +86126,7 @@
                 "SM2259XT",
                 "SM2259XT2",
                 "SM2263XT",
+                "MAS1102",
                 "PS3111",
                 "INIC6081"
             ]
@@ -86002,6 +86151,7 @@
                 "SM2258",
                 "SM2259",
                 "MAS0902",
+                "MAS1102",
                 "CBM2199",
                 "CBM2199E",
                 "IS917"
@@ -86021,10 +86171,12 @@
         "MT29F2T08EMLDE": {
             "id": [
                 "2CD3F932EA10",
-                "2CE38A32EA31"
+                "2CE38A32EA31",
+                "2CC37832EA10"
             ],
             "t": [
-                "SM2259XT2"
+                "SM2259XT2",
+                "MAS1102"
             ]
         },
         "MT29F512G08MBLKE": {
@@ -86705,6 +86857,7 @@
             ],
             "t": [
                 "MAS0902",
+                "MAS1102",
                 "CBM2199",
                 "CBM2199E",
                 "IS917"
@@ -86716,6 +86869,7 @@
             ],
             "t": [
                 "MAS0902",
+                "MAS1102",
                 "CBM2199",
                 "CBM2199E",
                 "IS917"
@@ -86727,6 +86881,7 @@
             ],
             "t": [
                 "MAS0902",
+                "MAS1102",
                 "CBM2199",
                 "CBM2199E",
                 "IS917"
@@ -86738,7 +86893,8 @@
                 "2CCCF932AA04"
             ],
             "t": [
-                "MAS0902"
+                "MAS0902",
+                "MAS1102"
             ]
         },
         "MT29E6T08ETHBB": {
@@ -86746,7 +86902,8 @@
                 "2CCCF932AA05"
             ],
             "t": [
-                "MAS0902"
+                "MAS0902",
+                "MAS1102"
             ]
         },
         "MT29F1T08GBCAG": {
@@ -86758,6 +86915,7 @@
             "c": "QLC",
             "t": [
                 "MAS0902",
+                "MAS1102",
                 "AU6989SN-GTC",
                 "AU6989SN-GTD",
                 "AU6989SN-GTE",
@@ -86771,6 +86929,7 @@
             ],
             "t": [
                 "MAS0902",
+                "MAS1102",
                 "CBM2199",
                 "CBM2199E"
             ]
@@ -86781,6 +86940,7 @@
             ],
             "t": [
                 "MAS0902",
+                "MAS1102",
                 "CBM2199",
                 "CBM2199E"
             ]
@@ -86791,6 +86951,7 @@
             ],
             "t": [
                 "MAS0902",
+                "MAS1102",
                 "CBM2199",
                 "CBM2199E"
             ]
@@ -86800,7 +86961,8 @@
                 "2CD48932A601"
             ],
             "t": [
-                "MAS0902"
+                "MAS0902",
+                "MAS1102"
             ]
         },
         "MT29E512G08CEHBB": {
@@ -86809,6 +86971,7 @@
             ],
             "t": [
                 "MAS0902",
+                "MAS1102",
                 "IS917"
             ]
         },
@@ -86817,7 +86980,8 @@
                 "2CE49A32A200"
             ],
             "t": [
-                "MAS0902"
+                "MAS0902",
+                "MAS1102"
             ]
         },
         "MT29F256G08BHBF3": {
@@ -86830,6 +86994,14 @@
                 "CBM2199",
                 "CBM2199E",
                 "IS917"
+            ]
+        },
+        "MT29F1T08EELDE": {
+            "id": [
+                "2CC37832EA10"
+            ],
+            "t": [
+                "MAS1102"
             ]
         },
         "MT29E256G08CMCAB": {
@@ -103767,6 +103939,7 @@
                 "SM2258",
                 "SM2259XT2",
                 "MAS0902",
+                "MAS1102",
                 "AU6989SN-GTC",
                 "AU6989SN-GTD",
                 "AU6989SN-GTE",
@@ -103805,6 +103978,7 @@
                 "SM2259XT2",
                 "SM2263XT",
                 "MAS0902",
+                "MAS1102",
                 "AU6989SN-GTC",
                 "AU6989SN-GTD",
                 "AU6989SN-GTE",
@@ -103892,7 +104066,8 @@
                 "987A9CB3766B"
             ],
             "t": [
-                "MAS0902"
+                "MAS0902",
+                "MAS1102"
             ]
         },
         "TH58TFT0T23TA2H": {
@@ -103971,6 +104146,7 @@
                 "SM2263EN",
                 "SM2263XT",
                 "MAS0902",
+                "MAS1102",
                 "IS917",
                 "PS3111",
                 "INIC6081"
@@ -109744,6 +109920,7 @@
                 "SM2263EN",
                 "SM2263XT",
                 "MAS0902",
+                "MAS1102",
                 "CBM2099E",
                 "CBM2199",
                 "CBM2199E",
@@ -109760,6 +109937,7 @@
                 "SM2259XT2",
                 "SM2263XT",
                 "MAS0902",
+                "MAS1102",
                 "CBM2099E",
                 "CBM2199",
                 "CBM2199E",
@@ -109810,6 +109988,7 @@
                 "SM2263EN",
                 "SM2263XT",
                 "MAS0902",
+                "MAS1102",
                 "CBM2199E"
             ]
         },
@@ -109846,6 +110025,7 @@
                 "SM2259XT",
                 "SM2258XT",
                 "MAS0902",
+                "MAS1102",
                 "CBM2199E"
             ]
         },
@@ -109857,7 +110037,8 @@
                 "SM2259XT",
                 "SM2262EN",
                 "SM2263EN",
-                "MAS0902"
+                "MAS0902",
+                "MAS1102"
             ]
         },
         "TH58LKT1T2MBAEF": {
@@ -110090,6 +110271,7 @@
             "t": [
                 "SM2262EN",
                 "MAS0902",
+                "MAS1102",
                 "CBM2099E",
                 "CBM2199",
                 "CBM2199E",
@@ -110103,6 +110285,7 @@
             "t": [
                 "SM2262EN",
                 "MAS0902",
+                "MAS1102",
                 "CBM2099E",
                 "CBM2199",
                 "CBM2199E",
@@ -110116,6 +110299,7 @@
             "t": [
                 "SM2262EN",
                 "MAS0902",
+                "MAS1102",
                 "IS917"
             ]
         },
@@ -110125,7 +110309,8 @@
             ],
             "t": [
                 "SM2262EN",
-                "MAS0902"
+                "MAS0902",
+                "MAS1102"
             ]
         },
         "TH58TFT2W23BASJ": {
@@ -110145,6 +110330,7 @@
             "t": [
                 "SM2263XT",
                 "MAS0902",
+                "MAS1102",
                 "AU6989SN-GTC",
                 "AU6989SN-GTD",
                 "AU6989SN-GTE",
@@ -110942,6 +111128,7 @@
             ],
             "t": [
                 "MAS0902",
+                "MAS1102",
                 "CBM2199",
                 "CBM2199E",
                 "IS917"
@@ -110953,6 +111140,7 @@
             ],
             "t": [
                 "MAS0902",
+                "MAS1102",
                 "CBM2199",
                 "CBM2199E",
                 "IS917"
@@ -110964,6 +111152,7 @@
             ],
             "t": [
                 "MAS0902",
+                "MAS1102",
                 "CBM2199",
                 "CBM2199E",
                 "IS917"
@@ -110975,6 +111164,7 @@
             ],
             "t": [
                 "MAS0902",
+                "MAS1102",
                 "CBM2199",
                 "CBM2199E",
                 "IS917"
@@ -110986,6 +111176,7 @@
             ],
             "t": [
                 "MAS0902",
+                "MAS1102",
                 "IS917"
             ]
         },
@@ -111009,6 +111200,7 @@
             ],
             "t": [
                 "MAS0902",
+                "MAS1102",
                 "IS917"
             ]
         },
@@ -114155,6 +114347,7 @@
             ],
             "t": [
                 "MAS0902",
+                "MAS1102",
                 "PS3111",
                 "INIC6081"
             ]
@@ -114324,7 +114517,8 @@
                 "9BC348251000"
             ],
             "t": [
-                "SM2263XT"
+                "SM2263XT",
+                "MAS1102"
             ]
         },
         "YMN08TB1B1JU1B": {
@@ -114349,6 +114543,30 @@
             ],
             "t": [
                 "SM2263XT"
+            ]
+        },
+        "YMN08TE1B1JC3B": {
+            "id": [
+                "9BC449251000"
+            ],
+            "t": [
+                "MAS1102"
+            ]
+        },
+        "YMN09TC1B1FC6C": {
+            "id": [
+                "9BC428492000"
+            ],
+            "t": [
+                "MAS1102"
+            ]
+        },
+        "YMN09TC1B1OC6C": {
+            "id": [
+                "9BC529492000"
+            ],
+            "t": [
+                "MAS1102"
             ]
         }
     },
