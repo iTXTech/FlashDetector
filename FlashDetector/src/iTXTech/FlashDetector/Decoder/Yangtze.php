@@ -111,6 +111,9 @@ class Yangtze extends Decoder{
 			"C1" => ["0°C ~ 70°C", "ONFI 3.2; Max Speed=533MB/s"],
 			"C2" => ["0°C ~ 70°C", "ONFI 4.0; Max Speed=667MB/s"],
 			"C3" => ["0°C ~ 70°C", "ONFI 4.0; Max Speed=800MB/s"],
+			"C4" => ["0°C ~ 70°C", "ONFI 4.0; Max Speed=1200MB/s (UNOFFICIAL)"],
+			"C5" => ["0°C ~ 70°C", "ONFI 4.0; Max Speed=1333MB/s (UNOFFICIAL)"],
+			"C6" => ["0°C ~ 70°C", "ONFI 4.0; Max Speed=1600MB/s (UNOFFICIAL)"],
 		], [-1, -1]);
 		$extra = [];
 		if($additionalInfo[0] != -1){
