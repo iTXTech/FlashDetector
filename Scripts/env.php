@@ -22,7 +22,7 @@
 
 //Runtime Environment Initializer
 
-require_once "../sfloader.php";
+require_once(__DIR__ . '/../sfloader.php');
 
 use iTXTech\SimpleFramework\Console\Logger;
 use iTXTech\SimpleFramework\Initializer;
