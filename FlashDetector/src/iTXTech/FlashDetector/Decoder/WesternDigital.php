@@ -105,6 +105,7 @@ class WesternDigital extends Decoder{
 			"Q" => "19 nm",
 			"R" => "1y nm",
 			"S" => "15 nm",
+			"O" => "A19nm[1y]",
 		]));
 
 		$cell = self::shiftChars($partNumber, 1);
